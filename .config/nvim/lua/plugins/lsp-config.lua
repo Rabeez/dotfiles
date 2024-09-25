@@ -26,6 +26,8 @@ return {
       require('lspconfig.ui.windows').default_options.border = 'double'
       local lspconfig = require("lspconfig")
 
+      -- TODO: check wiki to see any LSP-specific config requirements 
+      -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
       lspconfig.lua_ls.setup({ capabilities = capabilities })
       lspconfig.rust_analyzer.setup({ capabilities = capabilities })
       lspconfig.gopls.setup({ capabilities = capabilities })
@@ -33,7 +35,10 @@ return {
       lspconfig.cssls.setup({ capabilities = capabilities })
       lspconfig.bashls.setup({ capabilities = capabilities })
       lspconfig.ts_ls.setup({ capabilities = capabilities })
-      lspconfig.jsonls.setup({ capabilities = capabilities })
+      lspconfig.jsonls.setup({ 
+        capabilities = capabilities,
+        -- filetypes = { "json", "jsonc" },
+      })
       lspconfig.markdown_oxide.setup({ capabilities = capabilities })
       lspconfig.ruff_lsp.setup({ capabilities = capabilities })
       lspconfig.yamlls.setup({ capabilities = capabilities })
