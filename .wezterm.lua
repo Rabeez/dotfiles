@@ -1,6 +1,10 @@
 local wezterm = require("wezterm")
 local config = wezterm.config_builder()
 
+-- NOTE: Attempt to fix terminal name in fastfetch header
+-- https://wezfurlong.org/wezterm/config/lua/config/term.html
+config.term = "wezterm"
+
 config.font = wezterm.font("CaskaydiaCove NF")
 config.font_size = 16
 config.line_height = 1.2
@@ -28,7 +32,7 @@ config.color_scheme = "Catppuccin Mocha"
 -- TODO: setup cmd+N keybind to open new pane 'smartly'
 --       decide whether to do vsplit/hsplit depending on how many panes are currently open
 config.keys = {
-    { key = "LeftArrow", mods = "OPT", action = wezterm.action { SendString = "\x1bb" } },
+    { key = "LeftArrow",  mods = "OPT", action = wezterm.action { SendString = "\x1bb" } },
     { key = "RightArrow", mods = "OPT", action = wezterm.action { SendString = "\x1bf" } }
 }
 
