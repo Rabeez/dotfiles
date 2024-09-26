@@ -9,40 +9,40 @@ return {
 	-- 		require("oil").setup()
 	-- 	end,
 	-- },
-	{
-		"nvim-neo-tree/neo-tree.nvim",
-		branch = "v3.x",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-			"MunifTanjim/nui.nvim",
-			"3rd/image.nvim",     -- Optional image support in preview window: See `# Preview Mode` for more information
-		},
-		config = function()
-			-- TODO: check if this shows untracked git files in different color
-			-- https://github.com/nvim-neo-tree/neo-tree.nvim/discussions/353
-			require("neo-tree").setup({
-				filesystem = {
-					filtered_items = {
-						visible = true
-					},
-					follow_current_file = {
-						enabled = true, -- This will find and focus the file in the active buffer every time
-						--               -- the current file is changed while the tree is open.
-						leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
-					},
-				},
-				window = {
-					-- toggle = true,
-					position = "right",
-				},
-				hijack_netrw_behavior = "open_default"
-			})
-			-- TODO: <C-b> has a conflict within neotree so it doesn't close an opened panel
-			vim.keymap.set("n", "<leader>bb", "<Cmd>Neotree toggle last<CR>",
-				{ desc = "Toggle Neotree panel", silent = true })
-		end
-	},
+	-- {
+	-- 	"nvim-neo-tree/neo-tree.nvim",
+	-- 	branch = "v3.x",
+	-- 	dependencies = {
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		"3rd/image.nvim",     -- Optional image support in preview window: See `# Preview Mode` for more information
+	-- 	},
+	-- 	config = function()
+	-- 		-- TODO: check if this shows untracked git files in different color
+	-- 		-- https://github.com/nvim-neo-tree/neo-tree.nvim/discussions/353
+	-- 		require("neo-tree").setup({
+	-- 			filesystem = {
+	-- 				filtered_items = {
+	-- 					visible = true
+	-- 				},
+	-- 				follow_current_file = {
+	-- 					enabled = true, -- This will find and focus the file in the active buffer every time
+	-- 					--               -- the current file is changed while the tree is open.
+	-- 					leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
+	-- 				},
+	-- 			},
+	-- 			window = {
+	-- 				-- toggle = true,
+	-- 				position = "right",
+	-- 			},
+	-- 			hijack_netrw_behavior = "disabled"
+	-- 		})
+	-- 		-- TODO: <C-b> has a conflict within neotree so it doesn't close an opened panel
+	-- 		vim.keymap.set("n", "<leader>bb", "<Cmd>Neotree toggle last<CR>",
+	-- 			{ desc = "Toggle Neotree panel", silent = true })
+	-- 	end
+	-- },
 	{
 		"mikavilpas/yazi.nvim",
 		event = "VeryLazy",
@@ -69,8 +69,8 @@ return {
 		},
 		---@type YaziConfig
 		opts = {
-		  -- if you want to open yazi instead of netrw, see below for more info
-		  open_for_directories = false,
+		  -- NOTE: If using this then neotree `hijack_netrw_behavior` has to be `disabled`
+		  open_for_directories = true,
 		  keymaps = {
 			show_help = '<f1>',
 		  },

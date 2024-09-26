@@ -52,7 +52,7 @@ return {
         dashboard.section.buttons.val = {
             dashboard.button("e", "  > New file", "<Cmd>ene <BAR> startinsert <CR>"),
             dashboard.button("f", "  > Find file", "<Cmd>Telescope find_files<CR>"),
-            dashboard.button("p", "  > Open file tree", "<Cmd>Neotree toggle last<CR>"),
+            dashboard.button("p", "  > Open file explorer", "<Cmd>Yazi<CR>"),
             dashboard.button("r", "  > Recent", "<Cmd>Telescope oldfiles<CR>"),
             dashboard.button("q", "  > Quit NVIM", "<Cmd>qa<CR>"),
         }
