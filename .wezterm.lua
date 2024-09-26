@@ -5,7 +5,7 @@ local config = wezterm.config_builder()
 -- https://wezfurlong.org/wezterm/config/lua/config/term.html
 config.term = "wezterm"
 
-config.font = wezterm.font("CaskaydiaCove NF")
+config.font = wezterm.font("CaskaydiaCove NFM")
 config.font_size = 16
 config.line_height = 1.2
 config.enable_tab_bar = false
@@ -13,10 +13,10 @@ config.window_decorations = "RESIZE"
 config.initial_rows = 35
 config.initial_cols = 110
 config.window_padding = {
-    left = 20,
-    right = 20,
-    top = 20,
-    bottom = 20,
+	left = 20,
+	right = 20,
+	top = 20,
+	bottom = 20,
 }
 
 config.color_scheme = "Catppuccin Mocha"
@@ -32,8 +32,8 @@ config.color_scheme = "Catppuccin Mocha"
 -- TODO: setup cmd+N keybind to open new pane 'smartly'
 --       decide whether to do vsplit/hsplit depending on how many panes are currently open
 config.keys = {
-    { key = "LeftArrow",  mods = "OPT", action = wezterm.action { SendString = "\x1bb" } },
-    { key = "RightArrow", mods = "OPT", action = wezterm.action { SendString = "\x1bf" } }
+	{ key = "LeftArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bb" }) },
+	{ key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },
 }
 
 return config
