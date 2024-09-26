@@ -1,5 +1,7 @@
+# TODO: change this to nvim?
 export EDITOR=code
 
+# Override builtin binaries with GNU ones installed via homebrew
 export PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/make/libexec/gnubin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin:$PATH"
@@ -14,6 +16,7 @@ then
 
   autoload -Uz compinit
   compinit
+  # https://stackoverflow.com/questions/29196718/zsh-highlight-on-tab
   zstyle ':completion:*' menu select
 fi
 
