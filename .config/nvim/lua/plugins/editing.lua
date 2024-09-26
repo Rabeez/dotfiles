@@ -24,9 +24,10 @@ return {
         event = { "BufReadPre", "BufNewFile" },
         config = function()
             require("nvim-surround").setup({
-                -- Configuration here, or leave empty to use defaults
-                -- NOTE: 'ys' is the trigger keymap
-                -- TODO: 's' seems to be mapped to something else. Fix this
+                -- NOTE: default keymaps
+                -- add     ->  ys{motion}{char}
+                -- delete  ->  ds{char}
+                -- change  ->  cs{target}{replacement}
             })
         end
     }
