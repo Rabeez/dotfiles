@@ -48,6 +48,10 @@ return {
       -- TODO: use `LSPAttach` to have buffer specific keybinds to user specific LS functionality
       -- https://youtu.be/6pAG3BHurdM?si=v67Qo7ENJCr-PwD-&t=3990
       vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+      -- k("n", "gD", l.buf.declaration, bufopts)
+      vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
+      vim.keymap.set("n", "gr", vim.lsp.buf.references)
+      vim.keymap.set("n", "gt", vim.lsp.buf.type_definition)
       vim.keymap.set("n", "K", vim.lsp.buf.hover)
       vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
     end
