@@ -16,6 +16,8 @@ return {
 				pickers = {
 					-- NOTE: This is needed for dotfiles repo since all those files are hidden, but still need to ignore .git
 					find_files = {
+						-- NOTE: This is to enable color highlights of hidden files in file explorers
+						hidden = true,
 						find_command = { 'rg', '--files', '--iglob', '!.git', '--hidden' },
 					},
 					grep_string = {
