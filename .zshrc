@@ -9,14 +9,14 @@ export PATH="$HOME/.cargo/bin:$PATH"
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('$HOMEBREW_PREFIX/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
-    if [ -f "$HOMEBREW_PREFIX/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "$HOMEBREW_PREFIX/anaconda3/etc/profile.d/conda.sh"
+    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
     else
-        export PATH="$HOMEBREW_PREFIX/anaconda3/bin:$PATH"
+        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
     fi
 fi
 unset __conda_setup
@@ -37,7 +37,7 @@ ca () {
     # TODO: Add support for executing while in non-base environment
     # conda activate "$(conda info --envs | fzf | awk '{print $1}')"
     env_dir=`printf "%s/envs" $CONDA_PREFIX`
-    conda activate "$(command ls $env_dir | fzf --height 40% --border)"
+    conda activate "$(command ls $env_dir | fzf --height 40% --border --reverse)"
 }
 cdc () {
     if [ $CONDA_DEFAULT_ENV != 'base' ]; then
@@ -67,7 +67,7 @@ export FZF_CTRL_T_OPTS="
 export FZF_CTRL_R_OPTS="
   --bind 'ctrl-y:execute-silent(echo -n {2..} | pbcopy)+abort'
   --color header:italic
-  --header 'Press CTRL-Y to copy command into clipboard' --border"
+  --header 'Press CTRL-Y to copy command into clipboard' --border --reverse"
 # Print tree structure in the preview window
 export FZF_ALT_C_OPTS="
   --walker-skip .git,node_modules,target
