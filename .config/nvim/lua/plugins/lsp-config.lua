@@ -11,6 +11,7 @@ return {
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
+		dependencies = { "WhoIsSethDaniel/mason-tool-installer.nvim" },
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
@@ -24,17 +25,29 @@ return {
 					"jsonls",
 					"markdown_oxide",
 					"ruff",
+					"ruff_lsp",
 					"basedpyright",
 					"yamlls",
 					"taplo",
 					"sqlls",
 				},
 			})
+			require("mason-tool-installer").setup({
+				ensure_installed = {
+					"stylua",
+					"sqlfluff",
+					"jsonlint",
+					"glow",
+					"prettierd",
+				},
+			})
 		end,
 	},
+
 	{
 		"neovim/nvim-lspconfig",
 		event = { "BufReadPre", "BufNewFile" },
+		dependencies = { "antosha417/nvim-lsp-file-operations" },
 		config = function()
 			local border = {
 				{ "🭽", "FloatBorder" },
@@ -59,6 +72,7 @@ return {
 			require("lspconfig.ui.windows").default_options.border = "double"
 			local lspconfig = require("lspconfig")
 
+			-- TODO: use setup_handlers method instead of this nonsense of all listed LSPs
 			-- TODO: check wiki to see any LSP-specific config requirements
 			-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 			lspconfig.lua_ls.setup({ capabilities = capabilities })
