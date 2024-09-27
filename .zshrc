@@ -11,6 +11,7 @@ export PATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/unzip/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/gzip/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export DYLD_LIBRARY_PATH="$HOMEBREW_PREFIX/lib:$DYLD_LIBRARY_PATH"
 
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 if type brew &>/dev/null
