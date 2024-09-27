@@ -24,6 +24,7 @@ return {
 					"jsonls",
 					"markdown_oxide",
 					"ruff",
+					"basedpyright",
 					"yamlls",
 					"taplo",
 					"sqlls",
@@ -73,6 +74,7 @@ return {
 			})
 			lspconfig.markdown_oxide.setup({ capabilities = capabilities })
 			lspconfig.ruff_lsp.setup({ capabilities = capabilities })
+			lspconfig.basedpyright.setup({ capabilities = capabilities })
 			lspconfig.yamlls.setup({ capabilities = capabilities })
 			lspconfig.taplo.setup({ capabilities = capabilities })
 			lspconfig.sqlls.setup({ capabilities = capabilities })

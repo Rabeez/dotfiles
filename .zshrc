@@ -12,6 +12,10 @@ export PATH="$HOMEBREW_PREFIX/opt/unzip/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/gzip/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export DYLD_LIBRARY_PATH="$HOMEBREW_PREFIX/lib:$DYLD_LIBRARY_PATH"
+# For openblas
+export LDFLAGS="-L/opt/homebrew/opt/openblas/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/openblas/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/openblas/lib/pkgconfig"
 
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 if type brew &>/dev/null
