@@ -5,7 +5,7 @@ local config = wezterm.config_builder()
 -- https://wezfurlong.org/wezterm/config/lua/config/term.html
 config.term = "wezterm"
 
-config.font = wezterm.font("CaskaydiaCove NFM")
+config.font = wezterm.font_with_fallback({ "CaskaydiaCove Nerd Font", "Hack Nerd Font", "Noto Color Emoji" })
 config.font_size = 16
 config.line_height = 1.2
 config.enable_tab_bar = false

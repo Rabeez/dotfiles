@@ -107,12 +107,19 @@ return {
 			local lazy_status = require("lazy.status")
 			require("lualine").setup({
 				sections = {
-					-- TODO: setup Molten kernel name/status
+					-- lualine_b = { "branch", "diff", "diagnostics" },
 					lualine_x = {
 						{
 							lazy_status.updates,
 							cond = lazy_status.has_updates,
 						},
+						-- NOTE: this needs Molten as a dependency here I think
+						-- look into setting this lualine mod from within Molten config instead
+						-- {
+						-- 	require("molten.status").kernels(),
+						-- 	cond = require("molten.status").initialized() == "Molten",
+						-- },
+						{ "encoding", "fileformat", "filetype" },
 					},
 				},
 			})
