@@ -1,6 +1,9 @@
 # TODO: change this to nvim?
 export EDITOR=code
 
+# rather than "~/Library/Application\ Support/"
+export XDG_CONFIG_HOME="$HOME/.config"
+
 # Override builtin binaries with GNU ones installed via homebrew
 export PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/make/libexec/gnubin:$PATH"
