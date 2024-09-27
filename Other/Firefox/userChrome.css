@@ -1,0 +1,30 @@
+/* 
+This custom CSS
+- disables native tab bar
+- sets some style overrides for sideberry vertical tabs
+
+Steps:
+<https://github.com/MrOtherGuy/firefox-csshacks>
+1. Go to about:config and set the pref toolkit.legacyUserProfileCustomizations.stylesheets to true
+2. First, find your profile folder. While Firefox is running, go to about:support and find a Profile folder
+- The real profile folder should have files like prefs.js and places.sqlite If you see those two files in the folder, then great! You found the profile folder! Now lets actually create those stylesheet files.
+3. Firefox loads userChrome.css from <profileFolder>/chrome/userChrome.css. That chrome-folder or the stylesheet files do not exist by default.
+- Note: only userChrome.css is mentioned in this section for brevity, but everything regarding that will also apply to userContent.css
+
+ */
+
+#TabsToolbar {
+  display: none;
+}
+
+#sidebar-header {
+  border: none !important;
+}
+
+#sidebar-splitter {
+  display: none !important;
+}
+
+#sidebar-icon {
+  display: none;
+}
