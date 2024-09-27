@@ -1,3 +1,15 @@
+
+// NOTE: Make session manager/layout setup for this logic:
+//       `cd` into a directory and run a zellij script/command to open a 'session' with 2 windows/tabs:
+//          1. nvim     2. normal zsh terminal in directory
+//       This session should be named with directory name i.e. "blah/blah/Python programs/ab_testing" => "Python programs/ab_testing"
+//       Have a separate zellij command which uses a fzf UI to allow opening older sessions directly
+//       This means wezterm will open just normally by default, 
+//          if you run one of the two zellij commands (open existing session, create new sesion)
+//          only then zellij will open
+
+
+
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
 keybinds {
     normal {
