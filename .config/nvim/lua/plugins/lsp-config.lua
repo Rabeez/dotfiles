@@ -82,10 +82,7 @@ return {
 			lspconfig.cssls.setup({ capabilities = capabilities })
 			lspconfig.bashls.setup({ capabilities = capabilities })
 			lspconfig.ts_ls.setup({ capabilities = capabilities })
-			lspconfig.jsonls.setup({
-				capabilities = capabilities,
-				-- filetypes = { "json", "jsonc" },
-			})
+			lspconfig.jsonls.setup({ capabilities = capabilities })
 			lspconfig.markdown_oxide.setup({ capabilities = capabilities })
 			lspconfig.ruff_lsp.setup({ capabilities = capabilities })
 			lspconfig.basedpyright.setup({ capabilities = capabilities })
