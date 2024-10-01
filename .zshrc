@@ -1,5 +1,4 @@
-# TODO: change this to nvim?
-export EDITOR=code
+export EDITOR=nvim
 
 # rather than "~/Library/Application\ Support/"
 export XDG_CONFIG_HOME="$HOME/.config"
