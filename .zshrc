@@ -71,6 +71,8 @@ export NVM_DIR="$HOME/.nvm"
   [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
 
 
+# # Use ;; as the trigger sequence instead of the default **
+export FZF_COMPLETION_TRIGGER=';;'
 # FZF Catppuccin colors
 export FZF_DEFAULT_OPTS=" \
 --color=bg+:#313244,bg:#1e1e2e,spinner:#f5e0dc,hl:#f38ba8 \
