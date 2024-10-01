@@ -39,6 +39,7 @@ return {
 					"jsonlint",
 					"glow",
 					"prettierd",
+					"shfmt",
 				},
 			})
 		end,

@@ -17,19 +17,18 @@ export CPPFLAGS="-I/opt/homebrew/opt/openblas/include"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/openblas/lib/pkgconfig"
 
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
-if type brew &>/dev/null
-then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+if type brew &>/dev/null; then
+    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
-  autoload -Uz compinit
-  compinit
-  # https://stackoverflow.com/questions/29196718/zsh-highlight-on-tab
-  zstyle ':completion:*' menu select
+    autoload -Uz compinit
+    compinit
+    # https://stackoverflow.com/questions/29196718/zsh-highlight-on-tab
+    zstyle ':completion:*' menu select
 fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
 if [ $? -eq 0 ]; then
     eval "$__conda_setup"
 else
@@ -46,20 +45,20 @@ unset __conda_setup
 alias sz='source $HOME/.zshrc'
 alias ls='eza -l --color=always --icons --header --classify --group-directories-first'
 alias la='eza -al --color=always --icons --header --classify --group-directories-first'
-alias cp='cp -i'  # confirm before overwriting
-alias df='df -h'  # human readable sizes
-alias free='free -m'  # sizes in MB
+alias cp='cp -i'     # confirm before overwriting
+alias df='df -h'     # human readable sizes
+alias free='free -m' # sizes in MB
 # alias grep='ggrep'  # uses GNU grep (instead of built-in grep) installed via homebrew
 
 # Fuzzy finder + conda env activation
 # https://waylonwalker.com/quickly-change-conda-env-with-fzf/
-ca () {
+ca() {
     # TODO: Add support for executing while in non-base environment
     # conda activate "$(conda info --envs | fzf | awk '{print $1}')"
-    env_dir=`printf "%s/envs" $CONDA_PREFIX`
+    env_dir=$(printf "%s/envs" $CONDA_PREFIX)
     conda activate "$(command ls $env_dir | fzf --height 40% --border --reverse)"
 }
-cdc () {
+cdc() {
     if [ $CONDA_DEFAULT_ENV != 'base' ]; then
         conda deactivate
     fi
@@ -67,9 +66,8 @@ cdc () {
 
 # NVM bash completions
 export NVM_DIR="$HOME/.nvm"
-  [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh"  # This loads nvm
-  [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
-
+[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
+[ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
 
 # # Use ;; as the trigger sequence instead of the default **
 export FZF_COMPLETION_TRIGGER=';;'
