@@ -1,26 +1,24 @@
 return {
 	{
-		"hrsh7th/cmp-nvim-lsp",
-	},
-	{
-		"L3MON4D3/LuaSnip",
-		dependencies = {
-			"saadparwaiz1/cmp_luasnip",
-			"rafamadriz/friendly-snippets",
-		},
-	},
-	{
-		"windwp/nvim-autopairs",
-		event = { "InsertEnter" },
-		config = true,
-		-- use opts = {} for passing setup options
-		-- this is equivalent to setup({}) function
-	},
-	{
 		"hrsh7th/nvim-cmp",
 		event = { "InsertEnter" },
 		dependencies = {
+			"hrsh7th/cmp-nvim-lsp",
+			"hrsh7th/cmp-cmdline",
+			"hrsh7th/cmp-buffer",
+			"hrsh7th/cmp-path",
+			"L3MON4D3/LuaSnip",
+			"saadparwaiz1/cmp_luasnip",
+			"rafamadriz/friendly-snippets",
 			"onsails/lspkind.nvim",
+			{
+				"windwp/nvim-autopairs",
+				event = { "InsertEnter" },
+				config = true,
+				opts = {},
+				-- use opts = {} for passing setup options
+				-- this is equivalent to setup({}) function
+			},
 		},
 		-- opts coming from lazydev recommendations
 		opts = function(_, opts)
@@ -34,8 +32,8 @@ return {
 			local cmp = require("cmp")
 			local lspkind = require("lspkind")
 			require("luasnip.loaders.from_vscode").lazy_load()
-
 			local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
 			cmp.setup({
@@ -59,12 +57,11 @@ return {
 					["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 				}),
 				sources = cmp.config.sources({
-					{ name = "otter" },
+					{ name = "otter" }, -- For jupyter notebook completions
 					{ name = "nvim_lsp" },
-					{ name = "luasnip" }, -- For luasnip users.
-				}, {
-					{ name = "buffer" },
-					{ name = "path" },
+					{ name = "buffer", max_item_count = 5 },
+					{ name = "luasnip", max_item_count = 5 }, -- For snippets
+					{ name = "path", max_item_count = 5 },
 				}),
 				formatting = {
 					format = lspkind.cmp_format({
@@ -89,7 +86,12 @@ return {
 			cmp.setup.cmdline(":", {
 				-- mapping = cmp.mapping.preset.cmdline(),
 				sources = cmp.config.sources({
-					{ name = "cmdline" }, -- Priority 1
+					{
+						name = "cmdline",
+						option = {
+							ignore_cmds = { "Man", "!" },
+						},
+					}, -- Priority 1
 					{ name = "path" }, -- Priority 2
 				}),
 				matching = { disallow_symbol_nonprefix_matching = false },
