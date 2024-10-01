@@ -18,4 +18,4 @@ sketchybar --add alias "Control Center,Sound" right \
 	label.padding_right=0 \
 	background.padding_left=0 \
 	background.padding_right=0 \
-	# width=50
+	width=30
