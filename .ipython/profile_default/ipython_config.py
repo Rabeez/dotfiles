@@ -74,7 +74,8 @@ c = get_config()  #noqa
 #          the default matplotlib backend.
 #  Choices: any of ['auto', 'agg', 'gtk', 'gtk3', 'gtk4', 'inline', 'ipympl', 'nbagg', 'notebook', 'osx', 'pdf', 'ps', 'qt', 'qt4', 'qt5', 'qt6', 'svg', 'tk', 'webagg', 'widget', 'wx'] (case-insensitive) or None
 #  Default: None
-# c.InteractiveShellApp.matplotlib = None
+c.InteractiveShellApp.matplotlib = 'inline'
+c.InlineBackend.rc = {}
 
 ## Run the module as a script.
 #  Default: ''
