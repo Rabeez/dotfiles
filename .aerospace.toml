@@ -181,14 +181,11 @@ backspace = ['close-all-windows-but-current', 'mode main']
 # fi
 # ''']
 
-[[on-window-detected]]
-if.app-id = 'com.apple.finder'
-run = 'move-node-to-workspace 1'
 
 [[on-window-detected]]
 if.app-id = 'org.mozilla.firefox'
 check-further-callbacks = true
-run = 'move-node-to-workspace 2'
+run = 'move-node-to-workspace 1'
 
 # https://github.com/nikitabobko/AeroSpace/issues/246
 [[on-window-detected]]
@@ -198,10 +195,14 @@ run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
-run = 'move-node-to-workspace 3'
+run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
 if.app-id = 'com.microsoft.VSCode'
+run = 'move-node-to-workspace 2'
+
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
 run = 'move-node-to-workspace 3'
 
 [[on-window-detected]]
