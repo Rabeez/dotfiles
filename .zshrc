@@ -45,10 +45,10 @@ unset __conda_setup
 alias sz='source $HOME/.zshrc'
 alias ls='eza -l --color=always --icons --header --classify --group-directories-first'
 alias la='eza -al --color=always --icons --header --classify --group-directories-first'
+alias tree='eza --tree --icons -a'
 alias cp='cp -i'     # confirm before overwriting
 alias df='df -h'     # human readable sizes
 alias free='free -m' # sizes in MB
-# alias grep='ggrep'  # uses GNU grep (instead of built-in grep) installed via homebrew
 
 # Fuzzy finder + conda env activation
 # https://waylonwalker.com/quickly-change-conda-env-with-fzf/
