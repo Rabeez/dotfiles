@@ -113,6 +113,16 @@ return {
 					-- so here we directly execute the `python` executable in PATH
 					vim.cmd("MoltenInit python")
 					vim.cmd("MoltenImportOutput")
+
+					-- Dynamically check active conda environment
+					-- local venv = os.getenv("CONDA_PREFIX")
+					-- if venv ~= nil then
+					-- 	-- in the form of /home/benlubas/.virtualenvs/VENV_NAME
+					-- 	venv = string.match(venv, "/.+/(.+)")
+					-- 	vim.cmd(("MoltenInit %s"):format(venv))
+					-- else
+					-- 	vim.cmd("MoltenInit python3")
+					-- end
 				end)
 			end
 
