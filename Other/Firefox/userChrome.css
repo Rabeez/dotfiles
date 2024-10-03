@@ -28,3 +28,7 @@ Steps:
 #sidebar-icon {
   display: none;
 }
+
+#sidebar-close {
+  display: none;
+}
