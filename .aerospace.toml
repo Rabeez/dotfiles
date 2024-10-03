@@ -181,6 +181,9 @@ backspace = ['close-all-windows-but-current', 'mode main']
 # fi
 # ''']
 
+[[on-window-detected]]
+if.app-id = 'com.colliderli.iina'
+run = 'layout floating'
 
 [[on-window-detected]]
 if.app-id = 'org.mozilla.firefox'
