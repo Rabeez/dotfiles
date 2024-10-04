@@ -3,6 +3,11 @@ local sessionizer = require("sessionizer")
 local config = wezterm.config_builder()
 
 -- <<< Style elements >>>
+
+local function basename(s)
+	-- Isolates name of program from full absolute path of executable
+	return string.gsub(s, "(.*[/\\])(.*)", "%2")
+end
 local SOLID_RIGHT_ARROW = utf8.char(0xe0b0) -- for left-most cell (the one that is highlighted)
 local RIGHT_ARROW = utf8.char(0xe0b1) -- for intermediate cells
 local PROJECT_ICON = utf8.char(0xe601) -- for right-most cell (the one that has a different background)
@@ -36,6 +41,7 @@ config.window_padding = {
 	top = 20,
 	bottom = 20,
 }
+
 wezterm.on("update-status", function(window, pane)
 	local leader = "NORMAL"
 	local accent_clr = clr_accent_normal
@@ -57,6 +63,7 @@ wezterm.on("update-status", function(window, pane)
 		{ Foreground = { Color = accent_clr } },
 		{ Background = { Color = clr_background } },
 		{ Text = SOLID_RIGHT_ARROW },
+		-- TODO: add number of open workspaces here?
 		{ Text = " " .. PROJECT_ICON .. " " .. window:active_workspace() .. " " },
 		"ResetAttributes",
 
@@ -67,19 +74,30 @@ wezterm.on("update-status", function(window, pane)
 	window:set_left_status(wezterm.format(elements))
 
 	-- TODO: show all windows in current workspace on right side (w/ highlight color? for active window)
-	window:set_right_status("")
+	elements = {}
+	for _, item in ipairs(window:mux_window():tabs_with_info()) do
+		if item.is_active then
+			table.insert(elements, { Foreground = { Color = clr_background } })
+			table.insert(elements, { Background = { Color = accent_clr } })
+		else
+			table.insert(elements, { Foreground = { Color = accent_clr } })
+			table.insert(elements, { Background = { Color = clr_background } })
+		end
+		local proc_name = "< TEMP >"
+		for _, pane_item in ipairs(item.tab:panes_with_info()) do
+			if pane_item.is_active then
+				proc_name = pane_item.pane:get_foreground_process_name()
+				item.tab:set_title(basename(proc_name))
+			end
+		end
+		table.insert(elements, { Text = " " .. item.tab:get_title() .. " " })
+	end
+	table.insert(elements, { Background = { Color = clr_background } })
+	table.insert(elements, { Text = " " })
+	window:set_right_status(wezterm.format(elements))
 end)
 
 config.color_scheme = "Catppuccin Mocha"
--- NOTE: This might affect nvim molten notebook plot situation
--- TODO: figure out how to darken inactive pane to make difference more clear
--- local custom = wezterm.color.get_builtin_schemes()["Catppuccin Mocha"]
--- config.inactive_pane_saturation = 0.9
--- config.inactive_pane_brightness = 0.8
--- config.color_schemes = {
---     ["CustomCatppuccin"] = custom,
--- }
--- config.color_scheme = "CustomCatppuccin"
 
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.colors = {
@@ -92,14 +110,17 @@ config.colors = {
 -- TODO: setup cmd+N keybind to open new pane 'smartly'
 --       decide whether to do vsplit/hsplit depending on how many panes are currently open
 config.keys = {
+	{ key = "D", mods = "LEADER", action = wezterm.action.ShowDebugOverlay },
 	{ key = "LeftArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bb" }) },
 	{ key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },
 	{ key = "f", mods = "LEADER", action = wezterm.action_callback(sessionizer.toggle) },
 	{
-		key = "l",
+		key = "w",
 		mods = "LEADER",
 		action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
 	},
+	{ key = "h", mods = "LEADER", action = wezterm.action.ActivateTabRelative(-1) },
+	{ key = "l", mods = "LEADER", action = wezterm.action.ActivateTabRelative(-1) },
 }
 
 return config
