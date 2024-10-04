@@ -5,7 +5,7 @@ local config = wezterm.config_builder()
 -- <<< Style elements >>>
 local SOLID_RIGHT_ARROW = utf8.char(0xe0b0) -- for left-most cell (the one that is highlighted)
 local RIGHT_ARROW = utf8.char(0xe0b1) -- for intermediate cells
-local PROJECT_ICON = utf8.char(0xefce) -- for right-most cell (the one that has a different background)
+local PROJECT_ICON = utf8.char(0xe601) -- for right-most cell (the one that has a different background)
 -- colors from NVIM lualine catpuccin theme
 local clr_accent_normal = "#89B4FA"
 local clr_accent_leader = "#FAB387"
@@ -56,7 +56,7 @@ wezterm.on("update-status", function(window, pane)
 		{ Foreground = { Color = accent_clr } },
 		{ Background = { Color = clr_background } },
 		{ Text = SOLID_RIGHT_ARROW },
-		{ Text = " " .. PROJECT_ICON .. "  " .. window:active_workspace() .. " " },
+		{ Text = " " .. PROJECT_ICON .. " " .. window:active_workspace() .. " " },
 		"ResetAttributes",
 		{ Foreground = { Color = clr_background } },
 		{ Background = { Color = clr_bg_dark } },
