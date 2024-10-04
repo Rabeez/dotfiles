@@ -18,64 +18,6 @@ return {
 	{
 		"rcarriga/nvim-notify",
 		config = function()
-			-- Make custom faster animation (https://github.com/rcarriga/nvim-notify/issues/36#issuecomment-982651560)
-			-- local stages = require("notify.stages").slide({})
-			-- stages[2] = function(state)
-			--   return {
-			--     width = { state.message.width, frequency = 2.5 },
-			--     col = { vim.opt.columns:get() },
-			--   }
-			-- end
-
-			-- local animation_speed = 5
-			-- local stages_util = require("notify.stages.util")
-			-- local stages = function(direction)
-			--     return {
-			--         function(state)
-			--             local next_height = state.message.height + 2
-			--             local next_row = stages_util.available_slot(state.open_windows, next_height, direction)
-			--             if not next_row then
-			--                 return nil
-			--             end
-			--             return {
-			--                 relative = "editor",
-			--                 anchor = "NE",
-			--                 width = 1,
-			--                 height = state.message.height,
-			--                 col = vim.opt.columns:get(),
-			--                 row = next_row,
-			--                 border = "rounded",
-			--                 style = "minimal",
-			--             }
-			--         end,
-			--         function(state)
-			--             return {
-			--                 width = { state.message.width, frequency = animation_speed },
-			--                 col = { vim.opt.columns:get() },
-			--             }
-			--         end,
-			--         function()
-			--             return {
-			--                 col = { vim.opt.columns:get() },
-			--                 time = true,
-			--             }
-			--         end,
-			--         function()
-			--             return {
-			--                 width = {
-			--                     1,
-			--                     frequency = animation_speed,
-			--                     damping = 0.9,
-			--                     complete = function(cur_width)
-			--                         return cur_width < 2
-			--                     end,
-			--                 },
-			--                 col = { vim.opt.columns:get() },
-			--             }
-			--         end,
-			--     }
-			-- end
-
 			local nvim_notify = require("notify")
 			nvim_notify.setup({
 				timeout = 2000,
