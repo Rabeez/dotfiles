@@ -25,6 +25,7 @@ return {
 					"yaml",
 					"toml",
 					"markdown",
+					"markdown_inline",
 					"sql",
 					"gitignore",
 				},
