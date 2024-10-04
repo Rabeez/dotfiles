@@ -4,7 +4,7 @@ local act = wezterm.action
 local M = {}
 
 local fd = "/opt/homebrew/bin/fd"
-local rootPath = "/Users/rabeezriaz/Documents/Programming/"
+local rootPath = "/Users/rabeezriaz/Documents/Programming"
 
 M.toggle = function(window, pane)
 	local projects = {}
@@ -28,7 +28,7 @@ M.toggle = function(window, pane)
 		local project = line:gsub("/.git/$", "")
 		local label = project
 		local id = project:gsub(".*/", "")
-		table.insert(projects, { label = tostring(label), id = tostring(id) })
+		table.insert(projects, { label = tostring(label):sub(rootPath:len() + 1), id = tostring(id) })
 	end
 
 	window:perform_action(
@@ -38,7 +38,7 @@ M.toggle = function(window, pane)
 					wezterm.log_info("Cancelled")
 				else
 					wezterm.log_info("Selected " .. label)
-					win:perform_action(act.SwitchToWorkspace({ name = id, spawn = { cwd = label } }), pane)
+					win:perform_action(act.SwitchToWorkspace({ name = id, spawn = { cwd = rootPath .. label } }), pane)
 				end
 			end),
 			fuzzy = true,
