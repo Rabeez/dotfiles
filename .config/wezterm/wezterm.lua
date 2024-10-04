@@ -37,9 +37,6 @@ config.window_padding = {
 	bottom = 20,
 }
 wezterm.on("update-status", function(window, pane)
-	-- TODO: show all windows in current workspace on right side (w/ highlight color? for active window)
-	window:set_right_status("")
-
 	local leader = "NORMAL"
 	local accent_clr = clr_accent_normal
 	if window:leader_is_active() then
@@ -50,20 +47,27 @@ wezterm.on("update-status", function(window, pane)
 	local elements = {
 		{ Background = { Color = clr_background } },
 		{ Text = " " },
+		"ResetAttributes",
+
 		{ Foreground = { Color = clr_background } },
 		{ Background = { Color = accent_clr } },
 		{ Text = " " .. leader .. " " },
+		"ResetAttributes",
+
 		{ Foreground = { Color = accent_clr } },
 		{ Background = { Color = clr_background } },
 		{ Text = SOLID_RIGHT_ARROW },
 		{ Text = " " .. PROJECT_ICON .. " " .. window:active_workspace() .. " " },
 		"ResetAttributes",
+
 		{ Foreground = { Color = clr_background } },
 		{ Background = { Color = clr_bg_dark } },
 		{ Text = SOLID_RIGHT_ARROW },
 	}
-
 	window:set_left_status(wezterm.format(elements))
+
+	-- TODO: show all windows in current workspace on right side (w/ highlight color? for active window)
+	window:set_right_status("")
 end)
 
 config.color_scheme = "Catppuccin Mocha"
