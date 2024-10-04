@@ -80,7 +80,7 @@ config.color_scheme = "Catppuccin Mocha"
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.colors = {
 	-- NOTE: Change cursor color when wezterm LEADER is active
-	compose_cursor = accent_leader,
+	compose_cursor = clr_accent_leader,
 }
 -- TODO: setup cmd+N keybind to open new pane 'smartly'
 --       decide whether to do vsplit/hsplit depending on how many panes are currently open
