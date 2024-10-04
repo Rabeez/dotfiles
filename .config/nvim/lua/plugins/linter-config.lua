@@ -16,7 +16,7 @@ return {
 					lua = { "stylua" },
 					python = { "ruff" },
 					rust = { "rustfmt", lsp_format = "fallback" },
-					go = { "gofmt" },
+					go = { "goimports", "gofmt" },
 					javascript = { "prettierd" },
 					typescript = { "prettierd" },
 					html = { "prettierd" },
@@ -26,7 +26,10 @@ return {
 					sql = { "sqlfluff" },
 					zsh = { "shfmt" },
 					sh = { "shfmt" },
+					["_"] = { "trim_whitespace" },
 				},
+				notify_on_error = true,
+				notify_no_formatters = true,
 			})
 			-- keymap
 			vim.keymap.set("n", "<leader>gf", require("conform").format)
