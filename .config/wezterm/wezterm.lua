@@ -37,6 +37,7 @@ config.window_padding = {
 	bottom = 20,
 }
 wezterm.on("update-status", function(window, pane)
+	-- TODO: show all windows in current workspace on right side (w/ highlight color? for active window)
 	window:set_right_status("")
 
 	local leader = "NORMAL"
