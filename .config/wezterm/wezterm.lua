@@ -10,7 +10,7 @@ local PROJECT_ICON = utf8.char(0xefce) -- for right-most cell (the one that has 
 local clr_accent_normal = "#89B4FA"
 local clr_accent_leader = "#FAB387"
 local clr_background = "#252536" -- catpuccin NVIM lualine bg color
-local clr_bg_dark = "#11111B" -- for right-most cell (this color is the bg color of wezterm tab bar)
+local clr_bg_dark = "#181825" -- for right-most cell (this color is the bg color of wezterm tab bar)
 -- <<< Style elements >>>
 
 -- NOTE: Attempt to fix terminal name in fastfetch header
@@ -81,6 +81,9 @@ config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 1000 }
 config.colors = {
 	-- NOTE: Change cursor color when wezterm LEADER is active
 	compose_cursor = clr_accent_leader,
+	tab_bar = {
+		background = clr_bg_dark,
+	},
 }
 -- TODO: setup cmd+N keybind to open new pane 'smartly'
 --       decide whether to do vsplit/hsplit depending on how many panes are currently open
