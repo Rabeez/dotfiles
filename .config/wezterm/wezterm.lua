@@ -50,6 +50,7 @@ wezterm.on("update-status", function(window, pane)
 		accent_clr = clr_accent_leader
 	end
 
+	local workspaces = wezterm.mux:get_workspace_names()
 	local elements = {
 		{ Background = { Color = clr_background } },
 		{ Text = " " },
@@ -63,8 +64,7 @@ wezterm.on("update-status", function(window, pane)
 		{ Foreground = { Color = accent_clr } },
 		{ Background = { Color = clr_background } },
 		{ Text = SOLID_RIGHT_ARROW },
-		-- TODO: add number of open workspaces here?
-		{ Text = " " .. PROJECT_ICON .. " " .. window:active_workspace() .. " " },
+		{ Text = " [" .. tostring(#workspaces) .. "] " .. PROJECT_ICON .. " " .. window:active_workspace() .. " " },
 		"ResetAttributes",
 
 		{ Foreground = { Color = clr_background } },
@@ -73,7 +73,6 @@ wezterm.on("update-status", function(window, pane)
 	}
 	window:set_left_status(wezterm.format(elements))
 
-	-- TODO: show all windows in current workspace on right side (w/ highlight color? for active window)
 	elements = {}
 	for _, item in ipairs(window:mux_window():tabs_with_info()) do
 		if item.is_active then
