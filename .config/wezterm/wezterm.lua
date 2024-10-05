@@ -117,10 +117,28 @@ config.keys = {
 	{
 		key = "w",
 		mods = "LEADER",
-		action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES" }),
+		action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES", title = "Currently open workspaces" }),
+	},
+	{
+		key = "t",
+		mods = "LEADER",
+		action = wezterm.action.ShowLauncherArgs({
+			flags = "FUZZY|TABS",
+			title = "Currently open tabs (in active workspace)",
+		}),
 	},
 	{ key = "h", mods = "LEADER", action = wezterm.action.ActivateTabRelative(-1) },
 	{ key = "l", mods = "LEADER", action = wezterm.action.ActivateTabRelative(-1) },
+	{
+		key = "n",
+		mods = "LEADER",
+		action = wezterm.action.SpawnTab("CurrentPaneDomain"),
+	},
+	{
+		key = "c",
+		mods = "LEADER",
+		action = wezterm.action.CloseCurrentTab({ confirm = true }),
+	},
 }
 
 return config
