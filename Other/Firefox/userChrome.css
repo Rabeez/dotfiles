@@ -33,6 +33,10 @@ Steps:
   display: none;
 }
 
+#sidebar-title {
+  padding-inline: 0;
+}
+
 #sidebar-box {
   min-width: 23em;
 }
