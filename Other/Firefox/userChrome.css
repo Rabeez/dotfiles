@@ -34,9 +34,9 @@ Steps:
 }
 
 #sidebar-title {
-  padding-inline: 0;
+  padding-inline: 0 !important;
 }
 
 #sidebar-box {
-  min-width: 23em;
+  min-width: 23em !important;
 }
