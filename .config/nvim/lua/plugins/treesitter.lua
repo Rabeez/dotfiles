@@ -133,7 +133,7 @@ return {
 							["]s"] = { query = "@scope", query_group = "locals", desc = "Next scope" },
 							["]z"] = { query = "@fold", query_group = "folds", desc = "Next fold" },
 
-							["]b"] = { query = "@code_cell.inner", desc = "next code block" },
+							["]b"] = { query = "@code_cell.inner", desc = "Next code block start" },
 						},
 						goto_next_end = {
 							["]F"] = { query = "@call.outer", desc = "Next function call end" },
@@ -142,7 +142,7 @@ return {
 							["]I"] = { query = "@conditional.outer", desc = "Next conditional end" },
 							["]L"] = { query = "@loop.outer", desc = "Next loop end" },
 
-							["[b"] = { query = "@code_cell.inner", desc = "previous code block" },
+							["]B"] = { query = "@code_cell.inner", desc = "Next code block end" },
 						},
 						goto_previous_start = {
 							["[f"] = { query = "@call.outer", desc = "Prev function call start" },
@@ -150,6 +150,8 @@ return {
 							["[c"] = { query = "@class.outer", desc = "Prev class start" },
 							["[i"] = { query = "@conditional.outer", desc = "Prev conditional start" },
 							["[l"] = { query = "@loop.outer", desc = "Prev loop start" },
+
+							["[b"] = { query = "@code_cell.inner", desc = "Previous code block start" },
 						},
 						goto_previous_end = {
 							["[F"] = { query = "@call.outer", desc = "Prev function call end" },
@@ -157,6 +159,8 @@ return {
 							["[C"] = { query = "@class.outer", desc = "Prev class end" },
 							["[I"] = { query = "@conditional.outer", desc = "Prev conditional end" },
 							["[L"] = { query = "@loop.outer", desc = "Prev loop end" },
+
+							["[B"] = { query = "@code_cell.inner", desc = "Previous code block end" },
 						},
 					},
 				},
