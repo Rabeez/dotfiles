@@ -93,6 +93,7 @@ return {
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 			"bwpge/lualine-pretty-path",
+			"letieu/harpoon-lualine",
 		},
 		config = function()
 			-- https://github.com/williamboman/mason.nvim/discussions/1535
@@ -165,6 +166,16 @@ return {
 				},
 			}
 
+			local harpoon_indicators = {}
+			local harpoon_active_indicators = {}
+			for i = 1, vim.g.harpoon_max_files do
+				print("Loop iteration: " .. i)
+				table.insert(harpoon_indicators, string.format(" %d ", i))
+				table.insert(harpoon_active_indicators, string.format("[%d]", i))
+			end
+
+			local tb = require("catppuccin.palettes").get_palette("mocha")
+
 			require("lualine").setup({
 				options = {
 					theme = "catppuccin",
@@ -216,7 +227,7 @@ return {
 							-- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#show-recording-messages
 							require("noice").api.status.mode.get,
 							cond = require("noice").api.status.mode.has,
-							color = { fg = "#FDDB98" },
+							color = { fg = tb.yellow },
 						},
 						{
 							-- https://github.com/williamboman/mason.nvim/discussions/1535
@@ -251,14 +262,22 @@ return {
 					},
 					lualine_x = {
 						{
+							"harpoon2",
+							icon = " ",
+							indicators = harpoon_indicators,
+							active_indicators = harpoon_active_indicators,
+							_separator = "",
+							no_harpoon = "Harpoon not loaded",
+						},
+					},
+					lualine_y = {
+						{
 							lualine_molten_kernel,
 							icon = "󰺿",
 							on_click = function()
 								vim.cmd("MoltenInfo")
 							end,
 						},
-					},
-					lualine_y = {
 						{
 							lualine_formatters_count,
 							icon = "󰛖",

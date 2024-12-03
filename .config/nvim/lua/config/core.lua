@@ -64,3 +64,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank({ timeout = 80 })
 	end,
 })
+
+-- NOTE: This is max size of harpoon quick-access list
+-- used to define keymaps etc dynamically
+vim.g.harpoon_max_files = 5
