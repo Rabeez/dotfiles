@@ -256,12 +256,12 @@ return {
 			})
 
 			-- TODO: Custom highlight groups
-			-- MoltenOutputBorderFail -> red
-			-- MoltenOutputWin -> default text color from catppuccin
-			-- MoltenOutputFooter -> faded text color
-			-- MoltenVirtualText -> faded text color
-			-- eg: vim.api.nvim_set_hl(0, "MoltenOutputBorder", { ... })
-			-- eg: vim.api.nvim_set_hl(namespace, "DapStopped", { ctermbg = 0, fg = tb.green, bg = tb.base })
+			-- NOTE: Apparantly all cell output (x more lines, actual code output, traceback etc)
+			-- all of it is treated as MoltenVirtualText
+			local tb = require("catppuccin.palettes").get_palette("mocha")
+			vim.api.nvim_set_hl(0, "MoltenVirtualText", { fg = tb.text, bg = tb.base })
+			vim.api.nvim_set_hl(0, "MoltenOutputFooter", { fg = tb.green, bg = tb.base, bold = true })
+			vim.api.nvim_set_hl(0, "MoltenOutputBorderFail", { fg = tb.red, bg = tb.red })
 		end,
 	},
 	{
