@@ -25,7 +25,6 @@ return {
 					"jsonls",
 					"markdown_oxide",
 					"ruff",
-					"ruff_lsp",
 					"basedpyright",
 					"yamlls",
 					"taplo",
@@ -35,7 +34,9 @@ return {
 			require("mason-tool-installer").setup({
 				ensure_installed = {
 					"stylua",
+					"shellcheck",
 					"sqlfluff",
+					"sql-formatter",
 					"jsonlint",
 					"glow",
 					"prettierd",
@@ -50,30 +51,16 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		dependencies = { "antosha417/nvim-lsp-file-operations" },
 		config = function()
-			local border = {
-				{ "🭽", "FloatBorder" },
-				{ "▔", "FloatBorder" },
-				{ "🭾", "FloatBorder" },
-				{ "▕", "FloatBorder" },
-				{ "🭿", "FloatBorder" },
-				{ "▁", "FloatBorder" },
-				{ "🭼", "FloatBorder" },
-				{ "▏", "FloatBorder" },
-			}
-
-			-- Use custom border by overriding default window_open function
-			local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
-			---@diagnostic disable-next-line: duplicate-set-field
-			function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
-				opts = opts or {}
-				opts.border = opts.border or border
-				return orig_util_open_floating_preview(contents, syntax, opts, ...)
-			end
-
-			local capabilities = require("cmp_nvim_lsp").default_capabilities()
+			local capabilities = vim.lsp.protocol.make_client_capabilities()
+			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
 			require("lspconfig.ui.windows").default_options.border = "double"
 			local lspconfig = require("lspconfig")
+
+			-- Rounded borders
+			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+			vim.lsp.handlers["textDocument/signatureHelp"] =
+				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
 			-- TODO: use setup_handlers method instead of this nonsense of all listed LSPs
 			-- TODO: check wiki to see any LSP-specific config requirements
@@ -83,27 +70,40 @@ return {
 			lspconfig.gopls.setup({ capabilities = capabilities })
 			lspconfig.html.setup({ capabilities = capabilities })
 			lspconfig.cssls.setup({ capabilities = capabilities })
-			lspconfig.bashls.setup({ capabilities = capabilities })
+			lspconfig.bashls.setup({ capabilities = capabilities, filetypes = { "sh", "zsh" } })
 			lspconfig.ts_ls.setup({ capabilities = capabilities })
 			lspconfig.jsonls.setup({ capabilities = capabilities })
 			lspconfig.markdown_oxide.setup({ capabilities = capabilities })
-			lspconfig.ruff_lsp.setup({ capabilities = capabilities })
+			-- https://docs.astral.sh/ruff/editors/setup/#neovim
+			lspconfig.ruff.setup({ capabilities = capabilities })
 			lspconfig.basedpyright.setup({ capabilities = capabilities })
 			lspconfig.yamlls.setup({ capabilities = capabilities })
 			lspconfig.taplo.setup({ capabilities = capabilities })
-			lspconfig.sqlls.setup({ capabilities = capabilities })
+			lspconfig.sqlls.setup({ capabilities = capabilities, filetypes = { "sql" } })
 
 			-- TODO: use `LSPAttach` to have buffer specific keybinds to user specific LS functionality
 			-- https://youtu.be/6pAG3BHurdM?si=v67Qo7ENJCr-PwD-&t=3990
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition)
+			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP: Goto [d]efinition" })
 			-- k("n", "gD", l.buf.declaration, bufopts)
-			vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
-			vim.keymap.set("n", "gr", vim.lsp.buf.references)
-			vim.keymap.set("n", "gt", vim.lsp.buf.type_definition)
-			vim.keymap.set("n", "K", vim.lsp.buf.hover)
-			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
+			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "LSP: Goto [i]mplementation" })
+			vim.keymap.set("n", "gu", vim.lsp.buf.references, { desc = "LSP: Goto [u]sage/references" })
+			vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "LSP: Goto [t]ype definition" })
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "LSP: Open hover panel" })
+			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP: Open [c]ode [a]ctions" })
+			vim.keymap.set("n", "<leader>gr", vim.lsp.buf.rename, { desc = "LSP: Execute [r]ename" })
+			vim.keymap.set({ "n", "i" }, "<c-s>", vim.lsp.buf.signature_help, { desc = "LSP: Open [s]ignature help" })
 		end,
 	},
+	-- {
+	-- 	"ray-x/lsp_signature.nvim",
+	-- 	event = "VeryLazy",
+	-- 	opts = {
+	-- 		hint_enable = false,
+	-- 	},
+	-- 	config = function(_, opts)
+	-- 		require("lsp_signature").setup(opts)
+	-- 	end,
+	-- },
 	{
 		"folke/trouble.nvim",
 		opts = {}, -- for default options, refer to the configuration section for custom setup.
@@ -140,6 +140,8 @@ return {
 				desc = "Quickfix List (Trouble)",
 			},
 			--   TODO: this conflicts with something else
+			--   Also this isn't really needed:
+			--   <leader>ft opens TODOs in telescope then <C-q> sends results to quickfix list
 			{
 				"<leader>xt",
 				"<cmd>TodoTrouble<cr>",
