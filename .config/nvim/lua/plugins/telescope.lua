@@ -6,6 +6,7 @@ return {
 			"nvim-lua/plenary.nvim",
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"folke/todo-comments.nvim",
+			'nvim-telescope/telescope-symbols.nvim'
 		},
 		config = function()
 			local telescope = require("telescope")
@@ -22,7 +23,7 @@ return {
 							.. filepath
 							.. '" '
 							.. "--line-numbers "
-							-- NOTE: This outputs ANSI escape codes for colors but telescope just renders 
+							-- NOTE: This outputs ANSI escape codes for colors but telescope just renders
 							-- the raw characters instead of syntax highlighting
 							-- .. "--force-terminal "
 							.. "--panel=none "
