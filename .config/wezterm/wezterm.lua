@@ -5,6 +5,14 @@ local config = wezterm.config_builder()
 
 -- <<< Style elements >>>
 
+function trim_with_ellipsis(str, max_length)
+	if #str > max_length then
+		return str:sub(1, max_length - 3) .. "..."
+	else
+		return str
+	end
+end
+
 local function basename(s)
 	-- Isolates name of program from full absolute path of executable
 	return string.gsub(s, "(.*[/\\])(.*)", "%2")
@@ -144,7 +152,7 @@ wezterm.on("update-status", function(window, pane)
 			table.insert(elements, { Foreground = { Color = accent_clr } })
 			table.insert(elements, { Background = { Color = clr_background } })
 		end
-		table.insert(elements, { Text = item.tab:get_title() })
+		table.insert(elements, { Text = " " .. trim_with_ellipsis(item.tab:get_title(), 10) .. " " })
 
 		-- Setup colors and write right half-circle
 		if not item.is_active then
@@ -163,8 +171,8 @@ wezterm.on("update-status", function(window, pane)
 	end
 
 	-- Single element spacer on right edge
-	table.insert(elements, { Background = { Color = clr_bg_dark } })
-	table.insert(elements, { Text = " " })
+	-- table.insert(elements, { Background = { Color = clr_bg_dark } })
+	-- table.insert(elements, { Text = " " })
 
 	window:set_right_status(wezterm.format(elements))
 end)
