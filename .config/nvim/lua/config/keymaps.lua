@@ -9,7 +9,7 @@ vim.g.maplocalleader = " "
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 vim.keymap.set({ "n", "v" }, "<space>", "<NOP>")
-vim.keymap.set({ "n", "v" }, "<CR>", "<NOP>")
+-- vim.keymap.set({ "n", "v" }, "<CR>", "<NOP>")
 
 -- Black-hole register for character deletion
 vim.keymap.set("n", "x", '"_x')
@@ -46,6 +46,7 @@ vim.keymap.set("n", "]t", "<cmd>bnext<CR>", { desc = "Go to next buffer/[t]ab" }
 
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Page [u]p and center cursor" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Page [d]p and center cursor" })
+vim.keymap.set("n", "G", "Gzz", { desc = "Goto end-of-file and center cursor" })
 
 vim.keymap.set("n", "U", "<cmd>redo<CR>", { desc = "Redo" })
 

@@ -67,19 +67,10 @@ return {
 		---@type quicker.SetupOptions
 		opts = {},
 		config = function()
-			require("quicker").setup()
-
-			vim.keymap.set("n", "<leader>q", function()
-				require("quicker").toggle()
-			end, {
-				desc = "Toggle quickfix",
-			})
-			vim.keymap.set("n", "<leader>l", function()
-				require("quicker").toggle({ loclist = true })
-			end, {
-				desc = "Toggle loclist",
-			})
 			require("quicker").setup({
+				opts = {
+					number = true,
+				},
 				keys = {
 					{
 						">",
@@ -96,6 +87,17 @@ return {
 						desc = "Collapse quickfix context",
 					},
 				},
+			})
+
+			vim.keymap.set("n", "<leader>q", function()
+				require("quicker").toggle()
+			end, {
+				desc = "Toggle quickfix",
+			})
+			vim.keymap.set("n", "<leader>l", function()
+				require("quicker").toggle({ loclist = true })
+			end, {
+				desc = "Toggle loclist",
 			})
 		end,
 	},

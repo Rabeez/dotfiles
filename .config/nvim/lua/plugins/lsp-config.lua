@@ -83,14 +83,14 @@ return {
 
 			-- TODO: use `LSPAttach` to have buffer specific keybinds to user specific LS functionality
 			-- https://youtu.be/6pAG3BHurdM?si=v67Qo7ENJCr-PwD-&t=3990
-			vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "LSP: Goto [d]efinition" })
+			vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, { desc = "[L]SP: Goto [d]efinition" })
 			-- k("n", "gD", l.buf.declaration, bufopts)
-			vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "LSP: Goto [i]mplementation" })
-			vim.keymap.set("n", "gu", vim.lsp.buf.references, { desc = "LSP: Goto [u]sage/references" })
-			vim.keymap.set("n", "gt", vim.lsp.buf.type_definition, { desc = "LSP: Goto [t]ype definition" })
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "LSP: Open hover panel" })
-			vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "LSP: Open [c]ode [a]ctions" })
-			vim.keymap.set("n", "<leader>gr", vim.lsp.buf.rename, { desc = "LSP: Execute [r]ename" })
+			vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation, { desc = "[L]SP: Goto [i]mplementations" })
+			vim.keymap.set("n", "<leader>lu", vim.lsp.buf.references, { desc = "[L]SP: Goto [u]sage/references" })
+			vim.keymap.set("n", "<leader>lt", vim.lsp.buf.type_definition, { desc = "[L]SP: Goto [t]ype definition" })
+			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "LSP: Open hover panel for [k]eyword under cursor" })
+			vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "[L]SP: Open code [a]ctions" })
+			vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "[L]SP: Execute [r]ename" })
 			vim.keymap.set({ "n", "i" }, "<c-s>", vim.lsp.buf.signature_help, { desc = "LSP: Open [s]ignature help" })
 		end,
 	},
@@ -114,39 +114,31 @@ return {
 				"<cmd>Trouble diagnostics toggle<cr>",
 				desc = "Diagnostics (Trouble)",
 			},
-			{
-				"<leader>xX",
-				"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
-				desc = "Buffer Diagnostics (Trouble)",
-			},
-			{
-				"<leader>cs",
-				"<cmd>Trouble symbols toggle focus=false<cr>",
-				desc = "Symbols (Trouble)",
-			},
-			{
-				"<leader>cl",
-				"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
-				desc = "LSP Definitions / references / ... (Trouble)",
-			},
-			{
-				"<leader>xL",
-				"<cmd>Trouble loclist toggle<cr>",
-				desc = "Location List (Trouble)",
-			},
-			{
-				"<leader>xQ",
-				"<cmd>Trouble qflist toggle<cr>",
-				desc = "Quickfix List (Trouble)",
-			},
-			--   TODO: this conflicts with something else
-			--   Also this isn't really needed:
-			--   <leader>ft opens TODOs in telescope then <C-q> sends results to quickfix list
-			{
-				"<leader>xt",
-				"<cmd>TodoTrouble<cr>",
-				desc = "Open TODOs in Trouble",
-			},
+			-- {
+			-- 	"<leader>xX",
+			-- 	"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
+			-- 	desc = "Buffer Diagnostics (Trouble)",
+			-- },
+			-- {
+			-- 	"<leader>cs",
+			-- 	"<cmd>Trouble symbols toggle focus=false<cr>",
+			-- 	desc = "Symbols (Trouble)",
+			-- },
+			-- {
+			-- 	"<leader>cl",
+			-- 	"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+			-- 	desc = "LSP Definitions / references / ... (Trouble)",
+			-- },
+			-- {
+			-- 	"<leader>xL",
+			-- 	"<cmd>Trouble loclist toggle<cr>",
+			-- 	desc = "Location List (Trouble)",
+			-- },
+			-- {
+			-- 	"<leader>xQ",
+			-- 	"<cmd>Trouble qflist toggle<cr>",
+			-- 	desc = "Quickfix List (Trouble)",
+			-- },
 		},
 	},
 	{
