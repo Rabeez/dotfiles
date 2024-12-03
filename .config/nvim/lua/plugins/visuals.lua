@@ -101,7 +101,7 @@ return {
 				local installed_packages = registry.get_installed_package_names()
 				local upgrades_available = false
 				local packages_outdated = 0
-				function myCallback(success, result_or_err)
+				local function myCallback(success, result_or_err)
 					if success then
 						upgrades_available = true
 						packages_outdated = packages_outdated + 1
@@ -117,6 +117,20 @@ return {
 
 				if upgrades_available then
 					return packages_outdated
+				else
+					return ""
+				end
+			end
+
+			local function lualine_molten_kernel()
+				local ok, molten_status = pcall(function()
+					return require("molten.status")
+				end)
+				if not ok or not molten_status then
+					return ""
+				end
+				if molten_status.initialized() == "Molten" then
+					return "Molten Kernels: " .. molten_status.kernels()
 				else
 					return ""
 				end
@@ -180,15 +194,8 @@ return {
 					},
 					lualine_c = {},
 					lualine_x = {
-						-- NOTE: this needs Molten as a dependency here I think
-						-- look into setting this lualine mod from within Molten config instead
-						-- {
-						-- 	require("molten.status").kernels(),
-						-- 	cond = require("molten.status").initialized() == "Molten",
-						-- },
-
-						-- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#show-recording-messages
 						{
+							-- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#show-recording-messages
 							require("noice").api.status.mode.get,
 							cond = require("noice").api.status.mode.has,
 							color = { fg = "#FDDB98" },
@@ -220,7 +227,18 @@ return {
 					lualine_z = {},
 				},
 				winbar = {
-					lualine_c = { pretty_path },
+					lualine_c = {
+						pretty_path,
+					},
+					lualine_x = {
+						{
+							lualine_molten_kernel,
+							icon = "",
+							on_click = function()
+								vim.cmd("MoltenInfo")
+							end,
+						},
+					},
 				},
 				inactive_winbar = {
 					lualine_c = { pretty_path },
