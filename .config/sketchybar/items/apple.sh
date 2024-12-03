@@ -39,32 +39,31 @@ apple_logo=(
 
 sketchybar --add item apple.logo left \
 	--set apple.logo "${apple_logo[@]}" \
-			click_script="sketchybar -m --animate tanh 2000 --set \$NAME popup.drawing=toggle"   \
-			popup.background.border_width=2                                  \
-			popup.background.corner_radius=3                                 \
-			popup.background.border_color=$POPUP_BORDER_COLOR                \
-			popup.background.background_color=$POPUP_BACKGROUND_COLOR        \
-# --add item apple.prefs popup.apple.logo \
-# --set apple.prefs "${apple_prefs[@]}" \
+	click_script="sketchybar -m --animate tanh 2000 --set \$NAME popup.drawing=toggle" \
+	popup.background.border_width=2 \
+	popup.background.corner_radius=3 \
+	popup.background.border_color=$POPUP_BORDER_COLOR \
+	popup.background.background_color=$POPUP_BACKGROUND_COLOR# --set apple.prefs "${apple_prefs[@]}"# --add item apple.activity popup.apple.logo \
+	\
+	# \
+	\
+	# --set apple.lock "${apple_lock[@]}" # --add item apple.prefs popup.apple.logo \
 # \
-# --add item apple.activity popup.apple.logo \
 # --set apple.activity "${apple_activity[@]}" \
-# \
 # --add item apple.lock popup.apple.logo \
-# --set apple.lock "${apple_lock[@]}"
 
 sketchybar --add item apple.preferences popup.apple.logo \
-		   --set apple.preferences icon=􀺽 \
-		   				label="Preferences" \
-		   				click_script="open -a 'System Preferences'; 
-		   								sketchybar -m --set apple.logo popup.drawing=off"\
-		   --add item apple.activity popup.apple.logo \
-		   --set apple.activity icon=􀒓 \
-		   				label="Activity" \
-		   				click_script="open -a 'Activity Monitor';                       
-		   								sketchybar -m --set apple.logo popup.drawing=off"\
-		   --add item apple.lock popup.apple.logo \
-		   --set apple.lock icon=􀒳 \
-		   				label="Lock Screen" \
-		   				click_script="pmset displaysleepnow;                           
+	--set apple.preferences icon=􀺽 \
+	label="Preferences" \
+	click_script="open -a 'System Preferences'; 
+		   								sketchybar -m --set apple.logo popup.drawing=off" \
+	--add item apple.activity popup.apple.logo \
+	--set apple.activity icon=􀒓 \
+	label="Activity" \
+	click_script="open -a 'Activity Monitor';                       
+		   								sketchybar -m --set apple.logo popup.drawing=off" \
+	--add item apple.lock popup.apple.logo \
+	--set apple.lock icon=􀒳 \
+	label="Lock Screen" \
+	click_script="pmset displaysleepnow;                           
 		   								sketchybar -m --set apple.logo popup.drawing=off"

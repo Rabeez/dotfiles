@@ -5,7 +5,7 @@ source "$CONFIG_DIR/colors.sh"
 sketchybar --add alias "Control Center,Sound" right \
 	--rename "Control Center,Sound" volume_alias \
 	--set volume_alias icon.drawing=on \
-	# script="$PLUGIN_DIR/audio.sh" \
+	\
 	update_freq=60 \
 	updates=on \
 	label.drawing=on \
@@ -18,4 +18,4 @@ sketchybar --add alias "Control Center,Sound" right \
 	label.padding_right=0 \
 	background.padding_left=0 \
 	background.padding_right=0 \
-	width=30
+	width=30 # script="$PLUGIN_DIR/audio.sh" \

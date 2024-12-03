@@ -17,7 +17,7 @@ battery=(
 sketchybar --add item battery right \
 	--set battery "${battery[@]}" \
 	--subscribe battery power_source_change system_woke
-	
+
 status_bracket=(
 	background.color="$BACKGROUND_1"
 	background.border_color="$MAUVE"
