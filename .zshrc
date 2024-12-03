@@ -10,6 +10,7 @@ export PATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/unzip/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/gzip/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/go/bin:$PATH"
 export DYLD_LIBRARY_PATH="$HOMEBREW_PREFIX/lib:$DYLD_LIBRARY_PATH"
 # For openblas
 export LDFLAGS="-L/opt/homebrew/opt/openblas/lib"
@@ -20,6 +21,7 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/openblas/lib/pkgconfig"
 if type brew &>/dev/null; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
+    # TODO: add fzf-tab here
     autoload -Uz compinit
     compinit
     # https://stackoverflow.com/questions/29196718/zsh-highlight-on-tab
@@ -46,20 +48,21 @@ alias sz='source $HOME/.zshrc'
 alias ls='eza -l --color=always --icons --header --classify --group-directories-first'
 alias la='eza -al --color=always --icons --header --classify --group-directories-first'
 alias tree='eza --tree --icons -a'
-alias cp='cp -i'     # confirm before overwriting
-alias df='df -h'     # human readable sizes
-alias free='free -m' # sizes in MB
+alias cp='cp -i'            # confirm before overwriting
+alias df='df -h'            # human readable sizes
+alias free='free -m'        # sizes in MB
+alias cloc='tokei --hidden' # fast CLOC implementation with nice defaults
 
 # Fuzzy finder + conda env activation
 # https://waylonwalker.com/quickly-change-conda-env-with-fzf/
 ca() {
     # TODO: Add support for executing while in non-base environment
     # conda activate "$(conda info --envs | fzf | awk '{print $1}')"
-    env_dir=$(printf "%s/envs" $CONDA_PREFIX)
-    conda activate "$(command ls $env_dir | fzf --height 40% --border --reverse)"
+    env_dir=$(printf "%s/envs" "$CONDA_PREFIX")
+    conda activate "$(command ls "$env_dir" | fzf --height 40% --border --reverse)"
 }
 cdc() {
-    if [ $CONDA_DEFAULT_ENV != 'base' ]; then
+    if [ "$CONDA_DEFAULT_ENV" != 'base' ]; then
         conda deactivate
     fi
 }
@@ -100,11 +103,50 @@ export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # Startup header
 # fastfetch --logo macos
-pokeget random --hide-name | fastfetch --file-raw -
+# pokeget random --hide-name | fastfetch --file-raw -
+
+# ART=(
+#     ""
+#     ".·:'''''''''''''''''''':·."
+#     ": :                    : :"
+#     ": :  ██████╗ ██████╗   : :"
+#     ": :  ██╔══██╗██╔══██╗  : :"
+#     ": :  ██████╔╝██████╔╝  : :"
+#     ": :  ██╔══██╗██╔══██╗  : :"
+#     ": :  ██║  ██║██║  ██║  : :"
+#     ": :  ╚═╝  ╚═╝╚═╝  ╚═╝  : :"
+#     ": :                    : :"
+#     "'·:....................:·'"
+# )
+# printf "%s\n" "${ART[@]}" | fastfetch --file-raw -
+
+CLR_BORDER="\033[35m"
+CLR_CONTENTS="\033[96m"
+CLR_RESET="\033[0m"
+
+# ASCII Art with embedded ANSI codes
+ART=(
+    ""
+    "${CLR_BORDER}.·:'''''''''''''''''''':·.${CLR_RESET}"
+    "${CLR_BORDER}: :${CLR_RESET}                    ${CLR_BORDER}: :${CLR_RESET}"
+    "${CLR_BORDER}: :  ${CLR_CONTENTS}██████╗ ██████╗${CLR_BORDER}   : :${CLR_RESET}"
+    "${CLR_BORDER}: :  ${CLR_CONTENTS}██╔══██╗██╔══██╗${CLR_BORDER}  : :${CLR_RESET}"
+    "${CLR_BORDER}: :  ${CLR_CONTENTS}██████╔╝██████╔╝${CLR_BORDER}  : :${CLR_RESET}"
+    "${CLR_BORDER}: :  ${CLR_CONTENTS}██╔══██╗██╔══██╗${CLR_BORDER}  : :${CLR_RESET}"
+    "${CLR_BORDER}: :  ${CLR_CONTENTS}██║  ██║██║  ██║${CLR_BORDER}  : :${CLR_RESET}"
+    "${CLR_BORDER}: :  ${CLR_CONTENTS}╚═╝  ╚═╝╚═╝  ╚═╝${CLR_BORDER}  : :${CLR_RESET}"
+    "${CLR_BORDER}: :${CLR_RESET}                    ${CLR_BORDER}: :${CLR_RESET}"
+    "${CLR_BORDER}'·:....................:·'${CLR_RESET}"
+)
+oneline=$(
+    IFS=$'\n'
+    echo "${ART[*]}"
+)
+echo "$oneline" | fastfetch --file-raw -
 
 # Setup starship prompt
 eval "$(starship init zsh)"
 
 # Setup ZSH plugins
-source $HOME/.config/fsh/fast-syntax-highlighting.plugin.zsh
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source "$HOME"/.config/fsh/fast-syntax-highlighting.plugin.zsh
+source "$(brew --prefix)"/share/zsh-autosuggestions/zsh-autosuggestions.zsh
