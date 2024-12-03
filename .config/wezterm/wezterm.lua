@@ -5,7 +5,7 @@ local config = wezterm.config_builder()
 
 -- <<< Style elements >>>
 
-function trim_with_ellipsis(str, max_length)
+local function trim_with_ellipsis(str, max_length)
 	if #str > max_length then
 		return str:sub(1, max_length - 3) .. "..."
 	else
