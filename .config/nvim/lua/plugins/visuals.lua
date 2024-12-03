@@ -135,11 +135,21 @@ return {
 					return ""
 				end
 			end
+			local function lualine_lsp_count()
+				local attached_clients = vim.lsp.get_clients({ bufnr = 0 })
+				return vim.tbl_count(attached_clients)
+			end
+			local function lualine_formatters_count()
+				local formatters = require("conform").list_formatters_to_run(0)
+				return vim.tbl_count(formatters)
+			end
 
 			local pretty_path = {
 				"pretty_path",
+				icon_show = false,
+				path_sep = "",
 				directories = {
-					max_depth = 3,
+					max_depth = 4,
 				},
 				symbols = {
 					modified = "",
@@ -201,6 +211,7 @@ return {
 							color = { fg = "#FDDB98" },
 						},
 						{
+							-- https://github.com/williamboman/mason.nvim/discussions/1535
 							lualine_mason_updates,
 							icon = "",
 							on_click = function()
@@ -233,9 +244,25 @@ return {
 					lualine_x = {
 						{
 							lualine_molten_kernel,
-							icon = "",
+							icon = "󰺿",
 							on_click = function()
 								vim.cmd("MoltenInfo")
+							end,
+						},
+					},
+					lualine_y = {
+						{
+							lualine_formatters_count,
+							icon = "󰛖",
+							on_click = function()
+								vim.cmd("ConformInfo")
+							end,
+						},
+						{
+							lualine_lsp_count,
+							icon = "󰿘",
+							on_click = function()
+								vim.cmd("LspInfo")
 							end,
 						},
 					},
