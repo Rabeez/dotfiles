@@ -126,14 +126,18 @@ return {
 				end)
 			end
 
+			local molten_augroup = vim.api.nvim_create_augroup("MoltenJupyter", { clear = true })
+
 			-- automatically import output chunks from a jupyter notebook
 			vim.api.nvim_create_autocmd("BufAdd", {
+				group = molten_augroup,
 				pattern = { "*.ipynb" },
 				callback = imb,
 			})
 
 			-- we have to do this as well so that we catch files opened like nvim ./hi.ipynb
 			vim.api.nvim_create_autocmd("BufEnter", {
+				group = molten_augroup,
 				pattern = { "*.ipynb" },
 				callback = function(e)
 					if vim.api.nvim_get_vvar("vim_did_enter") ~= 1 then
@@ -144,6 +148,7 @@ return {
 
 			-- automatically export output chunks to a jupyter notebook on write
 			vim.api.nvim_create_autocmd("BufWritePost", {
+				group = molten_augroup,
 				pattern = { "*.ipynb" },
 				callback = function()
 					if require("molten.status").initialized() == "Molten" then
@@ -154,6 +159,7 @@ return {
 
 			-- change the configuration when editing a python file
 			vim.api.nvim_create_autocmd("BufEnter", {
+				group = molten_augroup,
 				pattern = "*.py",
 				callback = function(e)
 					if string.match(e.file, ".otter.") then
@@ -171,6 +177,7 @@ return {
 
 			-- Undo those config changes when we go back to a markdown or quarto file
 			vim.api.nvim_create_autocmd("BufEnter", {
+				group = molten_augroup,
 				pattern = { "*.qmd", "*.md", "*.ipynb" },
 				callback = function(e)
 					if string.match(e.file, ".otter.") then
@@ -198,7 +205,14 @@ return {
 			      "source": [
 				""
 			      ]
-			     }
+			     },
+				 {
+				  "cell_type": "python",
+				  "metadata": {},
+				  "source": [
+				  ""
+				  ]
+				 }
 			    ],
 			    "metadata": {
 			     "kernelspec": {
@@ -230,7 +244,7 @@ return {
 					file:close()
 					vim.cmd("edit " .. path)
 				else
-					print("Error: Could not open new notebook file for writing.")
+					vim.notify("Could not open new notebook file for writing.", vim.log.levels.ERROR)
 				end
 			end
 
