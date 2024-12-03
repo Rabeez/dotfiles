@@ -7,17 +7,14 @@ return {
 		-- refer to the configuration section below
 		preset = "modern",
 		icons = { mappings = true, keys = {} },
+		win = {
+			border = "double", -- none, single, double, shadow
+		},
 	},
 	keys = {
 		{
 			"<leader>?",
 			function()
-				require("which-key").setup({
-					window = {
-						border = "double", -- none, single, double, shadow
-						position = "bottom", -- bottom, top
-					},
-				})
 				-- TODO: this needs me to fix the dumb global LSP keymaps I setup
 				require("which-key").show({ global = false })
 			end,
