@@ -6,7 +6,7 @@ return {
 			"nvim-lua/plenary.nvim",
 			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 			"folke/todo-comments.nvim",
-			'nvim-telescope/telescope-symbols.nvim'
+			"nvim-telescope/telescope-symbols.nvim",
 		},
 		config = function()
 			local telescope = require("telescope")
