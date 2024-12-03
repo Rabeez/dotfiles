@@ -17,6 +17,7 @@ return {
 					"html",
 					"css",
 					"python",
+					"regex",
 					"rust",
 					"go",
 					"bash",
