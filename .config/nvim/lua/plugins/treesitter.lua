@@ -33,7 +33,31 @@ return {
 				sync_install = false,
 				auto_install = true,
 				autotag = { enable = true },
-				highlight = { enable = true },
+				-- https://www.reddit.com/r/neovim/comments/1cyta15/comment/l5l5m6c/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+				highlight = {
+					enable = true,
+					-- TODO: This somehow breaks injected highlighting in jupyter notebooks
+					-- disable = function(lang, buf)
+					-- 	if lang == "html" then
+					-- 		return true
+					-- 	end
+					-- 	-- This is needed to ensure the Molten/Jupyter notebook works
+					-- 	if lang == "markdown" then
+					-- 		return true
+					-- 	end
+					-- 	local max_filesize = 100 * 1024 -- 100 KB
+					-- 	local ok, stats = pcall(vim.loop.fs_stat, vim.api.nvim_buf_get_name(buf))
+					-- 	if ok and stats and stats.size > max_filesize then
+					-- 		vim.notify(
+					-- 			"File larger than 100KB treesitter disabled for performance",
+					-- 			vim.log.levels.WARN,
+					-- 			{ title = "Treesitter" }
+					-- 		)
+					-- 		return true
+					-- 	end
+					-- end,
+					additional_vim_regex_highlighting = false,
+				},
 				indent = { enable = true },
 				incremental_selection = {
 					enable = true,
