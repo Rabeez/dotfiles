@@ -90,14 +90,95 @@ return {
 	},
 	{
 		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+			"bwpge/lualine-pretty-path",
+		},
 		config = function()
-			local lazy_status = require("lazy.status")
+			-- https://github.com/williamboman/mason.nvim/discussions/1535
+			local function lualine_mason_updates()
+				local registry = require("mason-registry")
+				local installed_packages = registry.get_installed_package_names()
+				local upgrades_available = false
+				local packages_outdated = 0
+				function myCallback(success, result_or_err)
+					if success then
+						upgrades_available = true
+						packages_outdated = packages_outdated + 1
+					end
+				end
+
+				for _, pkg in pairs(installed_packages) do
+					local p = registry.get_package(pkg)
+					if p then
+						p:check_new_version(myCallback)
+					end
+				end
+
+				if upgrades_available then
+					return packages_outdated
+				else
+					return ""
+				end
+			end
+
+			local pretty_path = {
+				"pretty_path",
+				directories = {
+					max_depth = 3,
+				},
+				symbols = {
+					modified = "",
+					newfile = "",
+				},
+			}
+
 			require("lualine").setup({
+				options = {
+					theme = "catppuccin",
+					disabled_filetypes = {
+						winbar = {
+							"help",
+							"man",
+							"startify",
+							"dashboard",
+							"alpha",
+							"packer",
+							"neogitstatus",
+							"NvimTree",
+							"Trouble",
+							"trouble",
+							"alpha",
+							"lir",
+							"Outline",
+							"spectre_panel",
+							"toggleterm",
+							"qf",
+							"dap-repl",
+							"dapui_console",
+							"dapui_watches",
+							"dapui_stacks",
+							"dapui_breakpoints",
+							"dapui_scopes",
+						},
+					},
+				},
+				extensions = {
+					"nvim-dap-ui",
+				},
 				sections = {
 					lualine_a = { "mode" },
-					lualine_b = { "branch", "diff", "diagnostics" },
-					lualine_c = { "filename", "encoding" },
+					lualine_b = {
+						"branch",
+						"diff",
+						{
+							"diagnostics",
+							on_click = function()
+								vim.cmd("Trouble diagnostics")
+							end,
+						},
+					},
+					lualine_c = {},
 					lualine_x = {
 						-- NOTE: this needs Molten as a dependency here I think
 						-- look into setting this lualine mod from within Molten config instead
@@ -105,13 +186,44 @@ return {
 						-- 	require("molten.status").kernels(),
 						-- 	cond = require("molten.status").initialized() == "Molten",
 						-- },
+
+						-- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#show-recording-messages
 						{
-							lazy_status.updates,
-							cond = lazy_status.has_updates,
+							require("noice").api.status.mode.get,
+							cond = require("noice").api.status.mode.has,
+							color = { fg = "#FDDB98" },
+						},
+						{
+							lualine_mason_updates,
+							icon = "",
+							on_click = function()
+								vim.cmd("Mason")
+							end,
+						},
+						{
+							require("lazy.status").updates,
+							cond = require("lazy.status").has_updates,
+							on_click = function()
+								vim.cmd("Lazy")
+							end,
 						},
 					},
 					lualine_y = { "fileformat", "filetype" },
 					lualine_z = { "location" },
+				},
+				inactive_sections = {
+					lualine_a = {},
+					lualine_b = {},
+					lualine_c = {},
+					lualine_x = {},
+					lualine_y = {},
+					lualine_z = {},
+				},
+				winbar = {
+					lualine_c = { pretty_path },
+				},
+				inactive_winbar = {
+					lualine_c = { pretty_path },
 				},
 			})
 		end,
@@ -137,7 +249,7 @@ return {
 			require("noice").setup({
 				-- Disable cmdline suggestions since cmp-cmdline is used instead
 				popupmenu = {
-					enabled = false,
+					enabled = true,
 				},
 				lsp = {
 					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
@@ -145,6 +257,9 @@ return {
 						["vim.lsp.util.convert_input_to_markdown_lines"] = true,
 						["vim.lsp.util.stylize_markdown"] = true,
 						["cmp.entry.get_documentation"] = true, -- requires hrsh7th/nvim-cmp
+					},
+					signature = {
+						enabled = true,
 					},
 				},
 				-- you can enable a preset for easier configuration
