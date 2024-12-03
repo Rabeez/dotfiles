@@ -130,18 +130,26 @@ return {
 					return ""
 				end
 				if molten_status.initialized() == "Molten" then
-					return "Molten Kernels: " .. molten_status.kernels()
+					local kernels = 0
+					for _ in string.gmatch(molten_status.kernels(), "%S+") do
+						kernels = kernels + 1
+					end
+					return kernels
 				else
 					return ""
 				end
 			end
+
 			local function lualine_lsp_count()
 				local attached_clients = vim.lsp.get_clients({ bufnr = 0 })
-				return vim.tbl_count(attached_clients)
+				local count = vim.tbl_count(attached_clients)
+				return count > 0 and count or ""
 			end
+
 			local function lualine_formatters_count()
 				local formatters = require("conform").list_formatters_to_run(0)
-				return vim.tbl_count(formatters)
+				local count = vim.tbl_count(formatters)
+				return count > 0 and count or ""
 			end
 
 			local pretty_path = {
