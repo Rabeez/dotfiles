@@ -268,6 +268,9 @@ return {
 							active_indicators = harpoon_active_indicators,
 							_separator = "",
 							no_harpoon = "Harpoon not loaded",
+							on_click = function()
+								require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
+							end,
 						},
 					},
 					lualine_y = {
