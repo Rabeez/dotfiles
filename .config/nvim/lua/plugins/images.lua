@@ -41,6 +41,12 @@ return {
 	},
 	{
 		"willothy/wezterm.nvim",
-		config = true,
+		config = function()
+			-- TODO: set these keymaps up in a way that they don't conflict with nvim native pane switching
+			-- similar to nvim tmux navigator
+			-- CHECK OUT THIS PLUGIN
+			-- https://github.com/mrjones2014/smart-splits.nvim
+			-- vim.keymap.set("n", "<leader>wt", require("wezterm").switch_pane_direction)
+		end,
 	},
 }
