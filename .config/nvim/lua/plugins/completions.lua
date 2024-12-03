@@ -36,6 +36,8 @@ return {
 
 			cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
+			-- TODO: add suffix [LSP], [Snippet] etc to end of cmp entries to signify source
+			-- use TJ's dotfiles for this?
 			cmp.setup({
 				completion = {
 					completeopt = "menu,menuone,preview,noselect",
@@ -49,13 +51,14 @@ return {
 					completion = cmp.config.window.bordered(),
 					documentation = cmp.config.window.bordered(),
 				},
+				-- TODO: disable arrow keys for completion selection (this conflicts with pressing arrows to move cursor)
 				mapping = cmp.mapping.preset.insert({
 					["<C-b>"] = cmp.mapping.scroll_docs(-4),
 					["<C-f>"] = cmp.mapping.scroll_docs(4),
 					["<C-Space>"] = cmp.mapping.complete(),
 					["<CR>"] = nil,
 					["<tab>"] = nil,
-					["<C-e>"] = cmp.mapping.abort(),
+					["<C-x>"] = cmp.mapping.abort(),
 					["<C-y>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
 				}),
 				sources = cmp.config.sources({
@@ -85,19 +88,19 @@ return {
 			})
 
 			-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-			cmp.setup.cmdline(":", {
-				-- mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					{
-						name = "cmdline",
-						option = {
-							ignore_cmds = { "Man", "!" },
-						},
-					}, -- Priority 1
-					{ name = "path" }, -- Priority 2
-				}),
-				matching = { disallow_symbol_nonprefix_matching = false },
-			})
+			-- cmp.setup.cmdline(":", {
+			-- 	-- mapping = cmp.mapping.preset.cmdline(),
+			-- 	sources = cmp.config.sources({
+			-- 		{
+			-- 			name = "cmdline",
+			-- 			option = {
+			-- 				ignore_cmds = { "Man", "!" },
+			-- 			},
+			-- 		}, -- Priority 1
+			-- 		{ name = "path" }, -- Priority 2
+			-- 	}),
+			-- 	matching = { disallow_symbol_nonprefix_matching = false },
+			-- })
 		end,
 	},
 }
