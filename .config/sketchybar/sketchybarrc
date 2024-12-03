@@ -52,7 +52,6 @@ defaults=(
 	scroll_texts=off
 )
 
-
 spacer=(
 	icon=''
 	icon.font="$FONT:Regular:20.0"
@@ -61,7 +60,6 @@ spacer=(
 	padding_right=0
 	padding_left=0
 )
-
 
 sketchybar --default "${defaults[@]}"
 source "$ITEM_DIR/apple.sh"
