@@ -254,6 +254,14 @@ return {
 				nargs = 1,
 				complete = "file",
 			})
+
+			-- TODO: Custom highlight groups
+			-- MoltenOutputBorderFail -> red
+			-- MoltenOutputWin -> default text color from catppuccin
+			-- MoltenOutputFooter -> faded text color
+			-- MoltenVirtualText -> faded text color
+			-- eg: vim.api.nvim_set_hl(0, "MoltenOutputBorder", { ... })
+			-- eg: vim.api.nvim_set_hl(namespace, "DapStopped", { ctermbg = 0, fg = tb.green, bg = tb.base })
 		end,
 	},
 	{
