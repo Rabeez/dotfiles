@@ -54,25 +54,6 @@ return {
 			vim.lsp.handlers["textDocument/signatureHelp"] =
 				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
-			-- TODO: use setup_handlers method instead of this nonsense of all listed LSPs
-			-- TODO: check wiki to see any LSP-specific config requirements
-			-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-			-- lspconfig.lua_ls.setup({ capabilities = capabilities })
-			-- lspconfig.rust_analyzer.setup({ capabilities = capabilities })
-			-- lspconfig.gopls.setup({ capabilities = capabilities })
-			-- lspconfig.html.setup({ capabilities = capabilities })
-			-- lspconfig.cssls.setup({ capabilities = capabilities })
-			-- lspconfig.bashls.setup({ capabilities = capabilities, filetypes = { "sh", "zsh" } })
-			-- lspconfig.ts_ls.setup({ capabilities = capabilities })
-			-- lspconfig.jsonls.setup({ capabilities = capabilities })
-			-- lspconfig.markdown_oxide.setup({ capabilities = capabilities })
-			-- -- https://docs.astral.sh/ruff/editors/setup/#neovim
-			-- lspconfig.ruff.setup({ capabilities = capabilities })
-			-- lspconfig.basedpyright.setup({ capabilities = capabilities })
-			-- lspconfig.yamlls.setup({ capabilities = capabilities })
-			-- lspconfig.taplo.setup({ capabilities = capabilities })
-			-- lspconfig.sqlls.setup({ capabilities = capabilities, filetypes = { "sql" } })
-
 			require("mason-lspconfig").setup_handlers({
 				-- The first entry (without a key) will be the default handler
 				-- and will be called for each installed server that doesn't have
