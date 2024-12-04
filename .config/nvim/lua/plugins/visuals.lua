@@ -290,7 +290,7 @@ return {
 						},
 						{
 							lualine_lsp_count,
-							icon = "󰿘",
+							icon = "",
 							on_click = function()
 								vim.cmd("LspInfo")
 							end,

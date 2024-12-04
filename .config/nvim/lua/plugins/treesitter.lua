@@ -127,21 +127,21 @@ return {
 							["ab"] = { query = "@code_cell.outer", desc = "around block" },
 						},
 					},
-					swap = {
-						enable = true,
-						swap_next = {
-							["<leader>na"] = "@parameter.inner", -- swap parameters/argument with next
-							["<leader>n:"] = "@property.outer", -- swap object property with next
-							["<leader>nm"] = "@function.outer", -- swap function with next
-							["<leader>sbl"] = "@code_cell.outer",
-						},
-						swap_previous = {
-							["<leader>pa"] = "@parameter.inner", -- swap parameters/argument with prev
-							["<leader>p:"] = "@property.outer", -- swap object property with prev
-							["<leader>pm"] = "@function.outer", -- swap function with previous
-							["<leader>sbh"] = "@code_cell.outer",
-						},
-					},
+					-- swap = {
+					-- 	enable = true,
+					-- 	swap_next = {
+					-- 		["<leader>na"] = "@parameter.inner", -- swap parameters/argument with next
+					-- 		["<leader>n:"] = "@property.outer", -- swap object property with next
+					-- 		["<leader>nm"] = "@function.outer", -- swap function with next
+					-- 		["<leader>sbl"] = "@code_cell.outer",
+					-- 	},
+					-- 	swap_previous = {
+					-- 		["<leader>pa"] = "@parameter.inner", -- swap parameters/argument with prev
+					-- 		["<leader>p:"] = "@property.outer", -- swap object property with prev
+					-- 		["<leader>pm"] = "@function.outer", -- swap function with previous
+					-- 		["<leader>sbh"] = "@code_cell.outer",
+					-- 	},
+					-- },
 					move = {
 						enable = true,
 						set_jumps = true, -- whether to set jumps in the jumplist
