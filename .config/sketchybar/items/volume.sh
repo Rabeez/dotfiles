@@ -16,6 +16,6 @@ sketchybar --add alias "Control Center,Sound" right \
 	icon.padding_right=0 \
 	label.padding_left=0 \
 	label.padding_right=0 \
-	background.padding_left=0 \
-	background.padding_right=0 \
+	background.padding_left=10 \
+	background.padding_right=10 \
 	width=30 # script="$PLUGIN_DIR/audio.sh" \
