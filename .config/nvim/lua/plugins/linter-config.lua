@@ -11,6 +11,7 @@ return {
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {},
 		config = function()
+			-- TODO: Move all this to lsp-config and single source of code processing
 			require("conform").setup({
 				formatters_by_ft = {
 					lua = { "stylua" },

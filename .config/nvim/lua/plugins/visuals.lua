@@ -325,6 +325,7 @@ return {
 				-- Disable cmdline suggestions since cmp-cmdline is used instead
 				popupmenu = {
 					enabled = true,
+					backend = "nui",
 				},
 				lsp = {
 					-- override markdown rendering so that **cmp** and other plugins use **Treesitter**
