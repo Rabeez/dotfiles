@@ -300,7 +300,6 @@ return {
 					},
 				},
 				-- keymap = {
-				-- 	--TODO: setup your own keymaps:
 				-- 	hover = "H",
 				-- 	definition = "gd",
 				-- 	rename = "<leader>rn",

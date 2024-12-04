@@ -11,7 +11,6 @@ return {
 			local substitute = require("substitute")
 			substitute.setup()
 
-			-- TODO: 's' seems to be mapped to something else. Fix this
 			vim.keymap.set("n", "s", substitute.operator, { desc = "Substitute with motion" })
 			vim.keymap.set("n", "ss", substitute.line, { desc = "Substitute line" })
 			vim.keymap.set("n", "S", substitute.eol, { desc = "Substitute to end of line" })

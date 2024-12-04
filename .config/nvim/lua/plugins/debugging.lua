@@ -30,7 +30,7 @@ return {
 			require("dap-python").test_runner = "pytest"
 			-- End language-specific adapters setup
 
-			-- TODO: setup better more consistent keybinds
+			-- Start keymaps
 			vim.keymap.set("n", "<Leader>dc", function()
 				dap.continue()
 			end, { desc = "[D]AP: [c]ontinue debugger" })
@@ -72,6 +72,7 @@ return {
 			vim.keymap.set("n", "<leader>?", function()
 				require("dapui").eval(nil, { context = "repl", enter = true, width = 100, height = 100 })
 			end)
+			-- End keymaps
 
 			-- Begin UI listeners
 			dap.listeners.before.attach.dapui_config = function()
@@ -89,7 +90,6 @@ return {
 			-- End UI listeners
 
 			-- Begin DAP gutter indicator colors
-			-- NOTE: Use table from colorscheme package instead of raw hexcodes
 			local tb = require("catppuccin.palettes").get_palette("mocha")
 
 			-- https://github.com/mfussenegger/nvim-dap/discussions/355#discussioncomment-4425804
