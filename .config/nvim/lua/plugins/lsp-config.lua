@@ -1,18 +1,19 @@
 return {
 	{
-		"williamboman/mason.nvim",
+		"neovim/nvim-lspconfig",
+		event = { "BufReadPre", "BufNewFile" },
+		dependencies = {
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+			"WhoIsSethDaniel/mason-tool-installer.nvim",
+			"antosha417/nvim-lsp-file-operations",
+		},
 		config = function()
 			require("mason").setup({
 				ui = {
 					border = "double",
 				},
 			})
-		end,
-	},
-	{
-		"williamboman/mason-lspconfig.nvim",
-		dependencies = { "WhoIsSethDaniel/mason-tool-installer.nvim" },
-		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
 					"lua_ls",
@@ -43,21 +44,12 @@ return {
 					"shfmt",
 				},
 			})
-		end,
-	},
 
-	{
-		"neovim/nvim-lspconfig",
-		event = { "BufReadPre", "BufNewFile" },
-		dependencies = { "antosha417/nvim-lsp-file-operations" },
-		config = function()
 			local capabilities = vim.lsp.protocol.make_client_capabilities()
 			capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-			require("lspconfig.ui.windows").default_options.border = "double"
-			local lspconfig = require("lspconfig")
-
 			-- Rounded borders
+			require("lspconfig.ui.windows").default_options.border = "double"
 			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 			vim.lsp.handlers["textDocument/signatureHelp"] =
 				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
@@ -65,36 +57,104 @@ return {
 			-- TODO: use setup_handlers method instead of this nonsense of all listed LSPs
 			-- TODO: check wiki to see any LSP-specific config requirements
 			-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
-			lspconfig.lua_ls.setup({ capabilities = capabilities })
-			lspconfig.rust_analyzer.setup({ capabilities = capabilities })
-			lspconfig.gopls.setup({ capabilities = capabilities })
-			lspconfig.html.setup({ capabilities = capabilities })
-			lspconfig.cssls.setup({ capabilities = capabilities })
-			lspconfig.bashls.setup({ capabilities = capabilities, filetypes = { "sh", "zsh" } })
-			lspconfig.ts_ls.setup({ capabilities = capabilities })
-			lspconfig.jsonls.setup({ capabilities = capabilities })
-			lspconfig.markdown_oxide.setup({ capabilities = capabilities })
-			-- https://docs.astral.sh/ruff/editors/setup/#neovim
-			lspconfig.ruff.setup({ capabilities = capabilities })
-			lspconfig.basedpyright.setup({ capabilities = capabilities })
-			lspconfig.yamlls.setup({ capabilities = capabilities })
-			lspconfig.taplo.setup({ capabilities = capabilities })
-			lspconfig.sqlls.setup({ capabilities = capabilities, filetypes = { "sql" } })
+			-- lspconfig.lua_ls.setup({ capabilities = capabilities })
+			-- lspconfig.rust_analyzer.setup({ capabilities = capabilities })
+			-- lspconfig.gopls.setup({ capabilities = capabilities })
+			-- lspconfig.html.setup({ capabilities = capabilities })
+			-- lspconfig.cssls.setup({ capabilities = capabilities })
+			-- lspconfig.bashls.setup({ capabilities = capabilities, filetypes = { "sh", "zsh" } })
+			-- lspconfig.ts_ls.setup({ capabilities = capabilities })
+			-- lspconfig.jsonls.setup({ capabilities = capabilities })
+			-- lspconfig.markdown_oxide.setup({ capabilities = capabilities })
+			-- -- https://docs.astral.sh/ruff/editors/setup/#neovim
+			-- lspconfig.ruff.setup({ capabilities = capabilities })
+			-- lspconfig.basedpyright.setup({ capabilities = capabilities })
+			-- lspconfig.yamlls.setup({ capabilities = capabilities })
+			-- lspconfig.taplo.setup({ capabilities = capabilities })
+			-- lspconfig.sqlls.setup({ capabilities = capabilities, filetypes = { "sql" } })
 
-			-- TODO: use `LSPAttach` to have buffer specific keybinds to user specific LS functionality
-			-- https://youtu.be/6pAG3BHurdM?si=v67Qo7ENJCr-PwD-&t=3990
-			vim.keymap.set("n", "<leader>ld", vim.lsp.buf.definition, { desc = "[L]SP: Goto [d]efinition" })
-			-- k("n", "gD", l.buf.declaration, bufopts)
-			vim.keymap.set("n", "<leader>li", vim.lsp.buf.implementation, { desc = "[L]SP: Goto [i]mplementations" })
-			vim.keymap.set("n", "<leader>lu", vim.lsp.buf.references, { desc = "[L]SP: Goto [u]sage/references" })
-			vim.keymap.set("n", "<leader>lt", vim.lsp.buf.type_definition, { desc = "[L]SP: Goto [t]ype definition" })
-			vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "LSP: Open hover panel for [k]eyword under cursor" })
-			vim.keymap.set("n", "<leader>la", vim.lsp.buf.code_action, { desc = "[L]SP: Open code [a]ctions" })
-			vim.keymap.set("n", "<leader>lr", vim.lsp.buf.rename, { desc = "[L]SP: Execute [r]ename" })
-			vim.keymap.set({ "n", "i" }, "<c-s>", vim.lsp.buf.signature_help, { desc = "LSP: Open [s]ignature help" })
+			require("mason-lspconfig").setup_handlers({
+				-- The first entry (without a key) will be the default handler
+				-- and will be called for each installed server that doesn't have
+				-- a dedicated handler.
+				function(server_name) -- default handler (optional)
+					require("lspconfig")[server_name].setup({})
+				end,
+				-- Next, you can provide a dedicated handler for specific servers.
+				["bashls"] = function()
+					require("lspconfig").bashls.setup({ capabilities = capabilities, filetypes = { "sh", "zsh" } })
+				end,
+				["sqlls"] = function()
+					require("lspconfig").sqlls.setup({ capabilities = capabilities, filetypes = { "sql" } })
+				end,
+			})
+
+			vim.api.nvim_create_autocmd("LspAttach", {
+				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
+				callback = function(event)
+					vim.keymap.set(
+						"n",
+						"<leader>ld",
+						vim.lsp.buf.definition,
+						{ buffer = event.buf, desc = "[L]SP: Goto [d]efinition" }
+					)
+					-- k("n", "gD", l.buf.declaration, bufopts)
+					vim.keymap.set(
+						"n",
+						"<leader>li",
+						vim.lsp.buf.implementation,
+						{ buffer = event.buf, desc = "[L]SP: Goto [i]mplementations" }
+					)
+					vim.keymap.set(
+						"n",
+						"<leader>lu",
+						vim.lsp.buf.references,
+						{ buffer = event.buf, desc = "[L]SP: Goto [u]sage/references" }
+					)
+					vim.keymap.set(
+						"n",
+						"<leader>lt",
+						vim.lsp.buf.type_definition,
+						{ buffer = event.buf, desc = "[L]SP: Goto [t]ype definition" }
+					)
+					vim.keymap.set(
+						"n",
+						"K",
+						vim.lsp.buf.hover,
+						{ buffer = event.buf, desc = "LSP: Open hover panel for [k]eyword under cursor" }
+					)
+					vim.keymap.set(
+						"n",
+						"<leader>la",
+						vim.lsp.buf.code_action,
+						{ buffer = event.buf, desc = "[L]SP: Open code [a]ctions" }
+					)
+					vim.keymap.set(
+						"n",
+						"<leader>lr",
+						vim.lsp.buf.rename,
+						{ buffer = event.buf, desc = "[L]SP: Execute [r]ename" }
+					)
+					vim.keymap.set(
+						{ "n", "i" },
+						"<c-s>",
+						vim.lsp.buf.signature_help,
+						{ buffer = event.buf, desc = "LSP: Open [s]ignature help" }
+					)
+
+					local client = vim.lsp.get_client_by_id(event.data.client_id)
+					if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+						vim.keymap.set("n", "<leader>lh", function()
+							vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
+						end, { buffer = event.buf, desc = "[L]SP: Toggle Inlay [H]ints" })
+					end
+				end,
+			})
 		end,
 	},
 	-- {
+	-- Noice builtin helper looks much better, even though it stops showing when cmp popup is triggered
+	-- Minor issue that can be avoided by using <C-s> insert mode keymap to manually show helper
 	-- 	"ray-x/lsp_signature.nvim",
 	-- 	event = "VeryLazy",
 	-- 	opts = {
