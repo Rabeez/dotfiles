@@ -14,7 +14,6 @@ return {
 	config = function()
 		local wk = require("which-key")
 		wk.setup({
-
 			preset = "modern",
 			win = {
 				border = "single", -- none, single, double, shadow
