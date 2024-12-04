@@ -6,7 +6,7 @@ update() {
 	if [ "$SELECTED" = "true" ]; then
 		COLOR=$MAUVE
 	fi
-	sketchybar --set $NAME icon.highlight="$SELECTED" \
+	sketchybar --set "$NAME" icon.highlight="$SELECTED" \
 		label.highlight="$SELECTED" \
 		background.border_color="$COLOR"
 }
@@ -17,7 +17,9 @@ set_space_label() {
 
 mouse_clicked() {
 	if [ "$MODIFIER" = "shift" ]; then
-		SPACE_LABEL="$(osascript -e "return (text returned of (display dialog \"Give a name to space $NAME:\" default answer \"\" with icon note buttons {\"Cancel\", \"Continue\"} default button \"Continue\"))")"
+		SPACE_LABEL="$(
+			osascript -e "return (text returned of (display dialog \"Give a name to space $NAME:\" default answer \"\" with icon note buttons {\"Cancel\", \"Continue\"} default button \"Continue\"))"
+		)"
 		if [ $? -eq 0 ]; then
 			if [ "$SPACE_LABEL" = "" ]; then
 				set_space_label "${NAME:6}"
@@ -26,7 +28,7 @@ mouse_clicked() {
 			fi
 		fi
 	else
-		yabai -m space --focus $SID 2>/dev/null
+		yabai -m space --focus "$SID" 2>/dev/null
 	fi
 }
 

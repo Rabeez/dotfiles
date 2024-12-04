@@ -5,7 +5,7 @@
 source "$CONFIG_DIR/colors.sh"
 
 if [ "$1" = "$FOCUSED_WORKSPACE" ]; then
-	sketchybar --set $NAME label.color=$MAUVE
+	sketchybar --set "$NAME" label.color="$MAUVE"
 else
-	sketchybar --set $NAME label.color=$WHITE
+	sketchybar --set "$NAME" label.color="$WHITE"
 fi

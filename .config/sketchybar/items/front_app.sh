@@ -4,7 +4,7 @@ chevron=(
 	icon='󰄾'
 	icon.font="$FONT:Bold:20.0"
 	# label.font="OperatorMono Nerd Font:Bold Italic:14.0"
-	icon.color=$MAUVE
+	icon.color="$MAUVE"
 	padding_right=0
 	padding_left=5
 )
