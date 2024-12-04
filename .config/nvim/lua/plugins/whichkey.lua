@@ -5,8 +5,7 @@ return {
 		{
 			"<leader>?",
 			function()
-				-- TODO: this needs me to fix the dumb global LSP keymaps I setup
-				require("which-key").show({ global = false })
+				require("which-key").show({ global = true })
 			end,
 			desc = "Buffer local keymaps",
 		},
