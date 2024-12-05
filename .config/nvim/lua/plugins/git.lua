@@ -15,7 +15,8 @@ return {
 		-- setting the keybinding for LazyGit with 'keys' is recommended in
 		-- order to load the plugin when the command is run for the first time
 		keys = {
-			{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "[G]it: Open lazy git panel" },
+			{ "<leader>gg", "<cmd>LazyGit<cr>", desc = "[G]it: Open lazy git main panel" },
+			{ "<leader>gl", "<cmd>LazyGit<cr>4++", desc = "[G]it: Open lazy git [l]og panel" },
 		},
 	},
 	{
