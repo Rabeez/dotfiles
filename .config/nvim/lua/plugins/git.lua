@@ -33,14 +33,21 @@ return {
 		-- If you want to load the plugin at startup, add something like event = "VeryLazy",
 		-- or lazy = false. One of both options will work.
 		config = function()
+			local hg_name = "gitblame_highlight_group"
 			require("gitblame").setup({
 				--Note how the `gitblame_` prefix is omitted in `setup`
 				enabled = false,
-				message_template = " <summary> • <date> • <author>", -- template for the blame message, check the Message template section for more options
+				message_template = " 󰊢 <summary> • <date> • <author>", -- template for the blame message, check the Message template section for more options
+				message_when_not_committed = " 󰊢 Not Committed Yet",
 				date_format = "%m-%d-%Y", -- template for the date, check Date format section for more options
 				virtual_text_column = 1, -- virtual text start column, check Start virtual text at column section for more options
+				highlight_group = hg_name,
 			})
 			vim.keymap.set("n", "<leader>gb", "<cmd>GitBlameToggle<CR>", { desc = "[G]it: Toggle line [b]lame" })
+
+			local tb = require("catppuccin.palettes").get_palette("mocha")
+			local namespace = vim.api.nvim_create_namespace("git-blame")
+			vim.api.nvim_set_hl(namespace, hg_name, { ctermbg = 0, fg = tb.subtext1, bg = tb.crust })
 		end,
 	},
 }
