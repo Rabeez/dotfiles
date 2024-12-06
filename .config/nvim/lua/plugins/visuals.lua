@@ -362,25 +362,25 @@ return {
 		-- Highlight word instances under cursor
 		"RRethy/vim-illuminate",
 	},
-	{
-		"rachartier/tiny-inline-diagnostic.nvim",
-		event = "VeryLazy", -- Or `LspAttach`
-		priority = 1000, -- needs to be loaded in first
-		config = function()
-			-- Need to disable default virtual text diagnostic messages
-			vim.diagnostic.config({ virtual_text = false })
-			require("tiny-inline-diagnostic").setup({
-				preset = "modern",
-				options = {
-					show_source = true,
-					multiple_diag_under_cursor = true,
-					multilines = true,
-					show_all_diags_on_cursorline = true,
-					-- format = function(diagnostic)
-					-- 	return diagnostic.message .. " <" .. diagnostic.source .. ">"
-					-- end,
-				},
-			})
-		end,
-	},
+	-- {
+	-- 	"rachartier/tiny-inline-diagnostic.nvim",
+	-- 	event = "VeryLazy", -- Or `LspAttach`
+	-- 	priority = 1000, -- needs to be loaded in first
+	-- 	config = function()
+	-- 		-- Need to disable default virtual text diagnostic messages
+	-- 		vim.diagnostic.config({ virtual_text = false })
+	-- 		require("tiny-inline-diagnostic").setup({
+	-- 			preset = "modern",
+	-- 			options = {
+	-- 				show_source = true,
+	-- 				multiple_diag_under_cursor = true,
+	-- 				multilines = true,
+	-- 				show_all_diags_on_cursorline = true,
+	-- 				-- format = function(diagnostic)
+	-- 				-- 	return diagnostic.message .. " <" .. diagnostic.source .. ">"
+	-- 				-- end,
+	-- 			},
+	-- 		})
+	-- 	end,
+	-- },
 }

@@ -53,10 +53,31 @@ return {
 			vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
 			vim.lsp.handlers["textDocument/signatureHelp"] =
 				vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
-			vim.lsp.handlers["textDocument/publishDiagnostics"] =
-				vim.lsp.with(vim.lsp.diagnostic.on_publish_diagnostics, {
-					underline = false,
-				})
+
+			vim.diagnostic.config({
+				severity_sort = true,
+				virtual_text = false,
+				underline = {
+					severity = {
+						min = vim.diagnostic.severity.WARN,
+					},
+				},
+				signs = {
+					text = {
+						[vim.diagnostic.severity.ERROR] = "",
+						[vim.diagnostic.severity.WARN] = "",
+						[vim.diagnostic.severity.INFO] = "",
+						[vim.diagnostic.severity.HINT] = "",
+					},
+					linehl = {
+						[vim.diagnostic.severity.ERROR] = "ErrorMsg",
+					},
+					numhl = {
+						[vim.diagnostic.severity.ERROR] = "ErrorMsg",
+						[vim.diagnostic.severity.WARN] = "WarningMsg",
+					},
+				},
+			})
 
 			require("mason-lspconfig").setup_handlers({
 				-- The first entry (without a key) will be the default handler
@@ -133,6 +154,59 @@ return {
 							vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
 						end, { buffer = event.buf, desc = "[L]SP: Toggle Inlay [H]ints" })
 					end
+
+					-- Show diagnostic in hover for cursor line
+					-- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#show-line-diagnostics-automatically-in-hover-window
+					vim.api.nvim_create_autocmd("CursorHold", {
+						buffer = event.buf,
+						callback = function()
+							local opts = {
+								focusable = false,
+								close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
+								border = "rounded",
+								source = "always",
+								prefix = "",
+								scope = "cursor",
+								severity_sort = true,
+								header = "",
+								format = function(diagnostic)
+									-- Just a simple text wrap to split long diagnostic into multiple lines
+									local max_width = 80
+									local result = {}
+									local space_left = max_width
+									local line = ""
+
+									-- Split the text into words
+									for word in diagnostic.message:gmatch("%S+") do
+										-- If there's enough space for the word, add it
+										if #word + 1 <= space_left then
+											if line == "" then
+												line = word
+												space_left = space_left - #word
+											else
+												line = line .. " " .. word
+												space_left = space_left - (#word + 1)
+											end
+										else
+											table.insert(result, line)
+											-- Start a new line and calculate space for the new word
+											line = word
+											space_left = max_width - #word
+										end
+									end
+
+									-- Add the final line if not already added
+									if line ~= "" then
+										table.insert(result, line)
+									end
+
+									-- Return the wrapped text joined by newline
+									return table.concat(result, "\n")
+								end,
+							}
+							vim.diagnostic.open_float(nil, opts)
+						end,
+					})
 				end,
 			})
 		end,
