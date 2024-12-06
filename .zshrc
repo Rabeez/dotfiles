@@ -154,3 +154,4 @@ source "$(brew --prefix)"/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # API keys and secrets
 export OPENAI_API_KEY=$(cat "$HOME"/dotfiles/Secrets/openai_api_key)
+export OPENAI_API_KEY_PRO=$(cat "$HOME"/dotfiles/Secrets/openai_api_key_pro)
