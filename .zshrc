@@ -151,3 +151,6 @@ eval "$(starship init zsh)"
 # Setup ZSH plugins
 source "$HOME"/.config/fsh/fast-syntax-highlighting.plugin.zsh
 source "$(brew --prefix)"/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# API keys and secrets
+export OPENAI_API_KEY=$(cat "$HOME"/dotfiles/Secrets/openai_api_key)

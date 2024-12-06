@@ -27,6 +27,7 @@ return {
 			{ "<leader>f", group = "Telescope fuzzy [f]inder", icon = { icon = "", color = "azure" } },
 			{ "<leader>h", group = "[H]arpoon", icon = { icon = "", color = "azure" } },
 			{ "<leader>m", group = "[M]olten", icon = { icon = "󰺿", color = "yellow" } },
+			{ "<leader>a", group = "[A]I", icon = { icon = "", color = "green" } },
 		})
 	end,
 }
