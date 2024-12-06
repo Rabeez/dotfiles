@@ -358,10 +358,10 @@ return {
 			-- TODO: ensure wezterm status/tab bar is hidden when zen mode is triggered
 		},
 	},
-	{
-		-- Highlight word instances under cursor
-		"RRethy/vim-illuminate",
-	},
+	-- {
+	-- 	-- Highlight word instances under cursor
+	-- 	"RRethy/vim-illuminate",
+	-- },
 	-- {
 	-- 	"rachartier/tiny-inline-diagnostic.nvim",
 	-- 	event = "VeryLazy", -- Or `LspAttach`

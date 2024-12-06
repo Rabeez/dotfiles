@@ -207,6 +207,34 @@ return {
 							vim.diagnostic.open_float(nil, opts)
 						end,
 					})
+
+					-- Highlight symbol under cursor
+					-- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#highlight-symbol-under-cursor
+					if client and client.server_capabilities.documentHighlightProvider then
+						local tb = require("catppuccin.palettes").get_palette("mocha")
+						local namespace = vim.api.nvim_create_namespace("lsp-doc-highlight")
+						vim.api.nvim_set_hl(namespace, "LspReferenceRead", { bg = tb.surface1 })
+						vim.api.nvim_set_hl(namespace, "LspReferenceText", { bg = tb.surface1 })
+						vim.api.nvim_set_hl(namespace, "LspReferenceWrite", { bg = tb.surface1 })
+
+						vim.api.nvim_create_augroup("lsp_document_highlight", {
+							clear = false,
+						})
+						vim.api.nvim_clear_autocmds({
+							buffer = event.buf,
+							group = "lsp_document_highlight",
+						})
+						vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+							group = "lsp_document_highlight",
+							buffer = event.buf,
+							callback = vim.lsp.buf.document_highlight,
+						})
+						vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+							group = "lsp_document_highlight",
+							buffer = event.buf,
+							callback = vim.lsp.buf.clear_references,
+						})
+					end
 				end,
 			})
 		end,

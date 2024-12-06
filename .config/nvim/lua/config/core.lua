@@ -68,3 +68,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 -- NOTE: This is max size of harpoon quick-access list
 -- used to define keymaps etc dynamically
 vim.g.harpoon_max_files = 5
+
+-- Much faster wait time for CursoHold autocmds
+vim.o.updatetime = 250
