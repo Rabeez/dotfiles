@@ -63,7 +63,7 @@ return {
 				-- and will be called for each installed server that doesn't have
 				-- a dedicated handler.
 				function(server_name) -- default handler (optional)
-					require("lspconfig")[server_name].setup({})
+					require("lspconfig")[server_name].setup({ capabilities = capabilities })
 				end,
 				-- Next, you can provide a dedicated handler for specific servers.
 				["bashls"] = function()
@@ -138,7 +138,7 @@ return {
 		end,
 	},
 	-- {
-	-- Noice builtin helper looks much better, even though it stops showing when cmp popup is triggered
+	-- NOTE: Noice builtin helper looks much better, even though it stops showing when cmp popup is triggered
 	-- Minor issue that can be avoided by using <C-s> insert mode keymap to manually show helper
 	-- 	"ray-x/lsp_signature.nvim",
 	-- 	event = "VeryLazy",
