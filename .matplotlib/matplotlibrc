@@ -1,2 +1,3 @@
 font.size: 20.0
 figure.figsize: 8, 6
+backend: macosx
