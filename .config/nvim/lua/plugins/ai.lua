@@ -2,6 +2,11 @@ return {
 	{
 		"robitx/gp.nvim",
 		config = function()
+			local gp_additional_prompt = [[
+			\nThe user is a programmer and data scientist and prefers terminal-based solutions, ideally using builtin or open-source software solutions. 
+Be brief and to-the-point. Avoid repeating information or examples you have already provided previously in conversations. 
+Bullet point lists are preferred over multiple paragraphs. Do not provide steps and intermediate explanations unless asked for specifically.
+			]]
 			-- For customization, refer to Install > Configuration in the Documentation/Readme
 			local conf = {
 				-- secrets can be strings or tables with command and arguments
@@ -31,6 +36,17 @@ return {
 				-- styling for popup
 				---@type "single" | "double" | "rounded" | "solid" | "shadow" | "none"
 				style_popup_border = "rounded",
+				agents = {
+					{
+						name = "ChatGPT4o",
+						chat = true,
+						command = false,
+						-- string with model name or table with model name and parameters
+						model = { model = "gpt-4o", temperature = 1.1, top_p = 1 },
+						-- system prompt (use this to specify the persona/role of the AI)
+						system_prompt = require("gp.defaults").chat_system_prompt .. gp_additional_prompt,
+					},
+				},
 			}
 			require("gp").setup(conf)
 
