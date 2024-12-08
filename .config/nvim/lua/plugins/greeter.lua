@@ -51,7 +51,7 @@ return {
 		-- Set menu
 		dashboard.section.buttons.val = {
 			dashboard.button("f", "  > Find file", "<Cmd>Telescope find_files<CR>"),
-			dashboard.button("p", "  > Open file explorer", "<Cmd>Yazi<CR>"),
+			dashboard.button("e", "  > Open file explorer", "<Cmd>Yazi<CR>"),
 			dashboard.button("q", "  > Quit NVIM", "<Cmd>qa<CR>"),
 		}
 
