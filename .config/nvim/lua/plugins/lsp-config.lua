@@ -30,6 +30,7 @@ return {
 					"yamlls",
 					"taplo",
 					"sqlls",
+					"clangd",
 				},
 			})
 			require("mason-tool-installer").setup({
@@ -42,6 +43,7 @@ return {
 					"glow",
 					"prettierd",
 					"shfmt",
+					"clang-format",
 				},
 			})
 

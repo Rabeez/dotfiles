@@ -31,6 +31,8 @@ return {
 					sql = { "sql-formatter" },
 					zsh = { "shfmt" },
 					sh = { "shfmt" },
+					c = { "clang-format" },
+					cpp = { "clang-format" },
 					["*"] = { "injected" }, -- enables injected-lang formatting for all filetypes
 					["_"] = { "trim_whitespace" },
 				},
