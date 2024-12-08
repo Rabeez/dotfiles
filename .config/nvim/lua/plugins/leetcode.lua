@@ -11,7 +11,31 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 			"nvim-tree/nvim-web-devicons",
 		},
+		---@alias lc.lang
+		---| "cpp"
+		---| "java"
+		---| "python"
+		---| "python3"
+		---| "c"
+		---| "csharp"
+		---| "javascript"
+		---| "typescript"
+		---| "php"
+		---| "swift"
+		---| "kotlin"
+		---| "dart"
+		---| "golang"
+		---| "ruby"
+		---| "scala"
+		---| "rust"
+		---| "racket"
+		---| "erlang"
+		---| "elixir"
+		---| "bash"
 		opts = {
+			---@type string
+			arg = "leet",
+
 			---@type lc.lang
 			lang = "python3",
 		},
