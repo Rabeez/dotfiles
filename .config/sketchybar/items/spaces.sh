@@ -2,20 +2,19 @@
 
 sketchybar --add event aerospace_workspace_change
 
-# TODO: show indicator for empty/non-empty spaces
-#       aerospace list-windows --workspace 4 | rg -q ".*" && echo "•" || echo " "
-# Need to account for 'on-window-close'/'on-window-open' callbacks
 for sid in $(aerospace list-workspaces --monitor focused); do
+	clr=$(aerospace list-windows --workspace "$sid" | rg -q ".*" && echo "$WHITE" || echo "$GREY")
+	active_ws=$(aerospace list-workspaces --focused)
+	if [[ $active_ws == "$sid" ]]; then
+		clr=$MAUVE
+	fi
 	sketchybar --add item space."$sid" left \
 		--subscribe space."$sid" aerospace_workspace_change \
 		--set space."$sid" \
-		background.border_color="$MAUVE" \
-		background.corner_radius=5 \
-		background.height=20 \
 		background.drawing=off \
 		label="$sid" \
 		label.font="$FONT:Bold:14.0" \
-		label.color="$WHITE" \
+		label.color="$clr" \
 		label.align=left \
 		padding_left=2 \
 		padding_right=2 \
