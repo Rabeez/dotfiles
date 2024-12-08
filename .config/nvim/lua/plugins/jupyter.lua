@@ -22,15 +22,17 @@ return {
 
 			-- this guide will be using image.nvim
 			-- Don't forget to setup and install the plugin if you want to view image outputs
-			vim.g.molten_image_provider = "wezterm"
+			vim.g.molten_image_provider = "none"
 			vim.g.molten_split_size = 30
+			vim.g.molten_auto_image_popup = true
 
 			-- optional, I like wrapping. works for virt text and the output window
 			vim.g.molten_wrap_output = true
 
 			-- Output as virtual text. Allows outputs to always be shown, works with images, but can
 			-- be buggy with longer images
-			vim.g.molten_virt_text_output = true
+			vim.g.molten_virt_text_output = false
+			vim.g.molten_use_border_highlights = true
 
 			-- this will make it so the output shows up below the \`\`\` cell delimiter
 			vim.g.molten_virt_lines_off_by_1 = true
@@ -71,6 +73,13 @@ return {
 				"<localleader>md",
 				":MoltenDelete<CR>",
 				{ desc = "[M]olten: [D]elete cell", silent = true }
+			)
+
+			vim.keymap.set(
+				"n",
+				"<localleader>mn",
+				"i```python<CR><CR>```<Esc>ki",
+				{ desc = "[M]olten: [N]ew cell at cursor", silent = true }
 			)
 
 			-- if you work with html outputs:
@@ -267,6 +276,37 @@ return {
 			vim.api.nvim_set_hl(0, "MoltenVirtualText", { fg = tb.text, bg = tb.base })
 			vim.api.nvim_set_hl(0, "MoltenOutputFooter", { fg = tb.green, bg = tb.base, bold = true })
 			vim.api.nvim_set_hl(0, "MoltenOutputBorderFail", { fg = tb.red, bg = tb.red })
+
+			-- -- Toggleterm behaviour
+			-- -- Function to display the plot in a floating terminal
+			-- local function molten_show_plot()
+			-- 	vim.notify("HEREEEEE")
+			-- 	local file_path = vim.g.molten_last_image_path -- Path to the generated image
+			-- 	if file_path then
+			-- 		local cmd = "wezterm imgcat " .. file_path
+			-- 		local Terminal = require("toggleterm.terminal").Terminal
+			-- 		local plot_term = Terminal:new({
+			-- 			cmd = cmd,
+			-- 			direction = "float",
+			-- 			float_opts = {
+			-- 				border = "curved",
+			-- 				width = 70,
+			-- 				height = 50,
+			-- 			},
+			-- 		})
+			-- 		plot_term:toggle()
+			-- 	else
+			-- 		vim.notify("No plot image found!", vim.log.levels.WARN)
+			-- 	end
+			-- end
+			-- vim.api.nvim_create_autocmd("User", {
+			-- 	group = "MoltenJupyter",
+			-- 	pattern = "MoltenImagePopup", -- Replace with the actual event name if needed
+			-- 	callback = molten_show_plot,
+			-- })
+			-- vim.api.nvim_create_user_command("MoltenImagePopup", function()
+			-- 	molten_show_plot()
+			-- end, {})
 		end,
 	},
 	{
