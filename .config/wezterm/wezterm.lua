@@ -1,4 +1,4 @@
-local wezterm = require("wezterm")
+local wezterm = require("wezterm") --[[@as Wezterm]]
 local act = wezterm.action
 local sessionizer = require("sessionizer")
 local config = wezterm.config_builder()
@@ -123,7 +123,7 @@ wezterm.on("update-status", function(window, pane)
 	window:set_left_status(wezterm.format(elements))
 
 	elements = {}
-	tab_arr = window:mux_window():tabs_with_info()
+	local tab_arr = window:mux_window():tabs_with_info()
 	for tab_index, item in ipairs(tab_arr) do
 		-- Ensure tab name correspond to foreground process name
 		local proc_name = "< TEMP >"
