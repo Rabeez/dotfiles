@@ -1,7 +1,8 @@
-export EDITOR=nvim
-
 # rather than "~/Library/Application\ Support/"
 export XDG_CONFIG_HOME="$HOME/.config"
+
+# Ensure user-installed thirdparty tools are in path
+export PATH="/usr/local/bin:$PATH"
 
 # Override builtin binaries with GNU ones installed via homebrew
 export PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin:$PATH"
@@ -10,13 +11,23 @@ export PATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/unzip/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/gzip/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/bc/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/ccache/libexec:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/curl/bin:$PATH"
+
+#Ensure binary packages for languages are in path
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export DYLD_LIBRARY_PATH="$HOMEBREW_PREFIX/lib:$DYLD_LIBRARY_PATH"
+
 # For openblas
 export LDFLAGS="-L/opt/homebrew/opt/openblas/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/openblas/include"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/openblas/lib/pkgconfig"
+
+# For curl (from brew instructions)
+export LDFLAGS="-L/opt/homebrew/opt/curl/lib $LDFLAGS"
+export CPPFLAGS="-I/opt/homebrew/opt/curl/include $CPPFLAGS"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/curl/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 if type brew &>/dev/null; then
@@ -158,3 +169,7 @@ export OPENAI_API_KEY_PRO=$(cat "$HOME"/dotfiles/Secrets/openai_api_key_pro)
 
 # Matplotlib config directory
 export MPLCONFIGDIR=$HOME/.matplotlib
+
+# Local Neovim
+export PATH="$HOME/Documents/Programming/ThirdParty/neovim/build/bin:$PATH"
+export EDITOR=nvim
