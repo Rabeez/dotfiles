@@ -219,6 +219,7 @@ return {
 		end,
 	},
 	{
+		-- when a string above contains the name of the language or the string contains a comment with the language name
 		"dariuscorvus/tree-sitter-language-injection.nvim",
 		opts = {},
 	},
