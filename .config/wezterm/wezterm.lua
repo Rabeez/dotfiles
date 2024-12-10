@@ -193,9 +193,9 @@ config.keys = {
 	{
 		key = "p",
 		mods = "LEADER",
-		action = wezterm.action.ActivateCommandPalette,
+		action = "ActivateCommandPalette",
 	},
-	{ key = "D", mods = "LEADER", action = wezterm.action.ShowDebugOverlay },
+	{ key = "D", mods = "LEADER", action = "ShowDebugOverlay" },
 	{ key = "LeftArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bb" }) },
 	{ key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },
 	{ key = "f", mods = "LEADER", action = wezterm.action_callback(sessionizer.toggle) },
