@@ -182,14 +182,25 @@ return {
 				},
 			},
 		},
-	},
-	{
-		"nvim-treesitter/nvim-treesitter-textobjects",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-		},
-		config = function()
+		config = function(plugin, opts)
+			require("nvim-treesitter.configs").setup(opts)
+
+			-- Textobjects config
 			local ts_repeat_move = require("nvim-treesitter.textobjects.repeatable_move")
+
+			-- example: make gitsigns.nvim movement repeatable with ; and , keys.
+			local gs = require("gitsigns")
+
+			-- make sure forward function comes first
+			local next_hunk_repeat, prev_hunk_repeat = ts_repeat_move.make_repeatable_move_pair(function()
+				gs.nav_hunk("next")
+			end, function()
+				gs.nav_hunk("prev")
+			end)
+			-- Or, use `make_repeatable_move` or `set_last_move` functions for more control. See the code for instructions.
+
+			vim.keymap.set({ "n", "x", "o" }, "]h", next_hunk_repeat)
+			vim.keymap.set({ "n", "x", "o" }, "[h", prev_hunk_repeat)
 
 			-- Repeat movement with ; and ,
 			-- ensure ; goes forward and , goes backward regardless of the last direction
@@ -205,20 +216,6 @@ return {
 			vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
 			vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
 			vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
-
-			-- example: make gitsigns.nvim movement repeatable with ; and , keys.
-			local gs = require("gitsigns")
-
-			-- make sure forward function comes first
-			local next_hunk_repeat, prev_hunk_repeat = ts_repeat_move.make_repeatable_move_pair(function()
-				gs.nav_hunk("next")
-			end, function()
-				gs.nav_hunk("prev")
-			end)
-			-- Or, use `make_repeatable_move` or `set_last_move` functions for more control. See the code for instructions.
-
-			vim.keymap.set({ "n", "x", "o" }, "]h", next_hunk_repeat)
-			vim.keymap.set({ "n", "x", "o" }, "[h", prev_hunk_repeat)
 		end,
 	},
 	{
