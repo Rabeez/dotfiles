@@ -199,8 +199,8 @@ return {
 			end)
 			-- Or, use `make_repeatable_move` or `set_last_move` functions for more control. See the code for instructions.
 
-			vim.keymap.set({ "n", "x", "o" }, "]h", next_hunk_repeat)
-			vim.keymap.set({ "n", "x", "o" }, "[h", prev_hunk_repeat)
+			vim.keymap.set({ "n", "x", "o" }, "[h", prev_hunk_repeat, { desc = "Previous git [h]unk" })
+			vim.keymap.set({ "n", "x", "o" }, "]h", next_hunk_repeat, { desc = "Next git [h]unk" })
 
 			-- Repeat movement with ; and ,
 			-- ensure ; goes forward and , goes backward regardless of the last direction
