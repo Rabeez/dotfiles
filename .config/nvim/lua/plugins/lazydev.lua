@@ -24,7 +24,7 @@ return {
 				local a = vim.g.lazydev_enabled == nil and true or vim.g.lazydev_enabled
 				-- disable when a .luarc.json file is found
 				local b = not vim.uv.fs_stat(root_dir .. "/.luarc.json")
-				return a or b
+				return a and b
 			end,
 		},
 	},
