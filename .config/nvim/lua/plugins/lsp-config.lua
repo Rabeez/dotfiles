@@ -44,6 +44,7 @@ return {
 					"prettierd",
 					"shfmt",
 					"clang-format",
+					"mdformat",
 				},
 			})
 

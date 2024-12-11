@@ -33,6 +33,7 @@ return {
 					sh = { "shfmt" },
 					c = { "clang-format" },
 					cpp = { "clang-format" },
+					markdown = { "mdformat" },
 					["*"] = { "injected" }, -- enables injected-lang formatting for all filetypes
 					["_"] = { "trim_whitespace" },
 				},

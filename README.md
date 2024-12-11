@@ -5,6 +5,7 @@ Various dotfiles from my mac setup including terminal, shell, prompt, nvim, wind
 ## Setup
 
 After [homebrew](https://brew.sh) is installed execute these commands:
+
 ```bash
 cd ~
 brew install git stow
@@ -13,4 +14,4 @@ cd dotfiles
 stow .
 ```
 
-Some configurations depend on other tools (e.g. `jq`, `rg` etc.) 
+Some configurations depend on other tools (e.g. `jq`, `rg` etc.)
