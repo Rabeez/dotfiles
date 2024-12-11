@@ -68,7 +68,13 @@ return {
 				},
 			}
 			-- Keymaps
-			vim.keymap.set("n", "<leader>lf", require("conform").format, { desc = "[L]SP: Run [f]ormatter" })
+			vim.keymap.set({ "n", "v", "x" }, "<leader>lf", function()
+				if vim.fn.mode() == "n" then
+					require("conform").format({ async = true, lsp_fallback = true })
+				else
+					vim.lsp.buf.format()
+				end
+			end, { desc = "[L]SP: Run [f]ormatter" })
 			-- vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format)
 			vim.api.nvim_create_autocmd("BufWritePre", {
 				pattern = "*",
