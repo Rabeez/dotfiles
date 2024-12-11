@@ -19,8 +19,11 @@ return {
 					"lua_ls",
 					"rust_analyzer",
 					"gopls",
+					"templ",
+					"htmx",
 					"html",
 					"cssls",
+					"tailwindcss",
 					"bashls",
 					"ts_ls",
 					"jsonls",
@@ -95,6 +98,28 @@ return {
 				end,
 				["sqlls"] = function()
 					require("lspconfig").sqlls.setup({ capabilities = capabilities, filetypes = { "sql" } })
+				end,
+				["html"] = function()
+					require("lspconfig").html.setup({ capabilities = capabilities, filetypes = { "html", "templ" } })
+				end,
+				["htmx"] = function()
+					require("lspconfig").htmx.setup({ capabilities = capabilities, filetypes = { "html", "templ" } })
+				end,
+				["templ"] = function()
+					require("lspconfig").templ.setup({ capabilities = capabilities, filetypes = { "templ" } })
+				end,
+				["tailwindcss"] = function()
+					require("lspconfig").tailwindcss.setup({
+						capabilities = capabilities,
+						filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+						settings = {
+							tailwindCSS = {
+								includeLanguages = {
+									templ = "html",
+								},
+							},
+						},
+					})
 				end,
 			})
 

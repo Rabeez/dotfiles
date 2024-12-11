@@ -22,6 +22,7 @@ return {
 				"regex",
 				"rust",
 				"go",
+				"templ",
 				"bash",
 				"json",
 				"ini",
