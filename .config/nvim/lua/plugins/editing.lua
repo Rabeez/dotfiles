@@ -100,4 +100,13 @@ return {
 			})
 		end,
 	},
+	{
+		"danymat/neogen",
+		-- TODO: Add keymap with ui.input selection for what type of doctring (func, class etc)
+		-- and raise error if chosen type is not supported by language of buffer
+		-- or even better use an fzf-style picker??
+		config = true,
+		-- Uncomment next line if you want to follow only stable versions
+		-- version = "*"
+	},
 }
