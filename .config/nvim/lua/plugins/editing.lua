@@ -112,4 +112,12 @@ return {
 		-- Uncomment next line if you want to follow only stable versions
 		-- version = "*"
 	},
+	{
+		-- NOTE: Used for commentstrings for non-programming languages
+		-- eg. templ, ini files etc
+		"folke/ts-comments.nvim",
+		opts = {},
+		event = "VeryLazy",
+		enabled = vim.fn.has("nvim-0.10.0") == 1,
+	},
 }
