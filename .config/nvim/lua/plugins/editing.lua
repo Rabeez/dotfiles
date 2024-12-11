@@ -106,6 +106,9 @@ return {
 		-- and raise error if chosen type is not supported by language of buffer
 		-- or even better use an fzf-style picker??
 		config = true,
+		-- TODO: Ensure that argument types are used in docstring
+		-- currently not working in python
+
 		-- Uncomment next line if you want to follow only stable versions
 		-- version = "*"
 	},

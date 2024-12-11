@@ -51,3 +51,6 @@ vim.keymap.set("n", "G", "Gzz", { desc = "Goto end-of-file and center cursor" })
 vim.keymap.set("n", "U", "<cmd>redo<CR>", { desc = "Redo" })
 
 vim.keymap.set("n", "<C-p>", "o<ESC>p", { desc = "[p]aste in next line" })
+
+-- TODO: add keymap to paste contents of start env yaml file in buffer
+-- !% cat $HOME/Documents/Programming/TBM_Misc/environment.yml
