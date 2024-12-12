@@ -121,9 +121,17 @@ return {
 		enabled = vim.fn.has("nvim-0.10.0") == 1,
 	},
 	{
+		-- Used for % navigation for more textobjects
 		"andymass/vim-matchup",
 		dependencies = {
 			"nvim-treesitter/nvim-treesitter",
 		},
+	},
+	{
+		-- NOTE: https://github.com/a-h/templ/issues/387
+		"catgoose/templ-goto-definition",
+		dependenciies = "nvim-treesitter/nvim-treesitter",
+		ft = { "go" },
+		config = true,
 	},
 }
