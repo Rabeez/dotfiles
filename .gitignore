@@ -6,4 +6,5 @@
 .jupyter/*
 !jupyter/jupyter_lab_config.py
 Secrets
-
+.docker
+!.docker/.config.json
