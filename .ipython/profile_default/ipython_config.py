@@ -664,7 +664,16 @@ c.InlineBackend.rc = {}
 ## The name or class of a Pygments style to use for syntax
 #          highlighting. To see available styles, run `pygmentize -L styles`.
 #  Default: traitlets.Undefined
-c.TerminalInteractiveShell.highlighting_style = "catppuccin-mocha"
+# c.TerminalInteractiveShell.highlighting_style = "catppuccin-mocha"
+from pygments.styles import get_style_by_name
+from pygments.util import ClassNotFound
+
+try:
+    c.TerminalInteractiveShell.highlighting_style = get_style_by_name(
+        "catppuccin-mocha"
+    )
+except ClassNotFound as ex:
+    print(f"Failed to set theme: {ex}")
 
 ## Override highlighting format for specific tokens
 #  Default: {}
