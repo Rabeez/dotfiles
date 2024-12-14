@@ -1,0 +1,15 @@
+# yaml-language-server: $schema=https://json.schemastore.org/lazydocker.json
+
+gui:
+  border: rounded
+  # Use the mocha catppuccin theme
+  theme:
+    activeBorderColor:
+      - "#cba6f7"
+      - bold
+    inactiveBorderColor:
+      - "#a6adc8"
+    optionsTextColor:
+      - "#89b4fa"
+    selectedLineBgColor:
+      - "#313244"
