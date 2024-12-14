@@ -8,3 +8,4 @@
 Secrets
 .docker
 !.docker/.config.json
+containers/
