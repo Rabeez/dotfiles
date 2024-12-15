@@ -11,7 +11,7 @@ return {
 		config = function()
 			require("mason").setup({
 				ui = {
-					border = "double",
+					border = "rounded",
 				},
 			})
 			require("mason-lspconfig").setup({

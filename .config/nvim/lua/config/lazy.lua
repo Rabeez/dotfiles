@@ -18,7 +18,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Setup lazy.nvim
 require("lazy").setup({
 	ui = {
-		border = "double",
+		border = "rounded",
 	},
 	spec = {
 		-- import your plugins
