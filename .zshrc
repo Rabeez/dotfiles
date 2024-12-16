@@ -36,7 +36,6 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/curl/lib/pkgconfig:$PKG_CONFIG_PATH"
 if type brew &>/dev/null; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
-    # TODO: add fzf-tab here
     zstyle ':completion:*' rehash true
     zstyle ':completion:*' use-cache on
     zstyle ':completion:*' cache-path ~/.zsh/cache
@@ -77,23 +76,24 @@ alias cloc='tokei --hidden --sort files' # fast CLOC implementation with nice de
 
 # Fuzzy finder + conda env activation
 # https://waylonwalker.com/quickly-change-conda-env-with-fzf/
-ca() {
-    # TODO: Add support for executing while in non-base environment
-    # conda activate "$(conda info --envs | fzf | awk '{print $1}')"
-    env_dir=$(printf "%s/envs" "$CONDA_PREFIX")
-    conda activate "$(command ls "$env_dir" | fzf --height 40% --border --reverse)"
-}
 cdc() {
     if [ "$CONDA_DEFAULT_ENV" != 'base' ]; then
         conda deactivate
     fi
 }
+ca() {
+    # TODO: Add support for executing while in non-base environment
+    env_dir=$(printf "%s/envs" "$CONDA_PREFIX")
+    selection=$(command ls "$env_dir" | fzf --height 40% --border --reverse)
+    if [[ -z $selection ]]; then
+        return
+    fi
+    cdc
+    conda activate $selection
+}
 
+# Faster NVM
 eval "$(fnm env --use-on-cd --shell zsh)"
-# NVM bash completions
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
-# [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
 
 # # Use ;; as the trigger sequence instead of the default **
 export FZF_COMPLETION_TRIGGER=';;'
