@@ -1,3 +1,6 @@
+# Performance profiler (paired line at end of file)
+# zmodload zsh/zprof
+
 # rather than "~/Library/Application\ Support/"
 export XDG_CONFIG_HOME="$HOME/.config"
 
@@ -42,18 +45,23 @@ fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
+function conda_initialize_bg() {
+    __conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
+    if [ $? -eq 0 ]; then
+        eval "$__conda_setup"
     else
-        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+        if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
+            . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
+        else
+            export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+        fi
     fi
-fi
-unset __conda_setup
+    unset __conda_setup
+}
 # <<< conda initialize <<<
+# Background Conda initialization
+conda_initialize_bg &>/dev/null &
+disown
 
 # Aliases
 alias sz='source $HOME/.zshrc'
@@ -79,10 +87,11 @@ cdc() {
     fi
 }
 
+eval "$(fnm env --use-on-cd --shell zsh)"
 # NVM bash completions
-export NVM_DIR="$HOME/.nvm"
-[ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
-[ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" ] && \. "$HOMEBREW_PREFIX/opt/nvm/nvm.sh" # This loads nvm
+# [ -s "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm" ] && \. "$HOMEBREW_PREFIX/opt/nvm/etc/bash_completion.d/nvm"
 
 # # Use ;; as the trigger sequence instead of the default **
 export FZF_COMPLETION_TRIGGER=';;'
@@ -173,3 +182,6 @@ export MPLCONFIGDIR=$HOME/.matplotlib
 # Local Neovim
 export PATH="$HOME/Documents/Programming/ThirdParty/neovim/build/bin:$PATH"
 export EDITOR=nvim
+
+# Performance profiler (paired line at start of file)
+# zprof
