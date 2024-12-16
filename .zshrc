@@ -38,6 +38,8 @@ if type brew &>/dev/null; then
 
     # TODO: add fzf-tab here
     zstyle ':completion:*' rehash true
+    zstyle ':completion:*' use-cache on
+    zstyle ':completion:*' cache-path ~/.zsh/cache
     autoload -Uz compinit
     compinit -C
     # https://stackoverflow.com/questions/29196718/zsh-highlight-on-tab
