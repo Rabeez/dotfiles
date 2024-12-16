@@ -37,8 +37,9 @@ if type brew &>/dev/null; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
 
     # TODO: add fzf-tab here
+    zstyle ':completion:*' rehash true
     autoload -Uz compinit
-    compinit
+    compinit -C
     # https://stackoverflow.com/questions/29196718/zsh-highlight-on-tab
     zstyle ':completion:*' menu select
 fi
