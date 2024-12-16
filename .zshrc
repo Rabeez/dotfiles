@@ -60,8 +60,7 @@ function conda_initialize_bg() {
 }
 # <<< conda initialize <<<
 # Background Conda initialization
-conda_initialize_bg &>/dev/null &
-disown
+(conda_initialize_bg &>/dev/null &)
 
 # Aliases
 alias sz='source $HOME/.zshrc'
