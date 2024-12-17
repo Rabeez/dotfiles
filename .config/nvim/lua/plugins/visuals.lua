@@ -275,13 +275,13 @@ return {
 						},
 					},
 					lualine_y = {
-						{
-							lualine_molten_kernel,
-							icon = "󰺿",
-							on_click = function()
-								vim.cmd("MoltenInfo")
-							end,
-						},
+						--{
+					--		lualine_molten_kernel,
+					--		icon = "󰺿",
+					--		on_click = function()
+					--			vim.cmd("MoltenInfo")
+					--		end,
+					--	},
 						{
 							lualine_formatters_count,
 							icon = "󰛖",
