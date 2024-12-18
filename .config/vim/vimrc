@@ -9,6 +9,12 @@ syntax on
 " Set leader key
 let mapleader = " "
 
+let &t_SI = "\e[5 q"  " IBeam for Insert mode
+let &t_SR = "\e[4 q"  " Underline for Replace mode
+let &t_EI = "\e[2 q"  " Block for Normal mode
+" Set the cursor to block (Normal mode) on Vim startup
+autocmd VimEnter * silent! exe "normal \e[2 q"
+
 " Disable swap files
 set noswapfile
 
