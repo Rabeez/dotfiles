@@ -47,22 +47,17 @@ fi
 
 # >>> conda initialize >>>
 # !! Contents within this block are managed by 'conda init' !!
-function conda_initialize_bg() {
-    __conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2>/dev/null)"
-    if [ $? -eq 0 ]; then
-        eval "$__conda_setup"
+function conda() {
+    unset -f conda
+    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
+	conda activate base
     else
-        if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
-            . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
-        else
-            export PATH="/opt/homebrew/anaconda3/bin:$PATH"
-        fi
+        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
     fi
-    unset __conda_setup
+    conda "$@"
 }
 # <<< conda initialize <<<
-# Background Conda initialization
-(conda_initialize_bg &>/dev/null &)
 
 # Aliases
 alias sz='source $HOME/.zshrc'
@@ -83,8 +78,7 @@ cdc() {
 }
 ca() {
     # TODO: Add support for executing while in non-base environment
-    env_dir=$(printf "%s/envs" "$CONDA_PREFIX")
-    selection=$(command ls "$env_dir" | fzf --height 40% --border --reverse)
+    selection=$(command ls "$CONDA_PREFIX/envs" | fzf --height 40% --border --reverse)
     if [[ -z $selection ]]; then
         return
     fi
