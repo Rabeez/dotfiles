@@ -1,0 +1,128 @@
+" ---------- CORE START -------------------------------------------------------
+
+" Don't try to be vi compatible
+set nocompatible
+
+" Enable syntax highlighting
+syntax on
+
+" Set leader key
+let mapleader = " "
+
+" Disable swap files
+set noswapfile
+
+" Line numbers and cursor settings
+set number
+set relativenumber
+set termguicolors
+set signcolumn=yes
+set cursorline
+set mouse=a
+
+" Show mode and command
+set noshowmode
+set noshowcmd
+set cmdheight=1
+
+" Minimal number of screen lines to keep above and below the cursor
+set scrolloff=10
+
+" Indentation settings
+set tabstop=4
+set shiftwidth=4
+set expandtab
+set autoindent
+
+" Disable line wrapping
+set nowrap
+
+" Configure backspace behavior
+set backspace=indent,eol,start
+
+" Search settings
+nnoremap / /\v
+vnoremap / /\v
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+set showmatch
+
+" Enable break indent
+set breakindent
+
+" Save undo history
+set undofile
+
+" Decrease mapped sequence wait time
+set timeoutlen=300
+
+" Configure how new splits should be opened
+set splitright
+set splitbelow
+
+" Update time for CursorHold autocmds
+set updatetime=250
+
+" Clipboard integration (Vim doesn't support Lua's `vim.schedule`)
+set clipboard=unnamedplus
+
+" ---------- CORE END ---------------------------------------------------------
+
+" ---------- PLUGINS START ----------------------------------------------------
+call plug#begin()
+
+" List your plugins here
+Plug 'tpope/vim-sensible'
+Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+Plug 'svermeulen/vim-subversive'
+Plug 'machakann/vim-highlightedyank'
+Plug 'tpope/vim-surround'
+Plug 'vim-airline/vim-airline'
+
+call plug#end()
+
+colorscheme catppuccin_mocha
+let g:airline_powerline_fonts = 1
+let g:airline_theme = 'catppuccin_mocha'
+let g:highlightedyank_highlight_duration = 80
+" ---------- PLUGINS END ------------------------------------------------------
+
+" ---------- KEYMAPS START ----------------------------------------------------
+nnoremap <Esc> :nohlsearch<CR>
+" Replace `x` with black hole register version
+nnoremap x "_x
+
+" Window navigation mappings
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+
+" Buffer/tab navigation
+nnoremap [t :bprevious<CR>
+nnoremap ]t :bnext<CR>
+
+" Center cursor while scrolling or navigating
+nnoremap <C-u> <C-u>zz
+nnoremap <C-d> <C-d>zz
+nnoremap G Gzz
+
+" Redo
+nnoremap U :redo<CR>
+
+" Yank to the system clipboard with 'y'
+nnoremap y "+y
+vnoremap y "+y
+inoremap <C-y> "+y
+
+" Paste from the system clipboard with 'p'
+nnoremap p "+p
+vnoremap p "+p
+inoremap <C-p> "+p
+
+" Paste in next line
+nnoremap P o<ESC>"+p
+" ---------- KEYMAPS END ------------------------------------------------------
+
