@@ -111,11 +111,12 @@ return {
 				["tailwindcss"] = function()
 					require("lspconfig").tailwindcss.setup({
 						capabilities = capabilities,
-						filetypes = { "templ", "astro", "javascript", "typescript", "react" },
+						filetypes = { "html", "templ", "astro", "javascript", "typescript", "react" },
 						settings = {
 							tailwindCSS = {
 								includeLanguages = {
 									templ = "html",
+									htmlangular = "html",
 								},
 							},
 						},
