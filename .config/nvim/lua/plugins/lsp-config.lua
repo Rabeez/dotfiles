@@ -122,6 +122,40 @@ return {
 						},
 					})
 				end,
+				["basedpyright"] = function()
+					require("lspconfig").basedpyright.setup({
+						handlers = {
+							["textDocument/publishDiagnostics"] = function() end,
+						},
+						on_attach = function(client, _)
+							client.server_capabilities.codeActionProvider = false
+						end,
+						settings = {
+							basedpyright = {
+								disableOrganizeImports = true,
+							},
+							python = {
+								analysis = {
+									autoSearchPaths = true,
+									typeCheckingMode = "standard",
+									useLibraryCodeForTypes = true,
+								},
+							},
+						},
+					})
+				end,
+				["ruff"] = function()
+					require("lspconfig").ruff.setup({
+						on_attach = function(client, _)
+							client.server_capabilities.hoverProvider = false
+						end,
+						init_options = {
+							settings = {
+								args = {},
+							},
+						},
+					})
+				end,
 			})
 
 			vim.api.nvim_create_autocmd("LspAttach", {
