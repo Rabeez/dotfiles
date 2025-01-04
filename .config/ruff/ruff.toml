@@ -25,4 +25,8 @@ ignore = [
     "FA102",  # new syntax for annotations without __future__ import
     "INP001", # implicit namespace without __init__.py
     "ERA001", # commented-out code
+    "T201",   # print found
+    "PLR2004",# magic value in comparison
+    "SLF001", # private member access
+    "PD010",  # pandas pivot v pivot_table
 ]
