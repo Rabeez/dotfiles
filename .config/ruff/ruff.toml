@@ -23,4 +23,6 @@ ignore = [
     "TD003",  # missing issue link in TODO
     "PT018",  # break apart multi-case assertions
     "FA102",  # new syntax for annotations without __future__ import
+    "INP001", # implicit namespace without __init__.py
+    "ERA001", # commented-out code
 ]
