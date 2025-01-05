@@ -124,17 +124,16 @@ return {
 				end,
 				["basedpyright"] = function()
 					require("lspconfig").basedpyright.setup({
-						handlers = {
-							["textDocument/publishDiagnostics"] = function() end,
-						},
+						-- NOTE: Disabling this kills ALL diagnostics/hints including type-checking
+						-- handlers = {
+						-- 	["textDocument/publishDiagnostics"] = function() end,
+						-- },
 						on_attach = function(client, _)
 							client.server_capabilities.codeActionProvider = false
 						end,
 						settings = {
 							basedpyright = {
 								disableOrganizeImports = true,
-							},
-							python = {
 								analysis = {
 									autoSearchPaths = true,
 									typeCheckingMode = "standard",
