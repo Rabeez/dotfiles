@@ -128,9 +128,10 @@ return {
 						-- handlers = {
 						-- 	["textDocument/publishDiagnostics"] = function() end,
 						-- },
-						on_attach = function(client, _)
-							client.server_capabilities.codeActionProvider = false
-						end,
+						-- NOTE: Import suggestions are code actions
+						-- on_attach = function(client, _)
+						-- 	client.server_capabilities.codeActionProvider = false
+						-- end,
 						settings = {
 							basedpyright = {
 								disableOrganizeImports = true,
@@ -138,6 +139,10 @@ return {
 									autoSearchPaths = true,
 									typeCheckingMode = "standard",
 									useLibraryCodeForTypes = true,
+									diagnosticSeverityOverrides = {
+										["reportUnusedImport"] = false,
+										["ReportUnusedVariable"] = false,
+									},
 								},
 							},
 						},
