@@ -223,6 +223,15 @@ return {
 			vim.keymap.set({ "n", "x", "o" }, "F", ts_repeat_move.builtin_F_expr, { expr = true })
 			vim.keymap.set({ "n", "x", "o" }, "t", ts_repeat_move.builtin_t_expr, { expr = true })
 			vim.keymap.set({ "n", "x", "o" }, "T", ts_repeat_move.builtin_T_expr, { expr = true })
+
+			-- Utility keymaps
+			vim.keymap.set("n", "<leader>ut", function()
+				if vim.bo.filetype == "query" then
+					return vim.cmd("q")
+				else
+					return vim.cmd("InspectTree")
+				end
+			end, { desc = "Toggle [T]reesitter playground" })
 		end,
 	},
 	{

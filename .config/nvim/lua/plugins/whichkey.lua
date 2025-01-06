@@ -28,6 +28,7 @@ return {
 			{ "<leader>h", group = "[H]arpoon", icon = { icon = "", color = "azure" } },
 			{ "<leader>m", group = "[M]olten", icon = { icon = "󰺿", color = "yellow" } },
 			{ "<leader>a", group = "[A]I", icon = { icon = "", color = "green" } },
+			{ "<leader>u", group = "[U]tilities", icon = { icon = "󱁤", color = "green" } },
 		})
 	end,
 }
