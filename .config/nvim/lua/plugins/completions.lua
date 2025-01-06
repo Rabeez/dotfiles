@@ -78,7 +78,7 @@ return {
 				}),
 				formatting = {
 					format = function(entry, vim_item)
-						vim_item.menu = entry.source.name
+						vim_item.menu = "[" .. entry.source.name .. "]"
 						return lspkind.cmp_format({})(entry, vim_item)
 					end,
 				},
