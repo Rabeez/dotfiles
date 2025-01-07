@@ -232,6 +232,9 @@ return {
 					return vim.cmd("InspectTree")
 				end
 			end, { desc = "Toggle [T]reesitter playground" })
+
+			-- Custom filetype syntax highlighting overrides
+			vim.treesitter.language.register("html", "jinja")
 		end,
 	},
 	{
