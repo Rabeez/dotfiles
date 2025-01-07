@@ -87,3 +87,12 @@ vim.g.harpoon_max_files = 5
 
 -- Much faster wait time for CursoHold autocmds
 vim.o.updatetime = 250
+
+-- Custom filetype overrides
+vim.filetype.add({
+	extension = {
+		jinja = "jinja",
+		jinja2 = "jinja",
+		j2 = "jinja",
+	},
+})

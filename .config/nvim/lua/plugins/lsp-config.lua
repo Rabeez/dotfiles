@@ -34,6 +34,7 @@ return {
 					"taplo",
 					"sqlls",
 					"clangd",
+					-- "jinja_lsp",
 				},
 			})
 			require("mason-tool-installer").setup({
@@ -48,6 +49,7 @@ return {
 					"shfmt",
 					"clang-format",
 					"mdformat",
+					"djlint",
 				},
 			})
 
@@ -100,18 +102,36 @@ return {
 					require("lspconfig").sqlls.setup({ capabilities = capabilities, filetypes = { "sql" } })
 				end,
 				["html"] = function()
-					require("lspconfig").html.setup({ capabilities = capabilities, filetypes = { "html", "templ" } })
+					require("lspconfig").html.setup({
+						capabilities = capabilities,
+						filetypes = { "html", "templ", "jinja" },
+					})
+				end,
+				["cssls"] = function()
+					require("lspconfig").cssls.setup({
+						capabilities = capabilities,
+						filetypes = { "html", "css", "templ", "jinja" },
+					})
 				end,
 				["htmx"] = function()
-					require("lspconfig").htmx.setup({ capabilities = capabilities, filetypes = { "html", "templ" } })
+					require("lspconfig").htmx.setup({
+						capabilities = capabilities,
+						filetypes = { "html", "templ", "jinja" },
+					})
 				end,
 				["templ"] = function()
 					require("lspconfig").templ.setup({ capabilities = capabilities, filetypes = { "templ" } })
 				end,
+				-- ["jinja_lsp"] = function()
+				-- 	require("lspconfig").jinja_lsp.setup({
+				-- 		capabilities = capabilities,
+				-- 		filetypes = { "jinja", "python" },
+				-- 	})
+				-- end,
 				["tailwindcss"] = function()
 					require("lspconfig").tailwindcss.setup({
 						capabilities = capabilities,
-						filetypes = { "html", "templ", "astro", "javascript", "typescript", "react" },
+						filetypes = { "html", "templ", "astro", "javascript", "typescript", "react", "jinja" },
 						settings = {
 							tailwindCSS = {
 								includeLanguages = {

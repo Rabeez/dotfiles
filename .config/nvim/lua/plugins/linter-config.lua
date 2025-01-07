@@ -35,12 +35,14 @@ return {
 					c = { "clang-format" },
 					cpp = { "clang-format" },
 					markdown = { "mdformat" },
+					jinja = { "djlint", prepend_args = { "--reformat", "--indent", "2" } },
 					["*"] = { "injected" }, -- enables injected-lang formatting for all filetypes
 					["_"] = { "trim_whitespace" },
 				},
 				notify_on_error = true,
 				notify_no_formatters = true,
 			})
+
 			-- Customize the "injected" formatter
 			require("conform").formatters.injected = {
 				-- Set the options field
@@ -69,6 +71,7 @@ return {
 					lang_to_formatters = {},
 				},
 			}
+
 			-- Keymaps
 			vim.keymap.set({ "n", "v", "x" }, "<leader>lf", function()
 				if vim.fn.mode() == "n" then
@@ -110,7 +113,15 @@ return {
 		config = function()
 			require("lint").linters_by_ft = {
 				markdown = { "vale" },
+				jinja = { "djlint" },
 			}
+			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+				callback = function()
+					-- try_lint without arguments runs the linters defined in `linters_by_ft`
+					-- for the current filetype
+					require("lint").try_lint()
+				end,
+			})
 		end,
 	},
 }
