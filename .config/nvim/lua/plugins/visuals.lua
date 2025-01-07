@@ -154,6 +154,14 @@ return {
 				return count > 0 and count or ""
 			end
 
+			-- TODO: Use this to add a linter section in status bar
+			-- This seems to always return empty table so....
+			local function lualine_linters_count()
+				local linters = require("lint").get_running()
+				local count = vim.tbl_count(linters)
+				return count > 0 and count or ""
+			end
+
 			local pretty_path = {
 				"pretty_path",
 				icon_show = false,
