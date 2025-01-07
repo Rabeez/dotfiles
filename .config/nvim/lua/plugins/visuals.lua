@@ -97,7 +97,9 @@ return {
 			"letieu/harpoon-lualine",
 		},
 		config = function()
-			-- https://github.com/williamboman/mason.nvim/discussions/1535
+			---Check number of available tool updates in Mason
+			---https://github.com/williamboman/mason.nvim/discussions/1535
+			---@return (integer | string)
 			local function lualine_mason_updates()
 				local registry = require("mason-registry")
 				local installed_packages = registry.get_installed_package_names()
@@ -124,6 +126,8 @@ return {
 				end
 			end
 
+			---Check number of attached Molten kernels
+			---@return (integer | string)
 			local function lualine_molten_kernel()
 				local ok, molten_status = pcall(function()
 					return require("molten.status")
@@ -142,21 +146,27 @@ return {
 				end
 			end
 
+			---Check number of attached LSP clients
+			---@return (integer | string)
 			local function lualine_lsp_count()
 				local attached_clients = vim.lsp.get_clients({ bufnr = 0 })
 				local count = vim.tbl_count(attached_clients)
 				return count > 0 and count or ""
 			end
 
+			---Check number of attached Conform formatters
+			---@return (integer | string)
 			local function lualine_formatters_count()
 				local formatters = require("conform").list_formatters_to_run(0)
 				local count = vim.tbl_count(formatters)
 				return count > 0 and count or ""
 			end
 
-			-- TODO: Use this to add a linter section in status bar
-			-- This seems to always return empty table so....
+			---Check number of attached nvim-lint linters
+			---@return (integer | string)
 			local function lualine_linters_count()
+				-- TODO: Use this to add a linter section in status bar
+				-- This seems to always return empty table so....
 				local linters = require("lint").get_running()
 				local count = vim.tbl_count(linters)
 				return count > 0 and count or ""

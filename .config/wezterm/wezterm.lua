@@ -5,6 +5,10 @@ local config = wezterm.config_builder()
 
 -- <<< Style elements >>>
 
+---Trims string to maxixum length and appends elipses
+---@param str string
+---@param max_length integer
+---@return string
 local function trim_with_ellipsis(str, max_length)
 	if #str > max_length then
 		return str:sub(1, max_length - 3) .. "..."
@@ -13,8 +17,10 @@ local function trim_with_ellipsis(str, max_length)
 	end
 end
 
+---Isolates name of program from full absolute path of executable
+---@param s string
+---@return string
 local function basename(s)
-	-- Isolates name of program from full absolute path of executable
 	return string.gsub(s, "(.*[/\\])(.*)", "%2")
 end
 local SOLID_RIGHT_HALF_CIRCLE = utf8.char(0xe0b4) -- for left-most cell (the one that is highlighted)

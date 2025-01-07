@@ -38,6 +38,10 @@ return {
 								{ "ERROR IN RENDERING JUPYTER NOTEBOOK VIA RICH" }
 							)
 						else
+							---Split string on separator and return array
+							---@param string string
+							---@param separator string
+							---@return table
 							local function split(string, separator)
 								local tabl = {}
 								for str in string.gmatch(string, "[^" .. separator .. "]+") do
