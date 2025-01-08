@@ -165,7 +165,13 @@ return {
 				group = molten_augroup,
 				pattern = { "*.ipynb" },
 				callback = function()
-					if require("molten.status").initialized() == "Molten" then
+					local ok, molten_status = pcall(function()
+						return require("molten.status")
+					end)
+					if not ok or not molten_status then
+						return
+					end
+					if molten_status.initialized() == "Molten" then
 						vim.cmd("MoltenExportOutput!")
 					end
 				end,
@@ -179,7 +185,14 @@ return {
 					if string.match(e.file, ".otter.") then
 						return
 					end
-					if require("molten.status").initialized() == "Molten" then -- this is kinda a hack...
+
+					local ok, molten_status = pcall(function()
+						return require("molten.status")
+					end)
+					if not ok or not molten_status then
+						return
+					end
+					if molten_status.initialized() == "Molten" then -- this is kinda a hack...
 						vim.fn.MoltenUpdateOption("virt_lines_off_by_1", false)
 						vim.fn.MoltenUpdateOption("virt_text_output", false)
 					else
@@ -197,7 +210,14 @@ return {
 					if string.match(e.file, ".otter.") then
 						return
 					end
-					if require("molten.status").initialized() == "Molten" then
+
+					local ok, molten_status = pcall(function()
+						return require("molten.status")
+					end)
+					if not ok or not molten_status then
+						return
+					end
+					if molten_status.initialized() == "Molten" then
 						vim.fn.MoltenUpdateOption("virt_lines_off_by_1", true)
 						vim.fn.MoltenUpdateOption("virt_text_output", true)
 					else
