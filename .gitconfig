@@ -1,12 +1,12 @@
 [filter "lfs"]
-	process = git-lfs filter-process
-	required = true
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
 
 [user]
-	name = Rabeez Riaz
-	email = ruoter123@gmail.com
+    name = Rabeez Riaz
+    email = ruoter123@gmail.com
 
 [core]
     pager = delta
@@ -14,19 +14,20 @@
 [interactive]
     diffFilter = delta --color-only
 
-[delta]
-	line-numbers = true
-	side-by-side = true
-    navigate = true    # use n and N to move between diff sections
+[include]
+    path = ~/.config/delta/catppuccin.gitconfig
 
-    # delta detects terminal colors automatically; set one of these to disable auto-detection
-    # dark = true
-    # light = true
+[delta]
+    line-numbers = true
+    side-by-side = true
+    navigate = true    # use n and N to move between diff sections
+    dark = true
+    features = catppuccin-mocha
 
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 
 [diff]
     colorMoved = default
 [init]
-	defaultBranch = main
+    defaultBranch = main
