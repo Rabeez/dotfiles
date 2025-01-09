@@ -125,8 +125,16 @@ return {
 
 					-- NOTE: Assumes `nvim` is executed from a shell with correct conda env active
 					-- so here we directly execute the `python` executable in PATH
-					vim.cmd("MoltenInit python")
-					vim.cmd("MoltenImportOutput")
+					local ok, res = pcall(vim.cmd("MoltenInit python"))
+					if not ok or not res then
+						vim.notify("MoltenInit failed", vim.log.levels.ERROR)
+						return
+					end
+					local ok, res = pcall(vim.cmd("MoltenImportOutput"))
+					if not ok or not res then
+						vim.notify("MoltenImportOutput failed", vim.log.levels.ERROR)
+						return
+					end
 
 					-- Dynamically check active conda environment
 					-- local venv = os.getenv("CONDA_PREFIX")
