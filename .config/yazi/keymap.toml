@@ -7,7 +7,7 @@ desc = "Cancel input"
 # Smart enter: enter for directory, open for file
 [[manager.prepend_keymap]]
 on   = "l"
-run  = "plugin --sync smart-enter"
+run  = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
 # Copy selected files to the system clipboard while yanking
@@ -20,20 +20,43 @@ run = [ '''
 # Maximize preview pane
 [[manager.prepend_keymap]]
 on   = "T"
-run  = "plugin --sync max-preview"
+run  = "plugin max-preview"
 desc = "Maximize or restore preview"
 
 # File navigation wraparound
 [[manager.prepend_keymap]]
 on  = "k"
-run = "plugin --sync arrow --args=-1"
+run = "plugin arrow --args=-1"
 
 [[manager.prepend_keymap]]
 on  = "j"
-run = "plugin --sync arrow --args=1"
+run = "plugin arrow --args=1"
+
+[[manager.prepend_keymap]]
+on  = "<Up>"
+run = "plugin arrow --args=-1"
+
+[[manager.prepend_keymap]]
+on  = "<Down>"
+run = "plugin arrow --args=1"
 
 # vim style -to-char
 [[manager.prepend_keymap]]
 on   = "f"
 run  = "plugin jump-to-char"
 desc = "Jump to char"
+
+[[manager.prepend_keymap]]
+on   = "l"
+run  = "plugin smart-enter"
+desc = "Enter the child directory, or open the file"
+
+[[manager.prepend_keymap]]
+on   = "<Right>"
+run  = "plugin smart-enter"
+desc = "Enter the child directory, or open the file"
+
+[[manager.prepend_keymap]]
+on   = "<Enter>"
+run  = "plugin smart-enter"
+desc = "Enter the child directory, or open the file"

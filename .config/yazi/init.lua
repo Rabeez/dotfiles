@@ -2,6 +2,9 @@ require("full-border"):setup({
 	-- Available values: ui.Border.PLAIN, ui.Border.ROUNDED
 	type = ui.Border.ROUNDED,
 })
+require("git"):setup()
+require("starship"):setup()
+require("no-status"):setup()
 
 -- Show user/group of files in status bar
 Status:children_add(function()
