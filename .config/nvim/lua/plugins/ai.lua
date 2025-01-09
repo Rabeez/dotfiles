@@ -3,10 +3,10 @@ return {
 		"robitx/gp.nvim",
 		config = function()
 			local gp_additional_prompt = [[
-			\nThe user is a programmer and data scientist and prefers terminal-based solutions, ideally using builtin or open-source software solutions. 
-Be brief and to-the-point. Avoid repeating information or examples you have already provided previously in conversations. 
-Bullet point lists are preferred over multiple paragraphs. Do not provide steps and intermediate explanations unless asked for specifically.
-			]]
+			 \nThe user is an experienced programmer and data scientist and prefers terminal-based solutions, ideally using builtin or open-source software solutions.
+			 Be brief and to-the-point. Avoid repeating information or examples you have already provided previously in conversations.
+			 Bullet point lists are preferred over multiple paragraphs. Do not provide steps and intermediate explanations unless asked for specifically.
+			 ]]
 			-- For customization, refer to Install > Configuration in the Documentation/Readme
 			local conf = {
 				-- secrets can be strings or tables with command and arguments
@@ -51,6 +51,7 @@ Bullet point lists are preferred over multiple paragraphs. Do not provide steps 
 			require("gp").setup(conf)
 
 			-- Setup shortcuts here (see Usage > Shortcuts in the Documentation/Readme)
+			-- NOTE: toggle popup is breaks when asking for a response . no idea why
 			vim.keymap.set("n", "<leader>at", "<cmd>GpChatToggle popup<CR>", { desc = "[A]I: [T]oggle chat popup" })
 			vim.keymap.set("n", "<leader>an", "<cmd>GpChatNew popup<CR>", { desc = "[A]I: [N]ew chat popup" })
 			vim.keymap.set("n", "<leader>as", "<cmd>GpStop<CR>", { desc = "[A]I: [S]top all processing" })
