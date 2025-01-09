@@ -29,4 +29,11 @@ ignore = [
     "PLR2004",# magic value in comparison
     "SLF001", # private member access
     "PD010",  # pandas pivot v pivot_table
+    "PTH123", # use Path.open instead of open
+    "S101",   # assert
+    "UP015",  # unnecessary open mode params
+    "D105",   # missing docstring for dunder method
+    "D401",   # tone of docstring lol
+    "TC003",  # move type-only stdlib imports into TYPE_CHECKING block
+    "E741",   # ambigous variable name for certain fonts (e.g. l, i, 1 etc)
 ]
