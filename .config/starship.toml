@@ -51,6 +51,7 @@ format = '\[[$symbol($version)]($style)\]'
 format = '\[[$symbol]($style)\]'
 
 [python]
+symbol = ' '
 format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
 
 [rlang]
