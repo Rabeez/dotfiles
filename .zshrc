@@ -16,6 +16,7 @@ export PATH="$HOMEBREW_PREFIX/opt/gzip/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/bc/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/ccache/libexec:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/curl/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
 
 #Ensure binary packages for languages are in path
 export PATH="$HOME/.cargo/bin:$PATH"
@@ -51,7 +52,7 @@ function conda() {
     unset -f conda
     if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
         . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
-	conda activate base
+        conda activate base
     else
         export PATH="/opt/homebrew/anaconda3/bin:$PATH"
     fi
