@@ -30,6 +30,7 @@ return {
 			{ "<leader>a", group = "[A]I", icon = { icon = "", color = "yellow" } },
 			{ "<leader>t", group = "[T]erminal", icon = { icon = "", color = "green" } },
 			{ "<leader>u", group = "[U]tilities", icon = { icon = "󱁤", color = "yellow" } },
+			{ "<leader>r", group = "[R]unner", icon = { icon = "󰜎", color = "purple" } },
 		})
 	end,
 }

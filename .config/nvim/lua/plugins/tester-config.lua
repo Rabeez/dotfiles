@@ -13,14 +13,16 @@ return {
 				adapters = {
 					require("neotest-python")({
 						python = "python",
+						runner = "pytest",
+						dap = { justMyCode = false, jinja = true },
 					}),
 				},
 			})
 
-			-- 			vim.keymap.set("n", "<leader>tt", function()
-			-- 				require("neotest").run.run()
-			-- require("neotest").output_panel
-			-- 			end, { desc = "NeoTest: Run [t]ests and show output panel" })
+			vim.keymap.set("n", "<leader>rt", function()
+				require("neotest").run.run(vim.fn.expand("%"))
+				-- vim.cmd("Neotest output")
+			end, { desc = "NeoTest: Run [t]ests and show output panel" })
 		end,
 	},
 }
