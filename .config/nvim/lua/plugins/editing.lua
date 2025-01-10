@@ -108,7 +108,10 @@ return {
 		-- TODO: Add keymap with ui.input selection for what type of doctring (func, class etc)
 		-- and raise error if chosen type is not supported by language of buffer
 		-- or even better use an fzf-style picker??
-		config = true,
+		config = function()
+			require("neogen").setup({})
+			vim.keymap.set("n", "<leader>lg", require("neogen").generate, { desc = "Generate neogen docstring" })
+		end,
 		-- TODO: Ensure that argument types are used in docstring
 		-- currently not working in python
 
