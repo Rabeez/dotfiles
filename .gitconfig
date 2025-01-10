@@ -19,7 +19,7 @@
 
 [delta]
     line-numbers = true
-    side-by-side = true
+    side-by-side = false
     navigate = true    # use n and N to move between diff sections
     dark = true
     features = catppuccin-mocha
