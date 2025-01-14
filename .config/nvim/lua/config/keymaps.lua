@@ -59,3 +59,5 @@ vim.keymap.set("n", "<C-p>", "o<ESC>p", { desc = "[p]aste in next line" })
 
 -- TODO: add keymap to paste contents of start env yaml file in buffer
 -- !% cat $HOME/Documents/Programming/TBM_Misc/environment.yml
+
+vim.keymap.set("n", "<leader>ua", "ggVG", { desc = "Visually select [a]ll" })
