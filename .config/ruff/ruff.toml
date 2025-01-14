@@ -34,6 +34,8 @@ ignore = [
     "UP015",  # unnecessary open mode params
     "D105",   # missing docstring for dunder method
     "D401",   # tone of docstring lol
+    "TC001",  # move application imports into TYPE_CHECKING block
     "TC003",  # move type-only stdlib imports into TYPE_CHECKING block
     "E741",   # ambigous variable name for certain fonts (e.g. l, i, 1 etc)
+    "G004",   # log statements with f-strings
 ]
