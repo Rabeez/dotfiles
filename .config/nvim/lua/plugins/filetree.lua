@@ -83,7 +83,7 @@ return {
 			"nvim-telescope/telescope.nvim",
 			"nvim-lua/plenary.nvim",
 		},
-
+		lazy = false,
 		keys = {
 			{ "<leader>ee", "<cmd>Yazi<CR>", desc = "Toggle Yazi" },
 		},
