@@ -8,34 +8,34 @@ line-length = 100
 [lint]
 select = ['ALL']
 ignore = [
-    "E501",   # line too long
-    "D100",   # missing docstring in public module
-    "D101",   # missing docstring in class
-    "D102",   # missing docstring in method
-    "D103",   # missing docstring in function
-    "TRY003", # long exception messages
-    "EM101",  # exception message string literal
-    "EM102",  # exception message fstring
-    "RET504", # unnecessary assignment before return
-    "RET505", # unnecessary else after return
-    "FIX002", # remove TODO
-    "TD002",  # missing author in TODO
-    "TD003",  # missing issue link in TODO
-    "PT018",  # break apart multi-case assertions
-    "FA102",  # new syntax for annotations without __future__ import
-    "INP001", # implicit namespace without __init__.py
-    "ERA001", # commented-out code
-    "T201",   # print found
-    "PLR2004",# magic value in comparison
-    "SLF001", # private member access
-    "PD010",  # pandas pivot v pivot_table
-    "PTH123", # use Path.open instead of open
-    "S101",   # assert
-    "UP015",  # unnecessary open mode params
-    "D105",   # missing docstring for dunder method
-    "D401",   # tone of docstring lol
-    "TC001",  # move application imports into TYPE_CHECKING block
-    "TC003",  # move type-only stdlib imports into TYPE_CHECKING block
-    "E741",   # ambigous variable name for certain fonts (e.g. l, i, 1 etc)
-    "G004",   # log statements with f-strings
+  "E501",    # line too long
+  "D100",    # missing docstring in public module
+  "D101",    # missing docstring in class
+  "D102",    # missing docstring in method
+  "D103",    # missing docstring in function
+  "TRY003",  # long exception messages
+  "EM101",   # exception message string literal
+  "EM102",   # exception message fstring
+  "RET504",  # unnecessary assignment before return
+  "RET505",  # unnecessary else after return
+  "FIX002",  # remove TODO
+  "TD002",   # missing author in TODO
+  "TD003",   # missing issue link in TODO
+  "PT018",   # break apart multi-case assertions
+  "FA102",   # new syntax for annotations without __future__ import
+  "INP001",  # implicit namespace without __init__.py
+  "ERA001",  # commented-out code
+  "T201",    # print found
+  "PLR2004", # magic value in comparison
+  "SLF001",  # private member access
+  "PD010",   # pandas pivot v pivot_table
+  "PTH123",  # use Path.open instead of open
+  "S101",    # assert
+  "UP015",   # unnecessary open mode params
+  "D105",    # missing docstring for dunder method
+  "D401",    # tone of docstring lol
+  "TC001",   # move application imports into TYPE_CHECKING block
+  "TC003",   # move type-only stdlib imports into TYPE_CHECKING block
+  "E741",    # ambigous variable name for certain fonts (e.g. l, i, 1 etc)
+  "G004",    # log statements with f-strings
 ]

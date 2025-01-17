@@ -1,64 +1,64 @@
 # Close input by once Esc press
 [[input.prepend_keymap]]
-on   = "<Esc>"
-run  = "close"
+on = "<Esc>"
+run = "close"
 desc = "Cancel input"
 
 # Smart enter: enter for directory, open for file
 [[manager.prepend_keymap]]
-on   = "l"
-run  = "plugin smart-enter"
+on = "l"
+run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
 # Copy selected files to the system clipboard while yanking
 [[manager.prepend_keymap]]
-on  = "y"
-run = [ '''
+on = "y"
+run = ['''
 	shell 'echo "$@" | xclip -i -selection clipboard -t text/uri-list' --confirm
-''', "yank" ]
+''', "yank"]
 
 # Maximize preview pane
 [[manager.prepend_keymap]]
-on   = "T"
-run  = "plugin max-preview"
+on = "T"
+run = "plugin max-preview"
 desc = "Maximize or restore preview"
 
 # File navigation wraparound
 [[manager.prepend_keymap]]
-on  = "k"
+on = "k"
 run = "plugin arrow --args=-1"
 
 [[manager.prepend_keymap]]
-on  = "j"
+on = "j"
 run = "plugin arrow --args=1"
 
 [[manager.prepend_keymap]]
-on  = "<Up>"
+on = "<Up>"
 run = "plugin arrow --args=-1"
 
 [[manager.prepend_keymap]]
-on  = "<Down>"
+on = "<Down>"
 run = "plugin arrow --args=1"
 
 # vim style -to-char
 [[manager.prepend_keymap]]
-on   = "f"
-run  = "plugin jump-to-char"
+on = "f"
+run = "plugin jump-to-char"
 desc = "Jump to char"
 
 [[manager.prepend_keymap]]
-on   = "l"
-run  = "plugin smart-enter"
+on = "l"
+run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
 [[manager.prepend_keymap]]
-on   = "<Right>"
-run  = "plugin smart-enter"
+on = "<Right>"
+run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
 [[manager.prepend_keymap]]
-on   = "<Enter>"
-run  = "plugin smart-enter"
+on = "<Enter>"
+run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
 
