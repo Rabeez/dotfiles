@@ -181,5 +181,8 @@ export MPLCONFIGDIR=$HOME/.matplotlib
 export PATH="$HOME/Documents/Programming/ThirdParty/neovim/build/bin:$PATH"
 export EDITOR=nvim
 
+# Pixi completions
+eval "$(pixi completion --shell zsh)"
+
 # Performance profiler (paired line at start of file)
 # zprof
