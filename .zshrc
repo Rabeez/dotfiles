@@ -69,6 +69,10 @@ alias cp='cp -i'                         # confirm before overwriting
 alias df='df -h'                         # human readable sizes
 alias free='free -m'                     # sizes in MB
 alias cloc='tokei --hidden --sort files' # fast CLOC implementation with nice defaults
+alias ee="yazi"
+alias gg="lazygit"
+alias g="git"
+alias p="pixi"
 
 # Fuzzy finder + conda env activation
 # https://waylonwalker.com/quickly-change-conda-env-with-fzf/
