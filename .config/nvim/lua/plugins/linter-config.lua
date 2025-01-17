@@ -35,6 +35,7 @@ return {
 					c = { "clang-format" },
 					cpp = { "clang-format" },
 					markdown = { "mdformat" },
+					toml = { "taplo", prepend_args = { "format", "-" } },
 					jinja = { "djlint", prepend_args = { "--reformat", "--indent", "2" } },
 					["*"] = { "injected" }, -- enables injected-lang formatting for all filetypes
 					["_"] = { "trim_whitespace" },
