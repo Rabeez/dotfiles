@@ -61,8 +61,14 @@ on = "<Enter>"
 run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
-
 [[manager.prepend_keymap]]
 on = "<z>"
 run = "plugin fzf"
 desc = "Start FZF"
+
+[[manager.prepend_keymap]]
+on = ["c", "g"]
+run = '''
+	shell 'realpath --relative-to="$(git rev-parse --show-toplevel)" "$@" | pbcopy'
+'''
+desc = "Copy file/directory path from git repo root"
