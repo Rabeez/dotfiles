@@ -15,18 +15,18 @@ vim.opt.scrolloff = 10
 -- Adjust the view to create some padding near the bottom of the file
 -- https://www.reddit.com/r/neovim/comments/17eomi1/how_do_you_deal_with_vertical_scrolloff_not_being/
 vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI", "BufEnter" }, {
-	group = vim.api.nvim_create_augroup("ScrollOffEOF", {}),
-	callback = function()
-		local win_h = vim.api.nvim_win_get_height(0)
-		local off = math.min(vim.o.scrolloff, math.floor(win_h / 2))
-		local dist = vim.fn.line("$") - vim.fn.line(".")
-		local rem = vim.fn.line("w$") - vim.fn.line("w0") + 1
-		if dist < off and win_h - rem + dist < off then
-			local view = vim.fn.winsaveview()
-			view.topline = view.topline + off - (win_h - rem + dist)
-			vim.fn.winrestview(view)
-		end
-	end,
+  group = vim.api.nvim_create_augroup("ScrollOffEOF", {}),
+  callback = function()
+    local win_h = vim.api.nvim_win_get_height(0)
+    local off = math.min(vim.o.scrolloff, math.floor(win_h / 2))
+    local dist = vim.fn.line("$") - vim.fn.line(".")
+    local rem = vim.fn.line("w$") - vim.fn.line("w0") + 1
+    if dist < off and win_h - rem + dist < off then
+      local view = vim.fn.winsaveview()
+      view.topline = view.topline + off - (win_h - rem + dist)
+      vim.fn.winrestview(view)
+    end
+  end,
 })
 
 opt.tabstop = 4
@@ -39,7 +39,7 @@ opt.backspace = "indent,eol,start"
 -- Sync clipboard between OS and Neovim.
 --  Schedule the setting after `UiEnter` because it can increase startup-time.
 vim.schedule(function()
-	vim.opt.clipboard = "unnamedplus"
+  vim.opt.clipboard = "unnamedplus"
 end)
 
 -- Enable break indent
@@ -74,11 +74,11 @@ package.path = package.path .. ";" .. vim.fn.expand("$HOME") .. "/.luarocks/shar
 --  Try it with `yap` in normal mode
 --  See `:help vim.highlight.on_yank()`
 vim.api.nvim_create_autocmd("TextYankPost", {
-	desc = "Highlight when yanking (copying) text",
-	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
-	callback = function()
-		vim.highlight.on_yank({ timeout = 80 })
-	end,
+  desc = "Highlight when yanking (copying) text",
+  group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
+  callback = function()
+    vim.highlight.on_yank({ timeout = 80 })
+  end,
 })
 
 -- NOTE: This is max size of harpoon quick-access list
@@ -90,9 +90,9 @@ vim.o.updatetime = 250
 
 -- Custom filetype overrides
 vim.filetype.add({
-	extension = {
-		jinja = "jinja",
-		jinja2 = "jinja",
-		j2 = "jinja",
-	},
+  extension = {
+    jinja = "jinja",
+    jinja2 = "jinja",
+    j2 = "jinja",
+  },
 })
