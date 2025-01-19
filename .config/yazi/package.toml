@@ -9,6 +9,7 @@ deps = [
   { use = "Rolv-Apneseth/starship", rev = "4053c8c" },
   { use = "yazi-rs/plugins:no-status", rev = "600614a" },
   { use = "yazi-rs/plugins:smart-enter", rev = "600614a" },
+  { use = "ahkohd/eza-preview", rev = "5ef05bc" },
 ]
 
 [flavor]

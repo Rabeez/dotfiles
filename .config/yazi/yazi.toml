@@ -6,10 +6,11 @@ image_delay = 0
 
 [plugin]
 prepend_previewers = [
-  # { name = "*.csv", run = "rich-preview"}, # for csv files
-  { name = "*.md", run = "rich-preview" },    # for markdown (.md) files
-  { name = "*.ipynb", run = "rich-preview" }, # for jupyter notebooks (.ipynb)
-  { name = "*.json", run = "rich-preview" },  # for json (.json) files
+  { name = "*/", run = "eza-preview" },
+  # { name = "*.csv", run = "rich-preview"},
+  { name = "*.md", run = "rich-preview" },
+  { name = "*.ipynb", run = "rich-preview" },
+  { name = "*.json", run = "rich-preview" },
 ]
 
 [[plugin.prepend_fetchers]]

@@ -5,6 +5,9 @@ require("full-border"):setup({
 require("git"):setup()
 require("starship"):setup()
 require("no-status"):setup()
+require("eza-preview"):setup({
+	level = 2,
+})
 
 -- Show user/group of files in status bar
 Status:children_add(function()

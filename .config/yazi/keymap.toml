@@ -72,3 +72,18 @@ run = '''
 	shell 'realpath --relative-to="$(git rev-parse --show-toplevel)" "$@" | pbcopy'
 '''
 desc = "Copy file/directory path from git repo root"
+
+[[manager.prepend_keymap]]
+on = "E"
+run = "plugin eza-preview"
+desc = "Toggle tree/list dir preview"
+
+[[manager.prepend_keymap]]
+on = "-"
+run = "plugin eza-preview --args='--inc-level'"
+desc = "Increment tree level"
+
+[[manager.prepend_keymap]]
+on = "_"
+run = "plugin eza-preview --args='--dec-level'"
+desc = "Decrement tree level"
