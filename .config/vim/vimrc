@@ -17,6 +17,7 @@ autocmd VimEnter * silent! exe "normal \e[2 q"
 
 " Disable swap files
 set noswapfile
+set noundofile
 
 " Line numbers and cursor settings
 set number
