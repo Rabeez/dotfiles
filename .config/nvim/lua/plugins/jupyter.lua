@@ -200,7 +200,11 @@ return {
 					if not ok or not molten_status then
 						return
 					end
-					if molten_status.initialized() == "Molten" then -- this is kinda a hack...
+					local ok, molten_init = pcall(molten_status.initailized)
+					if not ok or not molten_init then
+						return
+					end
+					if molten_init == "Molten" then -- this is kinda a hack...
 						vim.fn.MoltenUpdateOption("virt_lines_off_by_1", false)
 						vim.fn.MoltenUpdateOption("virt_text_output", false)
 					else
@@ -225,7 +229,11 @@ return {
 					if not ok or not molten_status then
 						return
 					end
-					if molten_status.initialized() == "Molten" then
+					local ok, molten_init = pcall(molten_status.initailized)
+					if not ok or not molten_init then
+						return
+					end
+					if molten_init == "Molten" then
 						vim.fn.MoltenUpdateOption("virt_lines_off_by_1", true)
 						vim.fn.MoltenUpdateOption("virt_text_output", true)
 					else

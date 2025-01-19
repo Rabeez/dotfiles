@@ -135,7 +135,11 @@ return {
 				if not ok or not molten_status then
 					return ""
 				end
-				if molten_status.initialized() == "Molten" then
+				local ok, molten_init = pcall(molten_status.initialized)
+				if not ok or not molten_init then
+					return ""
+				end
+				if molten_init == "Molten" then
 					local kernels = 0
 					for _ in string.gmatch(molten_status.kernels(), "%S+") do
 						kernels = kernels + 1
