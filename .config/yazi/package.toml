@@ -10,6 +10,7 @@ deps = [
   { use = "yazi-rs/plugins:no-status", rev = "600614a" },
   { use = "yazi-rs/plugins:smart-enter", rev = "600614a" },
   { use = "ahkohd/eza-preview", rev = "5ef05bc" },
+  { use = "pirafrank/what-size", rev = "b23e3a4" },
 ]
 
 [flavor]

@@ -87,3 +87,8 @@ desc = "Increment tree level"
 on = "_"
 run = "plugin eza-preview --args='--dec-level'"
 desc = "Decrement tree level"
+
+[[manager.prepend_keymap]]
+on = [".", "s"]
+run = "plugin what-size"
+desc = "Calc size of selection or cwd"
