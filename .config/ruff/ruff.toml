@@ -38,4 +38,5 @@ ignore = [
   "TC003",   # move type-only stdlib imports into TYPE_CHECKING block
   "E741",    # ambigous variable name for certain fonts (e.g. l, i, 1 etc)
   "G004",    # log statements with f-strings
+  "S301",    # pickle deserialization
 ]
