@@ -9,11 +9,13 @@ return {
         no_italic = true,
         integrations = {
           notify = true,
+          treesitter = true,
           telescope = true,
           alpha = true,
           fidget = true,
           ufo = true,
           indent_blankline = true,
+          semantic_tokens = true,
           harpoon = true,
           mini = true,
           markdown = true,
