@@ -60,6 +60,9 @@ function conda() {
 }
 # <<< conda initialize <<<
 
+# Custom LS/Eza colors
+export LS_COLORS="$(vivid generate catppuccin-mocha)"
+
 # Aliases
 alias sz='source $HOME/.zshrc'
 alias ls='eza -l --color=always --icons --header --classify --group-directories-first'
