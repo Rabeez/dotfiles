@@ -206,5 +206,14 @@ eval "$(pixi completion --shell zsh)"
 # Android SDK
 export ANDROID_HOME="$HOME/tools/android-sdk"
 
+# pnpm
+export PNPM_HOME="/Users/rabeezriaz/Library/pnpm"
+case ":$PATH:" in
+    *":$PNPM_HOME:"*) ;;
+    *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
 # Performance profiler (paired line at start of file)
 # zprof
+
