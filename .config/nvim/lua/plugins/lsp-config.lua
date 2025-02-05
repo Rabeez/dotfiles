@@ -132,7 +132,7 @@ return {
         ["tailwindcss"] = function()
           require("lspconfig").tailwindcss.setup({
             capabilities = capabilities,
-            filetypes = { "html", "templ", "astro", "javascript", "typescript", "react", "jinja" },
+            filetypes = { "html", "templ", "astro", "javascript", "typescript", "typescriptreact", "react", "jinja" },
             settings = {
               tailwindCSS = {
                 includeLanguages = {
@@ -324,6 +324,40 @@ return {
             })
           end
         end,
+      })
+    end,
+  },
+  {
+    "luckasRanarison/tailwind-tools.nvim",
+    name = "tailwind-tools",
+    build = ":UpdateRemotePlugins",
+    dependencies = {
+      "nvim-treesitter/nvim-treesitter",
+      "nvim-telescope/telescope.nvim", -- optional
+      "neovim/nvim-lspconfig", -- optional
+    },
+    opts = {}, -- your configuration
+    config = function()
+      require("tailwind-tools").setup({
+        document_color = {
+          inline_symbol = " ",
+        },
+      })
+      vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+        pattern = {
+          "*.html",
+          "*.js",
+          "*.jsx",
+          "*.tsx",
+          "*.twig",
+          "*.hbs",
+          "*.php",
+          "*.heex",
+          "*.astro",
+          "*.templ",
+          "*.jinja2",
+        },
+        command = "TailwindSort",
       })
     end,
   },
