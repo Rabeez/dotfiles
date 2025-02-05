@@ -43,9 +43,13 @@ config.default_workspace = "main"
 config.use_ime = false -- Needed to ensure ctrl-based keymaps are passed to processes (eg. in nvim)
 config.max_fps = 120
 config.default_cursor_style = "SteadyBar"
-config.font = wezterm.font_with_fallback({ "CaskaydiaCove Nerd Font", "Hack Nerd Font", "Noto Color Emoji" })
+config.font = wezterm.font_with_fallback({
+  { family = "Maple Mono NF", weight = "Medium" },
+  { family = "CaskaydiaCove Nerd Font" },
+  { family = "Noto Color Emoji" },
+})
 config.font_size = 16
-config.line_height = 1.2
+config.line_height = 1.1
 config.command_palette_font_size = 18
 -- These colors are copied from catppuccin palette in nvim quickfix list design
 config.command_palette_bg_color = "#13121D"
