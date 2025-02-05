@@ -203,5 +203,8 @@ export EDITOR=nvim
 # Pixi completions
 eval "$(pixi completion --shell zsh)"
 
+# Android SDK
+export ANDROID_HOME="$HOME/tools/android-sdk"
+
 # Performance profiler (paired line at start of file)
 # zprof
