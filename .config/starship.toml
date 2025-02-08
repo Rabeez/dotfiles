@@ -45,6 +45,7 @@ format = '\[[$symbol($version)]($style)\]'
 format = '\[$symbol[$ram( | $swap)]($style)\]'
 
 [nodejs]
+symbol = ' '
 format = '\[[$symbol($version)]($style)\]'
 
 [os]
