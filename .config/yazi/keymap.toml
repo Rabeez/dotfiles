@@ -92,3 +92,5 @@ desc = "Decrement tree level"
 on = [".", "s"]
 run = "plugin what-size"
 desc = "Calc size of selection or cwd"
+
+# TODO: fix hidden toggle to <.h>
