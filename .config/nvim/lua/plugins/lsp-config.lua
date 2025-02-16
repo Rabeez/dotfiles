@@ -348,6 +348,7 @@ return {
           "*.html",
           "*.js",
           "*.jsx",
+          "*.ts",
           "*.tsx",
           "*.twig",
           "*.hbs",
