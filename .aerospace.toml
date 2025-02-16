@@ -182,6 +182,10 @@ backspace = ['close-all-windows-but-current', 'mode main']
 # ''']
 
 [[on-window-detected]]
+if.app-id = 'com.apple.iphonesimulator'
+run = 'layout floating'
+
+[[on-window-detected]]
 if.app-id = 'com.1password.1password'
 run = 'layout floating'
 
