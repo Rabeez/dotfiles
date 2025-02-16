@@ -10,3 +10,4 @@ Secrets
 !.docker/.config.json
 containers/
 spicetify
+.android
