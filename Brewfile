@@ -68,6 +68,7 @@ brew "tokei"
 brew "tree"
 brew "unzip"
 brew "vivid"
+brew "watchman"
 brew "wget"
 brew "xclip"
 brew "yazi"
@@ -83,8 +84,10 @@ cask "1password"
 cask "aerospace"
 cask "aldente"
 cask "anaconda"
+cask "android-studio"
 cask "bartender"
 cask "betterdisplay"
+cask "bruno"
 cask "calibre"
 cask "chromedriver"
 cask "discord"
@@ -117,6 +120,7 @@ cask "vscodium"
 cask "wezterm@nightly"
 cask "windscribe"
 cask "zoom"
+cask "zulu@17"
 mas "1Password for Safari", id: 1569813296
 mas "Amphetamine", id: 937984704
 mas "Dropover", id: 1355679052
@@ -126,3 +130,4 @@ mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Steam Link", id: 1246969117
 mas "WhatsApp", id: 310633997
+mas "Xcode", id: 497799835
