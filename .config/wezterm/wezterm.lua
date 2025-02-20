@@ -162,7 +162,6 @@ wezterm.on("update-status", function(window, pane)
       table.insert(elements, { Foreground = { Color = accent_clr } })
       table.insert(elements, { Background = { Color = clr_background } })
     end
-    table.insert(elements, { Text = " " .. trim_with_ellipsis(item.tab:get_title(), 10) .. " " })
 
     -- Setup colors and write right half-circle
     if not item.is_active then
