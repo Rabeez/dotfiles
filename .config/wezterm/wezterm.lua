@@ -1,9 +1,8 @@
 local wezterm = require("wezterm") --[[@as Wezterm]]
 local act = wezterm.action
-local sessionizer = require("sessionizer")
 local config = wezterm.config_builder()
 
--- <<< Style elements >>>
+local PROJECT_ROOT_PATH = "/Users/rabeezriaz/Documents/Programming"
 
 ---Trims string to maxixum length and appends elipses
 ---@param str string
@@ -21,8 +20,11 @@ end
 ---@param s string
 ---@return string
 local function basename(s)
-  return string.gsub(s, "(.*[/\\])(.*)", "%2")
+  local res = string.gsub(s, "(.*[/\\])(.*)", "%2")
+  return res
 end
+
+-- <<< Style elements >>>
 local SOLID_RIGHT_HALF_CIRCLE = utf8.char(0xe0b4) -- for left-most cell (the one that is highlighted)
 local SOLID_LEFT_HALF_CIRCLE = utf8.char(0xe0b6) -- for left-most cell (the one that is highlighted)
 local SOLID_RIGHT_ARROW = utf8.char(0xe0b0) -- for left-most cell (the one that is highlighted)
@@ -70,13 +72,13 @@ config.window_padding = {
   bottom = 5,
 }
 
-wezterm.on("window-config-reloaded", function(window, pane)
+wezterm.on("window-config-reloaded", function(window, _)
   window:toast_notification("wezterm", "Configuration reloaded!", nil, 4000)
 end)
 
 -- TODO: this doesn't seem to actually update the tab title :(
 -- because my custom status bar update overwrites tab name to fg process always
-wezterm.on("augment-command-palette", function(window, pane)
+wezterm.on("augment-command-palette", function(_, _)
   return {
     {
       brief = "Rename tab",
@@ -85,17 +87,41 @@ wezterm.on("augment-command-palette", function(window, pane)
       action = act.PromptInputLine({
         description = "Enter new name for tab",
         -- initial_value = "My Tab Name",
-        action = wezterm.action_callback(function(window, pane, line)
+        action = wezterm.action_callback(function(window, _, line)
           if line then
             window:active_tab():set_title(line)
           end
         end),
       }),
     },
+    {
+      brief = "Create new project and open it in workspace",
+      icon = "md_new_box",
+      action = act.PromptInputLine({
+        description = "Enter name of project",
+        action = wezterm.action_callback(function(window, pane, line)
+          if not line then
+            return
+          end
+          if line:find(" ") then
+            window:toast_notification("Alert", "Input contains a space!", nil, 5000)
+            return
+          end
+
+          local project_path = PROJECT_ROOT_PATH .. "/probe/" .. line
+          local mkdir_cmd = { "mkdir", "-p", project_path }
+          local git_init_cmd = { "git", "-C", project_path, "init" }
+
+          wezterm.run_child_process(mkdir_cmd)
+          wezterm.run_child_process(git_init_cmd)
+          window:perform_action(act.SwitchToWorkspace({ name = project_path, spawn = { cwd = project_path } }), pane)
+        end),
+      }),
+    },
   }
 end)
 
-wezterm.on("update-status", function(window, pane)
+wezterm.on("update-status", function(window, _)
   -- Determine accent color based on if wezterm leader is active
   local leader = "NORMAL"
   local accent_clr = clr_accent_normal
@@ -197,6 +223,21 @@ config.colors = {
     background = clr_bg_dark,
   },
 }
+
+-- TODO: check repo for "major refactor" branch and redo config
+local sessionizer = wezterm.plugin.require("https://github.com/mikkasendke/sessionizer.wezterm")
+sessionizer.apply_to_config(config, true) -- disable default binds (right now you can also just not call this)
+sessionizer.config.paths = PROJECT_ROOT_PATH
+sessionizer.config.command = {
+  "/opt/homebrew/bin/fd",
+  "-HI",
+  "-td",
+  "^.git$",
+  "--max-depth=4",
+  PROJECT_ROOT_PATH,
+  -- add more paths here
+}
+
 -- TODO: setup cmd+N keybind to open new pane 'smartly'
 --       decide whether to do vsplit/hsplit depending on how many panes are currently open
 config.keys = {
@@ -208,7 +249,7 @@ config.keys = {
   { key = "D", mods = "LEADER", action = "ShowDebugOverlay" },
   { key = "LeftArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bb" }) },
   { key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },
-  { key = "f", mods = "LEADER", action = wezterm.action_callback(sessionizer.toggle) },
+  { key = "f", mods = "LEADER", action = sessionizer.show },
   {
     key = "w",
     mods = "LEADER",
