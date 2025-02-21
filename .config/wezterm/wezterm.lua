@@ -228,14 +228,12 @@ config.colors = {
 local sessionizer = wezterm.plugin.require("https://github.com/mikkasendke/sessionizer.wezterm")
 sessionizer.apply_to_config(config, true) -- disable default binds (right now you can also just not call this)
 sessionizer.config.paths = PROJECT_ROOT_PATH
-sessionizer.config.command = {
-  "/opt/homebrew/bin/fd",
-  "-HI",
-  "-td",
-  "^.git$",
-  "--max-depth=4",
-  PROJECT_ROOT_PATH,
-  -- add more paths here
+sessionizer.config.command_options = {
+  fd_path = "/opt/homebrew/bin/fd",
+  include_submodules = false,
+  max_depth = 4,
+  format = "{//}",
+  exclude = { "node_modules" },
 }
 
 -- TODO: setup cmd+N keybind to open new pane 'smartly'
