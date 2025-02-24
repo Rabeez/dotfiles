@@ -5,4 +5,7 @@ return {
       vim.keymap.set("n", "<leader>uc", "<cmd>CellularAutomaton make_it_rain<CR>", { desc = "Make it Rain" })
     end,
   },
+  {
+    "ThePrimeagen/vim-be-good",
+  },
 }
