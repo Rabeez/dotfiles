@@ -167,25 +167,25 @@ config.keys = {
     action = "ActivateCommandPalette",
   },
   { key = "D", mods = "LEADER", action = "ShowDebugOverlay" },
-  { key = "LeftArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bb" }) },
-  { key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },
+  { key = "LeftArrow", mods = "OPT", action = act({ SendString = "\x1bb" }) },
+  { key = "RightArrow", mods = "OPT", action = act({ SendString = "\x1bf" }) },
   { key = "f", mods = "LEADER", action = sessionizer.show },
   -- TODO: Check wezterm float PR and make tab switcher, workspace swithcer, workspace finder into float windows
   {
     key = "w",
     mods = "LEADER",
-    action = wezterm.action.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES", title = "Currently open workspaces" }),
+    action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES", title = "Currently open workspaces" }),
   },
   {
     key = "t",
     mods = "LEADER",
-    action = wezterm.action.ShowLauncherArgs({
+    action = act.ShowLauncherArgs({
       flags = "FUZZY|TABS",
       title = "Currently open tabs (in active workspace)",
     }),
   },
-  { key = "v", mods = "LEADER", action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
-  { key = "h", mods = "LEADER", action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
+  { key = "v", mods = "LEADER", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
+  { key = "h", mods = "LEADER", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
 }
 
 -- NOTE: Needs to be set after other keymaps
