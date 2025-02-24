@@ -20,7 +20,6 @@ config.font = wezterm.font_with_fallback({
 config.font_size = 16
 config.line_height = 1.1
 config.command_palette_font_size = 18
--- These colors are copied from catppuccin palette in nvim quickfix list design
 config.use_fancy_tab_bar = false
 config.show_new_tab_button_in_tab_bar = false
 config.window_decorations = "RESIZE"
