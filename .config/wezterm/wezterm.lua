@@ -96,7 +96,13 @@ tabline.setup({
     icons_enabled = true,
     theme = config.color_scheme,
     tabs_enabled = true,
-    theme_overrides = {},
+    theme_overrides = {
+      tab = {
+        active = { fg = scheme["ansi"][5], bg = scheme["tab_bar"]["inactive_tab"]["bg_color"] },
+        inactive = { fg = scheme["foreground"], bg = scheme["tab_bar"]["inactive_tab"]["bg_color"] },
+        inactive_hover = { fg = scheme["ansi"][6], bg = scheme["tab_bar"]["inactive_tab"]["bg_color"] },
+      },
+    },
     section_separators = {
       left = wezterm.nerdfonts.pl_left_hard_divider,
       right = wezterm.nerdfonts.pl_right_hard_divider,
@@ -106,14 +112,14 @@ tabline.setup({
       right = wezterm.nerdfonts.pl_right_soft_divider,
     },
     tab_separators = {
-      left = wezterm.nerdfonts.pl_left_hard_divider,
-      right = wezterm.nerdfonts.pl_right_hard_divider,
+      left = "",
+      right = "",
     },
   },
   sections = {
     tabline_a = { "mode" },
     tabline_b = { "workspace" },
-    tabline_c = { "  " },
+    tabline_c = { " " },
     tab_active = {
       {
         "index",
