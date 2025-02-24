@@ -408,4 +408,11 @@ return {
   -- 		})
   -- 	end,
   -- },
+  {
+    "tadaa/vimade",
+    opts = {
+      ncmode = "windows",
+      fadelevel = 0.7,
+    },
+  },
 }

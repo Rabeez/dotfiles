@@ -33,8 +33,8 @@ config.window_padding = {
 }
 ---@diagnostic disable-next-line: missing-fields
 config.inactive_pane_hsb = {
-  saturation = 0.7,
-  brightness = 0.7,
+  saturation = 0.8,
+  brightness = 1.0,
 }
 
 wezterm.on("window-config-reloaded", function(window, _)
