@@ -4,34 +4,6 @@ local config = wezterm.config_builder()
 
 local PROJECT_ROOT_PATH = "/Users/rabeezriaz/Documents/Programming"
 
----Trims string to maxixum length and appends elipses
----@param str string
----@param max_length integer
----@return string
-local function trim_with_ellipsis(str, max_length)
-  if #str > max_length then
-    return str:sub(1, max_length - 3) .. "..."
-  else
-    return str
-  end
-end
-
----Isolates name of program from full absolute path of executable
----@param s string
----@return string
-local function basename(s)
-  local res = string.gsub(s, "(.*[/\\])(.*)", "%2")
-  return res
-end
-
--- <<< Style elements >>>
--- colors from NVIM lualine catpuccin theme
-local clr_accent_normal = "#89B4FA"
-local clr_accent_leader = "#FAB387"
-local clr_background = "#252536" -- catpuccin NVIM lualine bg color
-local clr_bg_dark = "#181825" -- for right-most cell (this color is the bg color of wezterm tab bar)
--- <<< Style elements >>>
-
 -- NOTE: Attempt to fix terminal name in fastfetch header
 -- https://wezfurlong.org/wezterm/config/lua/config/term.html
 config.term = "wezterm"
@@ -49,8 +21,6 @@ config.font_size = 16
 config.line_height = 1.1
 config.command_palette_font_size = 18
 -- These colors are copied from catppuccin palette in nvim quickfix list design
-config.command_palette_bg_color = "#13121D"
-config.command_palette_fg_color = "#C0CCF5"
 config.use_fancy_tab_bar = false
 config.show_new_tab_button_in_tab_bar = false
 config.window_decorations = "RESIZE"
@@ -113,12 +83,16 @@ wezterm.on("augment-command-palette", function(_, _)
 end)
 
 config.color_scheme = "Catppuccin Mocha"
+local scheme = wezterm.color.get_builtin_schemes()[config.color_scheme]
+
+config.command_palette_bg_color = scheme["tab_bar"]["inactive_tab"]["bg_color"]
+config.command_palette_fg_color = scheme["foreground"]
 
 local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 tabline.setup({
   options = {
     icons_enabled = true,
-    theme = "Catppuccin Mocha",
+    theme = config.color_scheme,
     tabs_enabled = true,
     theme_overrides = {},
     section_separators = {
@@ -157,7 +131,7 @@ tabline.setup({
       { "tab", icons_enabled = false, padding = { left = 0, right = 1 } },
     },
     tabline_x = {},
-    tabline_y = {},
+    tabline_y = { "domain" },
     tabline_z = { "hostname" },
   },
   extensions = {},
@@ -165,12 +139,13 @@ tabline.setup({
 -- tabline.apply_to_config(config)
 
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 500 }
+---@diagnostic disable-next-line: missing-fields
 config.colors = {
   -- NOTE: Change cursor color when wezterm LEADER is active
-  compose_cursor = clr_accent_leader,
+  compose_cursor = scheme["indexed"][16],
   -- NOTE: Match background color with tabline
   tab_bar = {
-    background = clr_bg_dark,
+    background = scheme["tab_bar"]["inactive_tab"]["bg_color"],
   },
 }
 
@@ -186,13 +161,6 @@ sessionizer.config.command_options = {
   exclude = { "node_modules" },
 }
 
--- Function to determine if the current pane is running Neovim
-local function is_nvim(pane)
-  return pane:get_user_vars().IS_NVIM == "true"
-end
-
--- TODO: setup cmd+N keybind to open new pane 'smartly'
---       decide whether to do vsplit/hsplit depending on how many panes are currently open
 config.keys = {
   {
     key = "p",
@@ -203,6 +171,7 @@ config.keys = {
   { key = "LeftArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bb" }) },
   { key = "RightArrow", mods = "OPT", action = wezterm.action({ SendString = "\x1bf" }) },
   { key = "f", mods = "LEADER", action = sessionizer.show },
+  -- TODO: Check wezterm float PR and make tab switcher, workspace swithcer, workspace finder into float windows
   {
     key = "w",
     mods = "LEADER",
@@ -216,8 +185,6 @@ config.keys = {
       title = "Currently open tabs (in active workspace)",
     }),
   },
-  -- { key = "h", mods = "LEADER", action = wezterm.action.ActivateTabRelative(-1) },
-  -- { key = "l", mods = "LEADER", action = wezterm.action.ActivateTabRelative(1) },
   { key = "v", mods = "LEADER", action = wezterm.action({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
   { key = "h", mods = "LEADER", action = wezterm.action({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
 }
@@ -225,23 +192,14 @@ config.keys = {
 -- NOTE: Needs to be set after other keymaps
 local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
 smart_splits.apply_to_config(config, {
-  -- the default config is here, if you'd like to use the default keys,
-  -- you can omit this configuration table parameter and just use
-  -- smart_splits.apply_to_config(config)
-
-  -- directional keys to use in order of: left, down, up, right
-  -- if you want to use separate direction keys for move vs. resize, you
-  -- can also do this:
   direction_keys = {
     move = { "h", "j", "k", "l" },
     resize = { "LeftArrow", "DownArrow", "UpArrow", "RightArrow" },
   },
-  -- modifier keys to combine with direction_keys
   modifiers = {
-    move = "CTRL", -- modifier to use for pane movement, e.g. CTRL+h to move left
-    resize = "META", -- modifier to use for pane resize, e.g. META+h to resize to the left
+    move = "CTRL",
+    resize = "META",
   },
-  -- log level to use: info, warn, error
   log_level = "info",
 })
 
