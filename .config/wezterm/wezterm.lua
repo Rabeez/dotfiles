@@ -137,7 +137,9 @@ tabline.setup({
 })
 -- tabline.apply_to_config(config)
 
+-- Setup leader key
 config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 500 }
+
 ---@diagnostic disable-next-line: missing-fields
 config.colors = {
   -- NOTE: Change cursor color when wezterm LEADER is active
@@ -150,16 +152,21 @@ config.colors = {
 
 -- TODO: check repo for "major refactor" branch and redo config
 local sessionizer = wezterm.plugin.require("https://github.com/mikkasendke/sessionizer.wezterm")
-sessionizer.apply_to_config(config, true) -- disable default binds (right now you can also just not call this)
-sessionizer.config.paths = PROJECT_ROOT_PATH
-sessionizer.config.command_options = {
-  fd_path = "/opt/homebrew/bin/fd",
-  include_submodules = false,
-  max_depth = 4,
-  format = "{//}",
-  exclude = { "node_modules" },
+sessionizer.apply_to_config(config, true) -- disable default binds
+sessionizer.config = {
+  show_default = false,
+  show_most_recent = false,
+  paths = PROJECT_ROOT_PATH,
+  command_options = {
+    fd_path = "/opt/homebrew/bin/fd",
+    include_submodules = false,
+    max_depth = 4,
+    format = "{//}",
+    exclude = { "node_modules" },
+  },
 }
 
+-- Global terminal keymaps
 config.keys = {
   {
     key = "p",
