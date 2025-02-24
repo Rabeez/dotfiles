@@ -36,8 +36,6 @@ wezterm.on("window-config-reloaded", function(window, _)
   window:toast_notification("wezterm", "Configuration reloaded!", nil, 4000)
 end)
 
--- TODO: this doesn't seem to actually update the tab title :(
--- because my custom status bar update overwrites tab name to fg process always
 wezterm.on("augment-command-palette", function(_, _)
   return {
     {
