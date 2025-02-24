@@ -31,6 +31,11 @@ config.window_padding = {
   top = 0,
   bottom = 5,
 }
+---@diagnostic disable-next-line: missing-fields
+config.inactive_pane_hsb = {
+  saturation = 0.7,
+  brightness = 0.7,
+}
 
 wezterm.on("window-config-reloaded", function(window, _)
   window:toast_notification("wezterm", "Configuration reloaded!", nil, 4000)
