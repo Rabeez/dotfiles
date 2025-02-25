@@ -31,6 +31,7 @@ config.window_padding = {
   top = 0,
   bottom = 5,
 }
+config.tab_max_width = 30
 ---@diagnostic disable-next-line: missing-fields
 config.inactive_pane_hsb = {
   saturation = 0.8,
@@ -125,7 +126,7 @@ tabline.setup({
           local workspace_count = #wezterm.mux.get_workspace_names()
 
           if workspace_count > 1 then
-            return str .. " [" .. workspace_count .. "]"
+            return str .. " (" .. workspace_count .. ")"
           else
             return str
           end
@@ -136,24 +137,32 @@ tabline.setup({
     tab_active = {
       {
         "index",
+        padding = 0,
         fmt = function(str)
-          return str .. "."
+          return "[" .. str
         end,
       },
       {
         "tab",
         icons_enabled = false,
-        padding = { left = 0, right = 1 },
+        padding = 0,
         fmt = function(str, tab_info)
           local mux = wezterm.mux
           local window = mux.get_window(tab_info.window_id)
           local mux_tab = window:tabs()[tab_info.tab_index + 1]
 
+          local name
+          if str == "default" then
+            name = ""
+          else
+            name = " " .. str
+          end
+
           local pane_count = #mux_tab:panes()
           if pane_count > 1 then
-            return str .. " [" .. pane_count .. "]"
+            return name .. " (" .. pane_count .. ")" .. "]"
           else
-            return str
+            return name .. "]"
           end
         end,
       },
@@ -161,24 +170,32 @@ tabline.setup({
     tab_inactive = {
       {
         "index",
+        padding = 0,
         fmt = function(str)
-          return str .. "."
+          return " " .. str
         end,
       },
       {
         "tab",
         icons_enabled = false,
-        padding = { left = 0, right = 1 },
+        padding = 0,
         fmt = function(str, tab_info)
           local mux = wezterm.mux
           local window = mux.get_window(tab_info.window_id)
           local mux_tab = window:tabs()[tab_info.tab_index + 1]
 
+          local name
+          if str == "default" then
+            name = ""
+          else
+            name = " " .. str
+          end
+
           local pane_count = #mux_tab:panes()
           if pane_count > 1 then
-            return str .. " [" .. pane_count .. "]"
+            return name .. " (" .. pane_count .. ")" .. " "
           else
-            return str
+            return name .. " "
           end
         end,
       },
