@@ -135,7 +135,23 @@ tabline.setup({
           return str .. "."
         end,
       },
-      { "tab", icons_enabled = false, padding = { left = 0, right = 1 } },
+      {
+        "tab",
+        icons_enabled = false,
+        padding = { left = 0, right = 1 },
+        fmt = function(str, tab_info)
+          local mux = wezterm.mux
+          local window = mux.get_window(tab_info.window_id)
+          local mux_tab = window:tabs()[tab_info.tab_index + 1]
+
+          local pane_count = #mux_tab:panes()
+          if pane_count > 1 then
+            return str .. " [" .. pane_count .. "]"
+          else
+            return str
+          end
+        end,
+      },
     },
     tab_inactive = {
       {
@@ -144,7 +160,23 @@ tabline.setup({
           return str .. "."
         end,
       },
-      { "tab", icons_enabled = false, padding = { left = 0, right = 1 } },
+      {
+        "tab",
+        icons_enabled = false,
+        padding = { left = 0, right = 1 },
+        fmt = function(str, tab_info)
+          local mux = wezterm.mux
+          local window = mux.get_window(tab_info.window_id)
+          local mux_tab = window:tabs()[tab_info.tab_index + 1]
+
+          local pane_count = #mux_tab:panes()
+          if pane_count > 1 then
+            return str .. " [" .. pane_count .. "]"
+          else
+            return str
+          end
+        end,
+      },
     },
     tabline_x = {},
     tabline_y = { "domain" },
