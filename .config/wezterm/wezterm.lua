@@ -118,7 +118,15 @@ tabline.setup({
   },
   sections = {
     tabline_a = { "mode" },
-    tabline_b = { "workspace" },
+    tabline_b = {
+      {
+        "workspace",
+        fmt = function(str)
+          local workspace_count = #wezterm.mux.get_workspace_names()
+          return str .. " [" .. workspace_count .. "]"
+        end,
+      },
+    },
     tabline_c = { " " },
     tab_active = {
       {
