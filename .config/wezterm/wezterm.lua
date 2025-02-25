@@ -123,7 +123,12 @@ tabline.setup({
         "workspace",
         fmt = function(str)
           local workspace_count = #wezterm.mux.get_workspace_names()
-          return str .. " [" .. workspace_count .. "]"
+
+          if workspace_count > 1 then
+            return str .. " [" .. workspace_count .. "]"
+          else
+            return str
+          end
         end,
       },
     },
