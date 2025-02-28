@@ -121,6 +121,7 @@ cask "transmission"
 cask "vscodium"
 cask "wezterm@nightly"
 cask "windscribe"
+cask "zen-browser"
 cask "zoom"
 cask "zulu@17"
 mas "1Password for Safari", id: 1569813296
