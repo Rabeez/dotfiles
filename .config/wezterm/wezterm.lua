@@ -227,7 +227,10 @@ sessionizer.apply_to_config(config, true) -- disable default binds
 sessionizer.config = {
   show_default = false,
   show_most_recent = false,
-  paths = PROJECT_ROOT_PATH,
+  paths = {
+    PROJECT_ROOT_PATH,
+    -- "/Users/rabeezriaz/Documents/Obsidian/Main",
+  },
   command_options = {
     fd_path = "/opt/homebrew/bin/fd",
     include_submodules = false,
