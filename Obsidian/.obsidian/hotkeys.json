@@ -1,0 +1,22 @@
+{
+  "app:go-back": [],
+  "app:go-forward": [],
+  "obsidian-toggle-list:Task-Next": [
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
+      ],
+      "key": "L"
+    }
+  ],
+  "obsidian-toggle-list:Task-Prev": [
+    {
+      "modifiers": [
+        "Alt",
+        "Mod"
+      ],
+      "key": "K"
+    }
+  ]
+}

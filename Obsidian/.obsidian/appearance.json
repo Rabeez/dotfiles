@@ -1,0 +1,16 @@
+{
+  "cssTheme": "AnuPpuccin",
+  "textFontFamily": "Maple Mono NF",
+  "monospaceFontFamily": "Maple Mono NF",
+  "nativeMenus": true,
+  "baseFontSize": 16,
+  "showRibbon": false,
+  "showViewHeader": false,
+  "enabledCssSnippets": [
+    "powerline",
+    "fonts",
+    "sidebars"
+  ],
+  "interfaceFontFamily": "Maple Mono NF",
+  "accentColor": "#cba6f7"
+}

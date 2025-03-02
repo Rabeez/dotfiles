@@ -1,0 +1,10 @@
+{
+  "livePreview": true,
+  "showLineNumber": true,
+  "vimMode": true,
+  "alwaysUpdateLinks": true,
+  "showUnsupportedFiles": true,
+  "spellcheck": true,
+  "promptDelete": false,
+  "showInlineTitle": false
+}
