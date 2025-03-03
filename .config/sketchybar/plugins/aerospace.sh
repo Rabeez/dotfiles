@@ -10,7 +10,7 @@ source "$CONFIG_DIR/colors.sh"
 clr=$(aerospace list-windows --workspace "$1" | rg -q ".*" && echo "$WHITE" || echo "$GREY")
 active_ws=$(aerospace list-workspaces --focused)
 if [[ $active_ws == "$1" ]]; then
-	clr=$MAUVE
+    clr=$MAUVE
 fi
 sketchybar --set "$NAME" label.color="$clr"
 # fi
