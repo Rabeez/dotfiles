@@ -2,8 +2,9 @@ local wezterm = require("wezterm") --[[@as Wezterm]]
 local act = wezterm.action
 local config = wezterm.config_builder()
 
-local PROJECT_ROOT_PATH = "/Users/rabeezriaz/Documents/Programming"
+local PROJECTS_ROOT_PATH = "/Users/rabeezriaz/Documents/Programming"
 local OBSIDIAN_MAIN_VAULT = "/Users/rabeezriaz/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian Main"
+local DOTFILES_REPO = "/Users/rabeezriaz/dotfiles"
 
 -- NOTE: Attempt to fix terminal name in fastfetch header
 -- https://wezfurlong.org/wezterm/config/lua/config/term.html
@@ -73,7 +74,7 @@ wezterm.on("augment-command-palette", function(_, _)
             return
           end
 
-          local project_path = PROJECT_ROOT_PATH .. "/probe/" .. line
+          local project_path = PROJECTS_ROOT_PATH .. "/probe/" .. line
           local mkdir_cmd = { "mkdir", "-p", project_path }
           local git_init_cmd = { "git", "-C", project_path, "init" }
 
@@ -229,8 +230,9 @@ sessionizer.config = {
   show_default = false,
   show_most_recent = false,
   paths = {
-    PROJECT_ROOT_PATH,
+    PROJECTS_ROOT_PATH,
     OBSIDIAN_MAIN_VAULT,
+    DOTFILES_REPO,
   },
   command_options = {
     fd_path = "/opt/homebrew/bin/fd",
