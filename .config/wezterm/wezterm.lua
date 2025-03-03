@@ -3,6 +3,7 @@ local act = wezterm.action
 local config = wezterm.config_builder()
 
 local PROJECT_ROOT_PATH = "/Users/rabeezriaz/Documents/Programming"
+local OBSIDIAN_MAIN_VAULT = "/Users/rabeezriaz/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian Main"
 
 -- NOTE: Attempt to fix terminal name in fastfetch header
 -- https://wezfurlong.org/wezterm/config/lua/config/term.html
@@ -229,7 +230,7 @@ sessionizer.config = {
   show_most_recent = false,
   paths = {
     PROJECT_ROOT_PATH,
-    -- "/Users/rabeezriaz/Documents/Obsidian/Main",
+    OBSIDIAN_MAIN_VAULT,
   },
   command_options = {
     fd_path = "/opt/homebrew/bin/fd",
