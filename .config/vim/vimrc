@@ -132,5 +132,10 @@ inoremap <C-p> "+p
 
 " Paste in next line
 nnoremap <silent> <C-p> o<ESC>"+p
+
+" s for substitute
+nmap s <plug>(SubversiveSubstitute)
+nmap ss <plug>(SubversiveSubstituteLine)
+nmap S <plug>(SubversiveSubstituteToEndOfLine)
 " ---------- KEYMAPS END ------------------------------------------------------
 
