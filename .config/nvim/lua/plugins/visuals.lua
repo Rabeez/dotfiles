@@ -10,6 +10,7 @@ return {
         integrations = {
           notify = true,
           treesitter = true,
+          treesitter_context = true,
           telescope = true,
           alpha = true,
           fidget = true,
