@@ -244,6 +244,8 @@ return {
       require("treesitter-context").setup({
         mode = "topline",
       })
+
+      vim.keymap.set("n", "<leader>us", "<cmd>TSContextToggle<CR>", { desc = "Toggle TS Context [S]ticky headers" })
     end,
   },
   {
