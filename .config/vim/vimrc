@@ -98,9 +98,9 @@ let g:highlightedyank_highlight_duration = 80
 " ---------- PLUGINS END ------------------------------------------------------
 
 " ---------- KEYMAPS START ----------------------------------------------------
-nnoremap <Esc> :nohlsearch<CR>
+nnoremap <silent> <Esc> :nohlsearch<CR>
 " Replace `x` with black hole register version
-nnoremap x "_x
+nnoremap <silent> x "_x
 
 " Window navigation mappings
 nnoremap <C-h> <C-w>h
@@ -113,12 +113,12 @@ nnoremap [t :bprevious<CR>
 nnoremap ]t :bnext<CR>
 
 " Center cursor while scrolling or navigating
-nnoremap <C-u> <C-u>zz
-nnoremap <C-d> <C-d>zz
-nnoremap G Gzz
+nnoremap <silent> <C-u> <C-u>zz
+nnoremap <silent> <C-d> <C-d>zz
+nnoremap <silent> G Gzz
 
 " Redo
-nnoremap U :redo<CR>
+nnoremap <silent> U :redo<CR>
 
 " Yank to the system clipboard with 'y'
 nnoremap y "+y
@@ -131,6 +131,6 @@ vnoremap p "+p
 inoremap <C-p> "+p
 
 " Paste in next line
-nnoremap P o<ESC>"+p
+nnoremap <silent> <C-p> o<ESC>"+p
 " ---------- KEYMAPS END ------------------------------------------------------
 
