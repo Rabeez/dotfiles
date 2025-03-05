@@ -181,6 +181,7 @@ backspace = ['close-all-windows-but-current', 'mode main']
 # fi
 # ''']
 
+# Floats
 [[on-window-detected]]
 if.app-id = 'com.apple.iphonesimulator'
 run = 'layout floating'
@@ -197,11 +198,7 @@ run = 'layout floating'
 if.app-id = 'com.apple.QuickTimePlayerX'
 run = 'layout floating'
 
-[[on-window-detected]]
-if.app-id = 'org.mozilla.firefox'
-check-further-callbacks = true
-run = 'move-node-to-workspace 1'
-
+# Workspace 1: Browser
 [[on-window-detected]]
 if.app-id = 'app.zen-browser.zen'
 check-further-callbacks = true
@@ -209,31 +206,30 @@ run = 'move-node-to-workspace 1'
 
 # https://github.com/nikitabobko/AeroSpace/issues/246
 [[on-window-detected]]
-if.app-id = 'org.mozilla.firefox'
-if.window-title-regex-substring = 'Picture-in-Picture'
-run = 'layout floating'
-
-[[on-window-detected]]
 if.app-id = 'app.zen-browser.zen'
 if.window-title-regex-substring = 'Picture-in-Picture'
 run = 'layout floating'
 
 [[on-window-detected]]
-if.app-id = 'com.github.wez.wezterm'
-run = 'move-node-to-workspace 2'
+if.app-id = 'com.google.Chrome'
+check-further-callbacks = true
+run = 'move-node-to-workspace 1'
 
+# Workspace 2: Coding
 [[on-window-detected]]
-if.app-id = 'com.microsoft.VSCode'
+if.app-id = 'com.github.wez.wezterm'
 run = 'move-node-to-workspace 2'
 
 [[on-window-detected]]
 if.app-id = 'com.vscodium'
 run = 'move-node-to-workspace 2'
 
+# Workspace 3: File explorer
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
 run = 'move-node-to-workspace 3'
 
+# Workspace 4: Notes
 [[on-window-detected]]
 if.app-id = 'com.apple.notes'
 run = 'move-node-to-workspace 4'
@@ -242,6 +238,7 @@ run = 'move-node-to-workspace 4'
 if.app-id = 'md.obsidian'
 run = 'move-node-to-workspace 4'
 
+# Workspace 5: Media
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
 run = 'move-node-to-workspace 5'
