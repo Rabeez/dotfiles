@@ -16,6 +16,8 @@ ignore = [
   "TRY003",  # long exception messages
   "EM101",   # exception message string literal
   "EM102",   # exception message fstring
+  "D400",    # docstring ends with punctuation
+  "D415",    # docstring ends with punctuation
   "RET504",  # unnecessary assignment before return
   "RET505",  # unnecessary else after return
   "FIX002",  # remove TODO
@@ -39,4 +41,7 @@ ignore = [
   "E741",    # ambigous variable name for certain fonts (e.g. l, i, 1 etc)
   "G004",    # log statements with f-strings
   "S301",    # pickle deserialization
+  "PLR0911", # too many return statements in function
+  # "FBT001",  # bool argument in function definition
+  "FBT003", # bool argument in function call
 ]
