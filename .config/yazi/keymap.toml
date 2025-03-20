@@ -94,3 +94,7 @@ run = "plugin what-size"
 desc = "Calc size of selection or cwd"
 
 # TODO: fix hidden toggle to <.h>
+# TODO: fix Z that uses fzf for directory navigation - limit depth AND start from ~ always
+# TODO: set z to use same ^ fzf but start from current directory
+# TODO: use <C-O> to "go back" to previous directory (similar to vim jumplist)
+# TODO: extension to^: maybe setup <C-i> as well

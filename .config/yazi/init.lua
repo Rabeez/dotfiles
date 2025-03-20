@@ -36,6 +36,3 @@ function Status:name()
   end
   return ui.Line(" " .. h.name .. linked)
 end
-
--- TODO: Setup local/custom plugin to add an option on copy (c button press)
--- to copy file path to project root (as defined by git repo root)
