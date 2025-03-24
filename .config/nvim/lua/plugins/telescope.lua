@@ -84,6 +84,14 @@ return {
       vim.keymap.set("n", "<leader>ft", "<Cmd>TodoTelescope<CR>", { desc = "Telescope: List [T]ODOs" })
       vim.keymap.set("n", "<leader>fn", "<Cmd>Telescope notify<CR>", { desc = "Telescope: List [n]otifications" })
 
+      vim.keymap.set("n", "<leader>ui", function()
+        builtin.colorscheme({ enable_preview = true })
+        -- BUG: This code runs when key is pressed. NOT when picker exits
+        local current_theme = vim.g.colors_name
+        vim.print(current_theme)
+        require("lualine").setup({ options = { theme = current_theme } })
+      end, { desc = "Open UI colorscheme switcher" })
+
       telescope.load_extension("fzf")
       telescope.load_extension("notify")
     end,
