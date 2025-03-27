@@ -218,6 +218,9 @@ case ":$PATH:" in
 esac
 # pnpm end
 
+# ZSH vi mode
+source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+
 # Performance profiler (paired line at start of file)
 # zprof
 
