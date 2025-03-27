@@ -148,7 +148,7 @@ return {
 
       require("lualine").setup({
         options = {
-          theme = "catppuccin",
+          -- theme = "tokyonight",
           disabled_filetypes = {
             winbar = {
               "help",
