@@ -178,7 +178,7 @@ return {
           file:close()
 
           if colorscheme ~= AVAILABLE_COLORSCHEMES[DEFAULT_SCHEME] then
-            vim.notify("Setting WezTerm color scheme to '" .. colorscheme .. "'", vim.log.levels.INFO)
+            vim.notify(" Setting WezTerm color scheme to '" .. colorscheme .. "'", vim.log.levels.INFO)
           end
         end,
       })

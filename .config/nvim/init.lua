@@ -34,7 +34,7 @@ local file = io.open(filename, "r")
 if file then
   local scheme = file:read("*a")
   if scheme ~= DEFAULT_SCHEME then
-    vim.notify("Loading nvim colorscheme from state '" .. scheme .. "'", vim.log.levels.INFO)
+    vim.notify(" Loading nvim colorscheme from state '" .. scheme .. "'", vim.log.levels.INFO)
   end
   vim.cmd.colorscheme(scheme)
   file:close()
