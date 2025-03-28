@@ -87,34 +87,75 @@ return {
       vim.keymap.set("n", "<leader>ui", function()
         -- NOTE: Changing the colorscheme will trigger the autocmd that is defined below
         -- NOTE: 'Live preview' also triggers the autocmd
-        builtin.colorscheme({ enable_preview = true, ignore_builtins = true })
+        local whitelist = {}
+        for key, _ in pairs(AVAILABLE_COLORSCHEMES) do
+          table.insert(whitelist, key)
+        end
+        local function get_whitelisted_colorschemes()
+          return vim.tbl_filter(function(scheme)
+            return vim.tbl_contains(whitelist, scheme)
+          end, vim.fn.getcompletion("", "color"))
+        end
+        require("telescope.pickers")
+          .new({}, {
+            prompt_title = "Select Colorscheme",
+            finder = require("telescope.finders").new_table({ results = get_whitelisted_colorschemes() }),
+            sorter = require("telescope.config").values.generic_sorter({}),
+            layout_strategy = "center",
+            layout_config = {
+              width = 0.3,
+              height = 0.4,
+            },
+            previewer = false,
+            attach_mappings = function(prompt_bufnr, map)
+              local actions = require("telescope.actions")
+              local action_state = require("telescope.actions.state")
+
+              local function set_colorscheme()
+                local entry = action_state.get_selected_entry()
+                if entry then
+                  vim.cmd("colorscheme " .. entry.value)
+                end
+              end
+
+              -- Live preview on selection change
+              actions.select_default:replace(function()
+                set_colorscheme()
+                actions.close(prompt_bufnr)
+              end)
+
+              -- Live preview when navigating with Telescope's built-in movements
+              map("i", "<C-n>", function()
+                actions.move_selection_next(prompt_bufnr)
+                set_colorscheme()
+              end)
+              map("i", "<down>", function()
+                actions.move_selection_next(prompt_bufnr)
+                set_colorscheme()
+              end)
+              map("i", "<C-p>", function()
+                actions.move_selection_previous(prompt_bufnr)
+                set_colorscheme()
+              end)
+              map("i", "<up>", function()
+                actions.move_selection_previous(prompt_bufnr)
+                set_colorscheme()
+              end)
+
+              -- Close picker on single Escape press
+              map("i", "<Esc>", function()
+                actions.close(prompt_bufnr)
+              end)
+
+              return true
+            end,
+          })
+          :find()
       end, { desc = "Open UI colorscheme switcher" })
 
       vim.api.nvim_create_autocmd("ColorScheme", {
         group = vim.api.nvim_create_augroup("wezterm_colorscheme", { clear = true }),
         callback = function(args)
-          -- Table maps name in nvim to name in wezterm
-          local colorschemes = {
-            ["catppuccin-frappe"] = "Catppuccin Frappe",
-            ["catppuccin-latte"] = "Catppuccin Latte",
-            ["catppuccin-macchiato"] = "Catppuccin Macchiato",
-            ["catppuccin-mocha"] = "Catppuccin Mocha",
-            -- ["kanagawa-lotus"] = "catppuccin-macchiato", -- NOTE: not available in wezterm??
-            ["kanagawa-dragon"] = "Kanagawa Dragon (Gogh)",
-            ["kanagawa-wave"] = "Kanagawa (Gogh)",
-            ["nightfox"] = "nightfox",
-            ["dayfox"] = "dayfox",
-            ["dawnfox"] = "dawnfox",
-            ["duskfox"] = "duskfox",
-            ["nordfox"] = "nordfox",
-            ["terafox"] = "terafox",
-            ["carbonfox"] = "carbonfox",
-            ["tokyonight-day"] = "tokyonight_day",
-            ["tokyonight-night"] = "tokyonight_night",
-            ["tokyonight-moon"] = "tokyonight_moon",
-            ["tokyonight-storm"] = "tokyonight_storm",
-          }
-
           -- Write the colorscheme to a file for nvim
           local filename = vim.fn.expand("$XDG_CONFIG_HOME/nvim/colorscheme")
           assert(type(filename) == "string")
@@ -123,7 +164,7 @@ return {
           file:write(args.match)
           file:close()
 
-          local colorscheme = colorschemes[args.match]
+          local colorscheme = AVAILABLE_COLORSCHEMES[args.match]
           if not colorscheme then
             return
           end
@@ -136,8 +177,8 @@ return {
           file:write(colorscheme)
           file:close()
 
-          if colorscheme ~= colorschemes[DEFAULT_SCHEME] then
-            vim.notify("Setting WezTerm color scheme to " .. colorscheme, vim.log.levels.INFO)
+          if colorscheme ~= AVAILABLE_COLORSCHEMES[DEFAULT_SCHEME] then
+            vim.notify("Setting WezTerm color scheme to '" .. colorscheme .. "'", vim.log.levels.INFO)
           end
         end,
       })
