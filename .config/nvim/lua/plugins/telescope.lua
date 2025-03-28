@@ -99,7 +99,7 @@ return {
             ["catppuccin-latte"] = "Catppuccin Latte",
             ["catppuccin-macchiato"] = "Catppuccin Macchiato",
             ["catppuccin-mocha"] = "Catppuccin Mocha",
-            -- ["kanagawa-lotus"] = "catppuccin-macchiato",
+            -- ["kanagawa-lotus"] = "catppuccin-macchiato", -- NOTE: not available in wezterm??
             ["kanagawa-dragon"] = "Kanagawa Dragon (Gogh)",
             ["kanagawa-wave"] = "Kanagawa (Gogh)",
             ["nightfox"] = "nightfox",
@@ -114,20 +114,31 @@ return {
             ["tokyonight-moon"] = "tokyonight_moon",
             ["tokyonight-storm"] = "tokyonight_storm",
           }
+
+          -- Write the colorscheme to a file for nvim
+          local filename = vim.fn.expand("$XDG_CONFIG_HOME/nvim/colorscheme")
+          assert(type(filename) == "string")
+          local file = io.open(filename, "w")
+          assert(file)
+          file:write(args.match)
+          file:close()
+
           local colorscheme = colorschemes[args.match]
           if not colorscheme then
             return
           end
 
-          -- Write the colorscheme to a file
-          local filename = vim.fn.expand("$XDG_CONFIG_HOME/wezterm/colorscheme")
+          -- Write the colorscheme to a file for wezterm
+          filename = vim.fn.expand("$XDG_CONFIG_HOME/wezterm/colorscheme")
           assert(type(filename) == "string")
-          local file = io.open(filename, "w")
+          file = io.open(filename, "w")
           assert(file)
           file:write(colorscheme)
           file:close()
 
-          vim.notify("Setting WezTerm color scheme to " .. colorscheme, vim.log.levels.INFO)
+          if colorscheme ~= colorschemes[DEFAULT_SCHEME] then
+            vim.notify("Setting WezTerm color scheme to " .. colorscheme, vim.log.levels.INFO)
+          end
         end,
       })
 

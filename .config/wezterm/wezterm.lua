@@ -95,8 +95,11 @@ if file then
 else
   config.color_scheme = "Catppuccin Mocha"
 end
--- config.color_scheme = "Catppuccin Mocha"
 local scheme = wezterm.color.get_builtin_schemes()[config.color_scheme]
+-- TODO: setup simpler color overrides that:
+--   1. works with all themes e.g. base16 themes have very few colors defined
+--   2. some light themes e.g. dawnfox have bad colors for wezterm tabline section B
+--     ^ will need manual override for those few themes
 
 -- config.command_palette_bg_color = scheme["tab_bar"]["inactive_tab"]["bg_color"]
 -- config.command_palette_fg_color = scheme["foreground"]

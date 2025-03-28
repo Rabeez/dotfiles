@@ -53,9 +53,6 @@ return {
           },
         },
       })
-
-      -- NOTE: Set overall default color scheme
-      vim.cmd.colorscheme("catppuccin")
     end,
   },
   {
@@ -103,6 +100,9 @@ return {
       })
     end,
   },
+  -- NOTE: gruvbox themes have single entry in neovim
+  -- Dark/light is controlled by `vim.o.background=dark`
+  -- which messes with wezterm sync etc
   -- {
   --   "sainnhe/gruvbox-material",
   --   lazy = false,
@@ -119,54 +119,4 @@ return {
       },
     },
   },
-  -- {
-  --   "zaldih/themery.nvim",
-  --   lazy = false,
-  --   config = function()
-  --     require("themery").setup({
-  --       themes = {
-  --         "catppuccin-mocha",
-  --         "catppuccin-macchiato",
-  --         "catppuccin-frappe",
-  --         "catppuccin-latte",
-  --         "kanagawa-lotus",
-  --         "kanagawa-dragon",
-  --         "kanagawa-wave",
-  --         "nightfox",
-  --         "dayfox",
-  --         "dawnfox",
-  --         "duskfox",
-  --         "nordfox",
-  --         "terafox",
-  --         "carbonfox",
-  --         "tokyonight-day",
-  --         "tokyonight-night",
-  --         "tokyonight-moon",
-  --         "tokyonight-storm",
-  --         {
-  --           name = "gruvbox-material-dark",
-  --           colorscheme = "gruvbox-material",
-  --           before = [[ vim.opt.background = "dark" ]],
-  --         },
-  --         {
-  --           name = "gruvbox-material-light",
-  --           colorscheme = "gruvbox-material",
-  --           before = [[ vim.opt.background = "light" ]],
-  --         },
-  --       },
-  --       livePreview = true,
-  --       -- globalAfter = [[ require('lualine').setup({ options = { theme = require("themery").getCurrentTheme().name } }) ]],
-  --       -- globalAfter = [[ vim.print(require("themery").getCurrentTheme().name) ]],
-  --       globalAfter = [[
-  --       local themery = require('themery')
-  --       local currentTheme = themery.getCurrentTheme()
-  --       vim.print(currentTheme)
-  --
-  --       if currentTheme then
-  --         require('lualine').setup({ options = { theme = currentTheme.name or 'catppuccin-mocha' } })
-  --       end
-  --       ]],
-  --     })
-  --   end,
-  -- },
 }
