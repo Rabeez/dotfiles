@@ -103,11 +103,11 @@ return {
       })
     end,
   },
-  {
-    "sainnhe/gruvbox-material",
-    lazy = false,
-    priority = 1000,
-  },
+  -- {
+  --   "sainnhe/gruvbox-material",
+  --   lazy = false,
+  --   priority = 1000,
+  -- },
   {
     "folke/tokyonight.nvim",
     lazy = false,

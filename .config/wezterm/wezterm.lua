@@ -87,11 +87,19 @@ wezterm.on("augment-command-palette", function(_, _)
   }
 end)
 
-config.color_scheme = "Catppuccin Mocha"
+-- Colorscheme
+local file = io.open(wezterm.config_dir .. "/colorscheme", "r")
+if file then
+  config.color_scheme = file:read("*a")
+  file:close()
+else
+  config.color_scheme = "Catppuccin Mocha"
+end
+-- config.color_scheme = "Catppuccin Mocha"
 local scheme = wezterm.color.get_builtin_schemes()[config.color_scheme]
 
-config.command_palette_bg_color = scheme["tab_bar"]["inactive_tab"]["bg_color"]
-config.command_palette_fg_color = scheme["foreground"]
+-- config.command_palette_bg_color = scheme["tab_bar"]["inactive_tab"]["bg_color"]
+-- config.command_palette_fg_color = scheme["foreground"]
 
 local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
 tabline.setup({
@@ -99,13 +107,18 @@ tabline.setup({
     icons_enabled = true,
     theme = config.color_scheme,
     tabs_enabled = true,
-    theme_overrides = {
-      tab = {
-        active = { fg = scheme["ansi"][5], bg = scheme["tab_bar"]["inactive_tab"]["bg_color"] },
-        inactive = { fg = scheme["foreground"], bg = scheme["tab_bar"]["inactive_tab"]["bg_color"] },
-        inactive_hover = { fg = scheme["ansi"][6], bg = scheme["tab_bar"]["inactive_tab"]["bg_color"] },
-      },
-    },
+    -- theme_overrides = {
+    --   normal_mode = {
+    --     --     a = { fg = scheme["tab_bar"]["inactive_tab"]["bg_color"], bg = scheme["ansi"][5] },
+    --     b = { fg = scheme["selection_fg"] },
+    --     --     c = { fg = scheme["foreground"], bg = scheme["tab_bar"]["inactive_tab"]["bg_color"] },
+    --   },
+    --   tab = {
+    --     active = { bg = scheme["background"] },
+    --     --     inactive = { fg = scheme["foreground"], bg = scheme["tab_bar"]["inactive_tab"]["bg_color"] },
+    --     --     inactive_hover = { fg = scheme["ansi"][6], bg = scheme["tab_bar"]["inactive_tab"]["bg_color"] },
+    --   },
+    -- },
     section_separators = {
       left = wezterm.nerdfonts.pl_left_hard_divider,
       right = wezterm.nerdfonts.pl_right_hard_divider,
@@ -219,7 +232,7 @@ config.colors = {
   compose_cursor = scheme["indexed"][16],
   -- NOTE: Match background color with tabline
   tab_bar = {
-    background = scheme["tab_bar"]["inactive_tab"]["bg_color"],
+    background = scheme["background"],
   },
 }
 

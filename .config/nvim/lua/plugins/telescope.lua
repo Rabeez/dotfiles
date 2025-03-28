@@ -85,12 +85,51 @@ return {
       vim.keymap.set("n", "<leader>fn", "<Cmd>Telescope notify<CR>", { desc = "Telescope: List [n]otifications" })
 
       vim.keymap.set("n", "<leader>ui", function()
-        builtin.colorscheme({ enable_preview = true })
-        -- BUG: This code runs when key is pressed. NOT when picker exits
-        local current_theme = vim.g.colors_name
-        vim.print(current_theme)
-        require("lualine").setup({ options = { theme = current_theme } })
+        -- NOTE: Changing the colorscheme will trigger the autocmd that is defined below
+        -- NOTE: 'Live preview' also triggers the autocmd
+        builtin.colorscheme({ enable_preview = true, ignore_builtins = true })
       end, { desc = "Open UI colorscheme switcher" })
+
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        group = vim.api.nvim_create_augroup("wezterm_colorscheme", { clear = true }),
+        callback = function(args)
+          -- Table maps name in nvim to name in wezterm
+          local colorschemes = {
+            ["catppuccin-frappe"] = "Catppuccin Frappe",
+            ["catppuccin-latte"] = "Catppuccin Latte",
+            ["catppuccin-macchiato"] = "Catppuccin Macchiato",
+            ["catppuccin-mocha"] = "Catppuccin Mocha",
+            -- ["kanagawa-lotus"] = "catppuccin-macchiato",
+            ["kanagawa-dragon"] = "Kanagawa Dragon (Gogh)",
+            ["kanagawa-wave"] = "Kanagawa (Gogh)",
+            ["nightfox"] = "nightfox",
+            ["dayfox"] = "dayfox",
+            ["dawnfox"] = "dawnfox",
+            ["duskfox"] = "duskfox",
+            ["nordfox"] = "nordfox",
+            ["terafox"] = "terafox",
+            ["carbonfox"] = "carbonfox",
+            ["tokyonight-day"] = "tokyonight_day",
+            ["tokyonight-night"] = "tokyonight_night",
+            ["tokyonight-moon"] = "tokyonight_moon",
+            ["tokyonight-storm"] = "tokyonight_storm",
+          }
+          local colorscheme = colorschemes[args.match]
+          if not colorscheme then
+            return
+          end
+
+          -- Write the colorscheme to a file
+          local filename = vim.fn.expand("$XDG_CONFIG_HOME/wezterm/colorscheme")
+          assert(type(filename) == "string")
+          local file = io.open(filename, "w")
+          assert(file)
+          file:write(colorscheme)
+          file:close()
+
+          vim.notify("Setting WezTerm color scheme to " .. colorscheme, vim.log.levels.INFO)
+        end,
+      })
 
       telescope.load_extension("fzf")
       telescope.load_extension("notify")
