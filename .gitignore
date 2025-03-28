@@ -12,3 +12,4 @@ containers/
 spicetify
 .android
 Obsidian/.obsidian/workspace.json
+.config/wezterm/colorscheme
