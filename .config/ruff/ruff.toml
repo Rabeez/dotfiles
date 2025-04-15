@@ -45,4 +45,5 @@ ignore = [
   "PLR0911", # too many return statements in function
   # "FBT001",  # bool argument in function definition
   "FBT003", # bool argument in function call
+  "NPY002", # use np.random.Generator
 ]
