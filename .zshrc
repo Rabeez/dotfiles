@@ -225,6 +225,12 @@ zvm_after_init() {
     source <(fzf --zsh)
 }
 
+# Longer shell history
+export HISTFILE="$HOME/.zsh_history"
+export HISTSIZE=1000000000
+export SAVEHIST=1000000000
+setopt EXTENDED_HISTORY
+
 # Performance profiler (paired line at start of file)
 # zprof
 
