@@ -133,8 +133,6 @@ export FZF_CTRL_R_OPTS="
 export FZF_ALT_C_OPTS="
 --walker-skip .git,node_modules,target
 --preview 'tree -C {}' --border"
-# Set up fzf key bindings and fuzzy completion
-source <(fzf --zsh)
 
 # bat can be used as a colorizing pager for man
 export MANPAGER="sh -c 'col -bx | bat -l man -p'"
@@ -220,6 +218,12 @@ esac
 
 # ZSH vi mode
 source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+# NOTE: Need to re-apply keybind customizations, to ensure these are available in Insert mode
+# The plugin will auto execute this zvm_after_init function
+zvm_after_init() {
+    # Set up fzf key bindings and fuzzy completion
+    source <(fzf --zsh)
+}
 
 # Performance profiler (paired line at start of file)
 # zprof
