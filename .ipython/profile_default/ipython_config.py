@@ -74,8 +74,8 @@ c = get_config()  # noqa
 #          the default matplotlib backend.
 #  Choices: any of ['auto', 'agg', 'gtk', 'gtk3', 'gtk4', 'inline', 'ipympl', 'nbagg', 'notebook', 'osx', 'pdf', 'ps', 'qt', 'qt4', 'qt5', 'qt6', 'svg', 'tk', 'webagg', 'widget', 'wx'] (case-insensitive) or None
 #  Default: None
-c.InteractiveShellApp.matplotlib = "osx"
-c.InlineBackend.rc = {}
+# c.InteractiveShellApp.matplotlib = "osx"
+# c.InlineBackend.rc = {}
 
 ## Run the module as a script.
 #  Default: ''
@@ -669,9 +669,7 @@ from pygments.styles import get_style_by_name
 from pygments.util import ClassNotFound
 
 try:
-    c.TerminalInteractiveShell.highlighting_style = get_style_by_name(
-        "catppuccin-mocha"
-    )
+    c.TerminalInteractiveShell.highlighting_style = get_style_by_name("catppuccin-mocha")
 except ClassNotFound as ex:
     print(f"Failed to set theme: {ex}")
 
