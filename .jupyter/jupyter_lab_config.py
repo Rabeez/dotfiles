@@ -405,6 +405,8 @@ c = get_config()  # noqa
 # LabApp(LabServerApp) configuration
 # ------------------------------------------------------------------------------
 ##
+# c.LabApp.browser = "/System/Volumes/Data/Applications/Google Chrome.app --app=%s"
+c.LabApp.browser = "/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --app=%s"
 #  See also: LabServerApp.allowed_extensions_uris
 # c.LabApp.allowed_extensions_uris = ''
 
