@@ -43,7 +43,8 @@ ignore = [
   "G004",    # log statements with f-strings
   "S301",    # pickle deserialization
   "PLR0911", # too many return statements in function
-  # "FBT001",  # bool argument in function definition
-  "FBT003", # bool argument in function call
-  "NPY002", # use np.random.Generator
+  "FBT001",  # bool argument in function definition
+  "FBT002",  # bool argument in function definition with default value
+  "FBT003",  # bool argument in function call
+  "NPY002",  # use np.random.Generator
 ]
