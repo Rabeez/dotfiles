@@ -27,6 +27,7 @@ config.show_new_tab_button_in_tab_bar = false
 config.window_decorations = "RESIZE"
 config.initial_rows = 35
 config.initial_cols = 110
+config.audible_bell = "Disabled"
 config.window_padding = {
   left = 5,
   right = 5,
