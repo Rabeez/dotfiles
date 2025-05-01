@@ -6,8 +6,8 @@
 palette = "catppuccin_mocha"
 
 format = '''
-[╭──](bold green) $all
-[╰─](bold green)$character'''
+[╭─](bold green) $all
+[╰](bold green)$character'''
 
 # Inserts a blank line between shell prompts
 add_newline = true
