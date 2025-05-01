@@ -5,6 +5,10 @@
 # Palettes must be defined _after_ this line
 palette = "catppuccin_mocha"
 
+format = '''
+[╭──](bold green) $all
+[╰─](bold green)$character'''
+
 # Inserts a blank line between shell prompts
 add_newline = true
 
@@ -15,6 +19,10 @@ command_timeout = 1000
 # [character] # The name of the module we are configuring is 'character'
 # success_symbol = '[➜](bold green)' # The 'success_symbol' segment is being set to '➜' with the color 'bold green'
 # error_symbol = "[✖](bold red)"
+
+# Controls line break between multi-line custom prompts
+[line_break]
+disabled = true
 
 [directory]
 truncation_length = 4
