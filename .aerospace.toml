@@ -215,6 +215,11 @@ if.app-id = 'com.google.Chrome'
 check-further-callbacks = true
 run = 'move-node-to-workspace 1'
 
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+if.window-title-regex-substring = 'about:blank'
+run = 'layout floating'
+
 # Workspace 2: Coding
 [[on-window-detected]]
 if.app-id = 'com.github.wez.wezterm'
