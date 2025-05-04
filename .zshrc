@@ -183,6 +183,9 @@ echo "$oneline" | fastfetch --file-raw -
 # Setup starship prompt
 eval "$(starship init zsh)"
 
+# Zoxide completions, cache etc
+eval "$(zoxide init zsh)"
+
 # Setup ZSH plugins
 source "$HOME"/.config/fsh/fast-syntax-highlighting.plugin.zsh
 source "$(brew --prefix)"/share/zsh-autosuggestions/zsh-autosuggestions.zsh
