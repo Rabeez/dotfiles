@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # TODO: add mac dock etc config commands
 # TODO: add system install commands (brew etc)
