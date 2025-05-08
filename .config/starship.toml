@@ -34,6 +34,9 @@ disabled = true
 [cmd_duration]
 format = '\[[⏱ $duration]($style)\]'
 
+[pixi]
+format = '\[[$symbol$version( $environment)]($style)\]'
+
 [conda]
 format = '\[[$symbol$environment]($style)\]'
 
