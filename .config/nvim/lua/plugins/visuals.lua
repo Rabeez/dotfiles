@@ -159,6 +159,7 @@ return {
               "packer",
               "neogitstatus",
               "NvimTree",
+              "neo-tree",
               "Trouble",
               "trouble",
               "alpha",
@@ -178,6 +179,14 @@ return {
         },
         extensions = {
           "nvim-dap-ui",
+          "neo-tree",
+          "man",
+          "lazy",
+          "mason",
+          "quickfix",
+          "symbols-outline",
+          "trouble",
+          "toggleterm",
         },
         sections = {
           lualine_a = { "mode" },
