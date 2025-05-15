@@ -124,12 +124,12 @@ tabline.setup({
     --   },
     -- },
     section_separators = {
-      left = wezterm.nerdfonts.pl_left_hard_divider,
-      right = wezterm.nerdfonts.pl_right_hard_divider,
+      left = wezterm.nerdfonts.ple_right_half_circle_thick,
+      right = wezterm.nerdfonts.ple_left_half_circle_thick,
     },
     component_separators = {
-      left = wezterm.nerdfonts.pl_left_soft_divider,
-      right = wezterm.nerdfonts.pl_right_soft_divider,
+      left = wezterm.nerdfonts.ple_right_half_circle_thick,
+      right = wezterm.nerdfonts.ple_left_half_circle_thick,
     },
     tab_separators = {
       left = "",
