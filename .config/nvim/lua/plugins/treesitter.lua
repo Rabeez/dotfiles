@@ -242,7 +242,7 @@ return {
     dependencies = { "nvim-treesitter/nvim-treesitter" },
     config = function()
       require("treesitter-context").setup({
-        mode = "topline",
+        mode = "cursor",
       })
 
       vim.keymap.set("n", "<leader>us", "<cmd>TSContextToggle<CR>", { desc = "Toggle TS Context [S]ticky headers" })
