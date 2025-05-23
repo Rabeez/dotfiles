@@ -17,6 +17,7 @@ export PATH="$HOMEBREW_PREFIX/opt/bc/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/ccache/libexec:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/curl/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
+export LIBGCCJIT_LIBRARY_PATH=$(brew --prefix libgccjit)/lib
 
 #Ensure binary packages for languages are in path
 export PATH="$HOME/.cargo/bin:$PATH"
