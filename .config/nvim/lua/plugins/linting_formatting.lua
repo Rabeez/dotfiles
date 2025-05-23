@@ -14,6 +14,13 @@ return {
     opts = {},
     -- TODO:
     -- add keymaps for folding? and moving ([h, ]h) to headers (see how to do levels of headers?)
+    config = function()
+      require("render-markdown").setup({
+        heading = {
+          width = "block",
+        },
+      })
+    end,
   },
   {
     "stevearc/conform.nvim",
