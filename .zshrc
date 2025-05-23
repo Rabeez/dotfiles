@@ -76,6 +76,7 @@ alias ee="yazi"
 alias gg="lazygit"
 alias g="git"
 alias p="pixi"
+alias codi="codium"
 
 
 # Use y instead of yazi to start, and press q to quit, you'll see the CWD changed.
