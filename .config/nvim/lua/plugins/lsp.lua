@@ -34,6 +34,7 @@ return {
           "taplo",
           "sqlls",
           "clangd",
+          "tinymist",
           -- "jinja_lsp",
         },
       })
@@ -129,6 +130,14 @@ return {
         -- 		filetypes = { "jinja", "python" },
         -- 	})
         -- end,
+        ["tinymist"] = function()
+          require("lspconfig").tinymist.setup({
+            settings = {
+              formatterMode = "typstyle",
+              exportPdf = "onType",
+            },
+          })
+        end,
         ["tailwindcss"] = function()
           require("lspconfig").tailwindcss.setup({
             capabilities = capabilities,

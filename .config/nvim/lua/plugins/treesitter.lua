@@ -38,6 +38,7 @@ return {
         "markdown_inline",
         "sql",
         "gitignore",
+        "typst",
       },
       sync_install = false,
       auto_install = true,
