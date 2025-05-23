@@ -62,9 +62,12 @@ return {
 
       -- Rounded borders and other visual tweaks
       require("lspconfig.ui.windows").default_options.border = "rounded"
-      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
-      vim.lsp.handlers["textDocument/signatureHelp"] =
-        vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
+      vim.lsp.handlers["textDocument/hover"] = function()
+        vim.lsp.buf.hover({ border = "rounded" })
+      end
+      vim.lsp.handlers["textDocument/signatureHelp"] = function()
+        vim.lsp.buf.signature_help({ border = "rounded" })
+      end
 
       vim.diagnostic.config({
         severity_sort = true,
@@ -212,7 +215,7 @@ return {
           )
 
           local client = vim.lsp.get_client_by_id(event.data.client_id)
-          if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_inlayHint) then
             vim.keymap.set("n", "<leader>lh", function()
               vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = event.buf }))
             end, { buffer = event.buf, desc = "[L]SP: Toggle Inlay [H]ints" })
