@@ -15,6 +15,7 @@ return {
         },
       })
       require("mason-lspconfig").setup({
+        automatic_enable = true,
         ensure_installed = {
           "lua_ls",
           "rust_analyzer",
@@ -55,10 +56,11 @@ return {
         },
       })
 
+      -- LSP custom capabilities
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 
-      -- Rounded borders
+      -- Rounded borders and other visual tweaks
       require("lspconfig.ui.windows").default_options.border = "rounded"
       vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
       vim.lsp.handlers["textDocument/signatureHelp"] =
@@ -89,109 +91,73 @@ return {
         },
       })
 
-      require("mason-lspconfig").setup_handlers({
-        -- The first entry (without a key) will be the default handler
-        -- and will be called for each installed server that doesn't have
-        -- a dedicated handler.
-        function(server_name) -- default handler (optional)
-          require("lspconfig")[server_name].setup({ capabilities = capabilities })
-        end,
-        -- Next, you can provide a dedicated handler for specific servers.
-        ["bashls"] = function()
-          require("lspconfig").bashls.setup({ capabilities = capabilities, filetypes = { "sh", "zsh" } })
-        end,
-        ["sqlls"] = function()
-          require("lspconfig").sqlls.setup({ capabilities = capabilities, filetypes = { "sql" } })
-        end,
-        ["html"] = function()
-          require("lspconfig").html.setup({
-            capabilities = capabilities,
-            filetypes = { "html", "templ", "jinja" },
-          })
-        end,
-        ["cssls"] = function()
-          require("lspconfig").cssls.setup({
-            capabilities = capabilities,
-            filetypes = { "html", "css", "templ", "jinja" },
-          })
-        end,
-        ["htmx"] = function()
-          require("lspconfig").htmx.setup({
-            capabilities = capabilities,
-            filetypes = { "html", "templ", "jinja" },
-          })
-        end,
-        ["templ"] = function()
-          require("lspconfig").templ.setup({ capabilities = capabilities, filetypes = { "templ" } })
-        end,
-        -- ["jinja_lsp"] = function()
-        -- 	require("lspconfig").jinja_lsp.setup({
-        -- 		capabilities = capabilities,
-        -- 		filetypes = { "jinja", "python" },
-        -- 	})
-        -- end,
-        ["tinymist"] = function()
-          require("lspconfig").tinymist.setup({
-            settings = {
-              formatterMode = "typstyle",
-              exportPdf = "onType",
+      -- LSP configuration
+      -- reference to check `default_config` lua object: https://github.com/neovim/nvim-lspconfig/blob/master/lua/lspconfig/configs/basedpyright.lua
+      vim.lsp.config("*", {
+        capabilities = capabilities,
+      })
+      vim.lsp.config("bashls", {
+        filetypes = { "sh", "zsh" },
+      })
+      vim.lsp.config("html", {
+        filetypes = { "html", "templ", "jinja" },
+      })
+      vim.lsp.config("cssls", {
+        filetypes = { "html", "css", "templ", "jinja" },
+      })
+      vim.lsp.config("htmx", {
+        filetypes = { "html", "templ", "jinja" },
+      })
+      vim.lsp.config("templ", {
+        filetypes = { "templ" },
+      })
+      vim.lsp.config("tailwindcss", {
+        filetypes = { "html", "templ", "astro", "javascript", "typescript", "typescriptreact", "react", "jinja" },
+        settings = {
+          tailwindCSS = {
+            includeLanguages = {
+              templ = "html",
+              htmlangular = "html",
             },
-          })
-        end,
-        ["tailwindcss"] = function()
-          require("lspconfig").tailwindcss.setup({
-            capabilities = capabilities,
-            filetypes = { "html", "templ", "astro", "javascript", "typescript", "typescriptreact", "react", "jinja" },
-            settings = {
-              tailwindCSS = {
-                includeLanguages = {
-                  templ = "html",
-                  htmlangular = "html",
-                },
+          },
+        },
+      })
+      vim.lsp.config("tinymist", {
+        settings = {
+          formatterMode = "typstyle",
+          exportPdf = "onType",
+        },
+      })
+      vim.lsp.config("basedpyright", {
+        settings = {
+          basedpyright = {
+            disableOrganizeImports = true,
+            analysis = {
+              autoSearchPaths = true,
+              typeCheckingMode = "standard",
+              -- ignore = { "*" },
+              -- typeCheckingMode = "off",
+              useLibraryCodeForTypes = true,
+              diagnosticSeverityOverrides = {
+                ["reportUnusedImport"] = false,
+                ["ReportUnusedVariable"] = false,
               },
             },
-          })
+          },
+        },
+      })
+      vim.lsp.config("ruff", {
+        on_attach = function(client, _)
+          client.server_capabilities.hoverProvider = false
         end,
-        ["basedpyright"] = function()
-          require("lspconfig").basedpyright.setup({
-            -- NOTE: Disabling this kills ALL diagnostics/hints including type-checking
-            -- handlers = {
-            -- 	["textDocument/publishDiagnostics"] = function() end,
-            -- },
-            -- NOTE: Import suggestions are code actions
-            -- on_attach = function(client, _)
-            -- 	client.server_capabilities.codeActionProvider = false
-            -- end,
-            settings = {
-              basedpyright = {
-                disableOrganizeImports = true,
-                analysis = {
-                  autoSearchPaths = true,
-                  typeCheckingMode = "standard",
-                  useLibraryCodeForTypes = true,
-                  diagnosticSeverityOverrides = {
-                    ["reportUnusedImport"] = false,
-                    ["ReportUnusedVariable"] = false,
-                  },
-                },
-              },
-            },
-          })
-        end,
-        ["ruff"] = function()
-          require("lspconfig").ruff.setup({
-            on_attach = function(client, _)
-              client.server_capabilities.hoverProvider = false
-            end,
-            init_options = {
-              settings = {
-                args = {},
-              },
-            },
-          })
-        end,
+        init_options = {
+          settings = {
+            args = {},
+          },
+        },
       })
 
+      -- Setup keybinds
       vim.api.nvim_create_autocmd("LspAttach", {
         group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
         callback = function(event)
