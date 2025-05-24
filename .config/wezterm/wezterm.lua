@@ -122,6 +122,7 @@ config.keys = {
   k.cmd_to_tmux_prefix("t", "c"),
   k.cmd_to_tmux_prefix("w", "x"),
   k.cmd_to_tmux_prefix("z", "z"),
+  k.cmd_to_tmux_prefix("l", "L"),
   k.cmd_to_tmux_prefix("1", "1"),
   k.cmd_to_tmux_prefix("2", "2"),
   k.cmd_to_tmux_prefix("3", "3"),
