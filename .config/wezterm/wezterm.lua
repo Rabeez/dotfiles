@@ -2,9 +2,9 @@ local wezterm = require("wezterm") --[[@as Wezterm]]
 local act = wezterm.action
 local config = wezterm.config_builder()
 
-local PROJECTS_ROOT_PATH = "/Users/rabeezriaz/Documents/Programming"
-local OBSIDIAN_MAIN_VAULT = "/Users/rabeezriaz/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian Main"
-local DOTFILES_REPO = "/Users/rabeezriaz/dotfiles"
+-- local PROJECTS_ROOT_PATH = "/Users/rabeezriaz/Documents/Programming"
+-- local OBSIDIAN_MAIN_VAULT = "/Users/rabeezriaz/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian Main"
+-- local DOTFILES_REPO = "/Users/rabeezriaz/dotfiles"
 
 -- NOTE: Attempt to fix terminal name in fastfetch header
 -- https://wezfurlong.org/wezterm/config/lua/config/term.html
@@ -264,7 +264,7 @@ config.keys = {
     mods = "LEADER",
     action = "ActivateCommandPalette",
   },
-  { key = "D", mods = "LEADER", action = "ShowDebugOverlay" },
+  { key = "D", mods = "LEADER", action = act.ShowDebugOverlay },
   -- { key = "LeftArrow", mods = "OPT", action = act({ SendString = "\x1bb" }) },
   -- { key = "RightArrow", mods = "OPT", action = act({ SendString = "\x1bf" }) },
   -- { key = "f", mods = "LEADER", action = sessionizer.show },
