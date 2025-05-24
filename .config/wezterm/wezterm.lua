@@ -2,10 +2,6 @@ local wezterm = require("wezterm") --[[@as Wezterm]]
 local act = wezterm.action
 local config = wezterm.config_builder()
 
--- local PROJECTS_ROOT_PATH = "/Users/rabeezriaz/Documents/Programming"
--- local OBSIDIAN_MAIN_VAULT = "/Users/rabeezriaz/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian Main"
--- local DOTFILES_REPO = "/Users/rabeezriaz/dotfiles"
-
 -- NOTE: Attempt to fix terminal name in fastfetch header
 -- https://wezfurlong.org/wezterm/config/lua/config/term.html
 config.term = "wezterm"
@@ -100,128 +96,6 @@ local scheme = wezterm.color.get_builtin_schemes()[config.color_scheme]
 --   LC_ALL = "en_US.UTF-8",
 -- }
 
--- local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
--- tabline.setup({
---   options = {
---     icons_enabled = true,
---     theme = config.color_scheme,
---     tabs_enabled = true,
---     -- theme_overrides = {
---     --   normal_mode = {
---     --     --     a = { fg = scheme["tab_bar"]["inactive_tab"]["bg_color"], bg = scheme["ansi"][5] },
---     --     b = { fg = scheme["selection_fg"] },
---     --     --     c = { fg = scheme["foreground"], bg = scheme["tab_bar"]["inactive_tab"]["bg_color"] },
---     --   },
---     --   tab = {
---     --     active = { bg = scheme["background"] },
---     --     --     inactive = { fg = scheme["foreground"], bg = scheme["tab_bar"]["inactive_tab"]["bg_color"] },
---     --     --     inactive_hover = { fg = scheme["ansi"][6], bg = scheme["tab_bar"]["inactive_tab"]["bg_color"] },
---     --   },
---     -- },
---     section_separators = {
---       left = wezterm.nerdfonts.ple_right_half_circle_thick,
---       right = wezterm.nerdfonts.ple_left_half_circle_thick,
---     },
---     component_separators = {
---       left = wezterm.nerdfonts.ple_right_half_circle_thick,
---       right = wezterm.nerdfonts.ple_left_half_circle_thick,
---     },
---     tab_separators = {
---       left = "",
---       right = "",
---     },
---   },
---   sections = {
---     tabline_a = { "mode" },
---     tabline_b = {
---       {
---         "workspace",
---         fmt = function(str)
---           local workspace_count = #wezterm.mux.get_workspace_names()
---
---           if workspace_count > 1 then
---             return str .. " (" .. workspace_count .. ")"
---           else
---             return str
---           end
---         end,
---       },
---     },
---     tabline_c = { " " },
---     tab_active = {
---       {
---         "index",
---         padding = 0,
---         fmt = function(str)
---           return "[" .. str
---         end,
---       },
---       {
---         "tab",
---         icons_enabled = false,
---         padding = 0,
---         fmt = function(str, tab_info)
---           local mux = wezterm.mux
---           local window = mux.get_window(tab_info.window_id)
---           local mux_tab = window:tabs()[tab_info.tab_index + 1]
---
---           local name
---           if str == "default" then
---             name = ""
---           else
---             name = " " .. str
---           end
---
---           local pane_count = #mux_tab:panes()
---           if pane_count > 1 then
---             return name .. " (" .. pane_count .. ")" .. "]"
---           else
---             return name .. "]"
---           end
---         end,
---       },
---     },
---     tab_inactive = {
---       {
---         "index",
---         padding = 0,
---         fmt = function(str)
---           return " " .. str
---         end,
---       },
---       {
---         "tab",
---         icons_enabled = false,
---         padding = 0,
---         fmt = function(str, tab_info)
---           local mux = wezterm.mux
---           local window = mux.get_window(tab_info.window_id)
---           local mux_tab = window:tabs()[tab_info.tab_index + 1]
---
---           local name
---           if str == "default" then
---             name = ""
---           else
---             name = " " .. str
---           end
---
---           local pane_count = #mux_tab:panes()
---           if pane_count > 1 then
---             return name .. " (" .. pane_count .. ")" .. " "
---           else
---             return name .. " "
---           end
---         end,
---       },
---     },
---     tabline_x = {},
---     tabline_y = { "domain" },
---     tabline_z = { "hostname" },
---   },
---   extensions = {},
--- })
--- tabline.apply_to_config(config)
-
 -- Setup leader key
 config.leader = { key = "s", mods = "CTRL", timeout_milliseconds = 500 }
 
@@ -235,27 +109,7 @@ config.colors = {
   },
 }
 
--- TODO: check repo for "major refactor" branch and redo config
--- local sessionizer = wezterm.plugin.require("https://github.com/mikkasendke/sessionizer.wezterm")
--- sessionizer.apply_to_config(config, true) -- disable default binds
--- sessionizer.config = {
---   show_default = false,
---   show_most_recent = false,
---   paths = {
---     PROJECTS_ROOT_PATH,
---     OBSIDIAN_MAIN_VAULT,
---     DOTFILES_REPO,
---   },
---   command_options = {
---     fd_path = "/opt/homebrew/bin/fd",
---     include_submodules = false,
---     max_depth = 4,
---     format = "{//}",
---     exclude = { "node_modules" },
---   },
--- }
-
--- Global terminal keymaps
+-- Reference for dotfiles that pass correct keycodes to TMUX
 -- https://github.com/joshmedeski/dotfiles/blob/main/.config/wezterm/wezterm.lua
 local k = require("utils/keys")
 config.keys = {
@@ -265,24 +119,6 @@ config.keys = {
     action = "ActivateCommandPalette",
   },
   { key = "D", mods = "LEADER", action = act.ShowDebugOverlay },
-  -- { key = "LeftArrow", mods = "OPT", action = act({ SendString = "\x1bb" }) },
-  -- { key = "RightArrow", mods = "OPT", action = act({ SendString = "\x1bf" }) },
-  -- { key = "f", mods = "LEADER", action = sessionizer.show },
-  -- {
-  --   key = "w",
-  --   mods = "LEADER",
-  --   action = act.ShowLauncherArgs({ flags = "FUZZY|WORKSPACES", title = "Currently open workspaces" }),
-  -- },
-  -- {
-  --   key = "t",
-  --   mods = "LEADER",
-  --   action = act.ShowLauncherArgs({
-  --     flags = "FUZZY|TABS",
-  --     title = "Currently open tabs (in active workspace)",
-  --   }),
-  -- },
-  -- { key = "v", mods = "LEADER", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
-  -- { key = "h", mods = "LEADER", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
   k.cmd_to_tmux_prefix("t", "c"),
   k.cmd_to_tmux_prefix("w", "x"),
   k.cmd_to_tmux_prefix("1", "1"),
@@ -291,19 +127,5 @@ config.keys = {
   k.cmd_to_tmux_prefix("4", "4"),
   k.cmd_to_tmux_prefix("5", "5"),
 }
-
--- NOTE: Needs to be set after other keymaps
--- local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
--- smart_splits.apply_to_config(config, {
---   direction_keys = {
---     move = { "h", "j", "k", "l" },
---     resize = { "LeftArrow", "DownArrow", "UpArrow", "RightArrow" },
---   },
---   modifiers = {
---     move = "CTRL",
---     resize = "META",
---   },
---   log_level = "info",
--- })
 
 return config
