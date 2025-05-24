@@ -240,7 +240,7 @@ setopt EXTENDED_HISTORY
 
 # Start tmux properly
 if command -v tmux &> /dev/null && command -v sesh &> /dev/null && [ -z "$TMUX" ]; then
-    TMUX_DEFAULT_SESSION="main"
+    TMUX_DEFAULT_SESSION="root-default"
     # Check if the session already exists
     if tmux has-session -t "$TMUX_DEFAULT_SESSION" 2> /dev/null; then
         # Attach to existing session
