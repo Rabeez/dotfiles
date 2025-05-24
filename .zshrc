@@ -19,6 +19,9 @@ export PATH="$HOMEBREW_PREFIX/opt/curl/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
 export LIBGCCJIT_LIBRARY_PATH=$(brew --prefix libgccjit)/lib
 
+# Add Doom Emacs
+export PATH="$HOME/.config/emacs/bin:$PATH"
+
 #Ensure binary packages for languages are in path
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
