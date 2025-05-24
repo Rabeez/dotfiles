@@ -49,44 +49,30 @@ end)
 
 wezterm.on("augment-command-palette", function(_, _)
   return {
-    {
-      brief = "Rename tab",
-      icon = "md_rename_box",
-
-      action = act.PromptInputLine({
-        description = "Enter new name for tab",
-        -- initial_value = "My Tab Name",
-        action = wezterm.action_callback(function(window, _, line)
-          if line then
-            window:active_tab():set_title(line)
-          end
-        end),
-      }),
-    },
-    {
-      brief = "Create new project and open it in workspace",
-      icon = "md_new_box",
-      action = act.PromptInputLine({
-        description = "Enter name of project",
-        action = wezterm.action_callback(function(window, pane, line)
-          if not line then
-            return
-          end
-          if line:find(" ") then
-            window:toast_notification("Alert", "Input contains a space!", nil, 5000)
-            return
-          end
-
-          local project_path = PROJECTS_ROOT_PATH .. "/probe/" .. line
-          local mkdir_cmd = { "mkdir", "-p", project_path }
-          local git_init_cmd = { "git", "-C", project_path, "init" }
-
-          wezterm.run_child_process(mkdir_cmd)
-          wezterm.run_child_process(git_init_cmd)
-          window:perform_action(act.SwitchToWorkspace({ name = project_path, spawn = { cwd = project_path } }), pane)
-        end),
-      }),
-    },
+    -- {
+    --   brief = "Create new project and open it in workspace",
+    --   icon = "md_new_box",
+    --   action = act.PromptInputLine({
+    --     description = "Enter name of project",
+    --     action = wezterm.action_callback(function(window, pane, line)
+    --       if not line then
+    --         return
+    --       end
+    --       if line:find(" ") then
+    --         window:toast_notification("Alert", "Input contains a space!", nil, 5000)
+    --         return
+    --       end
+    --
+    --       local project_path = PROJECTS_ROOT_PATH .. "/probe/" .. line
+    --       local mkdir_cmd = { "mkdir", "-p", project_path }
+    --       local git_init_cmd = { "git", "-C", project_path, "init" }
+    --
+    --       wezterm.run_child_process(mkdir_cmd)
+    --       wezterm.run_child_process(git_init_cmd)
+    --       window:perform_action(act.SwitchToWorkspace({ name = project_path, spawn = { cwd = project_path } }), pane)
+    --     end),
+    --   }),
+    -- },
   }
 end)
 
@@ -107,126 +93,133 @@ local scheme = wezterm.color.get_builtin_schemes()[config.color_scheme]
 -- config.command_palette_bg_color = scheme["tab_bar"]["inactive_tab"]["bg_color"]
 -- config.command_palette_fg_color = scheme["foreground"]
 
-local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
-tabline.setup({
-  options = {
-    icons_enabled = true,
-    theme = config.color_scheme,
-    tabs_enabled = true,
-    -- theme_overrides = {
-    --   normal_mode = {
-    --     --     a = { fg = scheme["tab_bar"]["inactive_tab"]["bg_color"], bg = scheme["ansi"][5] },
-    --     b = { fg = scheme["selection_fg"] },
-    --     --     c = { fg = scheme["foreground"], bg = scheme["tab_bar"]["inactive_tab"]["bg_color"] },
-    --   },
-    --   tab = {
-    --     active = { bg = scheme["background"] },
-    --     --     inactive = { fg = scheme["foreground"], bg = scheme["tab_bar"]["inactive_tab"]["bg_color"] },
-    --     --     inactive_hover = { fg = scheme["ansi"][6], bg = scheme["tab_bar"]["inactive_tab"]["bg_color"] },
-    --   },
-    -- },
-    section_separators = {
-      left = wezterm.nerdfonts.ple_right_half_circle_thick,
-      right = wezterm.nerdfonts.ple_left_half_circle_thick,
-    },
-    component_separators = {
-      left = wezterm.nerdfonts.ple_right_half_circle_thick,
-      right = wezterm.nerdfonts.ple_left_half_circle_thick,
-    },
-    tab_separators = {
-      left = "",
-      right = "",
-    },
-  },
-  sections = {
-    tabline_a = { "mode" },
-    tabline_b = {
-      {
-        "workspace",
-        fmt = function(str)
-          local workspace_count = #wezterm.mux.get_workspace_names()
+-- TODO: solve for this from Josh Madelski dotfiles
+-- can be for lazygit, bat, eza etc?
+-- config.set_environment_variables = {
+--   BAT_THEME = h.is_dark() and "Catppuccin-mocha" or "Catppuccin-latte",
+--   LC_ALL = "en_US.UTF-8",
+-- }
 
-          if workspace_count > 1 then
-            return str .. " (" .. workspace_count .. ")"
-          else
-            return str
-          end
-        end,
-      },
-    },
-    tabline_c = { " " },
-    tab_active = {
-      {
-        "index",
-        padding = 0,
-        fmt = function(str)
-          return "[" .. str
-        end,
-      },
-      {
-        "tab",
-        icons_enabled = false,
-        padding = 0,
-        fmt = function(str, tab_info)
-          local mux = wezterm.mux
-          local window = mux.get_window(tab_info.window_id)
-          local mux_tab = window:tabs()[tab_info.tab_index + 1]
-
-          local name
-          if str == "default" then
-            name = ""
-          else
-            name = " " .. str
-          end
-
-          local pane_count = #mux_tab:panes()
-          if pane_count > 1 then
-            return name .. " (" .. pane_count .. ")" .. "]"
-          else
-            return name .. "]"
-          end
-        end,
-      },
-    },
-    tab_inactive = {
-      {
-        "index",
-        padding = 0,
-        fmt = function(str)
-          return " " .. str
-        end,
-      },
-      {
-        "tab",
-        icons_enabled = false,
-        padding = 0,
-        fmt = function(str, tab_info)
-          local mux = wezterm.mux
-          local window = mux.get_window(tab_info.window_id)
-          local mux_tab = window:tabs()[tab_info.tab_index + 1]
-
-          local name
-          if str == "default" then
-            name = ""
-          else
-            name = " " .. str
-          end
-
-          local pane_count = #mux_tab:panes()
-          if pane_count > 1 then
-            return name .. " (" .. pane_count .. ")" .. " "
-          else
-            return name .. " "
-          end
-        end,
-      },
-    },
-    tabline_x = {},
-    tabline_y = { "domain" },
-    tabline_z = { "hostname" },
-  },
-  extensions = {},
-})
+-- local tabline = wezterm.plugin.require("https://github.com/michaelbrusegard/tabline.wez")
+-- tabline.setup({
+--   options = {
+--     icons_enabled = true,
+--     theme = config.color_scheme,
+--     tabs_enabled = true,
+--     -- theme_overrides = {
+--     --   normal_mode = {
+--     --     --     a = { fg = scheme["tab_bar"]["inactive_tab"]["bg_color"], bg = scheme["ansi"][5] },
+--     --     b = { fg = scheme["selection_fg"] },
+--     --     --     c = { fg = scheme["foreground"], bg = scheme["tab_bar"]["inactive_tab"]["bg_color"] },
+--     --   },
+--     --   tab = {
+--     --     active = { bg = scheme["background"] },
+--     --     --     inactive = { fg = scheme["foreground"], bg = scheme["tab_bar"]["inactive_tab"]["bg_color"] },
+--     --     --     inactive_hover = { fg = scheme["ansi"][6], bg = scheme["tab_bar"]["inactive_tab"]["bg_color"] },
+--     --   },
+--     -- },
+--     section_separators = {
+--       left = wezterm.nerdfonts.ple_right_half_circle_thick,
+--       right = wezterm.nerdfonts.ple_left_half_circle_thick,
+--     },
+--     component_separators = {
+--       left = wezterm.nerdfonts.ple_right_half_circle_thick,
+--       right = wezterm.nerdfonts.ple_left_half_circle_thick,
+--     },
+--     tab_separators = {
+--       left = "",
+--       right = "",
+--     },
+--   },
+--   sections = {
+--     tabline_a = { "mode" },
+--     tabline_b = {
+--       {
+--         "workspace",
+--         fmt = function(str)
+--           local workspace_count = #wezterm.mux.get_workspace_names()
+--
+--           if workspace_count > 1 then
+--             return str .. " (" .. workspace_count .. ")"
+--           else
+--             return str
+--           end
+--         end,
+--       },
+--     },
+--     tabline_c = { " " },
+--     tab_active = {
+--       {
+--         "index",
+--         padding = 0,
+--         fmt = function(str)
+--           return "[" .. str
+--         end,
+--       },
+--       {
+--         "tab",
+--         icons_enabled = false,
+--         padding = 0,
+--         fmt = function(str, tab_info)
+--           local mux = wezterm.mux
+--           local window = mux.get_window(tab_info.window_id)
+--           local mux_tab = window:tabs()[tab_info.tab_index + 1]
+--
+--           local name
+--           if str == "default" then
+--             name = ""
+--           else
+--             name = " " .. str
+--           end
+--
+--           local pane_count = #mux_tab:panes()
+--           if pane_count > 1 then
+--             return name .. " (" .. pane_count .. ")" .. "]"
+--           else
+--             return name .. "]"
+--           end
+--         end,
+--       },
+--     },
+--     tab_inactive = {
+--       {
+--         "index",
+--         padding = 0,
+--         fmt = function(str)
+--           return " " .. str
+--         end,
+--       },
+--       {
+--         "tab",
+--         icons_enabled = false,
+--         padding = 0,
+--         fmt = function(str, tab_info)
+--           local mux = wezterm.mux
+--           local window = mux.get_window(tab_info.window_id)
+--           local mux_tab = window:tabs()[tab_info.tab_index + 1]
+--
+--           local name
+--           if str == "default" then
+--             name = ""
+--           else
+--             name = " " .. str
+--           end
+--
+--           local pane_count = #mux_tab:panes()
+--           if pane_count > 1 then
+--             return name .. " (" .. pane_count .. ")" .. " "
+--           else
+--             return name .. " "
+--           end
+--         end,
+--       },
+--     },
+--     tabline_x = {},
+--     tabline_y = { "domain" },
+--     tabline_z = { "hostname" },
+--   },
+--   extensions = {},
+-- })
 -- tabline.apply_to_config(config)
 
 -- Setup leader key
@@ -243,24 +236,24 @@ config.colors = {
 }
 
 -- TODO: check repo for "major refactor" branch and redo config
-local sessionizer = wezterm.plugin.require("https://github.com/mikkasendke/sessionizer.wezterm")
-sessionizer.apply_to_config(config, true) -- disable default binds
-sessionizer.config = {
-  show_default = false,
-  show_most_recent = false,
-  paths = {
-    PROJECTS_ROOT_PATH,
-    OBSIDIAN_MAIN_VAULT,
-    DOTFILES_REPO,
-  },
-  command_options = {
-    fd_path = "/opt/homebrew/bin/fd",
-    include_submodules = false,
-    max_depth = 4,
-    format = "{//}",
-    exclude = { "node_modules" },
-  },
-}
+-- local sessionizer = wezterm.plugin.require("https://github.com/mikkasendke/sessionizer.wezterm")
+-- sessionizer.apply_to_config(config, true) -- disable default binds
+-- sessionizer.config = {
+--   show_default = false,
+--   show_most_recent = false,
+--   paths = {
+--     PROJECTS_ROOT_PATH,
+--     OBSIDIAN_MAIN_VAULT,
+--     DOTFILES_REPO,
+--   },
+--   command_options = {
+--     fd_path = "/opt/homebrew/bin/fd",
+--     include_submodules = false,
+--     max_depth = 4,
+--     format = "{//}",
+--     exclude = { "node_modules" },
+--   },
+-- }
 
 -- Global terminal keymaps
 config.keys = {
