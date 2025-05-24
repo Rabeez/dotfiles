@@ -228,7 +228,7 @@ tabline.setup({
 -- tabline.apply_to_config(config)
 
 -- Setup leader key
-config.leader = { key = "a", mods = "CTRL", timeout_milliseconds = 500 }
+config.leader = { key = "s", mods = "CTRL", timeout_milliseconds = 500 }
 
 ---@diagnostic disable-next-line: missing-fields
 config.colors = {
