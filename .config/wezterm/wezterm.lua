@@ -284,6 +284,7 @@ config.keys = {
   -- { key = "v", mods = "LEADER", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
   -- { key = "h", mods = "LEADER", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
   k.cmd_to_tmux_prefix("t", "c"),
+  k.cmd_to_tmux_prefix("w", "x"),
   k.cmd_to_tmux_prefix("1", "1"),
   k.cmd_to_tmux_prefix("2", "2"),
   k.cmd_to_tmux_prefix("3", "3"),
