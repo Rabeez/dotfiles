@@ -22,6 +22,8 @@ config.font = wezterm.font_with_fallback({
 config.font_size = 16
 config.line_height = 1.1
 config.command_palette_font_size = 18
+-- config.enable_tab_bar = false
+config.hide_tab_bar_if_only_one_tab = true
 config.use_fancy_tab_bar = false
 config.show_new_tab_button_in_tab_bar = false
 config.window_decorations = "RESIZE"
@@ -290,17 +292,17 @@ config.keys = {
 }
 
 -- NOTE: Needs to be set after other keymaps
-local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
-smart_splits.apply_to_config(config, {
-  direction_keys = {
-    move = { "h", "j", "k", "l" },
-    resize = { "LeftArrow", "DownArrow", "UpArrow", "RightArrow" },
-  },
-  modifiers = {
-    move = "CTRL",
-    resize = "META",
-  },
-  log_level = "info",
-})
+-- local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
+-- smart_splits.apply_to_config(config, {
+--   direction_keys = {
+--     move = { "h", "j", "k", "l" },
+--     resize = { "LeftArrow", "DownArrow", "UpArrow", "RightArrow" },
+--   },
+--   modifiers = {
+--     move = "CTRL",
+--     resize = "META",
+--   },
+--   log_level = "info",
+-- })
 
 return config

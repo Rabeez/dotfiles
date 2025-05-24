@@ -238,6 +238,19 @@ export HISTSIZE=1000000000
 export SAVEHIST=1000000000
 setopt EXTENDED_HISTORY
 
+# Start tmux properly
+if command -v tmux &> /dev/null && command -v sesh &> /dev/null && [ -z "$TMUX" ]; then
+    TMUX_DEFAULT_SESSION="main"
+    # Check if the session already exists
+    if tmux has-session -t "$TMUX_DEFAULT_SESSION" 2> /dev/null; then
+        # Attach to existing session
+        tmux attach-session -t "$TMUX_DEFAULT_SESSION"
+    else
+        # Create new session with sesh
+        sesh connect "$TMUX_DEFAULT_SESSION" || tmux new-session -s "$TMUX_DEFAULT_SESSION"
+    fi
+fi
+
 # Performance profiler (paired line at start of file)
 # zprof
 
