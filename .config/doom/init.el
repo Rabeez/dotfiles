@@ -193,3 +193,8 @@
        :config
        ;;literate
        (default +bindings +smartparens))
+
+;; Disable titlebar and set rounded corners
+;; https://github.com/d12frosted/homebrew-emacs-plus#emacs-29-1
+(add-to-list 'default-frame-alist '(undecorated-round . t))
+
