@@ -256,6 +256,8 @@ config.colors = {
 -- }
 
 -- Global terminal keymaps
+-- https://github.com/joshmedeski/dotfiles/blob/main/.config/wezterm/wezterm.lua
+local k = require("utils/keys")
 config.keys = {
   {
     key = "p",
@@ -281,6 +283,12 @@ config.keys = {
   -- },
   -- { key = "v", mods = "LEADER", action = act({ SplitVertical = { domain = "CurrentPaneDomain" } }) },
   -- { key = "h", mods = "LEADER", action = act({ SplitHorizontal = { domain = "CurrentPaneDomain" } }) },
+  k.cmd_to_tmux_prefix("t", "c"),
+  k.cmd_to_tmux_prefix("1", "1"),
+  k.cmd_to_tmux_prefix("2", "2"),
+  k.cmd_to_tmux_prefix("3", "3"),
+  k.cmd_to_tmux_prefix("4", "4"),
+  k.cmd_to_tmux_prefix("5", "5"),
 }
 
 -- NOTE: Needs to be set after other keymaps
