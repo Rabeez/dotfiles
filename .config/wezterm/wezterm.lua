@@ -270,8 +270,8 @@ config.keys = {
     action = "ActivateCommandPalette",
   },
   { key = "D", mods = "LEADER", action = "ShowDebugOverlay" },
-  { key = "LeftArrow", mods = "OPT", action = act({ SendString = "\x1bb" }) },
-  { key = "RightArrow", mods = "OPT", action = act({ SendString = "\x1bf" }) },
+  -- { key = "LeftArrow", mods = "OPT", action = act({ SendString = "\x1bb" }) },
+  -- { key = "RightArrow", mods = "OPT", action = act({ SendString = "\x1bf" }) },
   -- { key = "f", mods = "LEADER", action = sessionizer.show },
   -- {
   --   key = "w",
