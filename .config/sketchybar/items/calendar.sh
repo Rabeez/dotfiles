@@ -3,7 +3,7 @@
 calendar=(
     icon=cal
     icon.font="$FONT:Regular:14.0"
-    icon.padding_left=15
+    icon.padding_left=0
     icon.padding_right=5
     label.font="$FONT:Regular:14.0"
     label.width=80
@@ -22,8 +22,8 @@ sketchybar --add item calendar right \
     --subscribe calendar system_woke
 
 calendar_bracket=(
-    background.color="$BACKGROUND_1"
-    background.border_color="$MAUVE"
+    background.color="$TRANSPARENT"
+    background.border_color="$TRANSPARENT"
     background.border_width=1
     background.height=30
 )
