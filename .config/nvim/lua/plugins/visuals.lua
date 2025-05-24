@@ -193,8 +193,8 @@ return {
         sections = {
           lualine_a = { "mode" },
           lualine_b = {
-            "branch",
-            "diff",
+            -- "branch",
+            -- "diff",
             {
               "diagnostics",
               on_click = function()
@@ -226,7 +226,7 @@ return {
               end,
             },
           },
-          lualine_y = { "fileformat", "filetype" },
+          lualine_y = { "fileformat" },
           lualine_z = { "location" },
         },
         inactive_sections = {
@@ -239,6 +239,7 @@ return {
         },
         winbar = {
           lualine_c = {
+            "filetype",
             pretty_path,
           },
           lualine_x = {
