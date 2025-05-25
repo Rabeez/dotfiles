@@ -1,0 +1,13 @@
+[[session]]
+name = "Downloads"
+path = "~/Downloads"
+startup_command = "yazi"
+
+[[session]]
+name = "dotfiles"
+path = "~/dotfiles"
+startup_command = "nvim -c ':Telescope find_files'"
+
+[[session]]
+name = "Obsidian Main Vault"
+path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian Main"
