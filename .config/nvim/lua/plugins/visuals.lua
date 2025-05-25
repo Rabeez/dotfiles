@@ -139,7 +139,6 @@ return {
       local harpoon_indicators = {}
       local harpoon_active_indicators = {}
       for i = 1, vim.g.harpoon_max_files do
-        print("Loop iteration: " .. i)
         table.insert(harpoon_indicators, string.format(" %d ", i))
         table.insert(harpoon_active_indicators, string.format("[%d]", i))
       end
@@ -148,7 +147,6 @@ return {
 
       require("lualine").setup({
         options = {
-          -- theme = "tokyonight",
           component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
           disabled_filetypes = {
@@ -193,23 +191,33 @@ return {
         sections = {
           lualine_a = { "mode" },
           lualine_b = {
-            -- "branch",
-            -- "diff",
+            {
+              "harpoon2",
+              icon = " ",
+              indicators = harpoon_indicators,
+              active_indicators = harpoon_active_indicators,
+              _separator = "",
+              no_harpoon = "Harpoon not loaded",
+              on_click = function()
+                require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
+              end,
+            },
+          },
+          lualine_c = {
             {
               "diagnostics",
               on_click = function()
                 vim.cmd("Trouble diagnostics")
               end,
             },
-          },
-          lualine_c = {},
-          lualine_x = {
             {
               -- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#show-recording-messages
               require("noice").api.status.mode.get,
               cond = require("noice").api.status.mode.has,
               color = { fg = tb.yellow },
             },
+          },
+          lualine_x = {
             {
               -- https://github.com/williamboman/mason.nvim/discussions/1535
               lualine_mason_updates,
@@ -226,43 +234,7 @@ return {
               end,
             },
           },
-          lualine_y = { "fileformat" },
-          lualine_z = { "location" },
-        },
-        inactive_sections = {
-          lualine_a = {},
-          lualine_b = {},
-          lualine_c = {},
-          lualine_x = {},
-          lualine_y = {},
-          lualine_z = {},
-        },
-        winbar = {
-          lualine_c = {
-            "filetype",
-            pretty_path,
-          },
-          lualine_x = {
-            {
-              "harpoon2",
-              icon = " ",
-              indicators = harpoon_indicators,
-              active_indicators = harpoon_active_indicators,
-              _separator = "",
-              no_harpoon = "Harpoon not loaded",
-              on_click = function()
-                require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
-              end,
-            },
-          },
           lualine_y = {
-            {
-              lualine_molten_kernel,
-              icon = "󰺿",
-              on_click = function()
-                vim.cmd("MoltenInfo")
-              end,
-            },
             {
               lualine_formatters_count,
               icon = "󰛖",
@@ -278,9 +250,29 @@ return {
               end,
             },
           },
+          lualine_z = {},
+        },
+        inactive_sections = {
+          lualine_a = {},
+          lualine_b = {},
+          lualine_c = {},
+          lualine_x = {},
+          lualine_y = {},
+          lualine_z = {},
+        },
+        winbar = {
+          lualine_c = {
+            "filetype",
+            pretty_path,
+          },
+          lualine_x = {},
+          lualine_y = {},
         },
         inactive_winbar = {
-          lualine_c = { pretty_path },
+          lualine_c = {
+            "filetype",
+            pretty_path,
+          },
         },
       })
     end,
