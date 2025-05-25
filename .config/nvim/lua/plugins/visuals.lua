@@ -365,11 +365,11 @@ return {
   -- 		})
   -- 	end,
   -- },
-  {
-    "tadaa/vimade",
-    opts = {
-      ncmode = "windows",
-      fadelevel = 0.7,
-    },
-  },
+  -- {
+  --   "tadaa/vimade",
+  --   opts = {
+  --     ncmode = "windows",
+  --     fadelevel = 0.7,
+  --   },
+  -- },
 }
