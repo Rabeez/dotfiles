@@ -1,9 +1,9 @@
 #!/bin/bash
 
 options=(
-    active_color=0x00957AB5
-    inactive_color=0x00000000
-    width=3.0
+    active_color=0xFF000000
+    inactive_color=0xFF000000
+    width=1.0
     hidpi=on
 )
 
