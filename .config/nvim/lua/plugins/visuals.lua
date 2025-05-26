@@ -147,7 +147,7 @@ return {
 
       require("lualine").setup({
         options = {
-          component_separators = { left = "", right = "" },
+          component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
           disabled_filetypes = {
             winbar = {
@@ -269,7 +269,7 @@ return {
         },
         winbar = {
           lualine_c = {
-            "filetype",
+            { "filetype", icon_only = true, left_padding = 0, right_padding = 0 },
             pretty_path,
           },
           lualine_x = {},
@@ -277,7 +277,7 @@ return {
         },
         inactive_winbar = {
           lualine_c = {
-            "filetype",
+            { "filetype", icon_only = true, left_padding = 0, right_padding = 0 },
             pretty_path,
           },
         },
