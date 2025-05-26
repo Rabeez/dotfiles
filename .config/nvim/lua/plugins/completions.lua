@@ -45,8 +45,6 @@ return {
 
       cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 
-      -- TODO: add suffix [LSP], [Snippet] etc to end of cmp entries to signify source
-      -- use TJ's dotfiles for this?
       cmp.setup({
         completion = {
           completeopt = "menu,menuone,preview,noselect",

@@ -300,9 +300,6 @@ return {
         complete = "file",
       })
 
-      -- TODO: Custom highlight groups
-      -- NOTE: Apparantly all cell output (x more lines, actual code output, traceback etc)
-      -- all of it is treated as MoltenVirtualText
       local tb = require("catppuccin.palettes").get_palette("mocha")
       vim.api.nvim_set_hl(0, "MoltenVirtualText", { fg = tb.text, bg = tb.base })
       vim.api.nvim_set_hl(0, "MoltenOutputFooter", { fg = tb.green, bg = tb.base, bold = true })

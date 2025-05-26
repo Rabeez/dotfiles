@@ -75,7 +75,6 @@ return {
           init_selection = "<C-space>",
           node_incremental = "<C-space>",
           scope_incremental = false,
-          -- TODO: decrement doesnt work properly
           node_decremental = "<C-BS>",
         },
       },

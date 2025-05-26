@@ -27,7 +27,6 @@ return {
     ---@type ibl.config
     opts = {},
     config = function()
-      -- TODO: make highlight line a dimmer grey color
       require("ibl").setup({
         scope = {
           show_start = false,
@@ -73,55 +72,30 @@ return {
         end
       end
 
-      ---Check number of attached Molten kernels
-      ---@return (integer | string)
-      local function lualine_molten_kernel()
-        local ok, molten_status = pcall(function()
-          return require("molten.status")
-        end)
-        if not ok or not molten_status then
-          return ""
-        end
-        local ok, molten_init = pcall(molten_status.initialized)
-        if not ok or not molten_init then
-          return ""
-        end
-        if molten_init == "Molten" then
-          local kernels = 0
-          for _ in string.gmatch(molten_status.kernels(), "%S+") do
-            kernels = kernels + 1
-          end
-          return kernels
-        else
-          return ""
-        end
-      end
-
-      ---Check number of attached LSP clients
-      ---@return (integer | string)
-      local function lualine_lsp_count()
-        local attached_clients = vim.lsp.get_clients({ bufnr = 0 })
-        local count = vim.tbl_count(attached_clients)
-        return count > 0 and count or ""
-      end
-
-      ---Check number of attached Conform formatters
-      ---@return (integer | string)
-      local function lualine_formatters_count()
-        local formatters = require("conform").list_formatters_to_run(0)
-        local count = vim.tbl_count(formatters)
-        return count > 0 and count or ""
-      end
-
-      ---Check number of attached nvim-lint linters
-      ---@return (integer | string)
-      local function lualine_linters_count()
-        -- TODO: Use this to add a linter section in status bar
-        -- This seems to always return empty table so....
-        local linters = require("lint").get_running()
-        local count = vim.tbl_count(linters)
-        return count > 0 and count or ""
-      end
+      ------Check number of attached LSP clients
+      ------@return (integer | string)
+      ---local function lualine_lsp_count()
+      ---  local attached_clients = vim.lsp.get_clients({ bufnr = 0 })
+      ---  local count = vim.tbl_count(attached_clients)
+      ---  return count > 0 and count or ""
+      ---end
+      ---
+      ------Check number of attached Conform formatters
+      ------@return (integer | string)
+      ---local function lualine_formatters_count()
+      ---  local formatters = require("conform").list_formatters_to_run(0)
+      ---  local count = vim.tbl_count(formatters)
+      ---  return count > 0 and count or ""
+      ---end
+      ---
+      ------Check number of attached nvim-lint linters
+      ------@return (integer | string)
+      ---local function lualine_linters_count()
+      ---  -- This seems to always return empty table so....
+      ---  local linters = require("lint").get_running()
+      ---  local count = vim.tbl_count(linters)
+      ---  return count > 0 and count or ""
+      ---end
 
       local pretty_path = {
         "pretty_path",
@@ -337,7 +311,7 @@ return {
   {
     "folke/zen-mode.nvim",
     opts = {
-      -- TODO: ensure wezterm status/tab bar is hidden when zen mode is triggered
+      -- TODO: ensure wezterm & tmux status/tab bar is hidden when zen mode is triggered
     },
   },
   -- {
