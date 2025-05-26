@@ -203,7 +203,7 @@ return {
               left_padding = 0,
               no_harpoon = "Harpoon not loaded",
               on_click = function()
-                require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
+                require("harpoon").ui:toggle_quick_menu(require("harpoon"):list(), harpoon_toggle_opts)
               end,
             },
           },

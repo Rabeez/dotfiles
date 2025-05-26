@@ -7,7 +7,7 @@ return {
       local harpoon = require("harpoon")
 
       harpoon:setup()
-      local toggle_opts = {
+      harpoon_toggle_opts = {
         title = " Harpoon ",
         border = "rounded",
         title_pos = "center",
@@ -19,7 +19,7 @@ return {
       end, { desc = "[H]arpoon: [A]dd current file" })
 
       vim.keymap.set("n", "<leader>hl", function()
-        harpoon.ui:toggle_quick_menu(harpoon:list(), toggle_opts)
+        harpoon.ui:toggle_quick_menu(harpoon:list(), harpoon_toggle_opts)
       end, { desc = "[H]arpoon: [L]ist files" })
 
       for i = 1, vim.g.harpoon_max_files do
