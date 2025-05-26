@@ -189,14 +189,18 @@ return {
           "toggleterm",
         },
         sections = {
-          lualine_a = { "mode" },
+          lualine_a = {
+            { "mode", separator = { left = "", right = "" }, right_padding = 0, left_padding = 0 },
+          },
           lualine_b = {
             {
               "harpoon2",
               icon = " ",
               indicators = harpoon_indicators,
               active_indicators = harpoon_active_indicators,
-              _separator = "",
+              separator = { left = "", right = "" },
+              right_padding = 0,
+              left_padding = 0,
               no_harpoon = "Harpoon not loaded",
               on_click = function()
                 require("harpoon").ui:toggle_quick_menu(require("harpoon"):list())
@@ -245,6 +249,9 @@ return {
             {
               lualine_lsp_count,
               icon = " ",
+              separator = { left = "", right = "" },
+              right_padding = 1,
+              left_padding = 0,
               on_click = function()
                 vim.cmd("LspInfo")
               end,
