@@ -90,7 +90,7 @@ local scheme = wezterm.color.get_builtin_schemes()[config.color_scheme]
 -- config.command_palette_fg_color = scheme["foreground"]
 
 -- TODO: solve for this from Josh Madelski dotfiles
--- can be for lazygit, bat, eza etc?
+-- can be for lazygit, bat, eza, delta etc?
 -- config.set_environment_variables = {
 --   BAT_THEME = h.is_dark() and "Catppuccin-mocha" or "Catppuccin-latte",
 --   LC_ALL = "en_US.UTF-8",
