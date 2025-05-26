@@ -240,23 +240,23 @@ return {
             },
           },
           lualine_y = {
-            {
-              lualine_formatters_count,
-              icon = "󰛖",
-              on_click = function()
-                vim.cmd("ConformInfo")
-              end,
-            },
-            {
-              lualine_lsp_count,
-              icon = " ",
-              separator = { left = "", right = "" },
-              right_padding = 1,
-              left_padding = 0,
-              on_click = function()
-                vim.cmd("LspInfo")
-              end,
-            },
+            -- {
+            --   lualine_formatters_count,
+            --   icon = "󰛖",
+            --   on_click = function()
+            --     vim.cmd("ConformInfo")
+            --   end,
+            -- },
+            -- {
+            --   lualine_lsp_count,
+            --   icon = " ",
+            --   separator = { left = "", right = "" },
+            --   right_padding = 1,
+            --   left_padding = 0,
+            --   on_click = function()
+            --     vim.cmd("LspInfo")
+            --   end,
+            -- },
           },
           lualine_z = {},
         },
