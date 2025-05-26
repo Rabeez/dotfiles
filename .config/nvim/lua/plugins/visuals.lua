@@ -195,7 +195,7 @@ return {
           lualine_b = {
             {
               "harpoon2",
-              icon = " ",
+              icon = "󰐾",
               indicators = harpoon_indicators,
               active_indicators = harpoon_active_indicators,
               separator = { left = "", right = "" },
@@ -213,6 +213,7 @@ return {
               on_click = function()
                 vim.cmd("Trouble diagnostics")
               end,
+              symbols = { error = " ", warn = " ", info = " ", hint = " " },
             },
             {
               -- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#show-recording-messages
