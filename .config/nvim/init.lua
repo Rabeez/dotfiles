@@ -26,6 +26,11 @@ require("config.keymaps")
 require("config.lazy")
 require("config.custom")
 
+-- Global keymap to toggle modes based on environment variable
+vim.keymap.set("n", "<leader>ud", function()
+  vim.notify("󰏘 Toggle mode", vim.log.levels.INFO)
+end, { noremap = true, silent = true, desc = "Toggle Dark/Light mode" })
+
 -- NOTE: Set overall default color scheme
 DEFAULT_SCHEME = "catppuccin-mocha"
 local filename = vim.fn.expand("$XDG_CONFIG_HOME/nvim/colorscheme")
