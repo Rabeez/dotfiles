@@ -84,74 +84,74 @@ return {
       vim.keymap.set("n", "<leader>ft", "<Cmd>TodoTelescope<CR>", { desc = "Telescope: List [T]ODOs" })
       vim.keymap.set("n", "<leader>fn", "<Cmd>Telescope notify<CR>", { desc = "Telescope: List [n]otifications" })
 
-      vim.keymap.set("n", "<leader>ui", function()
-        -- NOTE: Changing the colorscheme will trigger the autocmd that is defined below
-        -- NOTE: 'Live preview' also triggers the autocmd
-        local whitelist = {}
-        for key, _ in pairs(AVAILABLE_COLORSCHEMES) do
-          table.insert(whitelist, key)
-        end
-        local function get_whitelisted_colorschemes()
-          return vim.tbl_filter(function(scheme)
-            return vim.tbl_contains(whitelist, scheme)
-          end, vim.fn.getcompletion("", "color"))
-        end
-        require("telescope.pickers")
-          .new({}, {
-            prompt_title = "Select Colorscheme",
-            finder = require("telescope.finders").new_table({ results = get_whitelisted_colorschemes() }),
-            sorter = require("telescope.config").values.generic_sorter({}),
-            layout_strategy = "center",
-            layout_config = {
-              width = 0.3,
-              height = 0.4,
-            },
-            previewer = false,
-            attach_mappings = function(prompt_bufnr, map)
-              local actions = require("telescope.actions")
-              local action_state = require("telescope.actions.state")
-
-              local function set_colorscheme()
-                local entry = action_state.get_selected_entry()
-                if entry then
-                  vim.cmd("colorscheme " .. entry.value)
-                end
-              end
-
-              -- Live preview on selection change
-              actions.select_default:replace(function()
-                set_colorscheme()
-                actions.close(prompt_bufnr)
-              end)
-
-              -- Live preview when navigating with Telescope's built-in movements
-              map("i", "<C-n>", function()
-                actions.move_selection_next(prompt_bufnr)
-                set_colorscheme()
-              end)
-              map("i", "<down>", function()
-                actions.move_selection_next(prompt_bufnr)
-                set_colorscheme()
-              end)
-              map("i", "<C-p>", function()
-                actions.move_selection_previous(prompt_bufnr)
-                set_colorscheme()
-              end)
-              map("i", "<up>", function()
-                actions.move_selection_previous(prompt_bufnr)
-                set_colorscheme()
-              end)
-
-              -- Close picker on single Escape press
-              map("i", "<Esc>", function()
-                actions.close(prompt_bufnr)
-              end)
-
-              return true
-            end,
-          })
-          :find()
-      end, { desc = "Open UI colorscheme switcher" })
+      -- vim.keymap.set("n", "<leader>ui", function()
+      --   -- NOTE: Changing the colorscheme will trigger the autocmd that is defined below
+      --   -- NOTE: 'Live preview' also triggers the autocmd
+      --   local whitelist = {}
+      --   for key, _ in pairs(AVAILABLE_COLORSCHEMES) do
+      --     table.insert(whitelist, key)
+      --   end
+      --   local function get_whitelisted_colorschemes()
+      --     return vim.tbl_filter(function(scheme)
+      --       return vim.tbl_contains(whitelist, scheme)
+      --     end, vim.fn.getcompletion("", "color"))
+      --   end
+      --   require("telescope.pickers")
+      --     .new({}, {
+      --       prompt_title = "Select Colorscheme",
+      --       finder = require("telescope.finders").new_table({ results = get_whitelisted_colorschemes() }),
+      --       sorter = require("telescope.config").values.generic_sorter({}),
+      --       layout_strategy = "center",
+      --       layout_config = {
+      --         width = 0.3,
+      --         height = 0.4,
+      --       },
+      --       previewer = false,
+      --       attach_mappings = function(prompt_bufnr, map)
+      --         local actions = require("telescope.actions")
+      --         local action_state = require("telescope.actions.state")
+      --
+      --         local function set_colorscheme()
+      --           local entry = action_state.get_selected_entry()
+      --           if entry then
+      --             vim.cmd("colorscheme " .. entry.value)
+      --           end
+      --         end
+      --
+      --         -- Live preview on selection change
+      --         actions.select_default:replace(function()
+      --           set_colorscheme()
+      --           actions.close(prompt_bufnr)
+      --         end)
+      --
+      --         -- Live preview when navigating with Telescope's built-in movements
+      --         map("i", "<C-n>", function()
+      --           actions.move_selection_next(prompt_bufnr)
+      --           set_colorscheme()
+      --         end)
+      --         map("i", "<down>", function()
+      --           actions.move_selection_next(prompt_bufnr)
+      --           set_colorscheme()
+      --         end)
+      --         map("i", "<C-p>", function()
+      --           actions.move_selection_previous(prompt_bufnr)
+      --           set_colorscheme()
+      --         end)
+      --         map("i", "<up>", function()
+      --           actions.move_selection_previous(prompt_bufnr)
+      --           set_colorscheme()
+      --         end)
+      --
+      --         -- Close picker on single Escape press
+      --         map("i", "<Esc>", function()
+      --           actions.close(prompt_bufnr)
+      --         end)
+      --
+      --         return true
+      --       end,
+      --     })
+      --     :find()
+      -- end, { desc = "Open UI colorscheme switcher" })
 
       vim.api.nvim_create_autocmd("ColorScheme", {
         group = vim.api.nvim_create_augroup("wezterm_colorscheme", { clear = true }),
