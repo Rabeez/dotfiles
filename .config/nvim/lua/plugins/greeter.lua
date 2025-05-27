@@ -1,6 +1,6 @@
 return {
   "goolord/alpha-nvim",
-  dependencies = { "nvim-tree/nvim-web-devicons", "BlakeJC94/alpha-nvim-fortune" },
+  dependencies = { "nvim-tree/nvim-web-devicons" },
   event = "VimEnter",
   config = function()
     require("alpha").setup(require("alpha.themes.dashboard").config)
@@ -35,6 +35,10 @@ return {
       -- "    #+#   #+#+# #+#       #+#    #+#   #+#+#+#       #+#     #+#       #+#    ",
       -- "   ###    #### ########## ########      ###     ########### ###       ###     ",
 
+      "",
+      "",
+      "",
+      "",
       "                                                                                         .         .           ",
       "b.             8 8 8888888888       ,o888888o.  `8.`888b           ,8'  8 8888          ,8.       ,8.          ",
       "888o.          8 8 8888          . 8888     `88. `8.`888b         ,8'   8 8888         ,888.     ,888.         ",
@@ -46,6 +50,9 @@ return {
       "8      `Y8o. `Y8 8 8888         `8 8888       ,8P      `8.`888'         8 8888   ,8'     `8.`'     `8.`8888.   ",
       "8         `Y8o.` 8 8888          ` 8888     ,88'        `8.`8'          8 8888  ,8'       `8        `8.`8888.  ",
       "8            `Yo 8 888888888888     `8888888P'           `8.`           8 8888 ,8'         `         `8.`8888. ",
+      "",
+      "",
+      "",
     }
 
     -- Set menu
@@ -54,10 +61,6 @@ return {
       dashboard.button("e", "  > Open file explorer", "<cmd>Yazi<CR>"),
       dashboard.button("q", "  > Quit NVIM", "<Cmd>qa<CR>"),
     }
-
-    -- Set footer with `fortune`
-    local fortune = require("alpha.fortune")
-    dashboard.section.footer.val = fortune()
 
     -- Send config to alpha
     alpha.setup(dashboard.opts)
