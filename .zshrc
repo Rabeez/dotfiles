@@ -139,7 +139,9 @@ export FZF_ALT_C_OPTS="
 --preview 'tree -C {}' --border"
 
 # bat can be used as a colorizing pager for man
-export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
+# export MANPAGER="sh -c 'sed -u -e \"s/\\x1B\[[0-9;]*m//g; s/.\\x08//g\" | bat -p -lman'"
+export MANPAGER="nvim +Man!"
+
 # bat can overtake `--help` flags
 alias -g -- -h='-h 2>&1 | bat --language=help --style=plain --paging=never'
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain --paging=never'
