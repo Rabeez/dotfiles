@@ -16,6 +16,7 @@ return {
           alpha = true,
           fidget = true,
           ufo = true,
+          flash = true,
           indent_blankline = true,
           semantic_tokens = true,
           harpoon = true,
