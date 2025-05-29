@@ -23,7 +23,8 @@ export LIBGCCJIT_LIBRARY_PATH=$(brew --prefix libgccjit)/lib
 export PATH="$HOME/.config/emacs/bin:$PATH"
 
 #Ensure binary packages for languages are in path
-export PATH="$HOME/.cargo/bin:$PATH"
+rustup toolchain link system "$(brew --prefix rust)"
+# export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export DYLD_LIBRARY_PATH="$HOMEBREW_PREFIX/lib:$DYLD_LIBRARY_PATH"
 
