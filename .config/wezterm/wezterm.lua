@@ -97,7 +97,7 @@ local scheme = wezterm.color.get_builtin_schemes()[config.color_scheme]
 -- }
 
 -- Setup leader key
-config.leader = { key = "s", mods = "CTRL", timeout_milliseconds = 500 }
+config.leader = { key = "w", mods = "CTRL", timeout_milliseconds = 500 }
 
 ---@diagnostic disable-next-line: missing-fields
 config.colors = {
