@@ -266,7 +266,19 @@ return {
       vim.keymap.set("n", "<leader>fr", require("fzf-lua").resume, { desc = "[F]inder: [R]esume previous search" })
       vim.keymap.set("n", "<leader>ft", "<Cmd>TodoFzfLua<CR>", { desc = "[F]inder: List [T]ODOs" })
       vim.keymap.set("n", "<leader>fn", function()
-        require("notify.integrations").pick()
+        require("notify.integrations.fzf").open({
+          winopts = {
+            title = " asdasfd ",
+          },
+          actions = {
+            default = function(selected)
+              if #selected == 0 then
+                return
+              end
+              vim.fn.setreg("unnamedplus", selected[1])
+            end,
+          },
+        })
       end, { desc = "[F]inder: List [n]otifications" })
     end,
   },
