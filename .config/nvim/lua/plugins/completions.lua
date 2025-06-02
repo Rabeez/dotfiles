@@ -127,6 +127,13 @@ return {
         ["<CR>"] = {},
         ["<Tab>"] = {},
       },
+      fuzzy = {
+        sorts = {
+          "exact",
+          "score",
+          "sort_text",
+        },
+      },
       appearance = {
         nerd_font_variant = "mono",
       },
