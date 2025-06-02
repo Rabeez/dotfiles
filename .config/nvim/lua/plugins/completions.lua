@@ -195,9 +195,9 @@ return {
           "buffer",
         },
         providers = {
-          snippets = { max_items = 5 },
-          path = { max_items = 5 },
-          buffer = { max_items = 5 },
+          snippets = { max_items = 3 },
+          path = { max_items = 3 },
+          buffer = { max_items = 3 },
         },
       },
     },
