@@ -56,11 +56,7 @@ return {
     }
 
     -- Set menu
-    dashboard.section.buttons.val = {
-      dashboard.button("f", "  > Find file", "<Cmd>Telescope find_files<CR>"),
-      dashboard.button("e", "  > Open file explorer", "<cmd>Yazi<CR>"),
-      dashboard.button("q", "  > Quit NVIM", "<Cmd>qa<CR>"),
-    }
+    dashboard.section.buttons.val = {}
 
     -- Send config to alpha
     alpha.setup(dashboard.opts)
