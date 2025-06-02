@@ -199,6 +199,14 @@ return {
           vim.keymap.set("n", "<leader>la", function()
             require("fzf-lua").lsp_code_actions({
               prompt = "Code Actions> ",
+              winopts = {
+                height = 0.70,
+                width = 0.60,
+                layout = "vertical",
+                preview = {
+                  vertical = "down:70%",
+                },
+              },
               previewer = "codeaction_native",
             })
           end, { buffer = event.buf, desc = "[L]SP: Open code [a]ctions" })
