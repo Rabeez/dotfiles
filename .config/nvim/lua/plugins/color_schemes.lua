@@ -13,6 +13,7 @@ return {
           treesitter = true,
           treesitter_context = true,
           telescope = true,
+          fzf = true,
           alpha = true,
           fidget = true,
           ufo = true,
