@@ -1,0 +1,13 @@
+{
+  "Python Match Case": {
+    "prefix": "matchcase",
+    "body": [
+      "match ${1:expression}:",
+      "    case ${2:value}:",
+      "        pass",
+      "    case _:",
+      "        pass"
+    ],
+    "description": "Python match case statement with one case and default"
+  }
+}

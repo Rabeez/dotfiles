@@ -109,7 +109,6 @@ return {
   {
     "saghen/blink.cmp",
     dependencies = {
-      { "L3MON4D3/LuaSnip", version = "v2.*" },
       "nvim-tree/nvim-web-devicons",
       "onsails/lspkind.nvim",
       {
@@ -117,15 +116,12 @@ return {
         event = { "InsertEnter" },
         config = true,
         opts = {},
-        -- use opts = {} for passing setup options
-        -- this is equivalent to setup({}) function
       },
     },
     version = "1.*",
     ---@module 'blink.cmp'
     ---@type blink.cmp.Config
     opts = {
-      -- See :h blink-cmp-config-keymap for defining your own keymap
       keymap = {
         preset = "default",
         ["<CR>"] = {},
@@ -138,11 +134,7 @@ return {
         keymap = { preset = "inherit" },
         completion = { menu = { auto_show = true } },
       },
-      signature = {
-        enabled = true,
-        window = { border = "rounded" },
-      },
-      snippets = { preset = "luasnip" },
+      signature = { enabled = false },
       completion = {
         list = {
           selection = { preselect = false, auto_insert = true },
@@ -201,6 +193,11 @@ return {
           "snippets",
           "path",
           "buffer",
+        },
+        providers = {
+          snippets = { max_items = 5 },
+          path = { max_items = 5 },
+          buffer = { max_items = 5 },
         },
       },
     },
