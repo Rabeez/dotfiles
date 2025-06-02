@@ -242,6 +242,8 @@ return {
           },
         },
       })
+      -- NOTE: This is needed to ensure builtin pickers like LSP code actions use FzfLua
+      require("fzf-lua").register_ui_select()
 
       vim.keymap.set(
         "n",
