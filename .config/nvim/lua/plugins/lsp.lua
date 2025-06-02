@@ -100,6 +100,25 @@ return {
       vim.lsp.config("*", {
         capabilities = capabilities,
       })
+      vim.lsp.config("lua_ls", {
+        settings = {
+          Lua = {
+            completion = {
+              callSnippet = "Disable",
+              keywordSnippet = "Disable",
+            },
+          },
+        },
+      })
+      vim.lsp.config("rust_analyzer", {
+        settings = {
+          completion = {
+            capable = {
+              snippets = "add_parenthesis",
+            },
+          },
+        },
+      })
       vim.lsp.config("bashls", {
         filetypes = { "sh", "zsh" },
       })
