@@ -21,6 +21,7 @@ return {
           semantic_tokens = true,
           harpoon = true,
           mini = true,
+          blink_cmp = true,
           markdown = true,
           render_markdown = true,
           cmp = true,
