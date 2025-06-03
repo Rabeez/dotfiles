@@ -264,7 +264,18 @@ return {
       vim.keymap.set("n", "<leader>fk", require("fzf-lua").keymaps, { desc = "[F]inder: [K]eymaps" })
       vim.keymap.set("n", "<leader>fs", require("fzf-lua").spell_suggest, { desc = "[F]inder: [S]pellings" })
       vim.keymap.set("n", "<leader>fr", require("fzf-lua").resume, { desc = "[F]inder: [R]esume previous search" })
-      vim.keymap.set("n", "<leader>ft", "<Cmd>TodoFzfLua<CR>", { desc = "[F]inder: List [T]ODOs" })
+      vim.keymap.set("n", "<leader>ft", function()
+        require("todo-comments.fzf").todo({
+          prompt = "> ",
+          winopts = {
+            title = "TODOs",
+            layout = "vertical",
+            preview = {
+              horizontal = "down:50%",
+            },
+          },
+        })
+      end, { desc = "[F]inder: List [T]ODOs" })
       vim.keymap.set("n", "<leader>fn", function()
         require("notify.integrations.fzf").open({
           winopts = {
