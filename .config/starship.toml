@@ -37,6 +37,9 @@ format = '\[[⏱ $duration]($style)\]'
 [pixi]
 format = '\[[$symbol$version( $environment)]($style)\]'
 
+[bun]
+format = '\[[$symbol($version)]($style)\]'
+
 [conda]
 format = '\[[$symbol$environment]($style)\]'
 
