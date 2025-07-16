@@ -233,6 +233,11 @@ run = 'move-node-to-workspace 2'
 if.app-id = 'com.vscodium'
 run = 'move-node-to-workspace 2'
 
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome'
+if.window-title-regex-substring = 'JupyterLab'
+run = 'move-node-to-workspace 2'
+
 # Workspace 3: File explorer
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
