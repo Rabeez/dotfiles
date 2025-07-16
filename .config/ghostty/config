@@ -3,3 +3,15 @@ macos-titlebar-style = hidden
 font-family = Maple Mono NF Medium
 font-size = 16
 adjust-cell-height = 10%
+
+# Tmux leader (Ctrl+A) followed by specific commands
+# https://github.com/ghostty-org/ghostty/discussions/3493#discussioncomment-11719581
+keybind = cmd+t=text:\x01c
+keybind = cmd+w=text:\x01x
+keybind = cmd+z=text:\x01z
+keybind = cmd+l=text:\x01L
+keybind = cmd+1=text:\x011
+keybind = cmd+2=text:\x012
+keybind = cmd+3=text:\x013
+keybind = cmd+4=text:\x014
+keybind = cmd+5=text:\x015
