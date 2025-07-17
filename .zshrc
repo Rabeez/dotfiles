@@ -82,6 +82,7 @@ alias gg="lazygit"
 alias g="git"
 alias p="pixi"
 alias codi="codium"
+alias tgpt='tgpt -i -m --preprompt "Be specific and brief. Avoid detailed explanations unless specifically asked."'
 
 
 # Use y instead of yazi to start, and press q to quit, you'll see the CWD changed.
@@ -205,6 +206,9 @@ source "$HOME/.config/fzf-tab/fzf-tab.plugin.zsh"
 # API keys and secrets
 export OPENAI_API_KEY=$(cat "$HOME"/dotfiles/Secrets/openai_api_key)
 export OPENAI_API_KEY_PRO=$(cat "$HOME"/dotfiles/Secrets/openai_api_key_pro)
+export GOOGLE_API_KEY=$(cat "$HOME"/dotfiles/Secrets/google_api_key)
+export ANTHROPIC_API_KEY=$(cat "$HOME"/dotfiles/Secrets/anthropic_api_key)
+export DEEPSEEK_API_KEY=$(cat "$HOME"/dotfiles/Secrets/deepseek_api_key)
 
 # Matplotlib config directory
 export MPLCONFIGDIR=$HOME/.matplotlib
