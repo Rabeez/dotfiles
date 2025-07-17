@@ -1,0 +1,7 @@
+go install templ@latest
+go install staticcheck@latest
+go install gopls@latest
+go install termdbms@latest
+go install go-global-update@latest
+go install tgpt@latest
+go install wails@latest
