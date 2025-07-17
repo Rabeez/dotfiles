@@ -6,7 +6,8 @@ font-family = Maple Mono NF Medium
 font-size = 16
 adjust-cell-height = 10%
 macos-option-as-alt = left
-# macos-icon = make catppuccin-mocha colorscheme
+confirm-close-surface = false
+macos-icon = xray
 
 # Tmux leader (Ctrl+A) followed by specific commands
 # https://github.com/ghostty-org/ghostty/discussions/3493#discussioncomment-11719581
