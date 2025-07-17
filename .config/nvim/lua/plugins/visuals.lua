@@ -113,8 +113,8 @@ return {
       local harpoon_indicators = {}
       local harpoon_active_indicators = {}
       for i = 1, vim.g.harpoon_max_files do
-        table.insert(harpoon_indicators, string.format(" %d ", i))
-        table.insert(harpoon_active_indicators, string.format("[%d]", i))
+        table.insert(harpoon_indicators, string.format(" %d", i))
+        table.insert(harpoon_active_indicators, string.format("󰐾 %d", i))
       end
 
       local tb = require("catppuccin.palettes").get_palette("mocha")
@@ -169,7 +169,7 @@ return {
           lualine_b = {
             {
               "harpoon2",
-              icon = "󰐾",
+              icon = "",
               indicators = harpoon_indicators,
               active_indicators = harpoon_active_indicators,
               separator = { left = "", right = "" },
