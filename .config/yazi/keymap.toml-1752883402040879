@@ -5,20 +5,20 @@ run = "close"
 desc = "Cancel input"
 
 # Smart enter: enter for directory, open for file
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = "l"
 run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
 # Copy selected files to the system clipboard while yanking
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = "y"
 run = ['''
 	shell 'echo "$@" | xclip -i -selection clipboard -t text/uri-list' --confirm
 ''', "yank"]
 
 # Maximize preview pane
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = "T"
 run = "plugin toggle-pane max-preview"
 desc = "Maximize or restore preview"
@@ -41,54 +41,54 @@ desc = "Maximize or restore preview"
 # run = "plugin arrow --args=1"
 
 # vim style -to-char
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = "f"
 run = "plugin jump-to-char"
 desc = "Jump to char"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = "l"
 run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = "<Right>"
 run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = "<Enter>"
 run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = "<z>"
 run = "plugin fzf"
 desc = "Start FZF"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = ["c", "g"]
 run = '''
 	shell 'realpath --relative-to="$(git rev-parse --show-toplevel)" "$@" | pbcopy'
 '''
 desc = "Copy file/directory path from git repo root"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = "E"
 run = "plugin eza-preview"
 desc = "Toggle tree/list dir preview"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = "-"
 run = "plugin eza-preview --args='--inc-level'"
 desc = "Increment tree level"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = "_"
 run = "plugin eza-preview --args='--dec-level'"
 desc = "Decrement tree level"
 
-[[mgr.prepend_keymap]]
+[[manager.prepend_keymap]]
 on = [".", "s"]
 run = "plugin what-size"
 desc = "Calc size of selection or cwd"
