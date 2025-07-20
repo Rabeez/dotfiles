@@ -24,70 +24,59 @@ command_timeout = 1000
 [line_break]
 disabled = true
 
+# Module overrides
+[bun]
+symbol = " "
+
+[c]
+symbol = " "
+
+[cpp]
+symbol = " "
+
+[cmake]
+symbol = " "
+
 [directory]
 truncation_length = 4
+read_only = " 󰌾"
 
-# Disable the package module, hiding it from the prompt completely
-[package]
-disabled = true
-
-[cmd_duration]
-format = '\[[⏱ $duration]($style)\]'
-
-[pixi]
-format = '\[[$symbol$version( $environment)]($style)\]'
-
-[bun]
-format = '\[[$symbol($version)]($style)\]'
-
-[conda]
-format = '\[[$symbol$environment]($style)\]'
+[docker_context]
+symbol = " "
 
 [git_branch]
-format = '\[[$symbol$branch]($style)\]'
+symbol = " "
 
 [git_status]
 disabled = true
-format = '([\[$all_status$ahead_behind\]]($style))'
 
 [golang]
-format = '\[[$symbol($version)]($style)\]'
+symbol = " "
+
+[hostname]
+ssh_symbol = " "
 
 [lua]
-format = '\[[$symbol($version)]($style)\]'
-
-[memory_usage]
-format = '\[$symbol[$ram( | $swap)]($style)\]'
+symbol = " "
 
 [nodejs]
 symbol = ' '
-format = '\[[$symbol($version)]($style)\]'
 
-[os]
-format = '\[[$symbol]($style)\]'
+[os.symbols]
+Macos = " "
+
+[package]
+disabled = true
+
+[pixi]
+symbol = " "
 
 [python]
-symbol = ' '
-format = '\[[${symbol}${pyenv_prefix}(${version})(\($virtualenv\))]($style)\]'
-
-[rlang]
-format = '\[[$symbol($version)]($style)\]'
+symbol = " "
+style = "green"
 
 [rust]
-format = '\[[$symbol($version)]($style)\]'
-
-[typst]
-format = '\[[$symbol($version)]($style)\]'
-
-[sudo]
-format = '\[[as $symbol]($style)\]'
-
-[time]
-format = '\[[$time]($style)\]'
-
-[username]
-format = '\[[$user]($style)\]'
-
+symbol = "󱘗 "
 
 # Palette definitions
 [palettes.catppuccin_mocha]
