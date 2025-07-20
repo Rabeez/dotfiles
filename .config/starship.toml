@@ -28,6 +28,10 @@ disabled = true
 [bun]
 symbol = " "
 
+[character]
+vimcmd_symbol = "[❮](bold blue)"
+vimcmd_visual_symbol = "[❮](bold mauve)"
+
 [c]
 symbol = " "
 
