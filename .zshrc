@@ -19,9 +19,6 @@ export PATH="$HOMEBREW_PREFIX/opt/curl/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
 export LIBGCCJIT_LIBRARY_PATH=$(brew --prefix libgccjit)/lib
 
-# Add Doom Emacs
-export PATH="$HOME/.config/emacs/bin:$PATH"
-
 #Ensure binary packages for languages are in path
 rustup toolchain link system "$(brew --prefix rust)"
 # export PATH="$HOME/.cargo/bin:$PATH"
@@ -51,19 +48,6 @@ if type brew &>/dev/null; then
     zstyle ':completion:*' menu select
 fi
 
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-function conda() {
-    unset -f conda
-    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
-        conda activate base
-    else
-        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
-    fi
-    conda "$@"
-}
-# <<< conda initialize <<<
 
 # Custom LS/Eza colors
 export LS_COLORS="$(vivid generate catppuccin-mocha)"
@@ -94,23 +78,6 @@ function y() {
         builtin cd -- "$cwd"
     fi
     rm -f -- "$tmp"
-}
-
-# Fuzzy finder + conda env activation
-# https://waylonwalker.com/quickly-change-conda-env-with-fzf/
-cdc() {
-    if [ "$CONDA_DEFAULT_ENV" != 'base' ]; then
-        conda deactivate
-    fi
-}
-ca() {
-    # TODO: Add support for executing while in non-base environment
-    selection=$(command ls "$CONDA_PREFIX/envs" | fzf --height 40% --border --reverse)
-    if [[ -z $selection ]]; then
-        return
-    fi
-    cdc
-    conda activate $selection
 }
 
 # Faster NVM

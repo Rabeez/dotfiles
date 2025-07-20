@@ -5,7 +5,6 @@ tap "eth-p/software"
 tap "felixkratz/formulae"
 tap "fsouza/prettierd"
 tap "jesseduffield/lazydocker"
-tap "jimeh/emacs-builds"
 tap "nikitabobko/tap"
 tap "oven-sh/bun"
 tap "romkatv/powerlevel10k"
@@ -36,8 +35,6 @@ brew "chafa"
 brew "cmake"
 # Documentation for CMake
 brew "cmake-docs"
-# Zsh completion for conda
-brew "conda-zsh-completion"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Get a file from an HTTP, HTTPS or FTP server
@@ -196,8 +193,6 @@ cask "1password"
 cask "aerospace"
 # Menu bar tool to limit maximum charging percentage
 cask "aldente"
-# Distribution of the Python and R programming languages for scientific computing
-cask "anaconda"
 # Tools for building Android applications
 cask "android-studio"
 # Menu bar icon organiser
