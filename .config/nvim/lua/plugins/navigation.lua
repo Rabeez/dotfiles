@@ -304,7 +304,7 @@ return {
       local harpoon = require("harpoon")
 
       harpoon:setup()
-      harpoon_toggle_opts = {
+      local harpoon_toggle_opts = {
         title = " Harpoon ",
         border = "rounded",
         title_pos = "center",
