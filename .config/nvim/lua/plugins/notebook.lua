@@ -20,13 +20,6 @@ return {
         },
       },
       {
-        "jmbuhr/otter.nvim",
-        dependencies = {
-          "nvim-treesitter/nvim-treesitter",
-        },
-        opts = {},
-      },
-      {
         "GCBallesteros/jupytext.nvim",
         config = true,
       },
@@ -59,46 +52,6 @@ return {
       vim.g.molten_virt_lines_off_by_1 = false
     end,
     config = function()
-      -- vim.keymap.set(
-      --   "n",
-      --   "<localleader>e",
-      --   ":MoltenEvaluateOperator<CR>",
-      --   { desc = "evaluate operator", silent = true }
-      -- )
-      vim.keymap.set(
-        "n",
-        "<leader>mo",
-        ":noautocmd MoltenEnterOutput<CR>",
-        { desc = "[M]olten: Open [O]utput window", silent = true }
-      )
-      vim.keymap.set(
-        "n",
-        "<localleader>mr",
-        ":MoltenReevaluateCell<CR>",
-        { desc = "[M]olten: [R]un cell", silent = true }
-      )
-      vim.keymap.set(
-        "v",
-        "<localleader>r",
-        ":<C-u>MoltenEvaluateVisual<CR>gv",
-        { desc = "[M]olten: Run [V]isual selection", silent = true }
-      )
-      -- vim.keymap.set(
-      --   "n",
-      --   "<localleader>mh",
-      --   ":MoltenHideOutput<CR>",
-      --   { desc = "[M]olten: Hide [O]utput window", silent = true }
-      -- )
-      vim.keymap.set("n", "<localleader>md", ":MoltenDelete<CR>", { desc = "[M]olten: [D]elete cell", silent = true })
-
-      -- if you work with html outputs:
-      vim.keymap.set(
-        "n",
-        "<localleader>mx",
-        ":MoltenOpenInBrowser<CR>",
-        { desc = "open output in browser", silent = true }
-      )
-
       require("image").setup({
         backend = "kitty", -- Kitty will provide the best experience, but you need a compatible terminal
         integrations = {}, -- do whatever you want with image.nvim's integrations
@@ -181,6 +134,7 @@ return {
           if vim.api.nvim_get_vvar("vim_did_enter") ~= 1 then
             imb(e)
           end
+          require("otter").activate()
         end,
       })
 
@@ -201,16 +155,19 @@ return {
   {
     "cells": [
      {
-      "cell_type": "markdown",
+      "cell_type": "code",
       "metadata": {},
       "source": [
+        "",
+        "",
+        "",
         ""
       ]
      }
     ],
     "metadata": {
      "kernelspec": {
-      "display_name": "Python 3",
+      "display_name": "Python 3 (ipykernel)",
       "language": "python",
       "name": "python3"
      },
@@ -248,6 +205,50 @@ return {
         nargs = 1,
         complete = "file",
       })
+
+      local runner = require("quarto.runner")
+      -- vim.keymap.set(
+      --   "n",
+      --   "<leader>e",
+      --   ":MoltenEvaluateOperator<CR>",
+      --   { desc = "evaluate operator", silent = true }
+      -- )
+      vim.keymap.set(
+        "n",
+        "<leader>mo",
+        ":noautocmd MoltenEnterOutput<CR>",
+        { desc = "[M]olten: Open [O]utput window", silent = true }
+      )
+      vim.keymap.set("n", "<leader>mr", runner.run_cell, { desc = "[M]olten: [R]un cell", silent = true })
+      vim.keymap.set("v", "<leader>mv", runner.run_range, { desc = "[M]olten: Run [V]isual selection", silent = true })
+      vim.keymap.set("v", "<leader>ml", runner.run_line, { desc = "[M]olten: Run current [L]ine", silent = true })
+      -- vim.keymap.set(
+      --   "n",
+      --   "<leader>mh",
+      --   ":MoltenHideOutput<CR>",
+      --   { desc = "[M]olten: Hide [O]utput window", silent = true }
+      -- )
+      vim.keymap.set("n", "<leader>md", ":MoltenDelete<CR>", { desc = "[M]olten: [D]elete cell", silent = true })
+
+      vim.keymap.set("n", "<leader>mi", function()
+        local lines = {
+          "```python",
+          "",
+          "",
+          "```",
+        }
+        vim.api.nvim_put(lines, "l", true, true)
+        vim.api.nvim_win_set_cursor(0, { vim.api.nvim_win_get_cursor(0)[1] - 2, 0 })
+        vim.cmd("startinsert")
+      end, { desc = "[M]olten: [I]nsert Python code block" })
+
+      -- if you work with html outputs:
+      vim.keymap.set(
+        "n",
+        "<localleader>mx",
+        ":MoltenOpenInBrowser<CR>",
+        { desc = "open output in browser", silent = true }
+      )
     end,
   },
 }
