@@ -1,0 +1,20 @@
+{
+  "colors": [
+    "#89b4faff",
+    "#fab387ff",
+    "#a6e3a1ff",
+    "#f38ba8ff",
+    "#cba6f7ff",
+    "#eba0acff",
+    "#f5c2e7ff",
+    "#f5e0dcff",
+    "#94e2d5ff",
+    "#b4befeff"
+  ],
+  "contextMenu": true,
+  "imageSettings": {
+    "format": "image/png",
+    "quality": 0.92
+  },
+  "themeable": false
+}

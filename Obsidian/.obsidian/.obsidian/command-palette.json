@@ -1,0 +1,9 @@
+{
+  "pinned": [
+    "file-explorer:open",
+    "callout-manager:manage-callouts",
+    "obsidian-excalidraw-plugin:excalidraw-insert-transclusion",
+    "obsidian-book-search-plugin:open-book-search-modal",
+    "obsidian-excalidraw-plugin:excalidraw-autocreate-on-current"
+  ]
+}

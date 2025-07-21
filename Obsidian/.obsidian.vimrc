@@ -16,8 +16,10 @@ exmap back obcommand app:go-back
 nmap <C-o> :back<CR>
 exmap forward obcommand app:go-forward
 nmap <C-i> :forward<CR>
-exmap fuzzy obcommand switcher:open
-nmap <Space>ff :fuzzy<CR>
+exmap fuzzyfiles obcommand switcher:open
+nmap <Space>ff :fuzzyfiles<CR>
+exmap fuzzygrep obcommand global-search:open
+nmap <Space>fg :fuzzygrep<CR>
 exmap explorer obcommand app:toggle-left-sidebar
 nmap <Space>ee :explorer<CR>
 exmap graph obcommand app:toggle-right-sidebar
@@ -41,7 +43,13 @@ nnoremap G Gzz
 nnoremap U :redo<CR>
 
 " Paste in next line
-nnoremap P o<Esc>p
+nnoremap <C-p> o<Esc>p
+
+" Navigate across 'virtual lines' rather than real ones
+" This is needed since most 'paragraphs' are actually just single long line
+" with soft wrapping
+nnoremap <Up> k
+nnoremap <Down> j
 
 " Surround Text
 exmap surround_wiki surround [[ ]]

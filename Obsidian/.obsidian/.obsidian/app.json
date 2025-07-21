@@ -1,0 +1,18 @@
+{
+  "livePreview": true,
+  "showLineNumber": true,
+  "vimMode": true,
+  "alwaysUpdateLinks": true,
+  "showUnsupportedFiles": true,
+  "spellcheck": true,
+  "promptDelete": false,
+  "showInlineTitle": false,
+  "readableLineLength": true,
+  "propertiesInDocument": "visible",
+  "userIgnoreFilters": [
+    "my-templates-folder/",
+    "drawings/",
+    "attachments/book_covers/"
+  ],
+  "attachmentFolderPath": "attachments"
+}
