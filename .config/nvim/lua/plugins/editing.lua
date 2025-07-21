@@ -1,7 +1,6 @@
 return {
   {
     "gbprod/substitute.nvim",
-    event = { "BufReadPre", "BufNewFile" },
     opts = {
       -- your configuration comes here
       -- or leave it empty to use the default settings
@@ -20,7 +19,6 @@ return {
   {
     "kylechui/nvim-surround",
     version = "*", -- Use for stability; omit to use `main` branch for the latest features
-    event = { "BufReadPre", "BufNewFile" },
     config = function()
       require("nvim-surround").setup({
         -- NOTE: default keymaps
@@ -41,7 +39,6 @@ return {
   },
   {
     "folke/todo-comments.nvim",
-    event = { "BufReadPre", "BufNewFile" },
     dependencies = { "nvim-lua/plenary.nvim" },
     opts = {
       -- your configuration comes here
