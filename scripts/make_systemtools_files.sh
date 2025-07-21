@@ -30,4 +30,23 @@ else
 fi
 echo ""
 
+echo "   Backing up Obsidian configs"
+if ./scripts/make_obsidian.sh; then
+    echo "    Obsidian configs backed up successfully."
+else
+    echo "    Error backing up Obsidian configs."
+    exit 1
+fi
+echo ""
+
+
+echo "   Backing up Firefox/Zen configs"
+if ./scripts/make_firefox.sh; then
+    echo "    Firefox/Zen configs backed up successfully."
+else
+    echo "    Error backing up Firefox/Zen configs."
+    exit 1
+fi
+echo ""
+
 echo " Setup script generation complete."
