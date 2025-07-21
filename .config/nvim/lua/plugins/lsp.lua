@@ -368,18 +368,6 @@ return {
       })
     end,
   },
-  -- {
-  -- NOTE: Noice builtin helper looks much better, even though it stops showing when cmp popup is triggered
-  -- Minor issue that can be avoided by using <C-s> insert mode keymap to manually show helper
-  -- 	"ray-x/lsp_signature.nvim",
-  -- 	event = "VeryLazy",
-  -- 	opts = {
-  -- 		hint_enable = false,
-  -- 	},
-  -- 	config = function(_, opts)
-  -- 		require("lsp_signature").setup(opts)
-  -- 	end,
-  -- },
   {
     "folke/trouble.nvim",
     opts = {}, -- for default options, refer to the configuration section for custom setup.
