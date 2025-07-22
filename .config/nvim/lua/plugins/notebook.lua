@@ -154,16 +154,21 @@ return {
       local default_notebook = [[
   {
     "cells": [
-     {
-      "cell_type": "code",
-      "metadata": {},
-      "source": [
+    {
+       "cell_type": "code",
+       "execution_count": 1,
+       "id": "Tzl0YbnPjMps",
+       "metadata": {
+        "id": "Tzl0YbnPjMps"
+       },
+       "outputs": [],
+       "source": [
         "",
         "",
         "",
         ""
-      ]
-     }
+       ]
+      }
     ],
     "metadata": {
      "kernelspec": {
