@@ -82,6 +82,9 @@ style = "green"
 [rust]
 symbol = "󱘗 "
 
+[zig]
+symbol = "️ "
+
 # Palette definitions
 [palettes.catppuccin_mocha]
 rosewater = "#f5e0dc"
