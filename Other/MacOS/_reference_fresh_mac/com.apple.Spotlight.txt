@@ -1,0 +1,8 @@
+{
+    "NSStatusItem Visible Item-0" = 1;
+    "__NSEnableTSMDocumentWindowLevel" = 1;
+    lastVisibleScreenRect = "{{0, 76}, {1470, 842}}";
+    lastWindowPosition = "{{435, 334}, {600, 430}}";
+    showedFTE = 1;
+    startTime = "775080692.244559";
+}

@@ -1,0 +1,12 @@
+{
+    "__NSEnableTSMDocumentWindowLevel" = 1;
+    "engagementCount-com.apple.Spotlight" = 69;
+    "engagementCountForDate-com.apple.Spotlight" = 11;
+    "engagementDate-com.apple.Spotlight" = "2024-09-20";
+    lastVisibleScreenRect = "{{0, 0}, {1710, 1074}}";
+    lastWindowPosition = "{{555, 892.94291338582673}, {1, 1}}";
+    showedFTE = 1;
+    startTime = "774981480.108569";
+    useCount = 3;
+    userHasMovedWindow = 1;
+}

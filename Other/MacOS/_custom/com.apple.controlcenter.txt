@@ -1,0 +1,35 @@
+{
+    "LastHeartbeatDateString.daily" = "2025-07-23T16:36:18Z";
+    "NSStatusItem Preferred Position AudioVideoModule" = 569;
+    "NSStatusItem Preferred Position Battery" = 195;
+    "NSStatusItem Preferred Position BentoBox" = 84;
+    "NSStatusItem Preferred Position Bluetooth" = 314;
+    "NSStatusItem Preferred Position FocusModes" = 516;
+    "NSStatusItem Preferred Position KeyboardBrightness" = 351;
+    "NSStatusItem Preferred Position ScreenMirroring" = 501;
+    "NSStatusItem Preferred Position Sound" = 276;
+    "NSStatusItem Preferred Position Timer" = 535;
+    "NSStatusItem Visible AudioVideoModule" = 0;
+    "NSStatusItem Visible Battery" = 0;
+    "NSStatusItem Visible BentoBox" = 1;
+    "NSStatusItem Visible Bluetooth" = 1;
+    "NSStatusItem Visible Clock" = 1;
+    "NSStatusItem Visible FocusModes" = 0;
+    "NSStatusItem Visible Item-0" = 0;
+    "NSStatusItem Visible Item-1" = 0;
+    "NSStatusItem Visible Item-2" = 0;
+    "NSStatusItem Visible Item-3" = 0;
+    "NSStatusItem Visible Item-4" = 0;
+    "NSStatusItem Visible Item-5" = 0;
+    "NSStatusItem Visible Item-6" = 0;
+    "NSStatusItem Visible Item-7" = 0;
+    "NSStatusItem Visible Item-8" = 0;
+    "NSStatusItem Visible KeyboardBrightness" = 0;
+    "NSStatusItem Visible MusicRecognition" = 0;
+    "NSStatusItem Visible ScreenMirroring" = 0;
+    "NSStatusItem Visible Shortcuts" = 0;
+    "NSStatusItem Visible Sound" = 1;
+    "NSStatusItem Visible Timer" = 0;
+    "NSStatusItem Visible WiFi" = 0;
+    missionControlTooltipCount = 1;
+}

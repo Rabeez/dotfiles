@@ -1,0 +1,20 @@
+{
+    "disable-shadow" = 1;
+    "last-analytics-stamp" = "775082505.99256";
+    "last-selection" =     {
+        Height = 935;
+        Width = "439.5";
+        X = "416.75";
+        Y = 145;
+    };
+    "last-selection-display" = 0;
+    location = "~/Pictures/Screenshots";
+    "location-last" = "~/Pictures/Screenshots";
+    "show-thumbnail" = 0;
+    showsClicks = 1;
+    showsCursor = 1;
+    style = selection;
+    target = file;
+    type = png;
+    video = 1;
+}

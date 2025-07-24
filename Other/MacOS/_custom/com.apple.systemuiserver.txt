@@ -1,0 +1,7 @@
+{
+    "NSStatusItem Visible Item-0" = 0;
+    "__NSEnableTSMDocumentWindowLevel" = 1;
+    "last-analytics-stamp" = "775082506.082534";
+    menuExtras =     (
+    );
+}

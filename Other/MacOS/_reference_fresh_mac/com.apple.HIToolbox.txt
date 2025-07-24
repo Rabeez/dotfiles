@@ -1,0 +1,18 @@
+{
+    AppleEnabledInputSources =     (
+                {
+            InputSourceKind = "Keyboard Layout";
+            "KeyboardLayout ID" = 252;
+            "KeyboardLayout Name" = ABC;
+        },
+                {
+            InputSourceKind = "Keyboard Layout";
+            "KeyboardLayout ID" = 0;
+            "KeyboardLayout Name" = "U.S.";
+        },
+                {
+            "Bundle ID" = "com.apple.CharacterPaletteIM";
+            InputSourceKind = "Non Keyboard Input Method";
+        }
+    );
+}

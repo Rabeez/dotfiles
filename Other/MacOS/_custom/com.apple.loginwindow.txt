@@ -1,0 +1,7 @@
+{
+    MiniBuddyLaunch = 0;
+    "NSWindow Frame ProcessPanel" = "215 362 338 313 0 0 1710 1068 ";
+    TALLogoutReason = Restart;
+    TALLogoutSavesState = 0;
+    oneTimeSSMigrationComplete = 1;
+}

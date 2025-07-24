@@ -1,0 +1,4 @@
+{
+    MiniBuddyLaunch = 0;
+    oneTimeSSMigrationComplete = 1;
+}

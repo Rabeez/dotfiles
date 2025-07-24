@@ -1,0 +1,90 @@
+{
+    autohide = 1;
+    "autohide-delay" = 0;
+    "autohide-time-modifier" = 0;
+    "expose-group-apps" = 1;
+    "last-analytics-stamp" =     (
+        "774981483.619422"
+    );
+    lastShowIndicatorTime = "748469316.905743";
+    loc = "en_US:AE";
+    mineffect = scale;
+    "minimize-to-application" = 1;
+    "mod-count" = 205;
+    orientation = left;
+    "persistent-apps" =     (
+                {
+            GUID = 210280451;
+            "tile-data" =             {
+                book = {length = 552, bytes = 0x626f6f6b 28020000 00000410 30000000 ... 04000000 00000000 };
+                "bundle-identifier" = "app.zen-browser.zen";
+                "dock-extra" = 0;
+                "file-data" =                 {
+                    "_CFURLString" = "file:///Applications/Zen.app/";
+                    "_CFURLStringType" = 15;
+                };
+                "file-label" = Zen;
+                "file-mod-date" = 15259559278001;
+                "file-type" = 41;
+                "is-beta" = 0;
+                "parent-mod-date" = 155219659243674;
+            };
+            "tile-type" = "file-tile";
+        },
+                {
+            GUID = 2536335618;
+            "tile-data" =             {
+                book = {length = 556, bytes = 0x626f6f6b 2c020000 00000410 30000000 ... 04000000 00000000 };
+                "bundle-identifier" = "com.mitchellh.ghostty";
+                "dock-extra" = 0;
+                "file-data" =                 {
+                    "_CFURLString" = "file:///Applications/Ghostty.app/";
+                    "_CFURLStringType" = 15;
+                };
+                "file-label" = Ghostty;
+                "file-mod-date" = 274194548232459;
+                "file-type" = 41;
+                "is-beta" = 0;
+                "parent-mod-date" = 155219659243674;
+            };
+            "tile-type" = "file-tile";
+        },
+                {
+            GUID = 4188816223;
+            "tile-data" =             {
+                book = {length = 556, bytes = 0x626f6f6b 2c020000 00000410 30000000 ... 04000000 00000000 };
+                "bundle-identifier" = "md.obsidian";
+                "dock-extra" = 0;
+                "file-data" =                 {
+                    "_CFURLString" = "file:///Applications/Obsidian.app/";
+                    "_CFURLStringType" = 15;
+                };
+                "file-label" = Obsidian;
+                "file-mod-date" = 3804159229;
+                "file-type" = 41;
+                "is-beta" = 0;
+                "parent-mod-date" = 17273896265510;
+            };
+            "tile-type" = "file-tile";
+        }
+    );
+    "persistent-others" =     (
+    );
+    "recent-apps" =     (
+    );
+    region = AE;
+    "show-recents" = 0;
+    showAppExposeGestureEnabled = 1;
+    showMissionControlGestureEnabled = 1;
+    "size-immutable" = 1;
+    "springboard-columns" = 8;
+    "springboard-hide-duration" = 0;
+    "springboard-rows" = 6;
+    "springboard-show-duration" = 0;
+    tilesize = 44;
+    "trash-full" = 1;
+    version = 1;
+    "workspaces-edge-delay" = 0;
+    "wvous-br-corner" = 1;
+    "wvous-br-modifier" = 0;
+}

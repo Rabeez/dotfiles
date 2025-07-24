@@ -1,0 +1,14 @@
+{
+    "LastHeartbeatDateString.daily" = "2025-07-24T20:08:12Z";
+    "NSStatusItem Preferred Position FocusModes" = 368;
+    "NSStatusItem Visible Battery" = 1;
+    "NSStatusItem Visible BentoBox" = 1;
+    "NSStatusItem Visible Clock" = 1;
+    "NSStatusItem Visible FocusModes" = 1;
+    "NSStatusItem Visible Item-0" = 0;
+    "NSStatusItem Visible Item-1" = 0;
+    "NSStatusItem Visible Item-2" = 0;
+    "NSStatusItem Visible Item-3" = 0;
+    "NSStatusItem Visible Item-4" = 0;
+    "NSStatusItem Visible WiFi" = 1;
+}
