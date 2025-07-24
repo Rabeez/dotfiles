@@ -9,6 +9,7 @@ export PATH="/usr/local/bin:$PATH"
 
 # Override builtin binaries with GNU ones installed via homebrew
 export PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/gawk/libexec/gnubin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/make/libexec/gnubin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/unzip/bin:$PATH"

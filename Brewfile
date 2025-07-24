@@ -1,3 +1,4 @@
+tap "aerobounce/tap"
 tap "arl/arl"
 tap "buo/cask-upgrade"
 tap "d12frosted/emacs-plus"
@@ -35,6 +36,8 @@ brew "chafa"
 brew "cmake"
 # Documentation for CMake
 brew "cmake-docs"
+# Dependency manager for Cocoa projects
+brew "cocoapods"
 # GNU File, Shell, and Text utilities
 brew "coreutils"
 # Get a file from an HTTP, HTTPS or FTP server
@@ -57,6 +60,8 @@ brew "fnm"
 brew "fortune"
 # Command-line fuzzy finder written in Go
 brew "fzf"
+# GNU awk utility
+brew "gawk"
 # GNU compiler collection
 brew "gcc"
 # GitHub command-line tool
@@ -173,6 +178,8 @@ brew "zoxide"
 brew "zsh-autosuggestions"
 # Better and friendly vi(vim) mode plugin for ZSH
 brew "zsh-vi-mode"
+# User Defaults Plist → Shell Script converter with Regex filtering
+brew "aerobounce/tap/ds"
 # Git in your tmux status bar.
 brew "arl/arl/gitmux"
 # Quickly search through and highlight files using ripgrep
