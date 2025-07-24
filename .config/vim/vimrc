@@ -15,9 +15,11 @@ let &t_EI = "\e[2 q"  " Block for Normal mode
 " Set the cursor to block (Normal mode) on Vim startup
 autocmd VimEnter * silent! exe "normal \e[2 q"
 
-" Disable swap files
-set noswapfile
-set noundofile
+" Specify out-of-the-way locations for undo and swap files
+set directory=~/.vim/swapfiles//
+
+set undodir=~/.vim/undo
+set undofile
 
 " Line numbers and cursor settings
 set number
