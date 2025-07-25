@@ -164,7 +164,7 @@ echo "$oneline" | fastfetch --file-raw -
 eval "$(starship init zsh)"
 
 # Zoxide completions, cache etc
-eval "$(zoxide init zsh)"
+eval "$(zoxide init zsh --cmd cd)"
 
 # Setup ZSH plugins
 source "$HOME"/.config/fsh/fast-syntax-highlighting.plugin.zsh
