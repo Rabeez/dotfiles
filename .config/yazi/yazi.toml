@@ -2,7 +2,8 @@
 show_hidden = true
 
 [preview]
-image_delay = 0
+image_delay = 100
+max_width = 3000
 
 [plugin]
 prepend_previewers = [
