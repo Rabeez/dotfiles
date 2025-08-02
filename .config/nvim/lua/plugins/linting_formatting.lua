@@ -29,6 +29,21 @@ return {
     config = function()
       -- TODO: Move all this to lsp-config and single source of code processing
       require("conform").setup({
+        -- https://github.com/stevearc/conform.nvim/issues/443#issuecomment-2151769432
+        format_on_save = function(bufnr)
+          local bufname = vim.api.nvim_buf_get_name(bufnr)
+
+          -- Disable file formatting on any temporary buffer contents
+          if bufname:match("config/opencode/") then
+            vim.notify(bufname .. "HEREEEE")
+            return
+          else
+            return {
+              timeout_ms = 2500,
+              lsp_fallback = true,
+            }
+          end
+        end,
         formatters_by_ft = {
           lua = { "stylua" },
           -- NOTE: The name of the binary is 'ruff' which automatically works for LSP purposes with lspconfig
@@ -98,13 +113,6 @@ return {
         end
       end, { desc = "[L]SP: Run [f]ormatter" })
       -- vim.keymap.set("n", "<leader>gf", vim.lsp.buf.format)
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        pattern = "*",
-        callback = function(args)
-          require("conform").format({ bufnr = args.buf })
-          -- vim.lsp.buf.format({ async = true, bufnr = args.buf })
-        end,
-      })
 
       -- https://templ.guide/commands-and-tools/ide-support/#neovim--050
       Templ_format = function()
