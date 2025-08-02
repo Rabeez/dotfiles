@@ -71,6 +71,7 @@ alias gg="lazygit"
 alias g="git"
 alias p="pixi"
 alias codi="codium"
+alias oc="opencode"
 alias tgpt='tgpt -i -m --preprompt "Be specific and brief. Avoid detailed explanations unless specifically asked."'
 
 
