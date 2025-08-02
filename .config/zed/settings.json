@@ -1,0 +1,29 @@
+{
+  "telemetry": {
+    "metrics": false
+  },
+  "projects_online_by_default": false,
+
+  "vim_mode": true,
+
+  "ui_font_size": 16,
+  "ui_font_family": "Maple Mono NF Medium",
+
+  "buffer_font_size": 16,
+  "buffer_font_family": "Maple Mono NF Medium",
+  "buffer_line_height": {"custom": 1.1},
+
+"terminal": {
+    "font_family": "Maple Mono NF Medium",
+    "font_size": 16,
+    "line_height":{"custom": 1.1}
+  },
+
+  "agent_font_size": 16,
+
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark"
+  }
+}
