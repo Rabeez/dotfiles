@@ -11,6 +11,9 @@
                 "baseURL": "http://localhost:1234/v1"
             },
             "models": {
+                "qwen/qwen3-1.7b": {
+                    "name": "qwen/qwen3-1.7b"
+                },
                 "qwen/qwen3-4b": {
                     "name": "qwen/qwen3-4b"
                 },
