@@ -7,3 +7,6 @@ README.md
 Brewfile
 Secrets
 Obsidian
+tmux*.log
+rust_tools.txt
+go_tools.txt
