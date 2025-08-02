@@ -78,6 +78,24 @@ symbol = " "
 [python]
 symbol = " "
 style = "green"
+detect_files = [
+  '.python-version',
+  'Pipfile',
+  '__init__.py',
+  'pyproject.toml',
+  'requirements.txt',
+  'setup.py',
+  'tox.ini',
+  "pixi.toml",
+]
+# customize python binary path for pixi
+python_binary = [
+  # this is the python from PATH if in a pixi shell
+  # (assuming you don't have python on your global PATH)
+  "python",
+  # fall back to pixi's python if it's available
+  ".pixi/envs/default/bin/python",
+]
 
 [rust]
 symbol = "󱘗 "
