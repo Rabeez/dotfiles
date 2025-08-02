@@ -13,6 +13,7 @@ Update the provided markdown file by performing these two types of cleanup opera
   - Fix general 'typos' that can occur while uses voice dictation-based typing
   - Since the content is going to be technical, the voice transcription will probably mess up tech proper nouns and abbreviations etc. Fix those as needed
   - In case there is some ambiguity about which tech terms should be used or what the actual context is, then *always* confirm before making the edits.
+  - The transcription text uses extremely long lines without any breaks when it's put in a markdown file. Fix this so the sentences and paragraphs have natural and logical breaks
 
 2. Markdown syntax and overall document structure
   - Ensure a short, but descriptive title is used
