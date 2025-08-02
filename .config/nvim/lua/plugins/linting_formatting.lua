@@ -35,7 +35,6 @@ return {
 
           -- Disable file formatting on any temporary buffer contents
           if bufname:match("config/opencode/") then
-            vim.notify(bufname .. "HEREEEE")
             return
           else
             return {
