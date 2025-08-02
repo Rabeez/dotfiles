@@ -26,6 +26,10 @@ rustup toolchain link system "$(brew --prefix rust)"
 export PATH="$HOME/go/bin:$PATH"
 export DYLD_LIBRARY_PATH="$HOMEBREW_PREFIX/lib:$DYLD_LIBRARY_PATH"
 
+# Added by LM Studio CLI (lms)
+export PATH="$PATH:/Users/rabeezriaz/.lmstudio/bin"
+# End of LM Studio CLI section
+
 # For openblas
 export LDFLAGS="-L/opt/homebrew/opt/openblas/lib"
 export CPPFLAGS="-I/opt/homebrew/opt/openblas/include"

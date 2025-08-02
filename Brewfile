@@ -44,6 +44,8 @@ brew "coreutils"
 brew "curl"
 # Secure runtime for JavaScript and TypeScript
 brew "deno"
+# Perl lib for reading and writing EXIF metadata
+brew "exiftool"
 # Modern, maintained replacement for ls
 brew "eza"
 # Like neofetch, but much faster because written mostly in C
@@ -156,6 +158,8 @@ brew "tree"
 brew "typst"
 # Extraction utility for .zip compressed archives
 brew "unzip"
+# Vi 'workalike' with many additional features
+brew "vim"
 # Generator for LS_COLORS with support for multiple color themes
 brew "vivid"
 # Watch files and take action when they change
@@ -241,6 +245,8 @@ cask "karabiner-elements"
 cask "keka"
 # Helper application for the Keka file archiver
 cask "kekaexternalhelper"
+# Discover, download, and run local LLMs
+cask "lm-studio"
 # Add middle click for Trackpad and Magic Mouse
 cask "middle"
 # Knowledge base that works on top of a local folder of plain text Markdown files
