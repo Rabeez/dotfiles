@@ -245,7 +245,7 @@ return {
         mode = "cursor",
       })
 
-      vim.keymap.set("n", "<leader>us", "<cmd>TSContextToggle<CR>", { desc = "Toggle TS Context [S]ticky headers" })
+      vim.keymap.set("n", "<leader>us", "<cmd>TSContext toggle<CR>", { desc = "Toggle TS Context [S]ticky headers" })
     end,
   },
   {
