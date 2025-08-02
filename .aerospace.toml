@@ -252,6 +252,10 @@ run = 'move-node-to-workspace 4'
 if.app-id = 'md.obsidian'
 run = 'move-node-to-workspace 4'
 
+[[on-window-detected]]
+if.app-id = 'ai.elementlabs.lmstudio'
+run = 'move-node-to-workspace 4'
+
 # Workspace 5: Media
 [[on-window-detected]]
 if.app-id = 'com.spotify.client'
