@@ -1,6 +1,8 @@
 # https://github.com/KroneCorylus/ghostty-shader-playground/tree/main/shaders
 custom-shader = shaders/cursor_smear.glsl
 
+command = /bin/zsh -l -c 'if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then exec tmux attach || exec tmux new-session -s "root-default"; else exec /bin/zsh -l; fi'
+
 theme = dark:catppuccin-mocha,light:catppuccin-latte
 macos-titlebar-style = hidden
 font-family = Maple Mono NF Medium
