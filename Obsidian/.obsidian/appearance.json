@@ -5,11 +5,15 @@
   "nativeMenus": true,
   "baseFontSize": 16,
   "showRibbon": false,
-  "showViewHeader": false,
+  "showViewHeader": true,
   "enabledCssSnippets": [
     "powerline",
     "fonts",
-    "sidebars"
+    "sidebars",
+    "dashboard-linelength",
+    "tabs",
+    "dashboard_custom",
+    "books"
   ],
   "interfaceFontFamily": "Maple Mono NF",
   "accentColor": "#cba6f7"

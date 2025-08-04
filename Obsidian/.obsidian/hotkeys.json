@@ -18,5 +18,40 @@
       ],
       "key": "K"
     }
+  ],
+  "file-explorer:new-file": [],
+  "editor:delete-paragraph": [],
+  "obsidian-excalidraw-plugin:excalidraw-autocreate-and-embed-new-tab": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "D"
+    }
+  ],
+  "file-explorer:new-file-in-current-tab": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "N"
+    }
+  ],
+  "command-palette:open": [
+    {
+      "modifiers": [
+        "Mod",
+        "Shift"
+      ],
+      "key": "P"
+    }
+  ],
+  "obsidian-completr:completr-open-suggestion-popup": [
+    {
+      "modifiers": [
+        "Ctrl"
+      ],
+      "key": " "
+    }
   ]
 }

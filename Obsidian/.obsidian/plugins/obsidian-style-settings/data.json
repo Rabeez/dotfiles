@@ -2,7 +2,7 @@
   "catppuccin-interface-styles@@ctp-bold-folder-title": true,
   "catppuccin-tag-styles@@ctp-tag-pill": false,
   "anuppuccin-theme-settings@@anuppuccin-theme-accents": "ctp-accent-mauve",
-  "anuppuccin-theme-settings@@anp-callout-select": "anp-callout-sleek",
+  "anuppuccin-theme-settings@@anp-callout-select": "anp-callout-block",
   "anuppuccin-theme-settings@@anp-callout-color-toggle": true,
   "anuppuccin-theme-settings@@anp-custom-checkboxes": true,
   "anuppuccin-theme-settings@@anp-speech-bubble": true,
@@ -11,7 +11,7 @@
   "anuppuccin-theme-settings@@anp-table-toggle": true,
   "anuppuccin-theme-settings@@anp-table-th-highlight": true,
   "anuppuccin-theme-settings@@anp-toggle-preview": true,
-  "anuppuccin-theme-settings@@anp-autohide-titlebar": false,
+  "anuppuccin-theme-settings@@anp-autohide-titlebar": true,
   "anuppuccin-theme-settings@@anp-toggle-scrollbars": true,
   "anuppuccin-theme-settings@@anp-hide-status-bar": false,
   "anuppuccin-theme-settings@@anp-hide-external-link-icon": true,
@@ -38,5 +38,12 @@
   "anuppuccin-theme-settings@@anp-card-header-left-padding": 20,
   "anuppuccin-theme-settings@@anp-translucency-opacity": 0.15,
   "anuppuccin-theme-settings@@anp-file-label-align": "0",
-  "anuppuccin-theme-settings@@anp-canvas-dark-bg": true
+  "anuppuccin-theme-settings@@anp-canvas-dark-bg": true,
+  "anuppuccin-theme-settings-extended@@anp-theme-ext-dark": false,
+  "anuppuccin-theme-settings-extended@@anp-theme-ext-amoled": false,
+  "anuppuccin-theme-settings@@anp-toggle-metadata": false,
+  "anuppuccin-theme-settings@@anp-alt-tab-style": "anp-mini-tab-toggle",
+  "anuppuccin-theme-settings@@anp-disable-newtab-align": false,
+  "anuppuccin-theme-settings@@anp-depth-tab-text-invert": false,
+  "anuppuccin-theme-settings@@anp-depth-tab-opacity": 0.6
 }

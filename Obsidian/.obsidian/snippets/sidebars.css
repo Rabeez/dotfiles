@@ -1,6 +1,6 @@
-.workspace-tab-header-container {
-    display: none;
-}
+/* .workspace-tab-header-container { */
+/*     display: none; */
+/* } */
 
 /*.workspace-tabs.mod-top.mod-top-left-space {
     margin-top: 3rem;
@@ -11,5 +11,5 @@
 }*/
 
 .nav-files-container.node-insert-event.show-unsupported {
-    margin-top: 2rem;
+  margin-top: 2rem;
 }

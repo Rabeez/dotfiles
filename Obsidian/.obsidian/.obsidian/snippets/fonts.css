@@ -1,7 +1,0 @@
-/* * { */
-/*     font-family: 'Maple Mono NF' !important; */
-/* } */
-
-.workspace-leaf-content[data-type="file-explorer"] * {
-  font-size: 14px;
-}
