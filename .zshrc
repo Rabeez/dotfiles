@@ -7,6 +7,9 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # Ensure user-installed thirdparty tools are in path
 export PATH="/usr/local/bin:$PATH"
 
+# Disable printing of what is updated on brew servers
+export HOMEBREW_NO_UPDATE_REPORT_NEW=1
+
 # Override builtin binaries with GNU ones installed via homebrew
 export PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/gawk/libexec/gnubin:$PATH"
@@ -52,7 +55,6 @@ if type brew &>/dev/null; then
     # https://stackoverflow.com/questions/29196718/zsh-highlight-on-tab
     zstyle ':completion:*' menu select
 fi
-
 
 # Custom LS/Eza colors
 export LS_COLORS="$(vivid generate catppuccin-mocha)"
