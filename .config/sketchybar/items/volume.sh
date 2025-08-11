@@ -2,8 +2,8 @@
 
 source "$CONFIG_DIR/colors.sh"
 
-sketchybar --add alias "Control Center,Sound" right \
-	--rename "Control Center,Sound" volume_alias \
+sketchybar --add alias "Control Centre,Sound" right \
+	--rename "Control Centre,Sound" volume_alias \
 	--set volume_alias icon.drawing=on \
 	update_freq=60 \
 	updates=on \
