@@ -124,6 +124,9 @@ alias -g -- -h='-h 2>&1 | bat --language=help --style=plain --paging=never'
 alias -g -- --help='--help 2>&1 | bat --language=help --style=plain --paging=never'
 alias bag="batgrep --paging=never --context=0"
 
+# enable mouse scroll in pager
+export LESS="-R --mouse"
+
 # Startup header
 # fastfetch --logo macos
 # pokeget random --hide-name | fastfetch --file-raw -
