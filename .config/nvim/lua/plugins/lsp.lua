@@ -36,6 +36,7 @@ return {
           "sqlls",
           "clangd",
           "tinymist",
+          "ols",
           -- "jinja_lsp",
         },
       })
@@ -107,6 +108,14 @@ return {
               callSnippet = "Disable",
               keywordSnippet = "Disable",
             },
+          },
+        },
+      })
+      vim.lsp.config("ols", {
+        init_options = {
+          checker_args = "-strict-style",
+          collections = {
+            { name = "shared", path = vim.fn.expand("$HOME/odin-lib") },
           },
         },
       })

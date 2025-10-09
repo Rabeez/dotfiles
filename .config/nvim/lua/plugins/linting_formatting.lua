@@ -43,6 +43,14 @@ return {
             }
           end
         end,
+        formatters = {
+          odinfmt = {
+            -- Change where to find the command if it isn't in your path.
+            command = "odinfmt",
+            args = { "-stdin" },
+            stdin = true,
+          },
+        },
         formatters_by_ft = {
           lua = { "stylua" },
           -- NOTE: The name of the binary is 'ruff' which automatically works for LSP purposes with lspconfig
@@ -59,6 +67,7 @@ return {
           css = { "prettierd" },
           yaml = { "prettierd" },
           json = { "jsonlint" },
+          odin = { "odinfmt" },
           sql = { "sql-formatter" },
           zsh = { "beautysh" },
           sh = { "beautysh" },
