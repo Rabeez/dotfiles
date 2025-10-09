@@ -1,9 +1,9 @@
 # https://github.com/KroneCorylus/ghostty-shader-playground/tree/main/shaders
 custom-shader = shaders/cursor_smear.glsl
 
-command = /bin/zsh -l -c 'if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then exec tmux attach || exec tmux new-session -s "root-default"; else exec /bin/zsh -l; fi'
+# command = /bin/zsh -l -c 'if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then exec tmux attach || exec tmux new-session -s "root-default"; else exec /bin/zsh -l; fi'
 
-theme = dark:catppuccin-mocha,light:catppuccin-latte
+theme = dark:Catppuccin Mocha,light:Catppuccin Latte
 macos-titlebar-style = hidden
 font-family = Maple Mono NF Medium
 font-size = 16
@@ -12,6 +12,13 @@ macos-option-as-alt = left
 confirm-close-surface = false
 mouse-hide-while-typing = true
 # macos-icon = xray
+
+# Remove Ghostty's tab-switch defaults so tmux binds can fire
+keybind = cmd+digit_1=unbind
+keybind = cmd+digit_2=unbind
+keybind = cmd+digit_3=unbind
+keybind = cmd+digit_4=unbind
+keybind = cmd+digit_5=unbind
 
 # Tmux leader (Ctrl+a) followed by specific commands
 # https://github.com/ghostty-org/ghostty/discussions/3493#discussioncomment-11719581
