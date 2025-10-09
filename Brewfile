@@ -5,11 +5,14 @@ tap "d12frosted/emacs-plus"
 tap "eth-p/software"
 tap "felixkratz/formulae"
 tap "fsouza/prettierd"
+tap "gromgit/brewtils"
 tap "jesseduffield/lazydocker"
+tap "jstkdng/programs"
 tap "nikitabobko/tap"
 tap "oven-sh/bun"
 tap "romkatv/powerlevel10k"
 tap "sst/tap"
+tap "th-ch/youtube-music"
 # Aquarium animation in ASCII art
 brew "asciiquarium"
 # Pyright fork with various improvements and built-in pylance features
@@ -44,6 +47,8 @@ brew "coreutils"
 brew "curl"
 # Secure runtime for JavaScript and TypeScript
 brew "deno"
+# Embeddable SQL OLAP Database Management System
+brew "duckdb"
 # Perl lib for reading and writing EXIF metadata
 brew "exiftool"
 # Modern, maintained replacement for ls
@@ -56,6 +61,8 @@ brew "fd"
 brew "ffmpeg"
 # Create thumbnails for your video files
 brew "ffmpegthumbnailer"
+# GNU compiler collection
+brew "gcc"
 # Fast and simple Node.js version manager
 brew "fnm"
 # Infamous electronic fortune-cookie generator
@@ -64,14 +71,14 @@ brew "fortune"
 brew "fzf"
 # GNU awk utility
 brew "gawk"
-# GNU compiler collection
-brew "gcc"
 # GitHub command-line tool
 brew "gh"
 # Distributed revision control system
 brew "git"
 # Syntax-highlighting pager for git and diff output
 brew "git-delta"
+# Git extension for versioning large files
+brew "git-lfs"
 # Render markdown on the CLI
 brew "glow"
 # GNU version of the tar archiving utility
@@ -80,18 +87,24 @@ brew "gnu-tar"
 brew "go"
 # RSS/Atom feeds in the terminal
 brew "goread"
+# Graph visualization software from AT&T and Bell Labs
+brew "graphviz"
 # GNU grep, egrep and fgrep
 brew "grep"
 # Tool for glamorous shell scripts
 brew "gum"
 # Popular GNU data compression program
 brew "gzip"
+# Package compiler and linker metadata toolkit
+brew "pkgconf"
 # Tools and libraries to manipulate images in many formats
 brew "imagemagick"
 # JSON parser and validator with a CLI
 brew "jsonlint"
 # Simple terminal UI for git commands
 brew "lazygit"
+# Pager program similar to more
+brew "less"
 # JIT library for the GNU compiler collection
 brew "libgccjit"
 # Just-In-Time Compiler (JIT) for the Lua programming language
@@ -108,14 +121,16 @@ brew "miller"
 brew "nbdime"
 # Small build system for use with gyp or CMake
 brew "ninja"
+# Programming language with focus on simplicity, performance and modern systems
+brew "odin"
 # Optimized BLAS library
 brew "openblas"
 # Shell command parallelization utility
 brew "parallel"
+# Command-line tool to generate, analyze, convert and manipulate colors
+brew "pastel"
 # Package management made easy
 brew "pixi"
-# Package compiler and linker metadata toolkit
-brew "pkgconf"
 # Tool for managing OCI containers and pods
 brew "podman"
 # Alternative to docker-compose using podman
@@ -126,8 +141,8 @@ brew "poppler"
 brew "rich-cli"
 # Search tool like grep and The Silver Searcher
 brew "ripgrep"
-# Safe, concurrent, practical language
-brew "rust"
+# Rust toolchain installer
+brew "rustup"
 # Smart session manager for the terminal
 brew "sesh"
 # Prints a steam locomotive if you type sl instead of ls
@@ -172,8 +187,6 @@ brew "xclip"
 brew "yazi"
 # Feature-rich command-line audio/video downloader
 brew "yt-dlp"
-# Pluggable terminal workspace, with terminal multiplexer as the base feature
-brew "zellij"
 # Programming language designed for robustness, optimality, and clarity
 brew "zig"
 # Shell extension to navigate your filesystem faster
@@ -194,8 +207,12 @@ brew "felixkratz/formulae/borders"
 brew "felixkratz/formulae/sketchybar"
 # prettier, on SPEED!
 brew "fsouza/prettierd/prettierd"
+# Interactive TUI for Homebrew
+brew "gromgit/brewtils/taproom"
 # A simple terminal UI for docker, written in Go
 brew "jesseduffield/lazydocker/lazydocker"
+# Drop in replacement for ueberzug written in C++
+brew "jstkdng/programs/ueberzugpp"
 # Incredibly fast JavaScript runtime, bundler, transpiler and package manager - all in one.
 brew "oven-sh/bun/bun"
 # The AI coding agent built for the terminal.
@@ -208,10 +225,6 @@ cask "aerospace"
 cask "aldente"
 # Tools for building Android applications
 cask "android-studio"
-# Menu bar icon organiser
-cask "bartender"
-# Installer for BetterDiscord
-cask "betterdiscord-installer"
 # Display management tool
 cask "betterdisplay"
 # E-books management software
@@ -220,8 +233,6 @@ cask "calibre"
 cask "chromedriver"
 # Voice and text chat software
 cask "discord"
-# Disk usage utility
-cask "disk-inventory-x"
 cask "font-caskaydia-cove-nerd-font"
 cask "font-maple-mono-nf"
 cask "font-noto-color-emoji"
@@ -239,6 +250,8 @@ cask "iina"
 cask "imageoptim"
 # Menu bar calendar
 cask "itsycal"
+# Menu bar manager
+cask "jordanbaird-ice@beta"
 # Keyboard customiser
 cask "karabiner-elements"
 # File archiver
@@ -251,10 +264,14 @@ cask "lm-studio"
 cask "middle"
 # Knowledge base that works on top of a local folder of plain text Markdown files
 cask "obsidian"
+# Finds large, unwanted files and deletes them
+cask "omnidisksweeper"
 # Remote desktop
 cask "parsec"
 # Control your tools with a few keystrokes
 cask "raycast"
+# Email client
+cask "readdle-spark"
 # Music streaming service
 cask "spotify"
 # System monitor for the menu bar
@@ -263,10 +280,16 @@ cask "stats"
 cask "steam"
 # Open-source media center
 cask "stremio"
+# Dictation tool including LLM reformatting
+cask "superwhisper"
+# Utility to hide the notch
+cask "topnotch"
 # Open-source BitTorrent client
 cask "transmission"
 # Easy to use text extraction tool
 cask "trex"
+# Virtual machines UI using QEMU
+cask "utm"
 # Open-source code editor
 cask "visual-studio-code"
 # Multimedia player
@@ -279,6 +302,8 @@ cask "wezterm@nightly"
 cask "windscribe"
 # REST, GraphQL and gRPC client
 cask "yaak"
+# YouTube Music Desktop App
+cask "youtube-music"
 # Gecko based web browser
 cask "zen"
 # Video communication and virtual meeting platform
@@ -287,6 +312,7 @@ cask "zoom"
 cask "zulu@17"
 mas "1Password for Safari", id: 1569813296
 mas "Amphetamine", id: 937984704
+mas "Disk Space Analyzer", id: 446243721
 mas "Dropover", id: 1355679052
 mas "Glance", id: 1564688210
 mas "Keynote", id: 409183694
