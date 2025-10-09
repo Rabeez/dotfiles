@@ -18,10 +18,13 @@ export PATH="$HOMEBREW_PREFIX/opt/gnu-tar/libexec/gnubin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/unzip/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/gzip/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/bc/bin:$PATH"
-export PATH="$HOMEBREW_PREFIX/opt/ccache/libexec:$PATH"
+# export PATH="$HOMEBREW_PREFIX/opt/ccache/libexec:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/curl/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
 export LIBGCCJIT_LIBRARY_PATH=$(brew --prefix libgccjit)/lib
+
+# export LIBCLANG_PATH="$HOMEBREW_PREFIX/opt/llvm@14/lib"
+# export PATH="$HOMEBREW_PREFIX/opt/llvm@14/bin:$PATH"
 
 #Ensure binary packages for languages are in path
 rustup toolchain link system "$(brew --prefix rust)"
@@ -42,6 +45,11 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/openblas/lib/pkgconfig"
 export LDFLAGS="-L/opt/homebrew/opt/curl/lib $LDFLAGS"
 export CPPFLAGS="-I/opt/homebrew/opt/curl/include $CPPFLAGS"
 export PKG_CONFIG_PATH="/opt/homebrew/opt/curl/lib/pkgconfig:$PKG_CONFIG_PATH"
+
+# For clang
+# export LDFLAGS="-L/opt/homebrew/opt/llvm@14/lib $LDFLAGS"
+# export CPPFLAGS="-I/opt/homebrew/opt/llvm@14/include $CPPFLAGS"
+
 
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 if type brew &>/dev/null; then
