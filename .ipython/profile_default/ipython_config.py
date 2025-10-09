@@ -665,13 +665,13 @@ c = get_config()  # noqa
 #          highlighting. To see available styles, run `pygmentize -L styles`.
 #  Default: traitlets.Undefined
 # c.TerminalInteractiveShell.highlighting_style = "catppuccin-mocha"
-from pygments.styles import get_style_by_name
-from pygments.util import ClassNotFound
-
-try:
-    c.TerminalInteractiveShell.highlighting_style = get_style_by_name("catppuccin-mocha")
-except ClassNotFound as ex:
-    print(f"Failed to set theme: {ex}")
+# from pygments.styles import get_style_by_name
+# from pygments.util import ClassNotFound
+#
+# try:
+#     c.TerminalInteractiveShell.highlighting_style = get_style_by_name("catppuccin-mocha")
+# except ClassNotFound as ex:
+#     print(f"Failed to set theme: {ex}")
 
 ## Override highlighting format for specific tokens
 #  Default: {}
