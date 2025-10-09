@@ -15,8 +15,8 @@ return {
     wk.setup({
       preset = "modern",
       win = {
-        border = "single", -- none, single, double, shadow
-        width = 0.8,
+        border = "rounded",
+        width = 0.6,
       },
     })
     wk.add({
