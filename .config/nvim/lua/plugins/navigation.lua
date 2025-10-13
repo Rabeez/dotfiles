@@ -8,6 +8,11 @@ return {
     opts = {},
     config = function()
       require("fzf-lua").setup({
+        fzf_colors = {
+          true, -- auto generate rest of fzf’s highlights?
+          bg = "-1", -- -1 is transparent
+          gutter = "-1",
+        },
         grep = {
           hidden = true,
         },
