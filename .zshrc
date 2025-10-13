@@ -203,6 +203,9 @@ export MPLCONFIGDIR=$HOME/.matplotlib
 export PATH="$HOME/Documents/Programming/ThirdParty/neovim/build/bin:$PATH"
 export EDITOR=nvim
 
+# Local Odin
+export PATH="$HOME/tools/odin-macos-arm64:$PATH"
+
 # Pixi completions
 eval "$(pixi completion --shell zsh)"
 

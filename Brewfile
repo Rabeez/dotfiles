@@ -121,8 +121,6 @@ brew "miller"
 brew "nbdime"
 # Small build system for use with gyp or CMake
 brew "ninja"
-# Programming language with focus on simplicity, performance and modern systems
-brew "odin"
 # Optimized BLAS library
 brew "openblas"
 # Shell command parallelization utility
