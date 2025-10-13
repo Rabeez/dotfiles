@@ -4,6 +4,8 @@ custom-shader = shaders/cursor_smear.glsl
 # command = /bin/zsh -l -c 'if command -v tmux &> /dev/null && [ -z "$TMUX" ]; then exec tmux attach || exec tmux new-session -s "root-default"; else exec /bin/zsh -l; fi'
 
 theme = dark:Catppuccin Mocha,light:Catppuccin Latte
+background-opacity = 0.8
+background-blur = 20
 macos-titlebar-style = hidden
 font-family = Maple Mono NF Medium
 font-size = 16

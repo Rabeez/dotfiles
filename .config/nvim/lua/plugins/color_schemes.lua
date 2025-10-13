@@ -7,6 +7,16 @@ return {
     config = function()
       require("catppuccin").setup({
         flavour = "mocha",
+        transparent_background = true,
+        float = {
+          transparent = true,
+          solid = false,
+        },
+        custom_highlights = function(colors)
+          return {
+            WinSeparator = { fg = colors.subtext1 },
+          }
+        end,
         no_italic = true,
         integrations = {
           notify = true,
@@ -56,6 +66,7 @@ return {
           },
         },
       })
+      vim.cmd("set laststatus=3")
     end,
   },
   -- {
