@@ -342,41 +342,41 @@ return {
       })
     end,
   },
-  {
-    "luckasRanarison/tailwind-tools.nvim",
-    name = "tailwind-tools",
-    build = ":UpdateRemotePlugins",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-      -- "nvim-telescope/telescope.nvim", -- optional to show picker with available tailwind classes
-      "neovim/nvim-lspconfig", -- optional
-    },
-    opts = {}, -- your configuration
-    config = function()
-      require("tailwind-tools").setup({
-        document_color = {
-          inline_symbol = " ",
-        },
-      })
-      vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-        pattern = {
-          "*.html",
-          "*.js",
-          "*.jsx",
-          "*.ts",
-          "*.tsx",
-          "*.twig",
-          "*.hbs",
-          "*.php",
-          "*.heex",
-          "*.astro",
-          "*.templ",
-          "*.jinja2",
-        },
-        command = "TailwindSort",
-      })
-    end,
-  },
+  -- {
+  --   "luckasRanarison/tailwind-tools.nvim",
+  --   name = "tailwind-tools",
+  --   build = ":UpdateRemotePlugins",
+  --   dependencies = {
+  --     "nvim-treesitter/nvim-treesitter",
+  --     -- "nvim-telescope/telescope.nvim", -- optional to show picker with available tailwind classes
+  --     "neovim/nvim-lspconfig", -- optional
+  --   },
+  --   opts = {}, -- your configuration
+  --   config = function()
+  --     require("tailwind-tools").setup({
+  --       document_color = {
+  --         inline_symbol = " ",
+  --       },
+  --     })
+  --     vim.api.nvim_create_autocmd({ "BufWritePre" }, {
+  --       pattern = {
+  --         "*.html",
+  --         "*.js",
+  --         "*.jsx",
+  --         "*.ts",
+  --         "*.tsx",
+  --         "*.twig",
+  --         "*.hbs",
+  --         "*.php",
+  --         "*.heex",
+  --         "*.astro",
+  --         "*.templ",
+  --         "*.jinja2",
+  --       },
+  --       command = "TailwindSort",
+  --     })
+  --   end,
+  -- },
   {
     "folke/trouble.nvim",
     opts = {}, -- for default options, refer to the configuration section for custom setup.
