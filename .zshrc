@@ -8,6 +8,7 @@ export XDG_CONFIG_HOME="$HOME/.config"
 export PATH="/usr/local/bin:$PATH"
 
 # Disable printing of what is updated on brew servers
+export HOMEBREW_NO_ENV_HINTS=1
 export HOMEBREW_NO_UPDATE_REPORT_NEW=1
 
 # Override builtin binaries with GNU ones installed via homebrew
@@ -50,7 +51,6 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/curl/lib/pkgconfig:$PKG_CONFIG_PATH"
 # export LDFLAGS="-L/opt/homebrew/opt/llvm@14/lib $LDFLAGS"
 # export CPPFLAGS="-I/opt/homebrew/opt/llvm@14/include $CPPFLAGS"
 
-
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 if type brew &>/dev/null; then
     FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
@@ -83,7 +83,6 @@ alias p="pixi"
 alias codi="codium"
 alias oc="opencode"
 alias tgpt='tgpt -i -m --preprompt "Be specific and brief. Avoid detailed explanations unless specifically asked."'
-
 
 # Use y instead of yazi to start, and press q to quit, you'll see the CWD changed.
 # Sometimes, you don't want to change, press Q to quit.
@@ -218,8 +217,8 @@ export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home"
 # pnpm
 export PNPM_HOME="/Users/rabeezriaz/Library/pnpm"
 case ":$PATH:" in
-    *":$PNPM_HOME:"*) ;;
-    *) export PATH="$PNPM_HOME:$PATH" ;;
+*":$PNPM_HOME:"*) ;;
+*) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
 
@@ -239,10 +238,10 @@ export SAVEHIST=1000000000
 setopt EXTENDED_HISTORY
 
 # Start tmux properly
-if command -v tmux &> /dev/null && command -v sesh &> /dev/null && [ -z "$TMUX" ]; then
+if command -v tmux &>/dev/null && command -v sesh &>/dev/null && [ -z "$TMUX" ]; then
     TMUX_DEFAULT_SESSION="root-default"
     # Check if the session already exists
-    if tmux has-session -t "$TMUX_DEFAULT_SESSION" 2> /dev/null; then
+    if tmux has-session -t "$TMUX_DEFAULT_SESSION" 2>/dev/null; then
         # Attach to existing session
         tmux attach-session -t "$TMUX_DEFAULT_SESSION"
     else
@@ -253,4 +252,3 @@ fi
 
 # Performance profiler (paired line at start of file)
 # zprof
-
