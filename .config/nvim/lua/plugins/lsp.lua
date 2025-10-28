@@ -34,7 +34,8 @@ return {
           "ts_ls",
           "jsonls",
           "ruff",
-          "basedpyright",
+          -- "basedpyright",
+          "pyrefly",
           "yamlls",
           "taplo",
           "clangd",
@@ -157,24 +158,24 @@ return {
           exportPdf = "onType",
         },
       })
-      vim.lsp.config("basedpyright", {
-        settings = {
-          basedpyright = {
-            disableOrganizeImports = true,
-            analysis = {
-              autoSearchPaths = true,
-              typeCheckingMode = "standard",
-              -- ignore = { "*" },
-              -- typeCheckingMode = "off",
-              useLibraryCodeForTypes = true,
-              diagnosticSeverityOverrides = {
-                ["reportUnusedImport"] = false,
-                ["ReportUnusedVariable"] = false,
-              },
-            },
-          },
-        },
-      })
+      -- vim.lsp.config("basedpyright", {
+      --   settings = {
+      --     basedpyright = {
+      --       disableOrganizeImports = true,
+      --       analysis = {
+      --         autoSearchPaths = true,
+      --         typeCheckingMode = "standard",
+      --         -- ignore = { "*" },
+      --         -- typeCheckingMode = "off",
+      --         useLibraryCodeForTypes = true,
+      --         diagnosticSeverityOverrides = {
+      --           ["reportUnusedImport"] = false,
+      --           ["ReportUnusedVariable"] = false,
+      --         },
+      --       },
+      --     },
+      --   },
+      -- })
       vim.lsp.config("ruff", {
         on_attach = function(client, _)
           client.server_capabilities.hoverProvider = false
