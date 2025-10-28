@@ -13,7 +13,8 @@ adjust-cell-height = 10%
 macos-option-as-alt = left
 confirm-close-surface = false
 mouse-hide-while-typing = true
-# macos-icon = xray
+title = " "
+window-padding-balance = true
 
 # Remove default split keybinds
 # https://gist.github.com/hensg/43bc71c21d1f79385892352a390aa2ca
