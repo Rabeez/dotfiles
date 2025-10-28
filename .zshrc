@@ -208,6 +208,7 @@ export PATH="$HOME/tools/odin-macos-arm64:$PATH"
 
 # Pixi completions
 eval "$(pixi completion --shell zsh)"
+export PATH="$HOME/.pixi/bin:$PATH"
 
 # Android SDK
 export ANDROID_HOME="$HOME/Library/Android/sdk"
