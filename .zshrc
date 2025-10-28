@@ -201,6 +201,7 @@ export MPLCONFIGDIR=$HOME/.matplotlib
 # Local Neovim
 export PATH="$HOME/Documents/Programming/ThirdParty/neovim/build/bin:$PATH"
 export EDITOR=nvim
+export MASON_BIN_PATH="$HOME/.local/share/nvim/mason/bin"
 
 # Local Odin
 export PATH="$HOME/tools/odin-macos-arm64:$PATH"

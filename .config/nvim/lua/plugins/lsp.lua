@@ -1,10 +1,10 @@
 return {
   {
-    "neovim/nvim-lspconfig",
+    "williamboman/mason-lspconfig.nvim",
     event = { "BufReadPre", "BufNewFile" },
     dependencies = {
       "williamboman/mason.nvim",
-      "williamboman/mason-lspconfig.nvim",
+      "neovim/nvim-lspconfig",
       "WhoIsSethDaniel/mason-tool-installer.nvim",
       "antosha417/nvim-lsp-file-operations",
     },
@@ -12,6 +12,11 @@ return {
       require("mason").setup({
         ui = {
           border = "rounded",
+          icons = {
+            package_installed = " ",
+            package_pending = " ",
+            package_uninstalled = " ",
+          },
         },
       })
       require("mason-lspconfig").setup({
@@ -28,32 +33,25 @@ return {
           "bashls",
           "ts_ls",
           "jsonls",
-          "markdown_oxide",
           "ruff",
           "basedpyright",
           "yamlls",
           "taplo",
-          "sqlls",
           "clangd",
           "tinymist",
           "ols",
-          -- "jinja_lsp",
         },
       })
       require("mason-tool-installer").setup({
         ensure_installed = {
-          "vale",
           "stylua",
           "shellcheck",
-          "sqlfluff",
-          "sql-formatter",
           "jsonlint",
           "glow",
           "prettierd",
           "shfmt",
           "clang-format",
           "mdformat",
-          "djlint",
         },
       })
 
