@@ -15,6 +15,11 @@ confirm-close-surface = false
 mouse-hide-while-typing = true
 # macos-icon = xray
 
+# Remove default split keybinds
+# https://gist.github.com/hensg/43bc71c21d1f79385892352a390aa2ca
+keybind = cmd+d=unbind
+keybind = cmd+shift+d=unbind
+
 # Remove Ghostty's tab-switch defaults so tmux binds can fire
 keybind = cmd+digit_1=unbind
 keybind = cmd+digit_2=unbind
