@@ -176,6 +176,19 @@ return {
       --     },
       --   },
       -- })
+      vim.lsp.config("pyrefly", {
+        root_markers = {
+          "pyrefly.toml",
+          "pyproject.toml",
+          "setup.py",
+          "setup.cfg",
+          "requirements.txt",
+          "Pipfile",
+          ".git",
+          "ruff.toml",
+          "pixi.toml",
+        },
+      })
       vim.lsp.config("ruff", {
         on_attach = function(client, _)
           client.server_capabilities.hoverProvider = false
