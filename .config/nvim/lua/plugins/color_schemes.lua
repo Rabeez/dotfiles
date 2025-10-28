@@ -36,7 +36,6 @@ return {
           blink_cmp = true,
           markdown = true,
           render_markdown = true,
-          cmp = true,
           mason = true,
           noice = true,
           dap = true,
