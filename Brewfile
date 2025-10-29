@@ -15,8 +15,6 @@ tap "sst/tap"
 tap "th-ch/youtube-music"
 # Aquarium animation in ASCII art
 brew "asciiquarium"
-# Pyright fork with various improvements and built-in pylance features
-brew "basedpyright"
 # Clone of cat(1) with syntax highlighting and Git integration
 brew "bat"
 # Arbitrary precision numeric processing language
@@ -147,8 +145,6 @@ brew "sesh"
 brew "sl"
 # Command-line tool to customize Spotify client
 brew "spicetify-cli"
-# SQL linter and auto-formatter for Humans
-brew "sqlfluff"
 # Cross-shell prompt for astronauts
 brew "starship"
 # Organize software neatly under a single directory tree (e.g. /usr/local)
@@ -278,6 +274,8 @@ cask "stats"
 cask "steam"
 # Open-source media center
 cask "stremio"
+# Text editor for code, markup and prose
+cask "sublime-text"
 # Dictation tool including LLM reformatting
 cask "superwhisper"
 # Utility to hide the notch
@@ -288,12 +286,8 @@ cask "transmission"
 cask "trex"
 # Virtual machines UI using QEMU
 cask "utm"
-# Open-source code editor
-cask "visual-studio-code"
 # Multimedia player
 cask "vlc"
-# Binary releases of VS Code without MS branding/telemetry/licensing
-cask "vscodium"
 # GPU-accelerated cross-platform terminal emulator and multiplexer
 cask "wezterm@nightly"
 # VPN client for secure internet access and private browsing
