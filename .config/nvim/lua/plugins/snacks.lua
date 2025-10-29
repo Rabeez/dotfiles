@@ -25,6 +25,19 @@ return {
         enabled = true,
         ui_select = true,
       },
+      notifier = {
+        enabled = true,
+        timeout = 2000,
+        style = "compact",
+        padding = false,
+        icons = {
+          error = "",
+          warn = "",
+          info = "",
+          debug = "",
+          trace = "",
+        },
+      },
     },
     keys = {
       -- find
@@ -77,69 +90,22 @@ return {
         desc = "[F]inder: [M]an Pages",
       },
       -- Other
-      -- {
-      --   "<leader>n",
-      --   function()
-      --     Snacks.notifier.show_history()
-      --   end,
-      --   desc = "[F]inder: Find [n]otifications",
-      -- },
-      -- {
-      --   "<leader>fn",
-      --   function()
-      --     Snacks.picker.notifications()
-      --   end,
-      --   desc = "[F]inder: Find [n]otifications",
-      -- },
-      -- vim.keymap.set("n", "<leader>fn", function()
-      --   local history = require("notify").history()
-      --
-      --   local function trim(s)
-      --     return s and s:match("^%s*(.-)%s*$") or ""
-      --   end
-      --   local function join_with_space(list)
-      --     return table.concat(list or {}, " ")
-      --   end
-      --   local items = vim.tbl_map(function(n)
-      --     local title = join_with_space(n.title)
-      --     local msg = trim(join_with_space(n.message)):gsub("\n+", " ")
-      --     return {
-      --       -- snacks expects a display-able string and any payload in `value`
-      --       display = string.format(
-      --         "%s  [%s]  %s  %s",
-      --         n.icon or " ",
-      --         n.level or "",
-      --         title,
-      --         msg ~= "" and ("| " .. msg) or ""
-      --       ),
-      --       value = n,
-      --       time = n.time or 0,
-      --       -- include a harmless file field to avoid previewer errors if any plugin checks it
-      --       file = title,
-      --     }
-      --   end, history)
-      --
-      --   require("snacks.picker").pick({
-      --     title = "Notification History",
-      --     items = items,
-      --     format_item = function(item)
-      --       return item.display
-      --     end,
-      --     sort = function(a, b)
-      --       return (a.time or 0) > (b.time or 0)
-      --     end,
-      --     -- disable the previewer so nothing tries to open `file`
-      --     preview = false,
-      --     -- show full message on select
-      --     on_select = function(item)
-      --       local n = item.value
-      --       local full = table.concat(n.message or {}, "\n")
-      --       vim.notify(full ~= "" and full or "(no message)", vim.log.levels.INFO, {
-      --         title = (n.title and n.title[1]) or "Notify",
-      --       })
-      --     end,
-      --   })
-      -- end, { desc = "[F]inder: Find [n]otifications" }),
+      {
+        "<leader>fn",
+        function()
+          Snacks.picker.notifications({
+            confirm = function(picker, item)
+              picker:close()
+              if not item then
+                return
+              end
+              local content = item.item.title .. "\n" .. item.item.msg
+              vim.fn.setreg("+", content)
+            end,
+          })
+        end,
+        desc = "[F]inder: Find [n]otifications",
+      },
       {
         "<leader>fs",
         function()

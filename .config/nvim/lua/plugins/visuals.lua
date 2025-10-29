@@ -6,19 +6,19 @@ return {
       require("dressing").setup()
     end,
   },
-  {
-    "rcarriga/nvim-notify",
-    config = function()
-      local nvim_notify = require("notify")
-      nvim_notify.setup({
-        timeout = 2000,
-        render = "wrapped-compact",
-        fps = 60,
-        stages = "static",
-      })
-      vim.notify = nvim_notify
-    end,
-  },
+  -- {
+  --   "rcarriga/nvim-notify",
+  --   config = function()
+  --     local nvim_notify = require("notify")
+  --     nvim_notify.setup({
+  --       timeout = 2000,
+  --       render = "wrapped-compact",
+  --       fps = 60,
+  --       stages = "static",
+  --     })
+  --     vim.notify = nvim_notify
+  --   end,
+  -- },
   -- {
   --   "lukas-reineke/indent-blankline.nvim",
   --   main = "ibl",
@@ -268,7 +268,7 @@ return {
       -- OPTIONAL:
       --   `nvim-notify` is only needed, if you want to use the notification view.
       --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
+      -- "rcarriga/nvim-notify",
     },
     config = function()
       require("noice").setup({
