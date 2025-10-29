@@ -19,24 +19,26 @@ return {
       vim.notify = nvim_notify
     end,
   },
-  {
-    "lukas-reineke/indent-blankline.nvim",
-    main = "ibl",
-    ---@module "ibl"
-    ---@type ibl.config
-    opts = {},
-    config = function()
-      require("ibl").setup({
-        scope = {
-          show_start = false,
-          show_end = false,
-        },
-      })
-    end,
-  },
+  -- {
+  --   "lukas-reineke/indent-blankline.nvim",
+  --   main = "ibl",
+  --   ---@module "ibl"
+  --   ---@type ibl.config
+  --   opts = {},
+  --   config = function()
+  --     require("ibl").setup({
+  --       scope = {
+  --         show_start = false,
+  --         show_end = false,
+  --       },
+  --     })
+  --   end,
+  -- },
   {
     "nvim-lualine/lualine.nvim",
     dependencies = {
+      -- TODO: migrate to mini.icons
+      --       will require checking other plugins as well. just do grep "nvim-web-devicons"
       "nvim-tree/nvim-web-devicons",
       "bwpge/lualine-pretty-path",
       "letieu/harpoon-lualine",
