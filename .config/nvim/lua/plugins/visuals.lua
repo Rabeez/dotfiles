@@ -66,6 +66,16 @@ return {
         return packages_outdated > 0 and tostring(packages_outdated) or ""
       end
 
+      local function lualine_supermaven_status()
+        local running = require("supermaven-nvim.api").is_running()
+        if running then
+          return "󱙺 "
+        else
+          return "󱙻 "
+        end
+        return
+      end
+
       ------Check number of attached LSP clients
       ------@return (integer | string)
       ---local function lualine_lsp_count()
@@ -191,6 +201,16 @@ return {
             },
           },
           lualine_x = {
+            {
+              lualine_supermaven_status,
+              on_click = function()
+                if require("supermaven-nvim.api").is_running() then
+                  vim.notify("Supermaven is running", vim.log.levels.INFO)
+                else
+                  vim.notify("Supermaven is not running", vim.log.levels.INFO)
+                end
+              end,
+            },
             {
               -- https://github.com/williamboman/mason.nvim/discussions/1535
               lualine_mason_updates,
