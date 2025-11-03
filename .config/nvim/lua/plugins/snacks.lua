@@ -55,6 +55,13 @@ return {
         end,
         desc = "[F]inder: Find [f]iles in git project",
       },
+      {
+        "<leader>fo",
+        function()
+          Snacks.picker.lsp_symbols()
+        end,
+        desc = "[F]inder: Find LSP symbol [o]bjects",
+      },
       -- Grep
       -- NOTE: picker starts in live mode
       --       type search terms
