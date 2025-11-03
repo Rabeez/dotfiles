@@ -194,6 +194,7 @@ export OPENAI_API_KEY_PRO=$(cat "$HOME"/dotfiles/Secrets/openai_api_key_pro)
 export GOOGLE_API_KEY=$(cat "$HOME"/dotfiles/Secrets/google_api_key)
 export ANTHROPIC_API_KEY=$(cat "$HOME"/dotfiles/Secrets/anthropic_api_key)
 export DEEPSEEK_API_KEY=$(cat "$HOME"/dotfiles/Secrets/deepseek_api_key)
+export BACKBLAZE_API_KEY=$(cat "$HOME"/dotfiles/Secrets/backblaze_api_key)
 
 # Matplotlib config directory
 export MPLCONFIGDIR=$HOME/.matplotlib

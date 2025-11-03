@@ -17,3 +17,4 @@ Obsidian/.obsidian/workspace.json
 tmux*.log
 .config/nvim/after/queries
 .config/zed/prompts/
+.config/rclone/rclone.conf
