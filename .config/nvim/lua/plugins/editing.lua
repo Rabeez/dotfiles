@@ -138,32 +138,5 @@ return {
     config = true,
   },
   {
-    "folke/flash.nvim",
-    event = "VeryLazy",
-    ---@type Flash.Config
-    opts = {
-      modes = {
-        search = { enabled = false },
-        char = { enabled = false },
-      },
-    },
-    keys = {
-      {
-        "<C-f>",
-        mode = { "n", "x", "o" },
-        function()
-          require("flash").jump()
-        end,
-        desc = "Flash",
-      },
-      {
-        "r",
-        mode = "o",
-        function()
-          require("flash").remote()
-        end,
-        desc = "Remote Flash",
-      },
-    },
   },
 }
