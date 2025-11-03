@@ -11,6 +11,9 @@ export PATH="/usr/local/bin:$PATH"
 export HOMEBREW_NO_ENV_HINTS=1
 export HOMEBREW_NO_UPDATE_REPORT_NEW=1
 
+# User scripts
+export PATH="$HOME/dotfiles_WORK/scripts/:$PATH"
+
 # Override builtin binaries with GNU ones installed via homebrew
 export PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/gawk/libexec/gnubin:$PATH"
