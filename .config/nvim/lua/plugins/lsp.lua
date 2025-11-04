@@ -47,6 +47,7 @@ return {
         ensure_installed = {
           "stylua",
           "shellcheck",
+          "sleek",
           "jsonlint",
           "glow",
           "prettierd",
@@ -68,6 +69,27 @@ return {
       vim.lsp.handlers["textDocument/signatureHelp"] = function()
         vim.lsp.buf.signature_help({ border = "rounded" })
       end
+
+      local function set_underline_color_from_group(diagnostic_group, source_group)
+        local hl = vim.api.nvim_get_hl(0, { name = source_group, link = false })
+        local fg = hl.fg
+        if fg then
+          local hex = string.format("#%06x", fg)
+          vim.api.nvim_set_hl(0, diagnostic_group, { underline = true, sp = hex })
+        else
+          -- fallback: just underline without custom sp color
+          vim.api.nvim_set_hl(0, diagnostic_group, { underline = true })
+        end
+      end
+
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        callback = function()
+          set_underline_color_from_group("DiagnosticUnderlineError", "ErrorMsg")
+          set_underline_color_from_group("DiagnosticUnderlineWarn", "WarningMsg")
+          set_underline_color_from_group("DiagnosticUnderlineInfo", "DiagnosticInfo")
+          set_underline_color_from_group("DiagnosticUnderlineHint", "DiagnosticHint")
+        end,
+      })
 
       vim.diagnostic.config({
         severity_sort = true,
@@ -106,14 +128,6 @@ return {
               callSnippet = "Disable",
               keywordSnippet = "Disable",
             },
-          },
-        },
-      })
-      vim.lsp.config("ols", {
-        init_options = {
-          checker_args = "-strict-style",
-          collections = {
-            { name = "shared", path = vim.fn.expand("$HOME/odin-lib") },
           },
         },
       })
@@ -220,7 +234,13 @@ return {
           vim.keymap.set(
             "n",
             "<leader>lu",
-            vim.lsp.buf.references,
+            -- vim.lsp.buf.references,
+            function()
+              Snacks.picker.lsp_references({
+                include_current = true,
+                auto_confirm = false,
+              })
+            end,
             { buffer = event.buf, desc = "[L]SP: Goto [u]sage/references" }
           )
           vim.keymap.set(
@@ -247,6 +267,57 @@ return {
             vim.lsp.buf.rename,
             { buffer = event.buf, desc = "[L]SP: Execute [r]ename" }
           )
+          vim.keymap.set("n", "<C-e>", function()
+            vim.diagnostic.open_float(nil, {
+              border = "rounded",
+              source = "always",
+              prefix = function(diagnostic, i, total)
+                local icons = {
+                  [vim.diagnostic.severity.ERROR] = { " ", "DiagnosticError" },
+                  [vim.diagnostic.severity.WARN] = { " ", "DiagnosticWarn" },
+                  [vim.diagnostic.severity.INFO] = { " ", "DiagnosticInfo" },
+                  [vim.diagnostic.severity.HINT] = { " ", "DiagnosticHint" },
+                }
+                return unpack(icons[diagnostic.severity])
+              end,
+              severity_sort = true,
+              header = "",
+              format = function(diagnostic)
+                -- Just a simple text wrap to split long diagnostic into multiple lines
+                local max_width = 80
+                local result = {}
+                local space_left = max_width
+                local line = ""
+
+                -- Split the text into words
+                for word in diagnostic.message:gmatch("%S+") do
+                  -- If there's enough space for the word, add it
+                  if #word + 1 <= space_left then
+                    if line == "" then
+                      line = word
+                      space_left = space_left - #word
+                    else
+                      line = line .. " " .. word
+                      space_left = space_left - (#word + 1)
+                    end
+                  else
+                    table.insert(result, line)
+                    -- Start a new line and calculate space for the new word
+                    line = word
+                    space_left = max_width - #word
+                  end
+                end
+
+                -- Add the final line if not already added
+                if line ~= "" then
+                  table.insert(result, line)
+                end
+
+                -- Return the wrapped text joined by newline
+                return table.concat(result, "\n")
+              end,
+            })
+          end, { buffer = event.buf, desc = "LSP: Open hover panel for [e]rror/diagnostic under cursor" })
           vim.keymap.set(
             { "n", "i" },
             "<c-s>",
@@ -271,7 +342,15 @@ return {
                 close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
                 border = "rounded",
                 source = "always",
-                prefix = "",
+                prefix = function(diagnostic, i, total)
+                  local icons = {
+                    [vim.diagnostic.severity.ERROR] = { " ", "DiagnosticError" },
+                    [vim.diagnostic.severity.WARN] = { " ", "DiagnosticWarn" },
+                    [vim.diagnostic.severity.INFO] = { " ", "DiagnosticInfo" },
+                    [vim.diagnostic.severity.HINT] = { " ", "DiagnosticHint" },
+                  }
+                  return unpack(icons[diagnostic.severity])
+                end,
                 scope = "cursor",
                 severity_sort = true,
                 header = "",

@@ -10,8 +10,9 @@ return {
     ft = "lua", -- only load on lua files
     opts = {
       library = {
-        -- always load the LazyVim library
-        "LazyVim",
+        -- local package-specific loads for config work
+        { path = "snacks.nvim", words = { "Snacks" } },
+        { path = "lazy.nvim", words = { "LazyVim" } },
         -- Load luvit types when the `vim.uv` word is found
         { path = "${3rd}/luv/library", words = { "vim%.uv" } },
         -- { path = "luvit-meta/library", words = { "vim%.uv" } },

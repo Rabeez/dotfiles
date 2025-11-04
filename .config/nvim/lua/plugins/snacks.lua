@@ -56,11 +56,11 @@ return {
         desc = "[F]inder: Find [f]iles in git project",
       },
       {
-        "<leader>fo",
+        "<leader>lo",
         function()
           Snacks.picker.lsp_symbols()
         end,
-        desc = "[F]inder: Find LSP symbol [o]bjects",
+        desc = "[L]SP: Find LSP symbol [o]bjects",
       },
       -- Grep
       -- NOTE: picker starts in live mode
@@ -130,9 +130,39 @@ return {
       {
         "<leader>gg",
         function()
-          Snacks.lazygit()
+          Snacks.lazygit({
+            configure = false,
+            config = {
+              os = { editPreset = "nvim-remote" },
+              gui = {
+                -- set to an empty string "" to disable icons
+                nerdFontsVersion = "",
+              },
+            },
+          })
         end,
         desc = "[G]it: Lazygit",
+      },
+      {
+        "<leader>gr",
+        function()
+          Snacks.picker.git_log()
+        end,
+        desc = "[G]it: Log [r]epo",
+      },
+      {
+        "<leader>gf",
+        function()
+          Snacks.picker.git_log_file()
+        end,
+        desc = "[G]it: Log [f]ile",
+      },
+      {
+        "<leader>gl",
+        function()
+          Snacks.picker.git_log_line()
+        end,
+        desc = "[G]it: Log [l]ine",
       },
     },
   },
