@@ -71,6 +71,8 @@ brew "fzf"
 brew "gawk"
 # GitHub command-line tool
 brew "gh"
+# Interpreter for PostScript and PDF
+brew "ghostscript"
 # Distributed revision control system
 brew "git"
 # Syntax-highlighting pager for git and diff output
@@ -133,6 +135,8 @@ brew "podman"
 brew "podman-compose"
 # PDF rendering library (based on the xpdf-3.0 code base)
 brew "poppler"
+# Rsync for cloud storage
+brew "rclone"
 # Command-line toolbox for fancy output in the terminal
 brew "rich-cli"
 # Search tool like grep and The Silver Searcher
@@ -304,6 +308,7 @@ cask "zoom"
 cask "zulu@17"
 mas "1Password for Safari", id: 1569813296
 mas "Amphetamine", id: 937984704
+mas "DigiDoc4", id: 1370791134
 mas "Disk Space Analyzer", id: 446243721
 mas "Dropover", id: 1355679052
 mas "Glance", id: 1564688210
@@ -311,5 +316,6 @@ mas "Keynote", id: 409183694
 mas "Numbers", id: 409203825
 mas "Pages", id: 409201541
 mas "Steam Link", id: 1246969117
+mas "Web eID", id: 1576665083
 mas "WhatsApp", id: 310633997
 mas "Xcode", id: 497799835
