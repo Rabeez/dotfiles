@@ -6,12 +6,11 @@ startup_command = "yazi"
 [[session]]
 name = "dotfiles"
 path = "~/dotfiles"
-startup_command = "nvim -c \":FzfLua files\""
+startup_command = "nvim"
 
 [[session]]
 name = "Obsidian Main Vault"
 path = "~/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian Main"
-
 
 [[session]]
 name = "Spotify Music"
