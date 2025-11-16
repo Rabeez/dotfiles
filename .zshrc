@@ -87,6 +87,8 @@ alias codi="codium"
 alias oc="opencode"
 alias tgpt='tgpt -i -m --preprompt "Be specific and brief. Avoid detailed explanations unless specifically asked."'
 
+export CLIPBOARD_THEME=ansi
+
 # Use y instead of yazi to start, and press q to quit, you'll see the CWD changed.
 # Sometimes, you don't want to change, press Q to quit.
 function y() {

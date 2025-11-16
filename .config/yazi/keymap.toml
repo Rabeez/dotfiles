@@ -93,6 +93,11 @@ on = [".", "s"]
 run = "plugin what-size"
 desc = "Calc size of selection or cwd"
 
+[[mgr.prepend_keymap]]
+on = "<C-y>"
+run = ["plugin system-clipboard"]
+desc = "Copy selection to system clipboard"
+
 # TODO: fix hidden toggle to <.h>
 # TODO: fix Z that uses fzf for directory navigation - limit depth AND start from ~ always
 # TODO: set z to use same ^ fzf but start from current directory

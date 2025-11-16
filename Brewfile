@@ -33,6 +33,8 @@ brew "ccache"
 brew "harfbuzz"
 # Versatile and fast Unicode/ASCII/ANSI graphics renderer
 brew "chafa"
+# Cut, copy, and paste anything, anywhere, all from the terminal
+brew "clipboard"
 # Cross-platform make
 brew "cmake"
 # Documentation for CMake
@@ -155,6 +157,8 @@ brew "starship"
 brew "stow"
 # Opinionated Lua code formatter
 brew "stylua"
+# Modern and pretty fancy file manager for the terminal
+brew "superfile"
 # User interface to the TELNET protocol
 brew "telnet"
 # Official tldr client written in Rust

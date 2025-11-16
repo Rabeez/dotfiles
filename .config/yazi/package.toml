@@ -53,5 +53,10 @@ use = "yazi-rs/plugins:toggle-pane"
 rev = "b886025"
 hash = "d6f60c24d8c0cf57a855bf46115b2502"
 
+[[plugin.deps]]
+use = "orhnk/system-clipboard"
+rev = "888026c"
+hash = "9f82a544335a53d79e87ea315746caaa"
+
 [flavor]
 deps = []
