@@ -139,6 +139,10 @@ alias bag="batgrep --paging=never --context=0"
 # enable mouse scroll in pager
 export LESS="-R --mouse"
 
+# Tealdeer (tldr)
+export TEALDEER_CONFIG_DIR="$HOME/.config/tealdeer"
+# cp completion/zsh_tealdeer /usr/share/zsh/site-functions/_tldr
+
 # Startup header
 # fastfetch --logo macos
 # pokeget random --hide-name | fastfetch --file-raw -

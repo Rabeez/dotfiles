@@ -159,10 +159,10 @@ brew "stow"
 brew "stylua"
 # Modern and pretty fancy file manager for the terminal
 brew "superfile"
+# Very fast implementation of tldr in Rust
+brew "tealdeer"
 # User interface to the TELNET protocol
 brew "telnet"
-# Official tldr client written in Rust
-brew "tlrc"
 # Terminal multiplexer
 brew "tmux"
 # Program that allows you to count code, quickly
