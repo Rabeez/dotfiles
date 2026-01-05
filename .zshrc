@@ -75,10 +75,10 @@ alias sz='source $HOME/.zshrc'
 alias ls='eza -l --color=always --icons --header --classify --group-directories-first'
 alias la='eza -al --color=always --icons --header --classify --group-directories-first'
 alias tree='eza --tree --icons -a'
-alias cp='cp -i'                         # confirm before overwriting
-alias df='df -h'                         # human readable sizes
-alias free='free -m'                     # sizes in MB
-alias cloc='tokei --hidden --sort files' # fast CLOC implementation with nice defaults
+alias cp='cp -i'                                            # confirm before overwriting
+alias df='df -h'                                            # human readable sizes
+alias free='free -m'                                        # sizes in MB
+alias cloc='tokei --hidden --sort code --num-format commas' # fast CLOC implementation with nice defaults
 alias ee="yazi"
 alias gg="lazygit"
 alias g="git"
