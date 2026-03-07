@@ -1,4 +1,4 @@
-# Place a copy of this config to ~/.aerospace.toml
+aerosp# Place a copy of this config to ~/.aerospace.toml
 # After that, you can edit ~/.aerospace.toml to your liking
 
 # It's not necessary to copy all keys to your config.
@@ -199,6 +199,11 @@ if.app-id = 'com.apple.QuickTimePlayerX'
 run = 'layout floating'
 
 # Workspace 1: Browser
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome.canary '
+check-further-callbacks = true
+run = 'move-node-to-workspace 1'
+
 [[on-window-detected]]
 if.app-id = 'app.zen-browser.zen'
 check-further-callbacks = true
