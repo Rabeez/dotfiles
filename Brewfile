@@ -57,12 +57,10 @@ brew "eza"
 brew "fastfetch"
 # Simple, fast and user-friendly alternative to find
 brew "fd"
-# Play, record, convert, and stream audio and video
+# Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
 # Create thumbnails for your video files
 brew "ffmpegthumbnailer"
-# GNU compiler collection
-brew "gcc"
 # Fast and simple Node.js version manager
 brew "fnm"
 # Infamous electronic fortune-cookie generator
@@ -71,6 +69,8 @@ brew "fortune"
 brew "fzf"
 # GNU awk utility
 brew "gawk"
+# GNU compiler collection
+brew "gcc"
 # GitHub command-line tool
 brew "gh"
 # Interpreter for PostScript and PDF
@@ -99,7 +99,7 @@ brew "gum"
 brew "gzip"
 # Package compiler and linker metadata toolkit
 brew "pkgconf"
-# Tools and libraries to manipulate images in many formats
+# Tools and libraries to manipulate images in select formats
 brew "imagemagick"
 # JSON parser and validator with a CLI
 brew "jsonlint"
@@ -222,7 +222,7 @@ brew "sst/tap/opencode"
 # Password manager that keeps all passwords secure behind one password
 cask "1password"
 # AeroSpace is an i3-like tiling window manager for macOS
-cask "aerospace"
+cask "nikitabobko/tap/aerospace"
 # Menu bar tool to limit maximum charging percentage
 cask "aldente"
 # Tools for building Android applications
@@ -246,6 +246,8 @@ cask "ghostty@tip"
 cask "github"
 # Web browser
 cask "google-chrome"
+# Web browser
+cask "google-chrome@canary"
 # Free and open-source media player
 cask "iina"
 # Tool to optimise images to a smaller size
@@ -303,7 +305,7 @@ cask "windscribe"
 # REST, GraphQL and gRPC client
 cask "yaak"
 # YouTube Music Desktop App
-cask "youtube-music"
+cask "th-ch/youtube-music/youtube-music"
 # Gecko based web browser
 cask "zen"
 # Video communication and virtual meeting platform

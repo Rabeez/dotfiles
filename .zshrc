@@ -74,7 +74,7 @@ export LS_COLORS="$(vivid generate catppuccin-mocha)"
 alias sz='source $HOME/.zshrc'
 alias ls='eza -l --color=always --icons --header --classify --group-directories-first'
 alias la='eza -al --color=always --icons --header --classify --group-directories-first'
-alias tree='eza --tree --icons -a'
+alias tree="eza --tree --icons -a --group-directories-last -I '.git|node_modules|.pixi|.venv|.databricks|.ruff_cache'"
 alias cp='cp -i'                         # confirm before overwriting
 alias df='df -h'                         # human readable sizes
 alias free='free -m'                     # sizes in MB
