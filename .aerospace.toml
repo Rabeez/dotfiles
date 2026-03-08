@@ -1,4 +1,4 @@
-aerosp# Place a copy of this config to ~/.aerospace.toml
+# Place a copy of this config to ~/.aerospace.toml
 # After that, you can edit ~/.aerospace.toml to your liking
 
 # It's not necessary to copy all keys to your config.
@@ -200,7 +200,7 @@ run = 'layout floating'
 
 # Workspace 1: Browser
 [[on-window-detected]]
-if.app-id = 'com.google.Chrome.canary '
+if.app-id = 'com.google.Chrome.canary'
 check-further-callbacks = true
 run = 'move-node-to-workspace 1'
 
@@ -210,6 +210,11 @@ check-further-callbacks = true
 run = 'move-node-to-workspace 1'
 
 # https://github.com/nikitabobko/AeroSpace/issues/246
+[[on-window-detected]]
+if.app-id = 'com.google.Chrome.canary'
+if.window-title-regex-substring = 'Picture-in-picture'
+run = 'layout floating'
+
 [[on-window-detected]]
 if.app-id = 'app.zen-browser.zen'
 if.window-title-regex-substring = 'Picture-in-Picture'
