@@ -16,7 +16,7 @@ return {
       "nvim-lua/plenary.nvim",
       "echasnovski/mini.icons",
       "MunifTanjim/nui.nvim",
-      "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+      -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
     },
     config = function()
       -- TODO: check if this shows untracked git files in different color

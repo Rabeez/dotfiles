@@ -1,6 +1,10 @@
 return {
   {
     "nvim-neotest/neotest",
+    keys = {
+      { "<leader>rt", desc = "NeoTest: Run [t]ests and show output panel" },
+    },
+    cmd = { "Neotest" },
     dependencies = {
       "nvim-neotest/nvim-nio",
       "nvim-lua/plenary.nvim",

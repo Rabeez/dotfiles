@@ -1,6 +1,16 @@
 return {
   {
     "mfussenegger/nvim-dap",
+    keys = {
+      { "<Leader>dc", desc = "[D]AP: [c]ontinue debugger" },
+      { "<Leader>db", desc = "[D]AP: Toggle [b]reakpoint" },
+      { "<Leader>dh", desc = "[D]AP: Hover", mode = { "n", "v" } },
+      { "<Leader>dp", desc = "[D]AP: Preview", mode = { "n", "v" } },
+      { "<Leader>df", desc = "[D]AP: Frames" },
+      { "<Leader>ds", desc = "[D]AP: Scopes" },
+      { "<leader>?", desc = "[D]AP: Eval" },
+    },
+    cmd = { "DapContinue", "DapToggleBreakpoint" },
     dependencies = {
       "williamboman/mason.nvim",
       "jay-babu/mason-nvim-dap.nvim",
