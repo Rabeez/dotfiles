@@ -126,9 +126,6 @@ return {
   {
     -- Used for % navigation for more textobjects
     "andymass/vim-matchup",
-    dependencies = {
-      "nvim-treesitter/nvim-treesitter",
-    },
   },
   {
     -- NOTE: https://github.com/a-h/templ/issues/387

@@ -32,6 +32,7 @@ return {
       { "<leader>u", group = "[U]tilities", icon = { icon = "󱁤", color = "yellow" } },
       { "<leader>r", group = "[R]unner", icon = { icon = "󰜎", color = "purple" } },
       { "<leader>w", group = "[W]indow", icon = { icon = "", color = "yellow" } },
+      { "z", group = "Folds / View", icon = { icon = " ", color = "azure" } },
     })
   end,
 }
