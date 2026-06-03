@@ -4,6 +4,11 @@ path = "~/Downloads"
 startup_command = "yazi"
 
 [[session]]
+name = "Screenshots"
+path = "~/Pictures/Screenshots"
+startup_command = "YAZI_CONFIG_HOME=~/.config/yazi-screenshots yazi"
+
+[[session]]
 name = "dotfiles"
 path = "~/dotfiles"
 startup_command = "nvim"
