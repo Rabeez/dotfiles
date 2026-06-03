@@ -249,9 +249,6 @@ oneline=$(
 )
 echo "$oneline" | fastfetch --file-raw -
 
-# Setup starship prompt
-eval "$(starship init zsh)"
-
 # Zoxide completions, cache etc
 eval "$(zoxide init zsh --cmd cd)"
 
@@ -309,6 +306,9 @@ zvm_after_init() {
     # Set up fzf key bindings and fuzzy completion
     source <(fzf --zsh)
 }
+
+# Setup starship prompt (MUST be after zsh-vi-mode to avoid recursive zle-keymap-select)
+eval "$(starship init zsh)"
 
 # Longer shell history
 export HISTFILE="$HOME/.zsh_history"
