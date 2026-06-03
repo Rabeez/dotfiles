@@ -2,7 +2,7 @@ return {
   {
     "saghen/blink.cmp",
     dependencies = {
-      "nvim-tree/nvim-web-devicons",
+      "echasnovski/mini.icons",
       "onsails/lspkind.nvim",
       {
         "windwp/nvim-autopairs",

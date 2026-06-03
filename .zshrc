@@ -25,14 +25,14 @@ export PATH="$HOMEBREW_PREFIX/opt/bc/bin:$PATH"
 # export PATH="$HOMEBREW_PREFIX/opt/ccache/libexec:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/curl/bin:$PATH"
 export PATH="$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin:$PATH"
-export LIBGCCJIT_LIBRARY_PATH=$(brew --prefix libgccjit)/lib
+export LIBGCCJIT_LIBRARY_PATH="$HOMEBREW_PREFIX/opt/libgccjit/lib"
 
 # export LIBCLANG_PATH="$HOMEBREW_PREFIX/opt/llvm@14/lib"
 # export PATH="$HOMEBREW_PREFIX/opt/llvm@14/bin:$PATH"
 
 #Ensure binary packages for languages are in path
-rustup toolchain link system "$(brew --prefix rust)"
-# export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOMEBREW_PREFIX/opt/rustup/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/go/bin:$PATH"
 export DYLD_LIBRARY_PATH="$HOMEBREW_PREFIX/lib:$DYLD_LIBRARY_PATH"
 
@@ -68,8 +68,13 @@ if type brew &>/dev/null; then
     zstyle ':completion:*' menu select
 fi
 
-# Custom LS/Eza colors
-export LS_COLORS="$(vivid generate catppuccin-mocha)"
+# Custom LS/Eza colors (cached for performance)
+_vivid_cache="$HOME/.cache/vivid-ls-colors"
+if [[ ! -f "$_vivid_cache" ]]; then
+    mkdir -p "$(dirname "$_vivid_cache")"
+    vivid generate catppuccin-mocha > "$_vivid_cache"
+fi
+export LS_COLORS="$(cat "$_vivid_cache")"
 
 export PATH="$HOME/.local/bin:$PATH"
 

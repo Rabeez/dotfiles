@@ -9,6 +9,43 @@ return {
       "antosha417/nvim-lsp-file-operations",
     },
     config = function()
+      -- Shared diagnostic helpers (used by <C-e> keymap and CursorHold autocmd)
+      local diag_icons = {
+        [vim.diagnostic.severity.ERROR] = { " ", "DiagnosticError" },
+        [vim.diagnostic.severity.WARN] = { " ", "DiagnosticWarn" },
+        [vim.diagnostic.severity.INFO] = { " ", "DiagnosticInfo" },
+        [vim.diagnostic.severity.HINT] = { " ", "DiagnosticHint" },
+      }
+
+      local function diag_prefix(diagnostic, _, _)
+        return unpack(diag_icons[diagnostic.severity])
+      end
+
+      local function diag_format(diagnostic)
+        local max_width = 80
+        local result = {}
+        local space_left = max_width
+        local line = ""
+        for word in diagnostic.message:gmatch("%S+") do
+          if #word + 1 <= space_left then
+            if line == "" then
+              line = word
+              space_left = space_left - #word
+            else
+              line = line .. " " .. word
+              space_left = space_left - (#word + 1)
+            end
+          else
+            table.insert(result, line)
+            line = word
+            space_left = max_width - #word
+          end
+        end
+        if line ~= "" then
+          table.insert(result, line)
+        end
+        return table.concat(result, "\n")
+      end
       require("mason").setup({
         ui = {
           border = "rounded",
@@ -61,14 +98,11 @@ return {
       local capabilities = vim.lsp.protocol.make_client_capabilities()
       capabilities = require("blink.cmp").get_lsp_capabilities(capabilities)
 
-      -- Rounded borders and other visual tweaks
+      -- Rounded borders for LSP windows
       require("lspconfig.ui.windows").default_options.border = "rounded"
-      vim.lsp.handlers["textDocument/hover"] = function()
-        vim.lsp.buf.hover({ border = "rounded" })
-      end
-      vim.lsp.handlers["textDocument/signatureHelp"] = function()
-        vim.lsp.buf.signature_help({ border = "rounded" })
-      end
+      vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = "rounded" })
+      vim.lsp.handlers["textDocument/signatureHelp"] =
+        vim.lsp.with(vim.lsp.handlers.signature_help, { border = "rounded" })
 
       local function set_underline_color_from_group(diagnostic_group, source_group)
         local hl = vim.api.nvim_get_hl(0, { name = source_group, link = false })
@@ -172,24 +206,6 @@ return {
           exportPdf = "onType",
         },
       })
-      -- vim.lsp.config("basedpyright", {
-      --   settings = {
-      --     basedpyright = {
-      --       disableOrganizeImports = true,
-      --       analysis = {
-      --         autoSearchPaths = true,
-      --         typeCheckingMode = "standard",
-      --         -- ignore = { "*" },
-      --         -- typeCheckingMode = "off",
-      --         useLibraryCodeForTypes = true,
-      --         diagnosticSeverityOverrides = {
-      --           ["reportUnusedImport"] = false,
-      --           ["ReportUnusedVariable"] = false,
-      --         },
-      --       },
-      --     },
-      --   },
-      -- })
       vim.lsp.config("pyrefly", {
         root_markers = {
           "pyrefly.toml",
@@ -271,51 +287,10 @@ return {
             vim.diagnostic.open_float(nil, {
               border = "rounded",
               source = "always",
-              prefix = function(diagnostic, i, total)
-                local icons = {
-                  [vim.diagnostic.severity.ERROR] = { " ", "DiagnosticError" },
-                  [vim.diagnostic.severity.WARN] = { " ", "DiagnosticWarn" },
-                  [vim.diagnostic.severity.INFO] = { " ", "DiagnosticInfo" },
-                  [vim.diagnostic.severity.HINT] = { " ", "DiagnosticHint" },
-                }
-                return unpack(icons[diagnostic.severity])
-              end,
+              prefix = diag_prefix,
               severity_sort = true,
               header = "",
-              format = function(diagnostic)
-                -- Just a simple text wrap to split long diagnostic into multiple lines
-                local max_width = 80
-                local result = {}
-                local space_left = max_width
-                local line = ""
-
-                -- Split the text into words
-                for word in diagnostic.message:gmatch("%S+") do
-                  -- If there's enough space for the word, add it
-                  if #word + 1 <= space_left then
-                    if line == "" then
-                      line = word
-                      space_left = space_left - #word
-                    else
-                      line = line .. " " .. word
-                      space_left = space_left - (#word + 1)
-                    end
-                  else
-                    table.insert(result, line)
-                    -- Start a new line and calculate space for the new word
-                    line = word
-                    space_left = max_width - #word
-                  end
-                end
-
-                -- Add the final line if not already added
-                if line ~= "" then
-                  table.insert(result, line)
-                end
-
-                -- Return the wrapped text joined by newline
-                return table.concat(result, "\n")
-              end,
+              format = diag_format,
             })
           end, { buffer = event.buf, desc = "LSP: Open hover panel for [e]rror/diagnostic under cursor" })
           vim.keymap.set(
@@ -333,69 +308,26 @@ return {
           end
 
           -- Show diagnostic in hover for cursor line
-          -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#show-line-diagnostics-automatically-in-hover-window
           vim.api.nvim_create_autocmd("CursorHold", {
             buffer = event.buf,
             callback = function()
-              local opts = {
+              vim.diagnostic.open_float(nil, {
                 focusable = false,
                 close_events = { "BufLeave", "CursorMoved", "InsertEnter", "FocusLost" },
                 border = "rounded",
                 source = "always",
-                prefix = function(diagnostic, i, total)
-                  local icons = {
-                    [vim.diagnostic.severity.ERROR] = { " ", "DiagnosticError" },
-                    [vim.diagnostic.severity.WARN] = { " ", "DiagnosticWarn" },
-                    [vim.diagnostic.severity.INFO] = { " ", "DiagnosticInfo" },
-                    [vim.diagnostic.severity.HINT] = { " ", "DiagnosticHint" },
-                  }
-                  return unpack(icons[diagnostic.severity])
-                end,
+                prefix = diag_prefix,
                 scope = "cursor",
                 severity_sort = true,
                 header = "",
-                format = function(diagnostic)
-                  -- Just a simple text wrap to split long diagnostic into multiple lines
-                  local max_width = 80
-                  local result = {}
-                  local space_left = max_width
-                  local line = ""
-
-                  -- Split the text into words
-                  for word in diagnostic.message:gmatch("%S+") do
-                    -- If there's enough space for the word, add it
-                    if #word + 1 <= space_left then
-                      if line == "" then
-                        line = word
-                        space_left = space_left - #word
-                      else
-                        line = line .. " " .. word
-                        space_left = space_left - (#word + 1)
-                      end
-                    else
-                      table.insert(result, line)
-                      -- Start a new line and calculate space for the new word
-                      line = word
-                      space_left = max_width - #word
-                    end
-                  end
-
-                  -- Add the final line if not already added
-                  if line ~= "" then
-                    table.insert(result, line)
-                  end
-
-                  -- Return the wrapped text joined by newline
-                  return table.concat(result, "\n")
-                end,
-              }
-              vim.diagnostic.open_float(nil, opts)
+                format = diag_format,
+              })
             end,
           })
 
           -- Highlight symbol under cursor
           -- https://github.com/neovim/nvim-lspconfig/wiki/UI-Customization#highlight-symbol-under-cursor
-          if client and client.server_capabilities.documentHighlightProvider then
+          if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
             local tb = require("catppuccin.palettes").get_palette("mocha")
             local namespace = vim.api.nvim_create_namespace("lsp-doc-highlight")
             vim.api.nvim_set_hl(namespace, "LspReferenceRead", { bg = tb.surface1 })
@@ -424,44 +356,9 @@ return {
       })
     end,
   },
-  -- {
-  --   "luckasRanarison/tailwind-tools.nvim",
-  --   name = "tailwind-tools",
-  --   build = ":UpdateRemotePlugins",
-  --   dependencies = {
-  --     "nvim-treesitter/nvim-treesitter",
-  --     -- "nvim-telescope/telescope.nvim", -- optional to show picker with available tailwind classes
-  --     "neovim/nvim-lspconfig", -- optional
-  --   },
-  --   opts = {}, -- your configuration
-  --   config = function()
-  --     require("tailwind-tools").setup({
-  --       document_color = {
-  --         inline_symbol = " ",
-  --       },
-  --     })
-  --     vim.api.nvim_create_autocmd({ "BufWritePre" }, {
-  --       pattern = {
-  --         "*.html",
-  --         "*.js",
-  --         "*.jsx",
-  --         "*.ts",
-  --         "*.tsx",
-  --         "*.twig",
-  --         "*.hbs",
-  --         "*.php",
-  --         "*.heex",
-  --         "*.astro",
-  --         "*.templ",
-  --         "*.jinja2",
-  --       },
-  --       command = "TailwindSort",
-  --     })
-  --   end,
-  -- },
   {
     "folke/trouble.nvim",
-    opts = {}, -- for default options, refer to the configuration section for custom setup.
+    opts = {},
     cmd = "Trouble",
     keys = {
       {
@@ -469,6 +366,8 @@ return {
         "<cmd>Trouble diagnostics toggle<cr>",
         desc = "[L]SP: Diagnostics (Trouble)",
       },
+    },
+  },
       -- {
       -- 	"<leader>xX",
       -- 	"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
