@@ -11,6 +11,7 @@ font-family = Maple Mono NF Medium
 font-size = 16
 adjust-cell-height = 10%
 macos-option-as-alt = left
+maximize = true
 confirm-close-surface = false
 mouse-hide-while-typing = true
 title = " "

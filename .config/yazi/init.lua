@@ -2,11 +2,18 @@ require("full-border"):setup({
   -- Available values: ui.Border.PLAIN, ui.Border.ROUNDED
   type = ui.Border.ROUNDED,
 })
-require("git"):setup()
+require("git"):setup({
+  -- Order of status signs showing in the linemode
+  order = 1500,
+})
 require("starship"):setup()
-require("no-status"):setup()
+require("toggle-status"):setup()
 require("eza-preview"):setup({
-  level = 2,
+	level = 2,
+	icons = true,
+	all = true,
+	git_ignore = false,
+	ignore_glob = ".git|node_modules|.pixi|.venv|.databricks|.ruff_cache|__pycache__",
 })
 
 -- Show user/group of files in status bar

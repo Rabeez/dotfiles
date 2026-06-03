@@ -8,7 +8,7 @@ return {
   },
   {
     "MeanderingProgrammer/render-markdown.nvim",
-    dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-tree/nvim-web-devicons" }, -- if you prefer nvim-web-devicons
+    dependencies = { "nvim-treesitter/nvim-treesitter" },
     ---@module 'render-markdown'
     ---@type render.md.UserConfig
     opts = {},
@@ -27,10 +27,47 @@ return {
     event = { "BufReadPre", "BufNewFile" },
     opts = {},
     config = function()
+      -- NOTE: this is meant to be used as a 'session-level' toggle switch for format-on-save
+      vim.api.nvim_create_user_command("ToggleAutoFormat", function()
+        if vim.g.disable_autoformat then
+          vim.g.disable_autoformat = false
+          print("Autoformat ENABLED")
+        else
+          vim.g.disable_autoformat = true
+          print("Autoformat DISABLED")
+        end
+      end, {})
+
+      -- NOTE: Disable format on save by default for blacklisted paths
+      local home = vim.loop.os_homedir()
+      local disabled_paths = {}
+      local function in_disabled_path(bufname)
+        for _, prefix in ipairs(disabled_paths) do
+          if bufname:sub(1, #prefix) == prefix then
+            return true
+          end
+        end
+        return false
+      end
+      vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
+        callback = function(args)
+          local bufname = vim.api.nvim_buf_get_name(args.buf)
+          if bufname ~= "" and in_disabled_path(bufname) then
+            vim.g.disable_autoformat = true
+            vim.notify("Autoformat DISABLED (blacklisted path)", vim.log.levels.INFO)
+          end
+        end,
+      })
+
       -- TODO: Move all this to lsp-config and single source of code processing
       require("conform").setup({
         -- https://github.com/stevearc/conform.nvim/issues/443#issuecomment-2151769432
         format_on_save = function(bufnr)
+          -- NOTE: this is meant to be used as a 'session-level' toggle switch for format-on-save
+          if vim.g.disable_autoformat then
+            return
+          end
+
           local bufname = vim.api.nvim_buf_get_name(bufnr)
 
           -- Disable file formatting on any temporary buffer contents

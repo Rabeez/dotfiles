@@ -32,6 +32,17 @@ return {
             leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
           },
         },
+        default_component_configs = {
+          git_status = {
+            symbols = {
+              untracked = "U",
+              ignored = "◌",
+              unstaged = "✗",
+              staged = "✓",
+              conflict = "",
+            },
+          },
+        },
         window = {
           -- toggle = true,
           position = "right",

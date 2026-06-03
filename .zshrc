@@ -12,7 +12,7 @@ export HOMEBREW_NO_ENV_HINTS=1
 export HOMEBREW_NO_UPDATE_REPORT_NEW=1
 
 # User scripts
-export PATH="$HOME/dotfiles_WORK/scripts/:$PATH"
+export PATH="$HOME/dotfiles/scripts/:$PATH"
 
 # Override builtin binaries with GNU ones installed via homebrew
 export PATH="$HOMEBREW_PREFIX/opt/grep/libexec/gnubin:$PATH"
@@ -37,18 +37,18 @@ export PATH="$HOME/go/bin:$PATH"
 export DYLD_LIBRARY_PATH="$HOMEBREW_PREFIX/lib:$DYLD_LIBRARY_PATH"
 
 # Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/rabeezriaz/.lmstudio/bin"
+export PATH="$PATH:$HOME/.lmstudio/bin"
 # End of LM Studio CLI section
 
 # For openblas
-export LDFLAGS="-L/opt/homebrew/opt/openblas/lib"
-export CPPFLAGS="-I/opt/homebrew/opt/openblas/include"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/openblas/lib/pkgconfig"
+export LDFLAGS="-L$HOMEBREW_PREFIX/opt/openblas/lib"
+export CPPFLAGS="-I$HOMEBREW_PREFIX/opt/openblas/include"
+export PKG_CONFIG_PATH="$HOMEBREW_PREFIX/opt/openblas/lib/pkgconfig"
 
 # For curl (from brew instructions)
-export LDFLAGS="-L/opt/homebrew/opt/curl/lib $LDFLAGS"
-export CPPFLAGS="-I/opt/homebrew/opt/curl/include $CPPFLAGS"
-export PKG_CONFIG_PATH="/opt/homebrew/opt/curl/lib/pkgconfig:$PKG_CONFIG_PATH"
+export LDFLAGS="$LDFLAGS -L$HOMEBREW_PREFIX/opt/curl/lib"
+export CPPFLAGS="$CPPFLAGS -I$HOMEBREW_PREFIX/opt/curl/include"
+export PKG_CONFIG_PATH="$HOMEBREW_PREFIX/opt/curl/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 # For clang
 # export LDFLAGS="-L/opt/homebrew/opt/llvm@14/lib $LDFLAGS"
@@ -56,7 +56,8 @@ export PKG_CONFIG_PATH="/opt/homebrew/opt/curl/lib/pkgconfig:$PKG_CONFIG_PATH"
 
 # https://docs.brew.sh/Shell-Completion#configuring-completions-in-zsh
 if type brew &>/dev/null; then
-    FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
+    _brew_prefix="$(brew --prefix)"
+    FPATH="$_brew_prefix/share/zsh/site-functions:${FPATH}"
 
     zstyle ':completion:*' rehash true
     zstyle ':completion:*' use-cache on
@@ -70,6 +71,8 @@ fi
 # Custom LS/Eza colors
 export LS_COLORS="$(vivid generate catppuccin-mocha)"
 
+export PATH="$HOME/.local/bin:$PATH"
+
 # Aliases
 alias sz='source $HOME/.zshrc'
 alias ls='eza -l --color=always --icons --header --classify --group-directories-first'
@@ -78,16 +81,76 @@ alias tree="eza --tree --icons -a --group-directories-last -I '.git|node_modules
 alias cp='cp -i'                         # confirm before overwriting
 alias df='df -h'                         # human readable sizes
 alias free='free -m'                     # sizes in MB
-alias cloc='tokei --hidden --sort files' # fast CLOC implementation with nice defaults
+alias cloc='tokei --hidden --sort code --num-format commas' # fast CLOC implementation with nice defaults
 alias ee="yazi"
 alias gg="lazygit"
 alias g="git"
 alias p="pixi"
 alias codi="codium"
 alias oc="opencode"
+alias cl="claude"
 alias tgpt='tgpt -i -m --preprompt "Be specific and brief. Avoid detailed explanations unless specifically asked."'
+alias tmux_sesh_info='tmux display -p -F "#{session_name}:#{window_index}.#{pane_index}  #{pane_current_command}  #{pane_current_path}"'
+alias glow="glow -p -w 200"
+alias glows="glow -p -w 150"
+mdopen() {
+    pandoc "$1" -o /tmp/mdpreview.html \
+        --standalone \
+        --css ~/.config/pandoc/github-dark.css \
+        --syntax-highlighting=idiomatic &&
+        open /tmp/mdpreview.html
+}
 
 export CLIPBOARD_THEME=ansi
+
+clip() {
+    if [ $# -lt 1 ]; then
+        echo "Usage: clip <file> [more files...]"
+        echo "Copies file(s) to macOS clipboard as file reference(s) (for pasting into apps/Finder)."
+        return 1
+    fi
+
+    # Ensure we're on macOS with osascript available
+    if ! command -v osascript >/dev/null 2>&1; then
+        echo "Error: osascript not found. This command only works on macOS."
+        return 1
+    fi
+
+    local as_items=""
+    local count=0
+    local file abs escaped
+
+    for file in "$@"; do
+        if [ ! -e "$file" ]; then
+            echo "Error: '$file' does not exist."
+            return 1
+        fi
+        abs="$(cd "$(dirname "$file")" && pwd)/$(basename "$file")"
+
+        # Escape for AppleScript string literal
+        escaped="${abs//\\/\\\\}"
+        escaped="${escaped//\"/\\\"}"
+
+        if [ -n "$as_items" ]; then
+            as_items="$as_items, (POSIX file \"$escaped\") as alias"
+        else
+            as_items="(POSIX file \"$escaped\") as alias"
+        fi
+        count=$((count + 1))
+    done
+
+    if [ $count -eq 1 ]; then
+        osascript >/dev/null <<EOF
+set the clipboard to $as_items
+EOF
+    else
+        osascript >/dev/null <<EOF
+set the clipboard to { $as_items }
+EOF
+    fi
+
+    echo "📦 $count item(s) placed on the clipboard as file reference(s). Try Cmd+V in Finder or apps that accept file paste."
+}
 
 # Use y instead of yazi to start, and press q to quit, you'll see the CWD changed.
 # Sometimes, you don't want to change, press Q to quit.
@@ -194,16 +257,17 @@ eval "$(zoxide init zsh --cmd cd)"
 
 # Setup ZSH plugins
 source "$HOME"/.config/fsh/fast-syntax-highlighting.plugin.zsh
-source "$(brew --prefix)"/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+source "$_brew_prefix"/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source "$HOME/.config/fzf-tab/fzf-tab.plugin.zsh"
 
 # API keys and secrets
-export OPENAI_API_KEY=$(cat "$HOME"/dotfiles/Secrets/openai_api_key)
-export OPENAI_API_KEY_PRO=$(cat "$HOME"/dotfiles/Secrets/openai_api_key_pro)
-export GOOGLE_API_KEY=$(cat "$HOME"/dotfiles/Secrets/google_api_key)
-export ANTHROPIC_API_KEY=$(cat "$HOME"/dotfiles/Secrets/anthropic_api_key)
-export DEEPSEEK_API_KEY=$(cat "$HOME"/dotfiles/Secrets/deepseek_api_key)
-export BACKBLAZE_API_KEY=$(cat "$HOME"/dotfiles/Secrets/backblaze_api_key)
+_load_secret() { [[ -f "$1" ]] && cat "$1" || echo ""; }
+export OPENAI_API_KEY=$(_load_secret "$HOME"/dotfiles/Secrets/openai_api_key)
+export OPENAI_API_KEY_PRO=$(_load_secret "$HOME"/dotfiles/Secrets/openai_api_key_pro)
+export GOOGLE_API_KEY=$(_load_secret "$HOME"/dotfiles/Secrets/google_api_key)
+export ANTHROPIC_API_KEY=$(_load_secret "$HOME"/dotfiles/Secrets/anthropic_api_key)
+export DEEPSEEK_API_KEY=$(_load_secret "$HOME"/dotfiles/Secrets/deepseek_api_key)
+export BACKBLAZE_API_KEY=$(_load_secret "$HOME"/dotfiles/Secrets/backblaze_api_key)
 
 # Matplotlib config directory
 export MPLCONFIGDIR=$HOME/.matplotlib
@@ -227,7 +291,7 @@ export PATH=$PATH:$ANDROID_HOME/platform-tools
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/zulu-17.jdk/Contents/Home"
 
 # pnpm
-export PNPM_HOME="/Users/rabeezriaz/Library/pnpm"
+export PNPM_HOME="$HOME/Library/pnpm"
 case ":$PATH:" in
 *":$PNPM_HOME:"*) ;;
 *) export PATH="$PNPM_HOME:$PATH" ;;
@@ -235,7 +299,9 @@ esac
 # pnpm end
 
 # ZSH vi mode
-source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+ZVM_VI_YANK_CLIP=1
+ZVM_VI_PUT_CLIP=1
+source "$_brew_prefix"/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 # NOTE: Need to re-apply keybind customizations, to ensure these are available in Insert mode
 # The plugin will auto execute this zvm_after_init function
 zvm_after_init() {
@@ -250,17 +316,19 @@ export SAVEHIST=1000000000
 setopt EXTENDED_HISTORY
 
 # Start tmux properly
-if command -v tmux &>/dev/null && command -v sesh &>/dev/null && [ -z "$TMUX" ]; then
-    TMUX_DEFAULT_SESSION="root-default"
-    # Check if the session already exists
-    if tmux has-session -t "$TMUX_DEFAULT_SESSION" 2>/dev/null; then
-        # Attach to existing session
-        tmux attach-session -t "$TMUX_DEFAULT_SESSION"
-    else
-        # Create new session with sesh
-        sesh connect "$TMUX_DEFAULT_SESSION" || tmux new-session -s "$TMUX_DEFAULT_SESSION"
+function tt() {
+    if command -v tmux &>/dev/null && command -v sesh &>/dev/null && [ -z "$TMUX" ]; then
+        TMUX_DEFAULT_SESSION="main"
+        # Check if the session already exists
+        if tmux has-session -t "$TMUX_DEFAULT_SESSION" 2>/dev/null; then
+            # Attach to existing session
+            tmux attach-session -t "$TMUX_DEFAULT_SESSION"
+        else
+            # Create new session with sesh
+            sesh connect "$TMUX_DEFAULT_SESSION" || tmux new-session -s "$TMUX_DEFAULT_SESSION"
+        fi
     fi
-fi
+}
 
 # Performance profiler (paired line at start of file)
 # zprof

@@ -96,3 +96,56 @@ vim.filetype.add({
     j2 = "jinja",
   },
 })
+
+-- Setup support for `file:line` navigation jumps
+vim.api.nvim_create_user_command("YankFileLine", function()
+  local path = vim.fn.expand("%") -- relative to CWD
+  local line = vim.fn.line(".") -- current line number
+  local result = string.format("%s:%d", path, line)
+  vim.fn.setreg("+", result) -- copy to system clipboard
+  print("Copied: " .. result)
+end, { desc = "Yank relative file path with line number" })
+
+vim.api.nvim_create_user_command("QfSort", function()
+  local qf = vim.fn.getqflist()
+
+  table.sort(qf, function(a, b)
+    local fa = vim.fn.bufname(a.bufnr)
+    local fb = vim.fn.bufname(b.bufnr)
+
+    if fa == fb then
+      return a.lnum < b.lnum
+    end
+    return fa < fb
+  end)
+
+  vim.fn.setqflist(qf, "r")
+end, { desc = "Sort QF list by fname,line" })
+
+vim.api.nvim_create_user_command("ToggleWrap", function()
+  vim.wo.wrap = not vim.wo.wrap
+end, { desc = "Toggle soft linewraps" })
+
+vim.keymap.set("n", "gf", function()
+  local word = vim.fn.expand("<cWORD>")
+  local file, line = word:match("([^:]+):?(%d*)")
+
+  if vim.fn.filereadable(file) == 1 then
+    vim.cmd("edit " .. file)
+    if line ~= "" then
+      vim.cmd(line)
+    end
+  else
+    print("File not found: " .. file)
+  end
+end, { desc = "Go to file:line" })
+
+-- Only touch the Python provider when inside a Pixi shell; otherwise disable it
+if vim.env.PIXI_ENVIRONMENT_NAME then
+  local host = vim.fn.exepath("python")
+  if host ~= "" then
+    vim.g.python3_host_prog = host
+  end
+else
+  vim.g.loaded_python3_provider = 0
+end

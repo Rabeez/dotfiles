@@ -164,6 +164,29 @@ return {
         end,
         desc = "[G]it: Log [l]ine",
       },
+      {
+        "<leader>gl",
+        function()
+          local start_line = vim.fn.line("v")
+          local end_line = vim.fn.line(".")
+          if start_line > end_line then
+            start_line, end_line = end_line, start_line
+          end
+          local file = vim.fn.expand("%:.")
+          -- Exit visual mode before opening terminal
+          vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "x", false)
+          local Terminal = require("toggleterm.terminal").Terminal
+          local git_log = Terminal:new({
+            cmd = "git log -L " .. start_line .. "," .. end_line .. ":" .. file .. " | delta --dark --paging=always",
+            direction = "float",
+            float_opts = { border = "rounded" },
+            close_on_exit = false,
+          })
+          git_log:toggle()
+        end,
+        mode = "v",
+        desc = "[G]it: Log [l]ine range",
+      },
     },
   },
 }

@@ -25,6 +25,10 @@ return {
           treesitter_context = true,
           telescope = true,
           fzf = true,
+          snacks = {
+            enabled = true,
+            indent_scope_color = "",
+          },
           alpha = true,
           fidget = true,
           ufo = true,

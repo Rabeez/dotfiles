@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BentoBoxCustomizationState</key>
+	<data>
+	eyJNb3ZlZENvbnRyb2xUb01lbnVCYXIiOmZhbHNlLCJSZXNpemVkQ29udHJvbCI6dHJ1
+	ZSwiTGFzdENoYW5nZURhdGUiOjc4MTY1NDE3MC4zODQzOTUsIkN1c3RvbWl6ZWRDb250
+	cm9sIjpmYWxzZSwiUmVtb3ZlZENvbnRyb2wiOnRydWUsIkFkZGVkQ29udHJvbCI6dHJ1
+	ZX0=
+	</data>
+	<key>HasAttemptedMenuBarWorkflowMigration</key>
+	<true/>
+	<key>LastHeartbeatDateString.daily</key>
+	<string>2026-06-02T13:58:10Z</string>
+	<key>LastPeriodicAnalyticsPostDate</key>
+	<date>2026-06-02T13:45:35Z</date>
+	<key>LiveActivityState</key>
+	<data>
+	eyJFbmFibGVkIjp0cnVlLCJDb21wYW5pb25QYWlyZWQiOnRydWUsIlNldHRpbmdFbmFi
+	bGVkIjp0cnVlLCJMYXN0Q2hhbmdlRGF0ZSI6NzkzNzA0NDEwLjIwODQyNywiU2V0dGlu
+	Z0V2ZXJFZGl0ZWQiOnRydWV9
+	</data>
+	<key>MenuBarCustomizationState</key>
+	<data>
+	eyJSZW1vdmVkQmVudG9Cb3giOmZhbHNlLCJSZW1vdmVkQ29udHJvbCI6dHJ1ZSwiQWRk
+	ZWRDb250cm9sIjpmYWxzZSwiTW92ZWRDb250cm9sVG9CZW50b0JveCI6ZmFsc2UsIkxh
+	c3RDaGFuZ2VEYXRlIjo3ODQ3MjMzNTMuMzcxNzE1LCJDdXN0b21pemVkQ29udHJvbCI6
+	ZmFsc2UsIkFkZGVkQmVudG9Cb3giOmZhbHNlfQ==
+	</data>
+	<key>NSStatusItem Preferred Position Battery</key>
+	<real>253.0</real>
+	<key>NSStatusItem Preferred Position BentoBox</key>
+	<real>76.0</real>
+	<key>NSStatusItem Preferred Position BentoBox-0</key>
+	<real>84.0</real>
+	<key>NSStatusItem Preferred Position Bluetooth</key>
+	<real>344.0</real>
+	<key>NSStatusItem Preferred Position KeyboardBrightness</key>
+	<real>294.0</real>
+	<key>NSStatusItem Preferred Position Sound</key>
+	<real>306.0</real>
+	<key>NSStatusItem Preferred Position WiFi</key>
+	<real>303.0</real>
+	<key>NSStatusItem Visible Battery</key>
+	<false/>
+	<key>NSStatusItem Visible BentoBox</key>
+	<true/>
+	<key>NSStatusItem Visible Item-0</key>
+	<false/>
+	<key>NSStatusItem Visible Item-1</key>
+	<false/>
+	<key>NSStatusItem Visible Item-2</key>
+	<false/>
+	<key>NSStatusItem Visible Item-3</key>
+	<false/>
+	<key>NSStatusItem Visible Item-4</key>
+	<false/>
+	<key>NSStatusItem Visible Item-5</key>
+	<false/>
+	<key>NSStatusItem Visible Item-6</key>
+	<false/>
+	<key>NSStatusItem Visible Item-7</key>
+	<false/>
+	<key>NSStatusItem Visible KeyboardBrightness</key>
+	<false/>
+	<key>NSStatusItem Visible Shortcuts</key>
+	<false/>
+	<key>NSStatusItem Visible WiFi</key>
+	<false/>
+	<key>NSStatusItem VisibleCC BentoBox-0</key>
+	<true/>
+	<key>NSStatusItem VisibleCC Bluetooth</key>
+	<true/>
+	<key>NSStatusItem VisibleCC Clock</key>
+	<true/>
+	<key>NSStatusItem VisibleCC Sound</key>
+	<true/>
+	<key>RemoteLiveActivitiesEnabled</key>
+	<true/>
+	<key>missionControlTooltipCount</key>
+	<integer>3</integer>
+</dict>
+</plist>

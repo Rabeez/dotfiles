@@ -3,23 +3,41 @@ show_hidden = true
 
 [preview]
 image_delay = 100
-max_width = 3000
+max_width = 2000
+max_height = 2000
 
 [plugin]
 prepend_previewers = [
-  { name = "*/", run = "eza-preview" },
-  # { name = "*.csv", run = "rich-preview"},
-  { name = "*.md", run = "rich-preview" },
-  { name = "*.ipynb", run = "rich-preview" },
-  { name = "*.json", run = "rich-preview" },
+  { url = "*/", run = "eza-preview" },
+  { url = "*.md", run = "glow" },
+  { url = "*.ipynb", run = "rich-preview" },
+  { mime = "image/*", run = "zoom" },
+  { mime = "application/pdf", run = "pdf-preview" },
+  { mime = "text/*", run = "bat-preview" },
+  { mime = "*/json", run = "bat-preview" },
+  { mime = "*/xml", run = "bat-preview" },
+  { mime = "*/javascript", run = "bat-preview" },
+  { mime = "*/x-python", run = "bat-preview" },
+  { mime = "*/x-shellscript", run = "bat-preview" },
+  { mime = "*/x-ruby", run = "bat-preview" },
+  { mime = "*/x-rust", run = "bat-preview" },
+  { mime = "*/toml", run = "bat-preview" },
+  { mime = "*/yaml", run = "bat-preview" },
+  { mime = "*/typescript", run = "bat-preview" },
+  { mime = "*/x-go", run = "bat-preview" },
+  { mime = "*/x-csrc", run = "bat-preview" },
+  { mime = "*/x-c++src", run = "bat-preview" },
+  { mime = "*/x-odin", run = "bat-preview" },
 ]
 
 [[plugin.prepend_fetchers]]
-id = "git"
-name = "*"
+group = "git"
+url = "*"
 run = "git"
+prio = "high"
 
 [[plugin.prepend_fetchers]]
-id = "git"
-name = "*/"
+group = "git"
+url = "*/"
 run = "git"
+prio = "high"

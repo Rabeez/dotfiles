@@ -73,7 +73,8 @@ Macos = " "
 disabled = true
 
 [pixi]
-symbol = " "
+symbol = " "
+format = 'via [$symbol($version )]($style)[(\(env: $environment\) )](bold red)'
 
 [python]
 symbol = " "

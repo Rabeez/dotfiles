@@ -1,5 +1,19 @@
 return {
   {
+    "echasnovski/mini.icons",
+    version = false,
+    lazy = false,
+    priority = 100,
+    opts = {},
+    init = function()
+      -- Provide nvim-web-devicons compatibility for plugins that require it
+      package.preload["nvim-web-devicons"] = function()
+        require("mini.icons").mock_nvim_web_devicons()
+        return package.loaded["nvim-web-devicons"]
+      end
+    end,
+  },
+  {
     "stevearc/dressing.nvim",
     -- event = "VeryLazy",
     config = function()
@@ -37,9 +51,7 @@ return {
   {
     "nvim-lualine/lualine.nvim",
     dependencies = {
-      -- TODO: migrate to mini.icons
-      --       will require checking other plugins as well. just do grep "nvim-web-devicons"
-      "nvim-tree/nvim-web-devicons",
+      "echasnovski/mini.icons",
       "bwpge/lualine-pretty-path",
       "letieu/harpoon-lualine",
     },

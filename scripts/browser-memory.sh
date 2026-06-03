@@ -1,199 +1,269 @@
-#!/usr/bin/env bash
-set -euo pipefail
+#!/bin/sh
+# browser-memory.sh — RAM usage by browser
+set -eu
 
-if ! command -v gum &> /dev/null; then
-    echo "Error: gum is not installed. Install it using: brew install gum" >&2
-    exit 1
-fi
+SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
+for lib in "$SCRIPT_DIR"/lib/*.sh; do . "$lib"; done
+
+require_cmd gum top
 
 # ─────────────────────────────────────────────
 # browser-memory.sh — RAM usage by browser
+# Groups all subprocesses (renderers, helpers,
+# GPU, plugin-containers, etc.) per browser.
+# Electron apps are auto-detected and shown
+# separately from actual browsers.
+#
+# Uses macOS `top` for memory measurement, which
+# reports physical footprint (same as Activity
+# Monitor) — accounts for memory compression,
+# shared pages, and purgeable memory.
+#
+# POSIX sh compatible — no bash required.
+# Heavy lifting done in awk for performance.
 # ─────────────────────────────────────────────
 
-BROWSER_NAMES=("Chrome Canary" "Chrome" "Firefox" "Zen" "Safari")
-BROWSER_PATTERNS=(
-	"/Applications/Google Chrome Canary.app/"
-	"/Applications/Google Chrome.app/"
-	"/Applications/Firefox.app/"
-	"/Applications/Zen.app/"
-	"Safari"
-)
-
-# ── Key-value store via tmpdir files ──────────
-KV_DIR=$(mktemp -d)
-trap 'rm -rf "$KV_DIR"' EXIT
-
-_kv_safe() { printf '%s' "$1" | tr -cs 'a-zA-Z0-9_-' '_'; }
-
-kv_set() {
-	local store="$KV_DIR/$1"; mkdir -p "$store"
-	local safe; safe=$(_kv_safe "$2")
-	printf '%s\n' "$3" > "$store/$safe"
-	printf '%s\n' "$2" > "$store/${safe}.orig"
-}
-
-kv_get() {
-	local f="$KV_DIR/$1/$(_kv_safe "$2")"
-	[[ -f "$f" ]] && cat "$f" || echo 0
-}
-
-kv_has() { [[ -f "$KV_DIR/$1/$(_kv_safe "$2")" ]]; }
-
-kv_inc() {
-	local cur; cur=$(kv_get "$1" "$2")
-	kv_set "$1" "$2" $((cur + $3))
-}
-
-# ── PID tracking ──────────────────────────────
-SEEN_DIR="$KV_DIR/seen"
-mkdir -p "$SEEN_DIR"
-seen_pid() { [[ -f "$SEEN_DIR/$1" ]]; }
-mark_pid() { touch "$SEEN_DIR/$1"; }
-
-# ── Initialize browser entries ────────────────
-for name in "${BROWSER_NAMES[@]}"; do
-	kv_set totals "$name" 0
-	kv_set counts "$name" 0
-done
-
-ELECTRON_APPS=()
-
-ps_output() {
-	ps -eo pid=,rss=,comm= | awk '{printf "%d\t%d\t", $1, $2; for(i=3;i<=NF;i++) printf "%s%s", $i, (i<NF?" ":""); print ""}'
-}
-
-process_line() {
-	local pid="$1" rss="$2" comm="$3"
-	[[ -z "$pid" || -z "$rss" || -z "$comm" ]] && return 0
-	seen_pid "$pid" && return 0
-
-	local matched=false i
-
-	for ((i = 0; i < ${#BROWSER_NAMES[@]}; i++)); do
-		if [[ "$comm" == *"${BROWSER_PATTERNS[$i]}"* ]]; then
-			kv_inc totals "${BROWSER_NAMES[$i]}" "$rss"
-			kv_inc counts "${BROWSER_NAMES[$i]}" 1
-			mark_pid "$pid"
-			matched=true
-			break
-		fi
-	done
-	$matched && return 0
-
-	if [[ "$comm" == /Applications/*.app/* ]]; then
-		local app_bundle="${comm#*/Applications/}"
-		app_bundle="${app_bundle%%/*}"
-		[[ -z "$app_bundle" || "$app_bundle" != *.app ]] && return 0
-
-		local is_browser=false
-		for ((i = 0; i < ${#BROWSER_NAMES[@]}; i++)); do
-			if [[ "/Applications/$app_bundle/" == *"${BROWSER_PATTERNS[$i]}"* ]]; then
-				is_browser=true; break
-			fi
-		done
-		$is_browser && return 0
-
-		local app_name="${app_bundle%.app}"
-
-		if [[ "$comm" == *"Electron Framework"* ]] ||
-			[[ "$comm" == *"Helper (Renderer)"* ]] ||
-			[[ "$comm" == *"Helper (GPU)"* ]] ||
-			[[ "$comm" == *"Helper (Plugin)"* ]] ||
-			[[ "$comm" == *"chrome_crashpad_handler"* ]] ||
-			[[ "$comm" == *"Helper.app"* ]]; then
-
-			if ! kv_has totals "$app_name"; then
-				kv_set totals "$app_name" 0
-				kv_set counts "$app_name" 0
-				ELECTRON_APPS+=("$app_name")
-			fi
-			kv_inc totals "$app_name" "$rss"
-			kv_inc counts "$app_name" 1
-			mark_pid "$pid"
-			matched=true
-		fi
-
-		if ! $matched && kv_has totals "$app_name"; then
-			kv_inc totals "$app_name" "$rss"
-			kv_inc counts "$app_name" 1
-			mark_pid "$pid"
-		fi
-	fi
-}
-
-while IFS=$'\t' read -r pid rss comm; do
-	process_line "$pid" "$rss" "$comm"
-done < <(ps_output)
-
-# ── Second pass for Electron main processes ───
-if ((${#ELECTRON_APPS[@]} > 0)); then
-	while IFS=$'\t' read -r pid rss comm; do
-		[[ -z "$pid" || -z "$rss" || -z "$comm" ]] && continue
-		seen_pid "$pid" && continue
-		if [[ "$comm" == /Applications/*.app/* ]]; then
-			app_bundle="${comm#*/Applications/}"
-			app_bundle="${app_bundle%%/*}"
-			[[ -z "$app_bundle" || "$app_bundle" != *.app ]] && continue
-			app_name="${app_bundle%.app}"
-			if kv_has totals "$app_name"; then
-				kv_inc totals "$app_name" "$rss"
-				kv_inc counts "$app_name" 1
-				mark_pid "$pid"
-			fi
-		fi
-	done < <(ps_output)
-fi
-
-# ── Sort Electron apps by memory desc ─────────
-if ((${#ELECTRON_APPS[@]} > 0)); then
-	sorted_electron=()
-	while IFS= read -r app; do
-		sorted_electron+=("$app")
-	done < <(
-		for app in "${ELECTRON_APPS[@]}"; do
-			echo "$(kv_get totals "$app") $app"
-		done | sort -rn | sed 's/^[0-9]* //'
-	)
-	ELECTRON_APPS=("${sorted_electron[@]}")
-fi
-
-# ── Format output ─────────────────────────────
+# human_size KB -> human readable (e.g. "1.5GiB")
 human_size() {
-	numfmt --to=iec --suffix=B --format="%.1f" $(($1 * 1024)) 2>/dev/null
+	echo "$1" | awk '{
+		b = $1 * 1024
+		if (b >= 1073741824) printf "%.1fGiB\n", b / 1073741824
+		else if (b >= 1048576) printf "%.1fMiB\n", b / 1048576
+		else if (b >= 1024) printf "%.1fKiB\n", b / 1024
+		else printf "%dB\n", b
+	}'
 }
 
-rows=()
+# ── Data collection script (runs inside gum spinner) ──
+# Writes results to a temp file since gum spin captures stdout.
+# The script collects top + ps snapshots and runs a single awk
+# invocation that does all PID→browser/Electron matching.
+_collect_script=$(mktemp)
+_data_out=$(mktemp)
+trap 'rm -f "$_collect_script" "$_data_out"' EXIT
+
+cat >"$_collect_script" <<'COLLECT_EOF'
+#!/bin/sh
+set -eu
+_data_out="$1"
+
+_top_data=$(mktemp)
+_ps_data=$(mktemp)
+trap 'rm -f "$_top_data" "$_ps_data"' EXIT
+
+top -l 1 -stats pid,mem 2>/dev/null | awk 'NR > 12 && NF >= 2 { print $1, $2 }' > "$_top_data"
+ps -eo pid=,comm= | awk '{printf "%d\t", $1; for(i=2;i<=NF;i++) printf "%s%s", $i, (i<NF?" ":""); print ""}' > "$_ps_data"
+
+# All matching logic in a single awk invocation for performance.
+# Three-phase input: top data (file), then ps data piped twice
+# via a here-document with sentinel lines as phase separators.
+# Outputs tab-separated: TYPE NAME KB COUNT
+awk '
+BEGIN {
+	FS = " "
+	# Browser definitions — order matters (Canary before Chrome)
+	bc = 5
+	bn[1] = "Chrome Canary"; bp[1] = "/Applications/Google Chrome Canary.app/"
+	bn[2] = "Chrome";        bp[2] = "/Applications/Google Chrome.app/"
+	bn[3] = "Firefox";       bp[3] = "/Applications/Firefox.app/"
+	bn[4] = "Zen";           bp[4] = "/Applications/Zen.app/"
+	bn[5] = "Safari";        bp[5] = "Safari"
+	for (i = 1; i <= bc; i++) { totals[bn[i]] = 0; counts[bn[i]] = 0 }
+
+	# Electron indicator patterns
+	ec = 6
+	ep[1] = "Electron Framework"
+	ep[2] = "Helper (Renderer)"
+	ep[3] = "Helper (GPU)"
+	ep[4] = "Helper (Plugin)"
+	ep[5] = "chrome_crashpad_handler"
+	ep[6] = "Helper.app"
+
+	eac = 0  # electron app count
+	phase = "top"
+}
+
+# Phase 1: top output (PID MEM)
+phase == "top" && /^---PS_DATA---$/ { phase = "ps1"; next }
+phase == "top" {
+	pid = $1; mem = $2
+	if (pid == "" || mem == "") next
+	num = mem; gsub(/[A-Za-z+]/, "", num)
+	if (num == "") next
+	nv = num + 0
+	if (mem ~ /[Gg]/) kb = int(nv * 1048576)
+	else if (mem ~ /[Mm]/) kb = int(nv * 1024)
+	else if (mem ~ /[Kk]/) kb = int(nv)
+	else kb = 0
+	mempid[pid] = kb
+	next
+}
+
+# Phase 2: first ps pass — match browsers and detect Electron apps
+phase == "ps1" && /^---PS_PASS2---$/ { phase = "ps2"; next }
+phase == "ps1" {
+	tab = index($0, "\t")
+	if (tab == 0) next
+	pid = substr($0, 1, tab - 1)
+	comm = substr($0, tab + 1)
+	if (pid == "" || comm == "") next
+	if (!(pid in mempid)) next
+	if (pid in seen) next
+	lkb = mempid[pid]
+
+	# Try matching known browsers
+	matched = 0
+	for (i = 1; i <= bc; i++) {
+		if (index(comm, bp[i]) > 0) {
+			totals[bn[i]] += lkb; counts[bn[i]]++
+			seen[pid] = 1; matched = 1; break
+		}
+	}
+	if (matched) next
+
+	# Auto-detect Electron apps from /Applications/*.app/ bundles
+	if (index(comm, "/Applications/") != 1) next
+	rest = substr(comm, 15)
+	sl = index(rest, "/")
+	if (sl == 0) next
+	ab = substr(rest, 1, sl - 1)
+	if (ab == "") next
+	if (!match(ab, /\.app$/)) next
+
+	# Skip known browser bundles
+	isbr = 0; tp = "/Applications/" ab "/"
+	for (i = 1; i <= bc; i++) { if (index(tp, bp[i]) > 0) { isbr = 1; break } }
+	if (isbr) next
+
+	# Check Electron indicators
+	isel = 0
+	for (i = 1; i <= ec; i++) { if (index(comm, ep[i]) > 0) { isel = 1; break } }
+	an = substr(ab, 1, length(ab) - 4)
+
+	if (isel) {
+		if (!(an in totals)) {
+			totals[an] = 0; counts[an] = 0; eac++; eapps[eac] = an
+		}
+		totals[an] += lkb; counts[an]++; seen[pid] = 1
+	} else if (an in totals) {
+		totals[an] += lkb; counts[an]++; seen[pid] = 1
+	}
+	next
+}
+
+# Phase 3: second ps pass — pick up main procs of discovered Electron apps
+phase == "ps2" {
+	if (eac == 0) next
+	tab = index($0, "\t")
+	if (tab == 0) next
+	pid = substr($0, 1, tab - 1)
+	comm = substr($0, tab + 1)
+	if (pid in seen) next
+	if (!(pid in mempid)) next
+	if (index(comm, "/Applications/") != 1) next
+	rest = substr(comm, 15)
+	sl = index(rest, "/")
+	if (sl == 0) next
+	ab = substr(rest, 1, sl - 1)
+	if (ab == "") next
+	if (!match(ab, /\.app$/)) next
+	an = substr(ab, 1, length(ab) - 4)
+	if (an in totals) {
+		totals[an] += mempid[pid]; counts[an]++; seen[pid] = 1
+	}
+	next
+}
+
+END {
+	for (i = 1; i <= bc; i++)
+		printf "BROWSER\t%s\t%d\t%d\n", bn[i], totals[bn[i]], counts[bn[i]]
+	for (i = 1; i <= eac; i++)
+		printf "ELECTRON\t%s\t%d\t%d\n", eapps[i], totals[eapps[i]], counts[eapps[i]]
+}
+' "$_top_data" - <<ENDMARKER > "$_data_out"
+---PS_DATA---
+$(cat "$_ps_data")
+---PS_PASS2---
+$(cat "$_ps_data")
+ENDMARKER
+COLLECT_EOF
+chmod +x "$_collect_script"
+
+gum spin --spinner minidot --title "Collecting memory data…" -- sh "$_collect_script" "$_data_out"
+
+# ── Format output ───────────────────────────────────────
+_rows=$(mktemp)
+_electron_unsorted=$(mktemp)
+: >"$_rows"
+: >"$_electron_unsorted"
+trap 'rm -f "$_collect_script" "$_data_out" "$_rows" "$_electron_unsorted" "${_rows}.bt" "${_rows}.et"' EXIT
+
 browser_total=0
 electron_total=0
 
-for name in "${BROWSER_NAMES[@]}"; do
-	kb=$(kv_get totals "$name")
-	count=$(kv_get counts "$name")
-	((kb == 0)) && continue
-	browser_total=$((browser_total + kb))
-	rows+=("$name|$(human_size "$kb")|$count processes")
-done
+# Parse awk output (tab-separated: TYPE NAME KB COUNT)
+while IFS='	' read -r type name kb count; do
+	[ -z "$type" ] && continue
+	case "$type" in
+	BROWSER)
+		[ "$kb" -eq 0 ] 2>/dev/null && continue
+		printf '%s\n' "$kb" >>"${_rows}.bt"
+		printf '%s|%s|%s processes\n' "$name" "$(human_size "$kb")" "$count" >>"$_rows"
+		;;
+	ELECTRON)
+		[ "$kb" -eq 0 ] 2>/dev/null && continue
+		printf '%s\t%s\t%s\n' "$kb" "$name" "$count" >>"$_electron_unsorted"
+		;;
+	esac
+done <"$_data_out"
 
-if ((${#ELECTRON_APPS[@]} > 0)); then
-	((${#rows[@]} > 0)) && rows+=("─|─|─")
-	for name in "${ELECTRON_APPS[@]}"; do
-		kb=$(kv_get totals "$name")
-		count=$(kv_get counts "$name")
-		((kb == 0)) && continue
-		electron_total=$((electron_total + kb))
-		rows+=("⚡$name|$(human_size "$kb")|$count processes")
+# Accumulate browser total from side-channel file
+# (piped while loops run in subshells in POSIX sh, so we
+#  write values to a file and sum them here in the main shell)
+if [ -f "${_rows}.bt" ]; then
+	while read -r val; do
+		browser_total=$((browser_total + val))
+	done <"${_rows}.bt"
+	rm -f "${_rows}.bt"
+fi
+
+# Sort electron apps by memory descending, add to rows
+if [ -s "$_electron_unsorted" ]; then
+	if [ -s "$_rows" ]; then
+		echo "─|─|─" >>"$_rows"
+	fi
+	sort -rn "$_electron_unsorted" | while IFS='	' read -r kb name count; do
+		[ -z "$name" ] && continue
+		[ "$kb" -eq 0 ] 2>/dev/null && continue
+		printf '%s\n' "$kb" >>"${_rows}.et"
+		printf '⚡%s|%s|%s processes\n' "$name" "$(human_size "$kb")" "$count" >>"$_rows"
 	done
 fi
 
-if ((${#rows[@]} == 0)); then
+# Accumulate electron total from side-channel file
+if [ -f "${_rows}.et" ]; then
+	while read -r val; do
+		electron_total=$((electron_total + val))
+	done <"${_rows}.et"
+	rm -f "${_rows}.et"
+fi
+
+if [ ! -s "$_rows" ]; then
 	gum style --foreground 242 "No browsers or Electron apps running."
 	exit 0
 fi
 
 grand_total=$((browser_total + electron_total))
-rows+=("─|─|─")
-((browser_total > 0)) && rows+=("Browsers|$(human_size "$browser_total")|")
-((electron_total > 0)) && rows+=("⚡Electron|$(human_size "$electron_total")|")
-rows+=("TOTAL|$(human_size "$grand_total")|")
+echo "─|─|─" >>"$_rows"
+if [ "$browser_total" -gt 0 ]; then
+	printf 'Browsers|%s|\n' "$(human_size "$browser_total")" >>"$_rows"
+fi
+if [ "$electron_total" -gt 0 ]; then
+	printf '⚡Electron|%s|\n' "$(human_size "$electron_total")" >>"$_rows"
+fi
+printf 'TOTAL|%s|\n' "$(human_size "$grand_total")" >>"$_rows"
 
-printf "%s\n" "App|Memory|Processes" "${rows[@]}" | gum table -s '|' -w 20,10,14 -p
+{
+	printf '%s\n' "App|Memory|Processes"
+	cat "$_rows"
+} | gum table -s '|' -w 20,10,14 -p

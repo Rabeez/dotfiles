@@ -4,24 +4,12 @@ on = "<Esc>"
 run = "close"
 desc = "Cancel input"
 
-# Smart enter: enter for directory, open for file
-[[mgr.prepend_keymap]]
-on = "l"
-run = "plugin smart-enter"
-desc = "Enter the child directory, or open the file"
-
 # Copy selected files to the system clipboard while yanking
 [[mgr.prepend_keymap]]
 on = "y"
 run = ['''
 	shell 'echo "$@" | xclip -i -selection clipboard -t text/uri-list' --confirm
 ''', "yank"]
-
-# Maximize preview pane
-[[mgr.prepend_keymap]]
-on = "T"
-run = "plugin toggle-pane max-preview"
-desc = "Maximize or restore preview"
 
 # File navigation wraparound
 # [[manager.prepend_keymap]]
@@ -62,9 +50,24 @@ run = "plugin smart-enter"
 desc = "Enter the child directory, or open the file"
 
 [[mgr.prepend_keymap]]
-on = "<z>"
+on = "z"
+run = "plugin zoxide"
+desc = "Zoxide jump"
+
+[[mgr.prepend_keymap]]
+on = "Z"
 run = "plugin fzf"
-desc = "Start FZF"
+desc = "FZF directory jump"
+
+[[mgr.prepend_keymap]]
+on = "<C-o>"
+run = "back"
+desc = "Go back"
+
+[[mgr.prepend_keymap]]
+on = "<C-i>"
+run = "forward"
+desc = "Go forward"
 
 [[mgr.prepend_keymap]]
 on = ["c", "g"]
@@ -74,33 +77,102 @@ run = '''
 desc = "Copy file/directory path from git repo root"
 
 [[mgr.prepend_keymap]]
+on = ["c", "h"]
+run = '''
+	shell 'realpath "$@" | sed "s|^$HOME|~|" | pbcopy'
+'''
+desc = "Copy file/directory path from home"
+
+[[mgr.prepend_keymap]]
 on = "E"
 run = "plugin eza-preview"
 desc = "Toggle tree/list dir preview"
 
 [[mgr.prepend_keymap]]
-on = "-"
-run = "plugin eza-preview --args='--inc-level'"
-desc = "Increment tree level"
-
-[[mgr.prepend_keymap]]
-on = "_"
-run = "plugin eza-preview --args='--dec-level'"
-desc = "Decrement tree level"
+on = "+"
+run = "plugin zoom-toggle"
+desc = "Toggle fullscreen preview"
 
 [[mgr.prepend_keymap]]
 on = [".", "s"]
 run = "plugin what-size"
 desc = "Calc size of selection or cwd"
 
+
 [[mgr.prepend_keymap]]
 on = "<C-y>"
 run = ["plugin system-clipboard"]
 desc = "Copy selection to system clipboard"
 
-# TODO: fix hidden toggle to <.h>
-# TODO: fix Z that uses fzf for directory navigation - limit depth AND start from ~ always
-# TODO: set z to use same ^ fzf but start from current directory
-# TODO: Set keymap <c-o> to back and <c-i> to forward
-# TODO: Set keymap <c-p> to show 'properties'/'info' (default is <c-i>)
-# TODO: Set Q keymap to quit yazi and navigate shell to directory that yazi was in
+# Utils group
+[[mgr.prepend_keymap]]
+on = ["u", "s"]
+run = "plugin toggle-status"
+desc = "Toggle status bar"
+
+[[mgr.prepend_keymap]]
+on = ["u", "h"]
+run = "hidden toggle"
+desc = "Toggle hidden files"
+
+[[mgr.prepend_keymap]]
+on = ["u", "d"]
+run = "plugin diff"
+desc = "Diff selected file with hovered"
+
+[[mgr.prepend_keymap]]
+on = ["u", "e"]
+run = "plugin exif-preview"
+desc = "Show EXIF metadata"
+
+[[mgr.prepend_keymap]]
+on = ["u", "t"]
+run = "plugin eza-preview"
+desc = "Toggle flat/tree dir preview"
+
+# Permissions group
+[[mgr.prepend_keymap]]
+on = ["p", "p"]
+run = "plugin chmod"
+desc = "Chmod (interactive)"
+
+[[mgr.prepend_keymap]]
+on = ["p", "r"]
+run = "shell 'chmod u+r \"$@\"' --confirm"
+desc = "Toggle +r (owner read)"
+
+[[mgr.prepend_keymap]]
+on = ["p", "w"]
+run = "shell 'chmod u+w \"$@\"' --confirm"
+desc = "Toggle +w (owner write)"
+
+[[mgr.prepend_keymap]]
+on = ["p", "x"]
+run = "shell 'chmod u+x \"$@\"' --confirm"
+desc = "Toggle +x (owner exec)"
+
+[[mgr.prepend_keymap]]
+on = ["p", "R"]
+run = "shell 'chmod u-r \"$@\"' --confirm"
+desc = "Toggle -r (owner read)"
+
+[[mgr.prepend_keymap]]
+on = ["p", "W"]
+run = "shell 'chmod u-w \"$@\"' --confirm"
+desc = "Toggle -w (owner write)"
+
+[[mgr.prepend_keymap]]
+on = ["p", "X"]
+run = "shell 'chmod u-x \"$@\"' --confirm"
+desc = "Toggle -x (owner exec)"
+
+[[mgr.prepend_keymap]]
+on = "<Tab>"
+run = "forward"
+desc = "Go forward"
+
+[[mgr.prepend_keymap]]
+on = "<C-p>"
+run = "spot"
+desc = "Spot hovered file"
+

@@ -1,3 +1,0 @@
-cargo install pokeget
-cargo install rustup
-cargo install spotify_player

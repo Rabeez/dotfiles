@@ -1,0 +1,8 @@
+# Miscfile — manually installed tools/apps (DMGs, direct downloads, other CLIs)
+# One entry per line. Use the app name (without .app) or binary name.
+# Entries here suppress warnings in the untracked report.
+#
+# Examples:
+#   Docker
+#   Raycast
+#   ngrok

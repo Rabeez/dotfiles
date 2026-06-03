@@ -1,0 +1,34 @@
+# Untracked Report — 2026-06-02 23:18:28
+# Items below are NOT managed by brew, cargo, go, uv, or listed in Miscfile.
+# Add items to backups/Miscfile to suppress these warnings.
+
+## Applications (/Applications)
+  .Karabiner-VirtualHIDDevice-Manager
+  Annotate
+  Falcon
+  Google Chrome
+  Karabiner-Elements
+  Karabiner-EventViewer
+  Okta Verify
+  Raycast Beta
+  Safari
+  Self Service
+  Slack
+  TinkerTool
+  Tunnelblick
+  Tunnelblick.old
+  zoom.us
+
+## Binaries (/usr/local/bin, ~/.local/bin)
+  /usr/local/bin/OktaDAServiceDaemon
+  /usr/local/bin/aws
+  /usr/local/bin/aws_completer
+  /usr/local/bin/desktoppr
+  /usr/local/bin/dialog
+  /usr/local/bin/fileicon
+  /usr/local/bin/jamf
+  /usr/local/bin/jamfconnect
+  /usr/local/bin/nvim
+  /usr/local/bin/selfservice
+  /usr/local/bin/syncher
+  /Users/rabeezriaz/.local/bin/forge
