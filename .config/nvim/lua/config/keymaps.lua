@@ -92,3 +92,7 @@ vim.api.nvim_create_user_command("ToggleScrollWheel", function()
   set_horizontal_scroll(not horizontal_scroll_disabled)
   vim.notify("󰍽 Horizontal Scroll wheel disabled: " .. tostring(horizontal_scroll_disabled))
 end, {})
+
+-- Keep visual selection after indent/dedent
+vim.keymap.set("v", "<", "<gv")
+vim.keymap.set("v", ">", ">gv")
