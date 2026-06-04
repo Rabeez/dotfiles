@@ -6,7 +6,8 @@ return {
     priority = 1000,
     config = function()
       require("catppuccin").setup({
-        flavour = "mocha",
+        flavour = "auto",
+        background = { light = "latte", dark = "mocha" },
         term_colors = true,
         transparent_background = true,
         float = {
@@ -20,6 +21,14 @@ return {
         end,
         no_italic = true,
         integrations = {
+          lualine = {
+            all = function(colors)
+              return {
+                normal = { c = { bg = colors.surface0, fg = colors.text } },
+                inactive = { c = { bg = colors.surface0, fg = colors.overlay0 } },
+              }
+            end,
+          },
           notify = true,
           treesitter = true,
           treesitter_context = true,

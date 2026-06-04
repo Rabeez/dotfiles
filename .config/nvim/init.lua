@@ -37,7 +37,7 @@ local filename = vim.fn.expand("$XDG_CONFIG_HOME/nvim/colorscheme")
 assert(type(filename) == "string")
 local file = io.open(filename, "r")
 if file then
-  local scheme = file:read("*a")
+  local scheme = file:read("*a"):gsub("%s+$", "")
   if scheme ~= DEFAULT_SCHEME then
     vim.notify(" Loading nvim colorscheme from state '" .. scheme .. "'", vim.log.levels.INFO)
   end

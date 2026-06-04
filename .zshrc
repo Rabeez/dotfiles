@@ -230,8 +230,13 @@ export TEALDEER_CONFIG_DIR="$HOME/.config/tealdeer"
 # )
 # printf "%s\n" "${ART[@]}" | fastfetch --file-raw -
 
-CLR_BORDER="\033[35m"
-CLR_CONTENTS="\033[96m"
+if [[ "$_theme_mode" == "light" ]]; then
+  CLR_BORDER="\033[38;2;114;135;253m"
+  CLR_CONTENTS="\033[38;2;30;102;245m"
+else
+  CLR_BORDER="\033[38;2;180;190;254m"
+  CLR_CONTENTS="\033[38;2;137;180;250m"
+fi
 CLR_RESET="\033[0m"
 
 # ASCII Art with embedded ANSI codes

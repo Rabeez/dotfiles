@@ -131,9 +131,9 @@ switch_neovim() {
 
 	# Live-reload all running nvim instances
 	local socks
-	socks=$(find /tmp -name "nvim.*" -type s 2>/dev/null || true)
+	socks=$(find "${TMPDIR:-/tmp}" -path "*/nvim*/nvim.*" -type s 2>/dev/null || true)
 	for sock in $socks; do
-		nvim --server "$sock" --remote-expr "execute('colorscheme $scheme')" 2>/dev/null || true
+		nvim --server "$sock" --remote-send "<Cmd>colorscheme $scheme<CR>" 2>/dev/null || true
 	done
 }
 

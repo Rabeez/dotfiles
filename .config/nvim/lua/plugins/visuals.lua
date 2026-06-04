@@ -133,10 +133,16 @@ return {
         table.insert(harpoon_active_indicators, string.format("󰐾 %d", i))
       end
 
-      local tb = require("catppuccin.palettes").get_palette("mocha")
+      local function get_catppuccin_palette()
+        local flavour = require("catppuccin").flavour or vim.g.catppuccin_flavour or "mocha"
+        return require("catppuccin.palettes").get_palette(flavour)
+      end
+
+      local tb = get_catppuccin_palette()
 
       require("lualine").setup({
         options = {
+          theme = "catppuccin-nvim",
           component_separators = { left = "", right = "" },
           section_separators = { left = "", right = "" },
           disabled_filetypes = {
@@ -282,6 +288,13 @@ return {
             pretty_path,
           },
         },
+      })
+
+      -- Refresh palette reference when colorscheme changes (used by noice recording indicator)
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        callback = function()
+          tb = get_catppuccin_palette()
+        end,
       })
     end,
   },
