@@ -81,9 +81,15 @@ switch_tmux() {
 	if [[ "$mode" == "light" ]]; then
 		sed -i '' 's/set -g popup-style "bg=#1e1e2e,fg=#cdd6f4"/set -g popup-style "bg=#eff1f5,fg=#4c4f69"/' "$conf"
 		sed -i '' 's/set -g popup-border-style "fg=#6c7086,bg=#1e1e2e"/set -g popup-border-style "fg=#9ca0b0,bg=#eff1f5"/' "$conf"
+		sed -i '' 's/set -g menu-style "bg=#1e1e2e,fg=#cdd6f4"/set -g menu-style "bg=#eff1f5,fg=#4c4f69"/' "$conf"
+		sed -i '' 's/set -g menu-border-style "fg=#cba6f7,bg=#1e1e2e"/set -g menu-border-style "fg=#8839ef,bg=#eff1f5"/' "$conf"
+		sed -i '' 's/set -g menu-selected-style "bg=#585b70,fg=#cdd6f4"/set -g menu-selected-style "bg=#ccd0da,fg=#4c4f69"/' "$conf"
 	else
 		sed -i '' 's/set -g popup-style "bg=#eff1f5,fg=#4c4f69"/set -g popup-style "bg=#1e1e2e,fg=#cdd6f4"/' "$conf"
 		sed -i '' 's/set -g popup-border-style "fg=#9ca0b0,bg=#eff1f5"/set -g popup-border-style "fg=#6c7086,bg=#1e1e2e"/' "$conf"
+		sed -i '' 's/set -g menu-style "bg=#eff1f5,fg=#4c4f69"/set -g menu-style "bg=#1e1e2e,fg=#cdd6f4"/' "$conf"
+		sed -i '' 's/set -g menu-border-style "fg=#8839ef,bg=#eff1f5"/set -g menu-border-style "fg=#cba6f7,bg=#1e1e2e"/' "$conf"
+		sed -i '' 's/set -g menu-selected-style "bg=#ccd0da,fg=#4c4f69"/set -g menu-selected-style "bg=#585b70,fg=#cdd6f4"/' "$conf"
 	fi
 
 	# Live-reload if tmux is running
@@ -108,13 +114,19 @@ switch_tmux() {
 		# Also re-source user tmux.conf to reapply custom status format
 		tmux source-file "$HOME/.config/tmux/tmux.conf" 2>/dev/null || true
 
-		# Update popup styling
+		# Update popup/menu styling
 		if [[ "$mode" == "light" ]]; then
 			tmux set -g popup-style "bg=#eff1f5,fg=#4c4f69"
 			tmux set -g popup-border-style "fg=#9ca0b0,bg=#eff1f5"
+			tmux set -g menu-style "bg=#eff1f5,fg=#4c4f69"
+			tmux set -g menu-border-style "fg=#8839ef,bg=#eff1f5"
+			tmux set -g menu-selected-style "bg=#ccd0da,fg=#4c4f69"
 		else
 			tmux set -g popup-style "bg=#1e1e2e,fg=#cdd6f4"
 			tmux set -g popup-border-style "fg=#6c7086,bg=#1e1e2e"
+			tmux set -g menu-style "bg=#1e1e2e,fg=#cdd6f4"
+			tmux set -g menu-border-style "fg=#cba6f7,bg=#1e1e2e"
+			tmux set -g menu-selected-style "bg=#585b70,fg=#cdd6f4"
 		fi
 
 		rm -f "$tmp_theme"
