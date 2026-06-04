@@ -40,3 +40,6 @@ keybind = cmd+2=text:\x012
 keybind = cmd+3=text:\x013
 keybind = cmd+4=text:\x014
 keybind = cmd+5=text:\x015
+
+# Toggle dark/light theme (Catppuccin Mocha/Latte)
+keybind = cmd+shift+t=text:\x01T

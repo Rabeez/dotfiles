@@ -19,3 +19,4 @@ tmux*.log
 .config/zed/prompts/
 .config/rclone/rclone.conf
 /.config/raycast-x/extensions
+scripts/themes/local.sh
