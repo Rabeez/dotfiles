@@ -1,0 +1,21 @@
+{
+  "$schema" : "https:\/\/schema.linearmouse.app\/0.10.2",
+  "schemes" : [
+    {
+      "if" : {
+        "device" : {
+          "category" : "mouse",
+          "productID" : "0xd028",
+          "productName" : "Keychron Ultra-Link 8K",
+          "vendorID" : "0x3434"
+        }
+      },
+      "scrolling" : {
+        "reverse" : true,
+        "speed" : {
+          "horizontal" : 6.14
+        }
+      }
+    }
+  ]
+}

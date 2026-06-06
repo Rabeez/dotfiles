@@ -1,0 +1,107 @@
+{
+  "actions" : [
+    {
+      "key" : "t",
+      "label" : "[T]erminal",
+      "type" : "application",
+      "value" : "/Applications/Ghostty.app"
+    },
+    {
+      "key" : "b",
+      "label" : "[B]rowser",
+      "type" : "application",
+      "value" : "/Applications/Google Chrome Canary.app"
+    },
+    {
+      "actions" : [
+        {
+          "key" : "m",
+          "label" : "[M]aximize",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/window-management/maximize"
+        },
+        {
+          "key" : "c",
+          "label" : "[C]enter",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/window-management/center-two-thirds"
+        },
+        {
+          "key" : "r",
+          "label" : "[R]easonable MIddle",
+          "type" : "url",
+          "value" : "raycast://extensions/raycast/window-management/reasonable-size"
+        }
+      ],
+      "iconPath" : "window.horizontal",
+      "key" : "w",
+      "label" : "[W]indow Management",
+      "type" : "group"
+    },
+    {
+      "key" : "p",
+      "label" : "[P]yCharm",
+      "type" : "application",
+      "value" : "/Applications/PyCharm.app"
+    },
+    {
+      "actions" : [
+        {
+          "key" : "m",
+          "label" : "[M]usic",
+          "type" : "application",
+          "value" : "/Applications/YouTube Music.app"
+        },
+        {
+          "key" : "p",
+          "label" : "[P]odcasts",
+          "type" : "application",
+          "value" : "/System/Applications/Podcasts.app"
+        }
+      ],
+      "iconPath" : "music.quarternote.3",
+      "key" : "l",
+      "label" : "[L]isten to",
+      "type" : "group"
+    },
+    {
+      "actions" : [
+        {
+          "key" : "c",
+          "label" : "[C]alendar",
+          "type" : "url",
+          "value" : "raycast://script-commands/open-calendar-tab"
+        },
+        {
+          "key" : "s",
+          "label" : "[S]lack",
+          "type" : "application",
+          "value" : "/Applications/Slack.app"
+        },
+        {
+          "key" : "m",
+          "label" : "[M]ail",
+          "type" : "application",
+          "value" : "/Applications/Spark Desktop.app"
+        }
+      ],
+      "iconPath" : "person.3.fill",
+      "key" : "c",
+      "label" : "[C]ommunication",
+      "type" : "group"
+    },
+    {
+      "key" : "f",
+      "label" : "[F]inder",
+      "type" : "application",
+      "value" : "/System/Library/CoreServices/Finder.app"
+    },
+    {
+      "key" : "m",
+      "label" : "[M]ouse Config",
+      "type" : "url",
+      "value" : "raycast://script-commands/open-keychron-launcher"
+    }
+  ],
+  "type" : "group"
+}
