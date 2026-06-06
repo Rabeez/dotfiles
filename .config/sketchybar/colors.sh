@@ -29,12 +29,12 @@ export MAUVE2=0xff8C6AB5
 export GREY=0xff939ab7
 export CYAN=0xff94e2d5
 export TRANSPARENT=0x00000000
-export BG0=0x801e1e2e
+export BG0=0x80181825
 export BG1=0x801e1e2e
 export BG2=0x80494d64
 
 # General bar colors
-export BAR_COLOR=$BG0
+export BAR_COLOR=0xff181825
 export BAR_BORDER_COLOR=$BG2
 export BACKGROUND_0=$BG0
 export BACKGROUND_1=$BG1

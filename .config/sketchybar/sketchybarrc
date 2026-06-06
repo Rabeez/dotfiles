@@ -12,9 +12,9 @@ PADDINGS=3    # All paddings use this value (icon, label, background)
 # Setting up the general bar appearance of the bar
 bar=(
     height=46
-    color=0xff000000
+    color=$BAR_COLOR
     border_width=2
-    border_color=0xff000000
+    border_color=$BAR_BORDER_COLOR
     shadow=off
     position=top
     sticky=on

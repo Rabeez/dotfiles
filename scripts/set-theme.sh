@@ -309,6 +309,7 @@ switch_sketchybar() {
 	local colors="$(resolve "$CFG/sketchybar/colors.sh")"
 
 	# Swap the palette section in colors.sh
+	# BG0=mantle (opaque for BAR_COLOR, alpha for item bg), BG1=base, BG2=surface
 	if [[ "$mode" == "light" ]]; then
 		sed -i '' \
 			-e 's/0xff181926/0xffdce0e8/g' \
@@ -321,7 +322,11 @@ switch_sketchybar() {
 			-e 's/0xffc6a0f6/0xff8839ef/g' \
 			-e 's/0xff939ab7/0xff9ca0b0/g' \
 			-e 's/0xff94e2d5/0xff179299/g' \
-			-e 's/0x801e1e2e/0x80eff1f5/g' \
+			-e 's/^export MAUVE=0xff957AB5/export MAUVE=0xff8839ef/' \
+			-e 's/^export MAUVE2=0xff8C6AB5/export MAUVE2=0xff7c5cbf/' \
+			-e 's/^export BAR_COLOR=0xff181825/export BAR_COLOR=0xffe6e9ef/' \
+			-e 's/^export BG0=0x80181825/export BG0=0x80e6e9ef/' \
+			-e 's/^export BG1=0x801e1e2e/export BG1=0x80eff1f5/' \
 			-e 's/0x80494d64/0x809ca0b0/g' \
 			"$colors"
 	else
@@ -333,10 +338,16 @@ switch_sketchybar() {
 			-e 's/0xff1e66f5/0xff8aadf4/g' \
 			-e 's/0xffdf8e1d/0xffeed49f/g' \
 			-e 's/0xfffe640b/0xfff5a97f/g' \
-			-e 's/0xff8839ef/0xffc6a0f6/g' \
 			-e 's/0xff9ca0b0/0xff939ab7/g' \
 			-e 's/0xff179299/0xff94e2d5/g' \
+			-e 's/^export MAUVE=0xff8839ef/export MAUVE=0xff957AB5/' \
+			-e 's/^export MAUVE2=0xff7c5cbf/export MAUVE2=0xff8C6AB5/' \
+			-e 's/^export BAR_COLOR=0xffe6e9ef/export BAR_COLOR=0xff181825/' \
+			-e 's/^export BG0=0x80e6e9ef/export BG0=0x80181825/' \
+			-e 's/^export BG1=0x80eff1f5/export BG1=0x801e1e2e/' \
+			-e 's/0xff8839ef/0xffc6a0f6/g' \
 			-e 's/0x80eff1f5/0x801e1e2e/g' \
+			-e 's/0x80e6e9ef/0x80181825/g' \
 			-e 's/0x809ca0b0/0x80494d64/g' \
 			"$colors"
 	fi
