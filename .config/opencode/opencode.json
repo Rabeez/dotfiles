@@ -4,7 +4,6 @@
     "layout": "auto",
     "plugin": [
         "@franlol/opencode-md-table-formatter@latest",
-        "@tarquinen/opencode-dcp@latest",
         "@mohak34/opencode-notifier@latest"
     ],
     "provider": {

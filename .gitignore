@@ -20,3 +20,4 @@ tmux*.log
 .config/rclone/rclone.conf
 /.config/raycast-x/extensions
 scripts/themes/local.sh
+/.config/opencode/opencode-notifier-state.json
