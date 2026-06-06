@@ -10,6 +10,7 @@ export PATH="/usr/local/bin:$PATH"
 # Disable printing of what is updated on brew servers
 export HOMEBREW_NO_ENV_HINTS=1
 export HOMEBREW_NO_UPDATE_REPORT_NEW=1
+export HOMEBREW_REQUIRE_TAP_TRUST=0
 
 # User scripts
 export PATH="$HOME/dotfiles/scripts/:$PATH"
