@@ -233,17 +233,11 @@ switch_lazygit() {
 switch_yazi() {
 	local mode="$1"
 	local conf="$(resolve "$CFG/yazi/theme.toml")"
-	if [[ -f "$conf" ]]; then
-		if [[ "$mode" == "light" ]]; then
-			sed -i '' 's/Catppuccin-mocha/Catppuccin-latte/g' "$conf"
-			# Swap known mocha bg/fg colors to latte
-			sed -i '' 's/#1e1e2e/#eff1f5/g' "$conf"
-			sed -i '' 's/#94e2d5/#179299/g' "$conf"
-		else
-			sed -i '' 's/Catppuccin-latte/Catppuccin-mocha/g' "$conf"
-			sed -i '' 's/#eff1f5/#1e1e2e/g' "$conf"
-			sed -i '' 's/#179299/#94e2d5/g' "$conf"
-		fi
+	# Use stored full theme files instead of fragile sed replacements
+	if [[ "$mode" == "light" ]]; then
+		cp "$SCRIPT_DIR/themes/yazi-latte.toml" "$conf"
+	else
+		cp "$SCRIPT_DIR/themes/yazi-mocha.toml" "$conf"
 	fi
 }
 
