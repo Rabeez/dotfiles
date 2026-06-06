@@ -11,11 +11,11 @@
 	<key>Dragging</key>
 	<false/>
 	<key>FirstClickThreshold</key>
-	<integer>1</integer>
+	<integer>0</integer>
 	<key>ForceSuppressed</key>
 	<false/>
 	<key>SecondClickThreshold</key>
-	<integer>1</integer>
+	<integer>0</integer>
 	<key>TrackpadCornerSecondaryClick</key>
 	<integer>0</integer>
 	<key>TrackpadFiveFingerPinchGesture</key>
@@ -37,7 +37,7 @@
 	<key>TrackpadRightClick</key>
 	<true/>
 	<key>TrackpadRotate</key>
-	<integer>1</integer>
+	<false/>
 	<key>TrackpadScroll</key>
 	<true/>
 	<key>TrackpadThreeFingerDrag</key>

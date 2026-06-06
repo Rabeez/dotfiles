@@ -2,50 +2,79 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AutoHideMenuBarOption</key>
+	<integer>0</integer>
 	<key>BentoBoxCustomizationState</key>
 	<data>
-	eyJNb3ZlZENvbnRyb2xUb01lbnVCYXIiOmZhbHNlLCJSZXNpemVkQ29udHJvbCI6dHJ1
-	ZSwiTGFzdENoYW5nZURhdGUiOjc4MTY1NDE3MC4zODQzOTUsIkN1c3RvbWl6ZWRDb250
-	cm9sIjpmYWxzZSwiUmVtb3ZlZENvbnRyb2wiOnRydWUsIkFkZGVkQ29udHJvbCI6dHJ1
-	ZX0=
+	eyJDdXN0b21pemVkQ29udHJvbCI6ZmFsc2UsIlJlbW92ZWRDb250cm9sIjp0cnVlLCJB
+	ZGRlZENvbnRyb2wiOnRydWUsIk1vdmVkQ29udHJvbFRvTWVudUJhciI6ZmFsc2UsIlJl
+	c2l6ZWRDb250cm9sIjpmYWxzZSwiTGFzdENoYW5nZURhdGUiOjc3OTkyNzUyNi40ODU4
+	MDF9
+	</data>
+	<key>ControlCenterDisplayableChronoControlsProviderConfiguration</key>
+	<data>
+	eyJDb250cm9scyI6W3siQ29udHJvbFNpemUiOjAsIkRpc3BsYXlOYW1lIjoiSG9tZSIs
+	IkNvbnRyb2xUeXBlIjoyLCJQcm9tcHRzRm9yVXNlckNvbmZpZ3VyYXRpb24iOmZhbHNl
+	LCJDb250cm9sSWRlbnRpdHkiOiJZbkJzYVhOME1ERFVBUUlEQkFVR0J3cFlKSFpsY25O
+	cGIyNVpKR0Z5WTJocGRtVnlWQ1IwYjNCWUpHOWlhbVZqZEhNU0FBR0dvRjhRRDA1VFMy
+	VjVaV1JCY21Ob2FYWmxjdEVJQ1ZSeWIyOTBnQUdvQ3d3VkhSNGZKaWRWSkc1MWJHelVE
+	UTRQRUJFU0V4UlphVzUwWlc1MFVtVm1WR3RwYm1SVlpYaDBTV1JXSkdOc1lYTnpnQUNB
+	Qm9BQ2dBZlVGaGNZRUJFYUd4eGZFQkJrWlhacFkyVkpaR1Z1ZEdsbWFXVnlYeEFaWTI5
+	dWRHRnBibVZ5UW5WdVpHeGxTV1JsYm5ScFptbGxjbDhRR1dWNGRHVnVjMmx2YmtKMWJt
+	UnNaVWxrWlc1MGFXWnBaWEtBQUlBRWdBT0FCVjhRSldOdmJTNWhjSEJzWlM1SWIyMWxM
+	a2h2YldWWGFXUm5aWFF1U1c1MFpYSmhZM1JwZG1WZVkyOXRMbUZ3Y0d4bExraHZiV1hT
+	SUNFaUkxb2tZMnhoYzNOdVlXMWxXQ1JqYkdGemMyVnpYeEFVUTBoVFJYaDBaVzV6YVc5
+	dVNXUmxiblJwZEhtaUpDVmZFQlJEU0ZORmVIUmxibk5wYjI1SlpHVnVkR2wwZVZoT1Uw
+	OWlhbVZqZEY4UUkyTnZiUzVoY0hCc1pTNUliMjFsTGt4aGRXNWphRWh2YldWQmNIQkRi
+	MjUwY205czBpQWhLQ2xmRUJKRFNGTkRiMjUwY205c1NXUmxiblJwZEhtaUtpVmZFQkpE
+	U0ZORGIyNTBjbTlzU1dSbGJuUnBkSGtBQ0FBUkFCb0FKQUFwQURJQU53QkpBRXdBVVFC
+	VEFGd0FZZ0JyQUhVQWVnQ0FBSWNBaVFDTEFJMEFqd0NZQUtzQXh3RGpBT1VBNXdEcEFP
+	c0JFd0VpQVNjQk1nRTdBVklCVlFGc0FYVUJtd0dnQWJVQnVBQUFBQUFBQUFJQkFBQUFB
+	QUFBQUNzQUFBQUFBQUFBQUFBQUFBQUFBQUhOIiwiT3ZlcnJpZGVTaXplRm9yTWVudUJh
+	ciI6ZmFsc2UsIkNvbnRyb2xEZXNjcmlwdGlvbiI6Ik9wZW4gSG9tZSBBcHAiLCJJZGVu
+	dGlmaWVyIjpbIkUxMTE0OUE5LTkzNUMtNDI4Ni1CQkZFLTlENDIzNjVBMDM0RSJdfV19
 	</data>
 	<key>HasAttemptedMenuBarWorkflowMigration</key>
 	<true/>
 	<key>LastHeartbeatDateString.daily</key>
-	<string>2026-06-02T13:58:10Z</string>
+	<string>2026-06-05T14:10:10Z</string>
 	<key>LastPeriodicAnalyticsPostDate</key>
-	<date>2026-06-02T13:45:35Z</date>
+	<date>2026-06-05T14:33:57Z</date>
 	<key>LiveActivityState</key>
 	<data>
-	eyJFbmFibGVkIjp0cnVlLCJDb21wYW5pb25QYWlyZWQiOnRydWUsIlNldHRpbmdFbmFi
-	bGVkIjp0cnVlLCJMYXN0Q2hhbmdlRGF0ZSI6NzkzNzA0NDEwLjIwODQyNywiU2V0dGlu
-	Z0V2ZXJFZGl0ZWQiOnRydWV9
+	eyJTZXR0aW5nRW5hYmxlZCI6dHJ1ZSwiQ29tcGFuaW9uUGFpcmVkIjpmYWxzZSwiRW5h
+	YmxlZCI6ZmFsc2UsIkxhc3RDaGFuZ2VEYXRlIjo3ODk1NTA3MDMuMjU5Nzc5LCJTZXR0
+	aW5nRXZlckVkaXRlZCI6dHJ1ZX0=
 	</data>
 	<key>MenuBarCustomizationState</key>
 	<data>
-	eyJSZW1vdmVkQmVudG9Cb3giOmZhbHNlLCJSZW1vdmVkQ29udHJvbCI6dHJ1ZSwiQWRk
-	ZWRDb250cm9sIjpmYWxzZSwiTW92ZWRDb250cm9sVG9CZW50b0JveCI6ZmFsc2UsIkxh
-	c3RDaGFuZ2VEYXRlIjo3ODQ3MjMzNTMuMzcxNzE1LCJDdXN0b21pemVkQ29udHJvbCI6
-	ZmFsc2UsIkFkZGVkQmVudG9Cb3giOmZhbHNlfQ==
+	eyJDdXN0b21pemVkQ29udHJvbCI6ZmFsc2UsIkFkZGVkQmVudG9Cb3giOmZhbHNlLCJS
+	ZW1vdmVkQ29udHJvbCI6dHJ1ZSwiQWRkZWRDb250cm9sIjpmYWxzZSwiTGFzdENoYW5n
+	ZURhdGUiOjc3OTkyODk3MS44NzExNDMsIk1vdmVkQ29udHJvbFRvQmVudG9Cb3giOmZh
+	bHNlLCJSZW1vdmVkQmVudG9Cb3giOmZhbHNlfQ==
 	</data>
 	<key>NSStatusItem Preferred Position Battery</key>
-	<real>253.0</real>
+	<real>195.0</real>
 	<key>NSStatusItem Preferred Position BentoBox</key>
 	<real>76.0</real>
 	<key>NSStatusItem Preferred Position BentoBox-0</key>
 	<real>84.0</real>
 	<key>NSStatusItem Preferred Position Bluetooth</key>
-	<real>344.0</real>
+	<real>323.0</real>
+	<key>NSStatusItem Preferred Position FocusModes</key>
+	<real>516.0</real>
 	<key>NSStatusItem Preferred Position KeyboardBrightness</key>
-	<real>294.0</real>
+	<real>351.0</real>
+	<key>NSStatusItem Preferred Position ScreenMirroring</key>
+	<real>501.0</real>
 	<key>NSStatusItem Preferred Position Sound</key>
-	<real>306.0</real>
-	<key>NSStatusItem Preferred Position WiFi</key>
-	<real>303.0</real>
+	<real>285.0</real>
 	<key>NSStatusItem Visible Battery</key>
 	<false/>
 	<key>NSStatusItem Visible BentoBox</key>
 	<true/>
+	<key>NSStatusItem Visible FocusModes</key>
+	<false/>
 	<key>NSStatusItem Visible Item-0</key>
 	<false/>
 	<key>NSStatusItem Visible Item-1</key>
@@ -62,7 +91,13 @@
 	<false/>
 	<key>NSStatusItem Visible Item-7</key>
 	<false/>
+	<key>NSStatusItem Visible Item-8</key>
+	<false/>
 	<key>NSStatusItem Visible KeyboardBrightness</key>
+	<false/>
+	<key>NSStatusItem Visible MusicRecognition</key>
+	<false/>
+	<key>NSStatusItem Visible ScreenMirroring</key>
 	<false/>
 	<key>NSStatusItem Visible Shortcuts</key>
 	<false/>
@@ -79,6 +114,6 @@
 	<key>RemoteLiveActivitiesEnabled</key>
 	<true/>
 	<key>missionControlTooltipCount</key>
-	<integer>3</integer>
+	<integer>1</integer>
 </dict>
 </plist>

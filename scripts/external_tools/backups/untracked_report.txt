@@ -1,34 +1,39 @@
-# Untracked Report — 2026-06-02 23:18:28
+# Untracked Report — 2026-06-06 11:52:45
 # Items below are NOT managed by brew, cargo, go, uv, or listed in Miscfile.
 # Add items to backups/Miscfile to suppress these warnings.
 
 ## Applications (/Applications)
   .Karabiner-VirtualHIDDevice-Manager
+  AeroSpace
   Annotate
-  Falcon
-  Google Chrome
+  BetterDiscord
+  Disk Inspector
+  Emacs
   Karabiner-Elements
   Karabiner-EventViewer
-  Okta Verify
+  Loom
+  Parsec
+  PokeMMO
+  qdigidoc4
   Raycast Beta
+  RetroArch
   Safari
-  Self Service
-  Slack
+  Seanime Denshi
   TinkerTool
-  Tunnelblick
-  Tunnelblick.old
+  web-eid-safari
+  Windscribe
   zoom.us
 
 ## Binaries (/usr/local/bin, ~/.local/bin)
-  /usr/local/bin/OktaDAServiceDaemon
-  /usr/local/bin/aws
-  /usr/local/bin/aws_completer
-  /usr/local/bin/desktoppr
-  /usr/local/bin/dialog
-  /usr/local/bin/fileicon
-  /usr/local/bin/jamf
-  /usr/local/bin/jamfconnect
+  /usr/local/bin/idle3
+  /usr/local/bin/idle3.15
   /usr/local/bin/nvim
-  /usr/local/bin/selfservice
-  /usr/local/bin/syncher
-  /Users/rabeezriaz/.local/bin/forge
+  /usr/local/bin/pip3
+  /usr/local/bin/pip3.15
+  /usr/local/bin/pydoc3
+  /usr/local/bin/pydoc3.15
+  /usr/local/bin/python3
+  /usr/local/bin/python3-config
+  /usr/local/bin/python3.15
+  /usr/local/bin/python3.15-config
+  /usr/local/bin/windscribe-cli

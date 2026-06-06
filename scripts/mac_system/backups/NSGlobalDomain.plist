@@ -3,29 +3,46 @@
 <plist version="1.0">
 <dict>
 	<key>ACDMonthlyAnalyticsLastPosted</key>
-	<real>799627037.946639</real>
+	<real>802189071.014816</real>
 	<key>AKLastIDMSEnvironment</key>
 	<integer>0</integer>
 	<key>AKLastLocale</key>
-	<string>en_US@rg=eezzzz</string>
+	<string>en_EE</string>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>4</integer>
+	<key>AppleEdgeResizeExteriorSize</key>
+	<integer>10</integer>
 	<key>AppleEnableSwipeNavigateWithScrolls</key>
 	<false/>
 	<key>AppleICUForce12HourTime</key>
 	<true/>
+	<key>AppleICUNumberSymbols</key>
+	<dict>
+		<key>0</key>
+		<string>.</string>
+		<key>1</key>
+		<string>,</string>
+		<key>10</key>
+		<string>.</string>
+		<key>17</key>
+		<string>,</string>
+	</dict>
 	<key>AppleIconAppearanceTheme</key>
 	<string>RegularDark</string>
 	<key>AppleInterfaceStyle</key>
 	<string>Dark</string>
 	<key>AppleLanguages</key>
 	<array>
-		<string>en-US</string>
+		<string>en-EE</string>
 	</array>
 	<key>AppleLanguagesSchemaVersion</key>
 	<integer>5400</integer>
+	<key>AppleLiveTextEnabled</key>
+	<true/>
 	<key>AppleLocale</key>
-	<string>en_US@rg=eezzzz</string>
+	<string>en_EE</string>
+	<key>AppleMenuBarVisibleInFullscreen</key>
+	<false/>
 	<key>AppleMiniaturizeOnDoubleClick</key>
 	<false/>
 	<key>ApplePressAndHoldEnabled</key>
@@ -36,8 +53,6 @@
 	<true/>
 	<key>AppleShowAllExtensions</key>
 	<true/>
-	<key>AppleShowScrollBars</key>
-	<string>WhenScrolling</string>
 	<key>InitialKeyRepeat</key>
 	<real>15.0</real>
 	<key>KB_DoubleQuoteOption</key>
@@ -53,31 +68,41 @@
 	<real>2.0</real>
 	<key>NSAutomaticCapitalizationEnabled</key>
 	<false/>
+	<key>NSAutomaticDashSubstitutionEnabled</key>
+	<false/>
 	<key>NSAutomaticInlinePredictionEnabled</key>
 	<false/>
 	<key>NSAutomaticPeriodSubstitutionEnabled</key>
+	<false/>
+	<key>NSAutomaticQuoteSubstitutionEnabled</key>
 	<false/>
 	<key>NSAutomaticSpellingCorrectionEnabled</key>
 	<false/>
 	<key>NSLinguisticDataAssetsRequestLastInterval</key>
 	<real>86400.0</real>
 	<key>NSLinguisticDataAssetsRequestTime</key>
-	<date>2026-06-02T10:50:13Z</date>
+	<date>2026-06-05T18:42:32Z</date>
 	<key>NSLinguisticDataAssetsRequested</key>
 	<array>
 		<string>en</string>
+		<string>en_AE</string>
 		<string>en_US</string>
+		<string>nl</string>
 		<string>mul</string>
 		<string>mul_Latn</string>
-		<string>de</string>
-		<string>ro</string>
+		<string>fr</string>
+		<string>en_EE</string>
+		<string>en_GB</string>
+		<string>mul_Hani</string>
 	</array>
 	<key>NSLinguisticDataAssetsRequestedByChecker</key>
 	<array>
 		<string>en</string>
-		<string>de</string>
-		<string>ro</string>
+		<string>nl</string>
+		<string>fr</string>
 	</array>
+	<key>NSNavPanelExpandedStateForSaveMode</key>
+	<true/>
 	<key>NSNavPanelFileLastListModeForOpenModeKey</key>
 	<integer>2</integer>
 	<key>NSNavPanelFileListModeForOpenMode2</key>
@@ -92,8 +117,12 @@
 			<string>com.google.www</string>
 		</dict>
 	</dict>
+	<key>NSSpellCheckerContainerTransitionComplete</key>
+	<true/>
 	<key>NSSpellCheckerDictionaryContainerTransitionComplete</key>
 	<true/>
+	<key>NSSpellCheckerInputAnalyticsTime</key>
+	<date>2024-09-19T18:30:29Z</date>
 	<key>NSTableViewDefaultSizeMode</key>
 	<integer>2</integer>
 	<key>NSUserDictionaryReplacementItems</key>
@@ -116,12 +145,18 @@
 	</array>
 	<key>NavPanelFileListModeForOpenMode</key>
 	<integer>2</integer>
+	<key>PKFPANInitialEligibilityCheckPerformedKey</key>
+	<true/>
+	<key>SLSMenuBarUseBlurredAppearance</key>
+	<true/>
 	<key>WebAutomaticSpellingCorrectionEnabled</key>
 	<false/>
 	<key>_AKBAACertMarkerKey</key>
 	<data>
-	W+Py8AuoZ69fZx8i6HbB7spZZ6uqWdUVcPAQT5dY5AI=
+	ql5SpddAt6fAznoy1lu3XQIpYBXpKwtY6lbdjAj+ooE=
 	</data>
+	<key>_HIHideMenuBar</key>
+	<true/>
 	<key>com.apple.finder.SyncExtensions</key>
 	<dict>
 		<key>collaborationMap</key>
@@ -140,11 +175,48 @@
 				<string>file:///Users/rabeezriaz/Pictures/</string>
 				<string>file:///Users/rabeezriaz/Downloads/</string>
 				<string>file:///Users/rabeezriaz/Public/</string>
+				<string>file:///System/Volumes/Update/SFR/mnt1/</string>
+				<string>file:///System/Volumes/Update/mnt1/</string>
 			</array>
 		</dict>
 	</dict>
+	<key>com.apple.gms.availability.accessNotGrantedUseCases</key>
+	<data>
+	YnBsaXN0MDCgCAAAAAAAAAEBAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAJ
+	</data>
+	<key>com.apple.gms.availability.disabledUseCases</key>
+	<data>
+	YnBsaXN0MDChAV8QI2NvZGVMTS5kZW55VGhpc1VzZUNhc2VPbkp1bmU2b2YyMDI0CAoA
+	AAAAAAABAQAAAAAAAAACAAAAAAAAAAAAAAAAAAAAMA==
+	</data>
+	<key>com.apple.gms.availability.disallowedUseCases</key>
+	<data>
+	YnBsaXN0MDCgCAAAAAAAAAEBAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAJ
+	</data>
+	<key>com.apple.gms.availability.essentialAssetReadiness</key>
+	<data>
+	dHJ1ZQ==
+	</data>
+	<key>com.apple.gms.availability.key</key>
+	<data>
+	YnBsaXN0MDChARAACAoAAAAAAAABAQAAAAAAAAACAAAAAAAAAAAAAAAAAAAADA==
+	</data>
+	<key>com.apple.gms.availability.osEligibilityReasons</key>
+	<array>
+		<integer>1</integer>
+	</array>
+	<key>com.apple.gms.availability.useCasesWhoseAssetsAreOutOfStorage</key>
+	<data>
+	YnBsaXN0MDCgCAAAAAAAAAEBAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAJ
+	</data>
+	<key>com.apple.gms.availability.useCasesWhoseAssetsNotReady</key>
+	<data>
+	YnBsaXN0MDCgCAAAAAAAAAEBAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAJ
+	</data>
 	<key>com.apple.sound.beep.flash</key>
 	<integer>0</integer>
+	<key>com.apple.sound.beep.sound</key>
+	<string>/System/Library/Sounds/Tink.aiff</string>
 	<key>com.apple.sound.uiaudio.enabled</key>
 	<integer>0</integer>
 	<key>com.apple.springing.delay</key>
@@ -153,6 +225,10 @@
 	<true/>
 	<key>com.apple.trackpad.forceClick</key>
 	<false/>
+	<key>com.apple.trackpad.scaling</key>
+	<real>0.875</real>
+	<key>com.apple.trackpad.scrolling</key>
+	<real>0.4412</real>
 	<key>shouldShowRSVPDataDetectors</key>
 	<false/>
 </dict>

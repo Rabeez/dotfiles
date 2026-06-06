@@ -9,6 +9,14 @@
 	<key>AppleEnabledInputSources</key>
 	<array>
 		<dict>
+			<key>InputSourceKind</key>
+			<string>Keyboard Layout</string>
+			<key>KeyboardLayout ID</key>
+			<integer>252</integer>
+			<key>KeyboardLayout Name</key>
+			<string>ABC</string>
+		</dict>
+		<dict>
 			<key>Bundle ID</key>
 			<string>com.apple.CharacterPaletteIM</string>
 			<key>InputSourceKind</key>
@@ -21,14 +29,6 @@
 			<string>Non Keyboard Input Method</string>
 		</dict>
 		<dict>
-			<key>InputSourceKind</key>
-			<string>Keyboard Layout</string>
-			<key>KeyboardLayout ID</key>
-			<integer>252</integer>
-			<key>KeyboardLayout Name</key>
-			<string>ABC</string>
-		</dict>
-		<dict>
 			<key>Bundle ID</key>
 			<string>com.apple.inputmethod.ironwood</string>
 			<key>InputSourceKind</key>
@@ -37,7 +37,7 @@
 	</array>
 	<key>AppleFnUsageType</key>
 	<integer>0</integer>
-	<key>AppleInputSourceHistory</key>
+	<key>AppleSelectedInputSources</key>
 	<array>
 		<dict>
 			<key>InputSourceKind</key>
@@ -47,30 +47,11 @@
 			<key>KeyboardLayout Name</key>
 			<string>ABC</string>
 		</dict>
-		<dict>
-			<key>InputSourceKind</key>
-			<string>Keyboard Layout</string>
-			<key>KeyboardLayout ID</key>
-			<integer>0</integer>
-			<key>KeyboardLayout Name</key>
-			<string>U.S.</string>
-		</dict>
-	</array>
-	<key>AppleSelectedInputSources</key>
-	<array>
 		<dict>
 			<key>Bundle ID</key>
 			<string>com.apple.PressAndHold</string>
 			<key>InputSourceKind</key>
 			<string>Non Keyboard Input Method</string>
-		</dict>
-		<dict>
-			<key>InputSourceKind</key>
-			<string>Keyboard Layout</string>
-			<key>KeyboardLayout ID</key>
-			<integer>252</integer>
-			<key>KeyboardLayout Name</key>
-			<string>ABC</string>
 		</dict>
 	</array>
 </dict>

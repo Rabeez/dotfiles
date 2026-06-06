@@ -11,10 +11,10 @@ return {
     config = function()
       -- Shared diagnostic helpers (used by <C-e> keymap and CursorHold autocmd)
       local diag_icons = {
-        [vim.diagnostic.severity.ERROR] = { " ", "DiagnosticError" },
-        [vim.diagnostic.severity.WARN] = { " ", "DiagnosticWarn" },
-        [vim.diagnostic.severity.INFO] = { " ", "DiagnosticInfo" },
-        [vim.diagnostic.severity.HINT] = { " ", "DiagnosticHint" },
+        [vim.diagnostic.severity.ERROR] = { " ", "DiagnosticError" },
+        [vim.diagnostic.severity.WARN] = { " ", "DiagnosticWarn" },
+        [vim.diagnostic.severity.INFO] = { " ", "DiagnosticInfo" },
+        [vim.diagnostic.severity.HINT] = { " ", "DiagnosticHint" },
       }
 
       local function diag_prefix(diagnostic, _, _)
@@ -142,10 +142,10 @@ return {
         },
         signs = {
           text = {
-            [vim.diagnostic.severity.ERROR] = "",
-            [vim.diagnostic.severity.WARN] = "",
-            [vim.diagnostic.severity.INFO] = "",
-            [vim.diagnostic.severity.HINT] = "",
+            [vim.diagnostic.severity.ERROR] = " ",
+            [vim.diagnostic.severity.WARN] = " ",
+            [vim.diagnostic.severity.INFO] = " ",
+            [vim.diagnostic.severity.HINT] = " ",
           },
           linehl = {
             [vim.diagnostic.severity.ERROR] = "ErrorMsg",

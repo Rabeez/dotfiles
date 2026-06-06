@@ -5,12 +5,37 @@
 	<key>disable-shadow</key>
 	<true/>
 	<key>last-analytics-stamp</key>
-	<real>801950286.424501</real>
+	<real>802300241.853348</real>
+	<key>last-selection</key>
+	<dict>
+		<key>Height</key>
+		<real>935.0</real>
+		<key>Width</key>
+		<real>1178.25</real>
+		<key>X</key>
+		<real>417.75</real>
+		<key>Y</key>
+		<real>101.0</real>
+	</dict>
+	<key>last-selection-display</key>
+	<integer>0</integer>
 	<key>location</key>
-	<string>/Users/rabeezriaz/Pictures/Screenshots</string>
+	<string>~/Pictures/Screenshots</string>
+	<key>location-last</key>
+	<string>~/Pictures/Screenshots</string>
 	<key>show-thumbnail</key>
 	<false/>
+	<key>showsClicks</key>
+	<true/>
+	<key>showsCursor</key>
+	<true/>
+	<key>style</key>
+	<string>display</string>
+	<key>target</key>
+	<string>file</string>
 	<key>type</key>
 	<string>png</string>
+	<key>video</key>
+	<true/>
 </dict>
 </plist>

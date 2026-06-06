@@ -1,9 +1,8 @@
 # Gofile — installed via `go install <module>@latest`
-github.com/kisielk/errcheck
-github.com/fzipp/gocyclo/cmd/gocyclo
-golang.org/x/tools/cmd/goimports
-golang.org/x/lint/golint
+github.com/Gelio/go-global-update
 golang.org/x/tools/gopls
-github.com/securego/gosec/v2/cmd/gosec
 honnef.co/go/tools/cmd/staticcheck
 github.com/a-h/templ/cmd/templ
+github.com/mathaou/termdbms
+github.com/aandrew-me/tgpt/v2
+github.com/wailsapp/wails/v2/cmd/wails

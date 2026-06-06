@@ -206,20 +206,20 @@ return {
           lualine_c = {
             {
               "diagnostics",
-              icon = " ",
+              icon = " ",
               on_click = function()
                 vim.cmd("Trouble diagnostics filter.buf=0")
               end,
-              symbols = { error = " ", warn = " ", info = " ", hint = " " },
+              symbols = { error = " ", warn = " ", info = " ", hint = " " },
             },
             {
               "diagnostics",
-              icon = " ",
+              icon = " ",
               sources = { "nvim_workspace_diagnostic" },
               on_click = function()
                 vim.cmd("Trouble diagnostics")
               end,
-              symbols = { error = " ", warn = " ", info = " ", hint = " " },
+              symbols = { error = " ", warn = " ", info = " ", hint = " " },
             },
             {
               -- https://github.com/folke/noice.nvim/wiki/Configuration-Recipes#show-recording-messages

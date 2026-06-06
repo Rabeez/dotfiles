@@ -2,8 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>ClockFontIdentifier</key>
+	<string>rounded</string>
+	<key>ClockFontWeight</key>
+	<real>640.0</real>
 	<key>MiniBuddyLaunch</key>
 	<false/>
+	<key>NSWindow Frame ProcessPanel</key>
+	<string>215 362 338 313 0 0 1710 1068 </string>
 	<key>TALLogoutReason</key>
 	<string>Shut Down</string>
 	<key>TALLogoutSavesState</key>

@@ -29,7 +29,7 @@
 	<key>TrackpadRightClick</key>
 	<true/>
 	<key>TrackpadRotate</key>
-	<integer>1</integer>
+	<false/>
 	<key>TrackpadScroll</key>
 	<true/>
 	<key>TrackpadThreeFingerDrag</key>

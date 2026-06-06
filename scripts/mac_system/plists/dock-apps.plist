@@ -6,7 +6,7 @@
 	<array>
 		<dict>
 			<key>GUID</key>
-			<integer>4221328004</integer>
+			<integer>4064805108</integer>
 			<key>tile-data</key>
 			<dict>
 				<key>book</key>
@@ -15,13 +15,13 @@
 				AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFgB
 				AAAEAAAAAwMAAAAAACAMAAAAAQEAAEFwcGxpY2F0aW9u
 				cxgAAAABAQAAR29vZ2xlIENocm9tZSBDYW5hcnkuYXBw
-				CAAAAAEGAAAQAAAAJAAAAAgAAAAEAwAAxEkfAgAAAAAI
-				AAAABAMAAJb0EQIAAAAACAAAAAEGAABUAAAAZAAAAAgA
-				AAAABAAAQcessZwAAAAYAAAAAQIAAAIAAAAAAAAADwAA
+				CAAAAAEGAAAQAAAAJAAAAAgAAAAEAwAAoptpCAAAAAAI
+				AAAABAMAAHNULwgAAAAACAAAAAEGAABUAAAAZAAAAAgA
+				AAAABAAAQceuUEMAAAAYAAAAAQIAAAIAAAAAAAAADwAA
 				AAAAAAAAAAAAAAAAAAgAAAABCQAAZmlsZTovLy8MAAAA
 				AQEAAE1hY2ludG9zaCBIRAgAAAAEAwAAAFChG3MAAAAI
-				AAAAAAQAAEHHp1N2AAAAJAAAAAEBAABCQzhFRUVGQS0w
-				N0FFLTQwREItOTg1NS03NjdFMUYxOTlCN0EYAAAAAQIA
+				AAAAAAQAAEHHp1N2AAAAJAAAAAEBAABEMjIwNzRCRi04
+				OTdCLTQ0N0QtQjI4My0zOEY0RTFBOUVFQTMYAAAAAQIA
 				AIEAAAABAAAA7xMAAAEAAAAAAAAAAAAAAAEAAAABAQAA
 				LwAAAAAAAAABBQAAqAAAAP7///8BAAAAAAAAAA0AAAAE
 				EAAARAAAAAAAAAAFEAAAdAAAAAAAAAAQEAAAlAAAAAAA
@@ -44,20 +44,20 @@
 				<key>file-label</key>
 				<string>Google Chrome Canary</string>
 				<key>file-mod-date</key>
-				<integer>3855539256</integer>
+				<integer>33036455152234</integer>
 				<key>file-type</key>
 				<integer>41</integer>
 				<key>is-beta</key>
 				<false/>
 				<key>parent-mod-date</key>
-				<integer>115680215627021</integer>
+				<integer>145367030471411</integer>
 			</dict>
 			<key>tile-type</key>
 			<string>file-tile</string>
 		</dict>
 		<dict>
 			<key>GUID</key>
-			<integer>323355548</integer>
+			<integer>2536335618</integer>
 			<key>tile-data</key>
 			<dict>
 				<key>book</key>
@@ -66,13 +66,13 @@
 				AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEwB
 				AAAEAAAAAwMAAAAAACAMAAAAAQEAAEFwcGxpY2F0aW9u
 				cwsAAAABAQAAR2hvc3R0eS5hcHAACAAAAAEGAAAQAAAA
-				JAAAAAgAAAAEAwAAxEkfAgAAAAAIAAAABAMAAByGCAAA
-				AAAACAAAAAEGAABIAAAAWAAAAAgAAAAABAAAQccf35g8
-				WpwYAAAAAQIAAAIAAAAAAAAADwAAAAAAAAAAAAAAAAAA
+				JAAAAAgAAAAEAwAAoptpCAAAAAAIAAAABAMAAPc0dgkA
+				AAAACAAAAAEGAABIAAAAWAAAAAgAAAAABAAAQcfY5AAM
+				E8EYAAAAAQIAAAIAAAAAAAAADwAAAAAAAAAAAAAAAAAA
 				AAgAAAABCQAAZmlsZTovLy8MAAAAAQEAAE1hY2ludG9z
 				aCBIRAgAAAAEAwAAAFChG3MAAAAIAAAAAAQAAEHHp1N2
-				AAAAJAAAAAEBAABCQzhFRUVGQS0wN0FFLTQwREItOTg1
-				NS03NjdFMUYxOTlCN0EYAAAAAQIAAIEAAAABAAAA7xMA
+				AAAAJAAAAAEBAABEMjIwNzRCRi04OTdCLTQ0N0QtQjI4
+				My0zOEY0RTFBOUVFQTMYAAAAAQIAAIEAAAABAAAA7xMA
 				AAEAAAAAAAAAAAAAAAEAAAABAQAALwAAAAAAAAABBQAA
 				qAAAAP7///8BAAAAAAAAAA0AAAAEEAAAOAAAAAAAAAAF
 				EAAAaAAAAAAAAAAQEAAAiAAAAAAAAABAEAAAeAAAAAAA
@@ -95,20 +95,20 @@
 				<key>file-label</key>
 				<string>Ghostty</string>
 				<key>file-mod-date</key>
-				<integer>114091077791503</integer>
+				<integer>55155536398267</integer>
 				<key>file-type</key>
 				<integer>41</integer>
 				<key>is-beta</key>
 				<false/>
 				<key>parent-mod-date</key>
-				<integer>38800302859102</integer>
+				<integer>145367030471411</integer>
 			</dict>
 			<key>tile-type</key>
 			<string>file-tile</string>
 		</dict>
 		<dict>
 			<key>GUID</key>
-			<integer>592946560</integer>
+			<integer>4188816223</integer>
 			<key>tile-data</key>
 			<dict>
 				<key>book</key>
@@ -116,14 +116,14 @@
 				Ym9vazwCAAAAAAUQQAAAAAAAAAAAAAAAAAAAAAAAAAAA
 				AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEwB
 				AAAEAAAAAwMAAAAAACAMAAAAAQEAAEFwcGxpY2F0aW9u
-				cwkAAAABAQAAU2xhY2suYXBwAAAACAAAAAEGAAAQAAAA
-				JAAAAAgAAAAEAwAAxEkfAgAAAAAIAAAABAMAAPie0gIA
-				AAAACAAAAAEGAABIAAAAWAAAAAgAAAAABAAAQcdn3i8A
+				cwwAAAABAQAAT2JzaWRpYW4uYXBwCAAAAAEGAAAQAAAA
+				JAAAAAgAAAAEAwAA9o+/CQAAAAAIAAAABAMAAJtaKgAA
+				AAAACAAAAAEGAABIAAAAWAAAAAgAAAAABAAAQcYksf6A
 				AAAYAAAAAQIAAAIAAAAAAAAADwAAAAAAAAAAAAAAAAAA
 				AAgAAAABCQAAZmlsZTovLy8MAAAAAQEAAE1hY2ludG9z
-				aCBIRAgAAAAEAwAAAFChG3MAAAAIAAAAAAQAAEHHp1N2
-				AAAAJAAAAAEBAABCQzhFRUVGQS0wN0FFLTQwREItOTg1
-				NS03NjdFMUYxOTlCN0EYAAAAAQIAAIEAAAABAAAA7xMA
+				aCBIRAgAAAAEAwAAAFChG3MAAAAIAAAAAAQAAEHH0fL+
+				gAAAJAAAAAEBAABEMjIwNzRCRi04OTdCLTQ0N0QtQjI4
+				My0zOEY0RTFBOUVFQTMYAAAAAQIAAIEAAAABAAAA7xMA
 				AAEAAAAAAAAAAAAAAAEAAAABAQAALwAAAAAAAAABBQAA
 				qAAAAP7///8BAAAAAAAAAA0AAAAEEAAAOAAAAAAAAAAF
 				EAAAaAAAAAAAAAAQEAAAiAAAAAAAAABAEAAAeAAAAAAA
@@ -133,77 +133,26 @@
 				0AAABAAAAAAAAAA=
 				</data>
 				<key>bundle-identifier</key>
-				<string>com.tinyspeck.slackmacgap</string>
+				<string>md.obsidian</string>
 				<key>dock-extra</key>
 				<false/>
 				<key>file-data</key>
 				<dict>
 					<key>_CFURLString</key>
-					<string>file:///Applications/Slack.app/</string>
+					<string>file:///Applications/Obsidian.app/</string>
 					<key>_CFURLStringType</key>
 					<integer>15</integer>
 				</dict>
 				<key>file-label</key>
-				<string>Slack</string>
+				<string>Obsidian</string>
 				<key>file-mod-date</key>
-				<integer>3862142073</integer>
+				<integer>255764848593772</integer>
 				<key>file-type</key>
 				<integer>41</integer>
 				<key>is-beta</key>
 				<false/>
 				<key>parent-mod-date</key>
-				<integer>38800302859102</integer>
-			</dict>
-			<key>tile-type</key>
-			<string>file-tile</string>
-		</dict>
-		<dict>
-			<key>GUID</key>
-			<integer>483762219</integer>
-			<key>tile-data</key>
-			<dict>
-				<key>book</key>
-				<data>
-				Ym9va0QCAAAAAAUQQAAAAAAAAAAAAAAAAAAAAAAAAAAA
-				AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFQB
-				AAAEAAAAAwMAAAAAACAMAAAAAQEAAEFwcGxpY2F0aW9u
-				cxEAAAABAQAAU3BhcmsgRGVza3RvcC5hcHAAAAAIAAAA
-				AQYAABAAAAAkAAAACAAAAAQDAADESR8CAAAAAAgAAAAE
-				AwAAOzOBAgAAAAAIAAAAAQYAAFAAAABgAAAACAAAAAAE
-				AABBxzRGPAAAABgAAAABAgAAAgAAAAAAAAAPAAAAAAAA
-				AAAAAAAAAAAACAAAAAEJAABmaWxlOi8vLwwAAAABAQAA
-				TWFjaW50b3NoIEhECAAAAAQDAAAAUKEbcwAAAAgAAAAA
-				BAAAQcenU3YAAAAkAAAAAQEAAEJDOEVFRUZBLTA3QUUt
-				NDBEQi05ODU1LTc2N0UxRjE5OUI3QRgAAAABAgAAgQAA
-				AAEAAADvEwAAAQAAAAAAAAAAAAAAAQAAAAEBAAAvAAAA
-				AAAAAAEFAACoAAAA/v///wEAAAAAAAAADQAAAAQQAABA
-				AAAAAAAAAAUQAABwAAAAAAAAABAQAACQAAAAAAAAAEAQ
-				AACAAAAAAAAAAAIgAABAAQAAAAAAAAUgAACwAAAAAAAA
-				ABAgAADAAAAAAAAAABEgAAD0AAAAAAAAABIgAADUAAAA
-				AAAAABMgAADkAAAAAAAAACAgAAAgAQAAAAAAADAgAABM
-				AQAAAAAAABDQAAAEAAAAAAAAAA==
-				</data>
-				<key>bundle-identifier</key>
-				<string>com.readdle.SparkDesktop</string>
-				<key>dock-extra</key>
-				<false/>
-				<key>file-data</key>
-				<dict>
-					<key>_CFURLString</key>
-					<string>file:///Applications/Spark%20Desktop.app/</string>
-					<key>_CFURLStringType</key>
-					<integer>15</integer>
-				</dict>
-				<key>file-label</key>
-				<string>Spark Desktop</string>
-				<key>file-mod-date</key>
-				<integer>183785513852753</integer>
-				<key>file-type</key>
-				<integer>41</integer>
-				<key>is-beta</key>
-				<false/>
-				<key>parent-mod-date</key>
-				<integer>38800302859102</integer>
+				<integer>200574540934201</integer>
 			</dict>
 			<key>tile-type</key>
 			<string>file-tile</string>
