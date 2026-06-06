@@ -21,3 +21,4 @@ tmux*.log
 /.config/raycast-x/extensions
 scripts/themes/local.sh
 /.config/opencode/opencode-notifier-state.json
+.config/nvim/after/queries/
