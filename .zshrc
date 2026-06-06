@@ -89,9 +89,9 @@ alias sz='source $HOME/.zshrc'
 alias ls='eza -l --color=always --icons --header --classify --group-directories-first'
 alias la='eza -al --color=always --icons --header --classify --group-directories-first'
 alias tree="eza --tree --icons -a --group-directories-last -I '.git|node_modules|.pixi|.venv|.databricks|.ruff_cache'"
-alias cp='cp -i'                         # confirm before overwriting
-alias df='df -h'                         # human readable sizes
-alias free='free -m'                     # sizes in MB
+alias cp='cp -i'                                            # confirm before overwriting
+alias df='df -h'                                            # human readable sizes
+alias free='free -m'                                        # sizes in MB
 alias cloc='tokei --hidden --sort code --num-format commas' # fast CLOC implementation with nice defaults
 alias ee="yazi"
 alias gg="lazygit"
@@ -232,11 +232,11 @@ export TEALDEER_CONFIG_DIR="$HOME/.config/tealdeer"
 # printf "%s\n" "${ART[@]}" | fastfetch --file-raw -
 
 if [[ "$_theme_mode" == "light" ]]; then
-  CLR_BORDER="\033[38;2;114;135;253m"
-  CLR_CONTENTS="\033[38;2;30;102;245m"
+    CLR_BORDER="\033[38;2;114;135;253m"
+    CLR_CONTENTS="\033[38;2;30;102;245m"
 else
-  CLR_BORDER="\033[38;2;180;190;254m"
-  CLR_CONTENTS="\033[38;2;137;180;250m"
+    CLR_BORDER="\033[38;2;180;190;254m"
+    CLR_CONTENTS="\033[38;2;137;180;250m"
 fi
 CLR_RESET="\033[0m"
 
