@@ -311,12 +311,9 @@ ZVM_VI_YANK_CLIP=1
 ZVM_VI_PUT_CLIP=1
 ZVM_INIT_MODE=sourcing
 source "$_brew_prefix"/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-# NOTE: Need to re-apply keybind customizations, to ensure these are available in Insert mode
-# The plugin will auto execute this zvm_after_init function
-zvm_after_init() {
-    # Set up fzf key bindings and fuzzy completion
-    source <(fzf --zsh)
-}
+# Set up fzf key bindings and fuzzy completion AFTER zsh-vi-mode has fully initialized
+# (ZVM_INIT_MODE=sourcing ensures init completes during source, so this line safely overrides its bindings)
+source <(fzf --zsh)
 
 # Setup starship prompt (MUST be after zsh-vi-mode to avoid recursive zle-keymap-select)
 eval "$(starship init zsh)"
