@@ -82,6 +82,18 @@ if [[ ! -f "$_vivid_cache" ]]; then
 fi
 export LS_COLORS="$(cat "$_vivid_cache")"
 
+# Auto-reload LS_COLORS when set-theme.sh updates the cache (like starship re-reads its config)
+_ls_colors_mtime="$(stat -f %m "$_vivid_cache" 2>/dev/null)"
+_refresh_ls_colors() {
+    local current_mtime="$(stat -f %m "$_vivid_cache" 2>/dev/null)"
+    if [[ "$current_mtime" != "$_ls_colors_mtime" ]]; then
+        export LS_COLORS="$(cat "$_vivid_cache")"
+        _ls_colors_mtime="$current_mtime"
+    fi
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _refresh_ls_colors
+
 export PATH="$HOME/.local/bin:$PATH"
 
 # Aliases
