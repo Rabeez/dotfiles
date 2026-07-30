@@ -292,6 +292,16 @@ switch_superfile() {
 	fi
 }
 
+switch_glow() {
+	local mode="$1"
+	local conf="$(resolve "$CFG/glow/glow.yml")"
+	if [[ "$mode" == "light" ]]; then
+		sed -i '' 's/^style: .*/style: "light"/' "$conf"
+	else
+		sed -i '' 's/^style: .*/style: "dark"/' "$conf"
+	fi
+}
+
 switch_vivid_cache() {
 	local mode="$1"
 	local cache="$HOME/.cache/vivid-ls-colors"
@@ -416,6 +426,7 @@ main() {
 	switch_spotify_player "$target"
 	switch_vim "$target"
 	switch_superfile "$target"
+	switch_glow "$target"
 	switch_vivid_cache "$target"
 	switch_sketchybar "$target"
 	switch_borders "$target"
