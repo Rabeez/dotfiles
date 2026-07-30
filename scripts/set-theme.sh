@@ -362,9 +362,24 @@ switch_sketchybar() {
 			"$colors"
 	fi
 
-	# Reload sketchybar
+	# Source new colors and apply them to running sketchybar
+	# (avoids --reload which kills system alias registration)
 	if command -v sketchybar &>/dev/null; then
-		sketchybar --reload 2>/dev/null || true
+		source "$colors"
+		sketchybar --bar color="$BAR_COLOR" border_color="$BAR_BORDER_COLOR"
+		sketchybar --default icon.color="$ICON_COLOR" label.color="$LABEL_COLOR" \
+			popup.background.border_color="$POPUP_BORDER_COLOR" \
+			popup.background.color="$POPUP_BACKGROUND_COLOR"
+		sketchybar --set apple.logo icon.color="$ICON_COLOR" \
+			--set chevron icon.color="$MAUVE" \
+			--set front_app label.color="$LABEL_COLOR" \
+			--set volume icon.color="$WHITE" label.color="$WHITE" \
+			--set calendar background.color="$TRANSPARENT" \
+			--set status background.color="$BG1" \
+			2>/dev/null || true
+		# Trigger refreshes so dynamic plugins re-evaluate with new colors
+		sketchybar --trigger aerospace_workspace_change 2>/dev/null || true
+		sketchybar --trigger power_source_change 2>/dev/null || true
 	fi
 }
 
