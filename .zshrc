@@ -82,17 +82,23 @@ if [[ ! -f "$_vivid_cache" ]]; then
 fi
 export LS_COLORS="$(cat "$_vivid_cache")"
 
-# Auto-reload LS_COLORS when set-theme.sh updates the cache (like starship re-reads its config)
+# Auto-reload LS_COLORS and FZF colors when set-theme.sh updates them
 _ls_colors_mtime="$(stat -f %m "$_vivid_cache" 2>/dev/null)"
-_refresh_ls_colors() {
+_current_theme="$_theme_mode"
+_refresh_theme_env() {
     local current_mtime="$(stat -f %m "$_vivid_cache" 2>/dev/null)"
     if [[ "$current_mtime" != "$_ls_colors_mtime" ]]; then
         export LS_COLORS="$(cat "$_vivid_cache")"
         _ls_colors_mtime="$current_mtime"
     fi
+    local now_theme="$(cat "$HOME/.local/state/theme-mode" 2>/dev/null)"
+    if [[ -n "$now_theme" && "$now_theme" != "$_current_theme" ]]; then
+        source "$HOME/dotfiles/scripts/themes/fzf-${now_theme}.sh"
+        _current_theme="$now_theme"
+    fi
 }
 autoload -Uz add-zsh-hook
-add-zsh-hook precmd _refresh_ls_colors
+add-zsh-hook precmd _refresh_theme_env
 
 export PATH="$HOME/.local/bin:$PATH"
 
