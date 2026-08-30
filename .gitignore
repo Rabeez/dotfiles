@@ -21,4 +21,38 @@ tmux*.log
 /.config/raycast-x/extensions
 scripts/themes/local.sh
 /.config/opencode/opencode-notifier-state.json
+/.config/opencode/tasks
+/.config/opencode/*backup*
 .config/nvim/after/queries/
+
+# Claude Code — keep settings & custom hooks, ignore runtime/cache/history
+/.claude/backups/
+/.claude/cache/
+/.claude/file-history/
+/.claude/paste-cache/
+/.claude/plugins/cache/
+/.claude/plugins/marketplaces/
+/.claude/plugins/blocklist.json
+/.claude/plugins/install-counts-cache.json
+/.claude/projects/
+/.claude/sessions/
+/.claude/shell-snapshots/
+/.claude/transcripts/
+/.claude/history.jsonl
+/.claude/plans/
+/.claude/policy-limits.json
+/.claude/tasks/
+
+# Herdr — keep config.toml + plugins-local (our code), ignore runtime/cache
+.config/herdr/*.log
+.config/herdr/*.bak-*
+.config/herdr/.plugins.lock
+.config/herdr/plugins.json
+.config/herdr/release-notes.json
+.config/herdr/session.json
+.config/herdr/session-history.json
+.config/herdr/plugins/config/
+.config/herdr/plugins/github/
+
+# Playwright MCP runtime
+/.playwright-mcp

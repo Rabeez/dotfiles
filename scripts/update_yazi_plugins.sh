@@ -26,6 +26,9 @@ if [[ "${1:-}" == "-f" ]]; then
 		fi
 	done
 
+	# Clear stale package cache to avoid "failed to read plugin directory" errors
+	rm -rf ~/.cache/yazi/packages/
+
 	ya pkg upgrade
 	log_info "Plugin upgrade complete"
 else

@@ -17,7 +17,7 @@ mkdir -p "$BACKUPS_DIR"
 # --- Brew ---
 if check_cmd brew; then
 	log_debug "Backing up Homebrew packages..."
-	brew bundle dump --force --mas --tap --cask --formula --no-vscode --describe --file="$BACKUPS_DIR/Brewfile"
+	brew bundle dump --force --mas --tap --cask --formula --no-vscode --file="$BACKUPS_DIR/Brewfile"
 	log_info "Brewfile written"
 else
 	log_warn "brew not found — skipping Homebrew backup"

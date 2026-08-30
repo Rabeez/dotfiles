@@ -44,14 +44,14 @@ return {
       {
         "<leader>fp",
         function()
-          Snacks.picker.files({ hidden = true })
+          Snacks.picker.files({ hidden = true, ignored = true, cwd = vim.fn.getcwd() })
         end,
         desc = "[F]inder: Find [p]roject files in directory",
       },
       {
         "<leader>ff",
         function()
-          Snacks.picker.git_files()
+          Snacks.picker.git_files({ cwd = vim.fn.getcwd() })
         end,
         desc = "[F]inder: Find [f]iles in git project",
       },

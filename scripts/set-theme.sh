@@ -156,6 +156,54 @@ switch_wezterm() {
 	echo "$scheme" >"$HOME/.config/wezterm/colorscheme" 2>/dev/null || true
 }
 
+switch_herdr() {
+	local mode="$1"
+	local conf="$(resolve "$CFG/herdr/config.toml")"
+	if [[ -f "$conf" ]]; then
+		# auto_switch = true follows the host terminal's appearance, so the
+		# base theme name toggles automatically when macOS dark mode changes.
+		# But [theme.custom] overrides and inline sidebar-row fg colors are
+		# literal hex values that must be swapped explicitly.
+		#
+		# Catppuccin mocha ↔ latte mappings:
+		#   mantle:   #181825 ↔ #e6e9ef   (sidebar_bg, panel_bg)
+		#   surface0: #313244 ↔ #ccd0da   (inactive tab bg)
+		#   surface2: #585b70 ↔ #acb0be   (active_row_bg)
+		#   overlay0:  #6c7086 ↔ #7c7f93   ($dir fg in sidebar rows)
+		#   overlay0: #7f849c ↔ #8c8fa1
+		#   subtext0: #a6adc8 ↔ #6c6f85
+		#   blue:     #89b4fa ↔ #1e66f5   (accent, $git fg, agent name)
+		#   text:     #cdd6f4 ↔ #4c4f69   (terminal_title_stripped fg in agents)
+		if [[ "$mode" == "light" ]]; then
+			sed -i '' \
+				-e 's/#181825/#e6e9ef/g' \
+				-e 's/#313244/#ccd0da/g' \
+				-e 's/#585b70/#acb0be/g' \
+				-e 's/#6c7086/#7c7f93/g' \
+				-e 's/#7f849c/#8c8fa1/g' \
+				-e 's/#a6adc8/#6c6f85/g' \
+				-e 's/#89b4fa/#1e66f5/g' \
+				-e 's/#cdd6f4/#4c4f69/g' \
+				"$conf"
+		else
+			sed -i '' \
+				-e 's/#e6e9ef/#181825/g' \
+				-e 's/#ccd0da/#313244/g' \
+				-e 's/#acb0be/#585b70/g' \
+				-e 's/#7c7f93/#6c7086/g' \
+				-e 's/#8c8fa1/#7f849c/g' \
+				-e 's/#6c6f85/#a6adc8/g' \
+				-e 's/#1e66f5/#89b4fa/g' \
+				-e 's/#4c4f69/#cdd6f4/g' \
+				"$conf"
+		fi
+	fi
+	# Live-reload if herdr server is running
+	if command -v herdr &>/dev/null; then
+		herdr server reload-config 2>/dev/null || true
+	fi
+}
+
 switch_kitty() {
 	local mode="$1"
 	local conf="$(resolve "$CFG/kitty/kitty.conf")"
@@ -166,6 +214,8 @@ switch_kitty() {
 			sed -i '' 's/catppuccin-latte/catppuccin-mocha/g' "$conf"
 		fi
 	fi
+	# Live-reload running kitty instances via SIGUSR1 (forces config re-read).
+	pkill -SIGUSR1 -f "MacOS/kitty" 2>/dev/null || true
 }
 
 switch_bat() {
@@ -428,6 +478,7 @@ main() {
 	switch_macos "$target"
 	switch_wallpaper "$target"
 	switch_tmux "$target"
+	switch_herdr "$target"
 	switch_neovim "$target"
 	switch_wezterm "$target"
 	switch_kitty "$target"

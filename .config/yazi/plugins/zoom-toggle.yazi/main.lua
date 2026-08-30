@@ -2,11 +2,11 @@
 
 local toggle = ya.sync(function(st)
 	if not st.zoomed then
-		st.old_ratio = { rt.mgr.ratio.parent, rt.mgr.ratio.current, rt.mgr.ratio.preview }
+		st.old_ratio = { rt.mgr.ratio[1], rt.mgr.ratio[2], rt.mgr.ratio[3] }
 		rt.mgr.ratio = { 0, 1, 9999 }
 		st.zoomed = true
 	else
-		rt.mgr.ratio = st.old_ratio
+		rt.mgr.ratio = { st.old_ratio[1], st.old_ratio[2], st.old_ratio[3] }
 		st.zoomed = false
 	end
 	ya.emit("app:resize", {})

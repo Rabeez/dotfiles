@@ -1,0 +1,309 @@
+# Herdr configuration
+#
+# Multiplexer for the kitty-exp profile (~/.config/kitty-exp), launched with `th`.
+# The tmux + Ghostty setup is separate and unaffected.
+#
+# Concept mapping from tmux:
+#   tmux session -> herdr workspace
+#   tmux window  -> herdr tab
+#   tmux pane    -> herdr pane
+#
+# Pane navigation (ctrl+hjkl) and resizing (alt+hjkl) are handled by the
+# herdr-splits plugin, which dispatches to Neovim or to herdr depending on
+# what the focused pane is running. This is the equivalent of tmux's
+# `@pane-is-vim` conditional. See the [[keys.command]] plugin_action blocks.
+
+onboarding = false
+
+# ---------------------------------------------------------------------------
+# Theme — Catppuccin, following the host terminal's light/dark appearance.
+# ---------------------------------------------------------------------------
+[theme]
+name = "catppuccin"
+auto_switch = true
+dark_name = "catppuccin"
+light_name = "catppuccin-latte"
+
+# herdr paints almost no cell backgrounds by default, so the sidebar renders as
+# floating text on the same surface as the terminal with no visible boundary.
+# sidebar_bg is what actually separates it (panel_bg does NOT -- it covers other
+# panel surfaces like popups/tab bar).
+#
+# Catppuccin mocha reference: base #1e1e2e (terminal bg), mantle #181825,
+# surface0 #313244, overlay1 #7f849c, subtext0 #a6adc8.
+[theme.custom]
+sidebar_bg = "#181825"    # one step darker than the terminal -> visible sidebar boundary
+panel_bg = "#181825"      # popups / tab bar chrome
+active_row_bg = "#313244" # surface0, darker highlight
+overlay0 = "#7f849c"      # dim UI text ("new", "agents", "grouped") was near-unreadable
+subtext0 = "#a6adc8"      # secondary text
+surface0 = "#313244"      # inactive tab bg (matches tmux @thm_surface_2 on @thm_mantle)
+
+# ---------------------------------------------------------------------------
+# Terminal
+# ---------------------------------------------------------------------------
+[terminal]
+shell_mode = "login"
+new_cwd = "follow"   # new panes/tabs inherit cwd, like tmux -c "#{pane_current_path}"
+
+# ---------------------------------------------------------------------------
+# Session persistence
+#
+# herdr saves workspaces, tabs, the split layout tree, per-pane cwd, zoom and
+# focus to ~/.config/herdr/session.json on every state change, and restores it
+# when the server starts. That covers tmux-continuum and most of
+# tmux-resurrect with no plugins and no hook scripts.
+#
+# pane_history additionally persists pane scrollback to session-history.json,
+# which is the equivalent of @resurrect-capture-pane-contents.
+#
+# Processes are not restarted (agents excepted, see resume_agents_on_restore
+# below, left at its default). Panes come back as shells in the right cwd.
+# ---------------------------------------------------------------------------
+[experimental]
+pane_history = true
+kitty_graphics = true # kitty image protocol (tmux: allow-passthrough on)
+
+[advanced]
+scrollback_limit_bytes = 10000000
+
+# ---------------------------------------------------------------------------
+# Keys — prefix is ctrl+a, matching tmux (set -g prefix C-a)
+# ---------------------------------------------------------------------------
+[keys]
+prefix = "ctrl+a"
+
+# --- Tabs (tmux "windows") -------------------------------------------------
+new_tab = "prefix+c" # tmux: bind c new-window
+# prefix+n is the new-project popup (matching tmux). Tab cycling uses
+# prefix+] / prefix+[ instead, or switch_tab with prefix+1..9.
+previous_tab = "prefix+["
+next_tab = "prefix+]"
+switch_tab = "prefix+1..9"    # tmux: bind 1..5 select-window
+switch_workspace = ""         # disabled — MRU sort makes positions unstable
+close_tab = "prefix+shift+x"
+rename_tab = "prefix+shift+e" # moved off the prefix+shift+t default,
+# which is used for the theme toggle below
+
+# --- Splits ----------------------------------------------------------------
+# Matched to tmux muscle memory:
+#   tmux: bind h split-window -h  -> side by side  -> herdr split_vertical
+#   tmux: bind v split-window -v  -> stacked       -> herdr split_horizontal
+split_vertical = "prefix+h"
+split_horizontal = "prefix+v"
+close_pane = "prefix+x"       # tmux: bind x kill-pane, no confirm
+zoom = "prefix+z"             # tmux: prefix+z
+
+# --- Pane focus ------------------------------------------------------------
+# ctrl+hjkl is the primary navigation and is bound via the herdr-splits plugin
+# further down. These prefix+arrow bindings are a fallback for when the plugin
+# is unavailable; they are moved off the prefix+hjkl defaults because prefix+h
+# and prefix+v are now splits.
+focus_pane_left = "prefix+left"
+focus_pane_down = "prefix+down"
+focus_pane_up = "prefix+up"
+focus_pane_right = "prefix+right"
+last_pane = "prefix+semicolon"    # tmux-style last-pane toggle
+resize_mode = "prefix+r"
+
+# Navigate-mode movement (plain keys, only while navigate mode is open).
+navigate_pane_left = "h"
+navigate_pane_down = "j"
+navigate_pane_up = "k"
+navigate_pane_right = "l"
+
+# --- Workspaces (tmux "sessions") ------------------------------------------
+new_workspace = "prefix+shift+n"
+rename_workspace = "prefix+shift+w"
+close_workspace = "prefix+shift+d"
+# Jump to the last-focused workspace (true MRU toggle, like tmux switch-client -l
+# / sesh last). Implemented as a plugin action because herdr's built-in
+# previous_workspace cycles positionally rather than toggling.
+# Also bound to cmd+l in kitty-exp.
+previous_workspace = ""
+next_workspace = ""
+# The built-in picker and goto are disabled: prefix+w is the fzf popup below,
+# and there was no prefix+g equivalent in the tmux setup.
+workspace_picker = ""
+goto = ""
+
+# --- Misc ------------------------------------------------------------------
+edit_scrollback = "prefix+e"
+# ctrl+s is a direct (prefix-less) binding, so herdr consumes it before it
+# reaches the pane's pty -- it never becomes XOFF inside herdr. `stty -ixon`
+# in .zshrc disables flow control anyway, which also frees ctrl+s outside
+# herdr. Nothing in the Neovim config binds <C-s>.
+# ctrl+s toggles between full sidebar and fully hidden (zero width).
+# No compact/icon-rail state — either all the info or all the pane width.
+toggle_sidebar = ["prefix+b", "ctrl+s"]
+reload_config = "prefix+shift+r"
+detach = "prefix+q"
+settings = "prefix+s"
+help = "prefix+?"
+
+# ---------------------------------------------------------------------------
+# Pane navigation and resizing — herdr-splits plugin
+#
+# The plugin checks whether the focused pane runs Neovim. If it does, the
+# chord is forwarded into Neovim, which moves between splits and delegates
+# back to herdr at the edges. If it does not, herdr moves pane focus directly.
+# This makes ctrl+hjkl work identically in Neovim, shells and TUI panes.
+#
+# Requires the Neovim side: lmilojevicc/herdr-splits.nvim
+# ---------------------------------------------------------------------------
+[[keys.command]]
+key = "ctrl+h"
+type = "plugin_action"
+command = "herdr-splits.nav-left"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "plugin_action"
+command = "herdr-splits.nav-down"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "plugin_action"
+command = "herdr-splits.nav-up"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "plugin_action"
+command = "herdr-splits.nav-right"
+
+# MRU workspace toggle — prefix+l (also cmd+l from kitty-exp).
+# True last-workspace flip, not positional cycling.
+[[keys.command]]
+key = "prefix+shift+l"
+type = "plugin_action"
+command = "rabeez.workspace.last"
+
+# NOTE: the plugin also ships resize-left/down/up/right actions, intended for
+# alt+hjkl. They are deliberately not bound: mini.move in Neovim already owns
+# alt+hjkl for moving lines and selections, and a herdr-level binding would
+# shadow it inside every Neovim pane. Resize panes with prefix+r instead.
+
+# ---------------------------------------------------------------------------
+# Popups — the equivalents of tmux display-popup + gum + sesh.
+# ---------------------------------------------------------------------------
+
+# Project picker (tmux: prefix+f, sesh connect).
+#
+# Lists *candidate* projects -- curated entries from sesh.toml merged with the
+# zoxide database -- not open workspaces. Picking one focuses the matching
+# workspace if it exists, otherwise creates it. This is why there is no
+# workspace bootstrap: useful directories are reachable without being
+# permanently open and cluttering the sidebar.
+#
+# Implemented as a script (not inline bash) because nested TOML/bash quoting
+# is unmaintainable and untestable. Uses fzf, not gum: gum's filter has much
+# weaker fuzzy matching.
+[[keys.command]]
+key = "prefix+f"
+type = "popup"
+width = "70%"
+height = "60%"
+command = "$HOME/dotfiles/scripts/herdr-pick-project.sh"
+
+# Workspace switcher (tmux: prefix+w, sesh list -t).
+# Lists only workspaces that are currently open. Also bound to cmd+l in kitty-exp.
+[[keys.command]]
+key = "prefix+w"
+type = "popup"
+width = "60%"
+height = "50%"
+command = "$HOME/dotfiles/scripts/herdr-pick-workspace.sh"
+
+# Lazygit (tmux had no popup for this; prefix+g is free since goto is unset).
+[[keys.command]]
+key = "prefix+g"
+type = "popup"
+width = "80%"
+height = "80%"
+command = "lazygit"
+
+# Agent picker — fuzzy find running agents by name/title/status and focus.
+[[keys.command]]
+key = "prefix+a"
+type = "popup"
+width = "60%"
+height = "50%"
+command = "$HOME/dotfiles/scripts/herdr-pick-agent.sh"
+
+# New project under ~/Programming/Probe (tmux: prefix+n popup).
+[[keys.command]]
+key = "prefix+n"
+type = "popup"
+width = "40%"
+height = "20%"
+command = "$HOME/dotfiles/scripts/herdr-new-project.sh"
+
+# Toggle dark/light theme (tmux: prefix+T).
+[[keys.command]]
+key = "prefix+shift+t"
+type = "shell"
+command = "$HOME/dotfiles/scripts/set-theme.sh toggle"
+
+# ---------------------------------------------------------------------------
+# UI
+#
+# herdr has no full-width scriptable status bar. The sidebar is the closest
+# analogue to the tmux catppuccin status line: workspace name plus git branch
+# and status, which is what gitmux provided on the right.
+# ---------------------------------------------------------------------------
+[ui]
+sidebar_width = 30
+mouse_capture = true
+confirm_close = false                # tmux: kill-pane without the y/n prompt
+prompt_new_tab_name = false          # tmux: bind c created windows instantly
+hide_tab_bar_when_single_tab = false
+tab_bar_position = "top"             # tmux: status-position top
+tab_bar_right = []
+sidebar_collapsed_mode = "hidden"
+sidebar_start_collapsed = false
+agent_panel_sort = "spaces"
+
+# Pane framing. pane_outer_borders draws the frame along the outside edge of the
+# pane area, which is what puts a visible boundary between the sidebar and the
+# panes even when a workspace has only one pane. pane_gaps = false makes
+# adjacent panes share a single divider instead of floating apart.
+pane_borders = true
+pane_outer_borders = false
+pane_gaps = false
+pane_scrollbars = false
+accent = "#89b4fa"         # drives highlights AND border color
+
+show_agent_labels_on_pane_borders = false
+[ui.sidebar.spaces]
+row_gap = 1
+rows = [
+  [
+    "state_icon",
+    { token = "workspace", bold = true },
+  ],
+  [
+    { token = "$dir", fg = "#6c7086" },
+  ],
+  [
+    { token = "$git", fg = "#89b4fa", bold = true },
+  ],
+]
+
+[ui.sidebar.agents]
+row_gap = 1
+rows = [
+  [
+    "state_icon",
+    { token = "terminal_title_stripped", fg = "#cdd6f4", bold = true },
+  ],
+  [
+    { token = "$dir", fg = "#6c7086" },
+  ],
+  [
+    { token = "agent", fg = "#89b4fa", bold = true },
+    { token = "state_text", fg = "#a6adc8" },
+  ],
+]
+
+[ui.toast]
+delivery = "system"

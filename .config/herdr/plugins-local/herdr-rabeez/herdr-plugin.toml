@@ -1,0 +1,31 @@
+id = "rabeez.workspace"
+name = "Workspace Extras"
+version = "0.1.0"
+min_herdr_version = "0.7.0"
+description = "MRU last-workspace toggle and cwd metadata for the sidebar"
+platforms = ["macos", "linux"]
+
+# Records every workspace focus change so `last` can toggle between the two
+# most recent workspaces, and stamps each workspace with a `dir` metadata
+# token (its shortened cwd) for the sidebar and for picker deduplication.
+[[events]]
+on = "workspace.focused"
+command = ["bash", "scripts/on-focus.sh"]
+
+# Also stamp `dir` on newly created workspaces so they carry it before ever
+# being focused (the project picker dedupes on it).
+[[events]]
+on = "workspace.created"
+command = ["bash", "scripts/on-focus.sh", "--no-mru"]
+
+# Stamp a $agent pane metadata token with an icon prefix when herdr detects
+# an agent running in a pane.
+[[events]]
+on = "pane.agent_detected"
+command = ["bash", "scripts/on-agent.sh"]
+
+[[actions]]
+id = "last"
+title = "Focus last workspace (MRU toggle)"
+contexts = ["global"]
+command = ["bash", "scripts/last-workspace.sh"]

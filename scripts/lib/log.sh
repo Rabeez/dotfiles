@@ -6,7 +6,7 @@ log_header() {
 		"$1" "$2"
 }
 
-log_debug() { gum log -t "RFC3339" --level debug "$@"; }
-log_info() { gum log -t "RFC3339" --level info "$@"; }
-log_warn() { gum log -t "RFC3339" --level warn "$@"; }
-log_error() { gum log -t "RFC3339" --level error "$@"; }
+log_debug() { gum log -t "RFC3339" --level debug -- "$@"; }
+log_info() { gum log -t "RFC3339" --level info -- "$@"; }
+log_warn() { gum log -t "RFC3339" --level warn -- "$@"; }
+log_error() { gum log -t "RFC3339" --level error -- "$@"; }

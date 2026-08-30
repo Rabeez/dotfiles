@@ -1,29 +1,90 @@
 {
-    "$schema": "https://opencode.ai/config.json",
-    "autoupdate": false,
-    "layout": "auto",
-    "plugin": [
-        "@franlol/opencode-md-table-formatter@latest",
-        "@mohak34/opencode-notifier@latest"
-    ],
-    "provider": {
-        "lmstudio": {
-            "npm": "@ai-sdk/openai-compatible",
-            "name": "LM Studio (local)",
-            "options":  {
-                "baseURL": "http://localhost:1234/v1"
-            },
-            "models": {
-                "qwen/qwen3-1.7b": {
-                    "name": "qwen/qwen3-1.7b"
-                },
-                "qwen/qwen3-4b": {
-                    "name": "qwen/qwen3-4b"
-                },
-                "deepseek/deepseek-r1-0528-qwen3-8b": {
-                    "name": "deepseek/deepseek-r1-0528-qwen3-8b"
-                }
-            }
-        }
+  "$schema": "https://opencode.ai/config.json",
+  "autoupdate": false,
+  "layout": "auto",
+  "plugin": [
+    "@franlol/opencode-md-table-formatter@latest",
+    "@mohak34/opencode-notifier@latest",
+    "file:///Users/rabeezriaz/.config/opencode/plugins/tmux-scout-opencode-plugin.js"
+  ],
+  "formatter": {
+    "ruff": {
+      "disabled": true
+    },
+    "uv": {
+      "disabled": true
     }
+  },
+  "lsp": {
+    "pyright": {
+      "disabled": true
+    },
+    "pyrefly": {
+      "command": [
+        "/Users/rabeezriaz/.local/share/nvim/mason/bin/pyrefly",
+        "lsp"
+      ],
+      "extensions": [
+        ".py",
+        ".pyi"
+      ]
+    },
+    "ruff": {
+      "command": [
+        "/Users/rabeezriaz/.local/share/nvim/mason/bin/ruff",
+        "server"
+      ],
+      "extensions": [
+        ".py",
+        ".pyi"
+      ]
+    }
+  },
+  "provider": {
+    "lmstudio": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LM Studio (local)",
+      "options": {
+        "baseURL": "http://localhost:1234/v1"
+      },
+      "models": {
+        "qwen/qwen2.5-vl-7b": {
+          "name": "qwen/qwen2.5-vl-7b"
+        },
+        "qwen/qwen3-8b": {
+          "name": "qwen/qwen3-8b"
+        },
+        "qwen/qwen3-coder-30b": {
+          "name": "qwen/qwen3-coder-30b"
+        },
+        "deepseek/deepseek-r1-0528-qwen3-8b": {
+          "name": "deepseek/deepseek-r1-0528-qwen3-8b"
+        }
+      }
+    }
+  },
+  "mcp": {
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx",
+        "@playwright/mcp@latest"
+      ],
+      "enabled": true
+    },
+    "exa": {
+      "type": "remote",
+      "url": "https://mcp.exa.ai/mcp",
+      "enabled": true
+    },
+    "chrome-devtools": {
+      "type": "local",
+      "command": [
+        "npx",
+        "-y",
+        "chrome-devtools-mcp@latest"
+      ],
+      "enabled": true
+    }
+  }
 }

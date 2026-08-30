@@ -14,11 +14,22 @@ ignore = [
   "D101",    # missing docstring in class
   "D102",    # missing docstring in method
   "D103",    # missing docstring in function
+  "D104",    # missing docstring in public package
+  "D105",    # missing docstring for dunder method
+  "D107",    # missing docstring in __init__
+  "D202",    # no blank lines after function docstring
+  "D205",    # blank line between summary and description
+  "D209",    # multi-line docstring closing quotes on separate line
+  "D212",    # multi-line docstring first line style
+  "D213",    # multi-line docstring summary on second line
+  "D400",    # docstring ends with punctuation
+  "D401",    # tone of docstring
+  "D413",    # missing blank line after last docstring section
+  "D415",    # docstring ends with punctuation
+  "D417",    # missing argument descriptions in docstring
   "TRY003",  # long exception messages
   "EM101",   # exception message string literal
   "EM102",   # exception message fstring
-  "D400",    # docstring ends with punctuation
-  "D415",    # docstring ends with punctuation
   "RET504",  # unnecessary assignment before return
   "RET505",  # unnecessary else after return
   "FIX002",  # remove TODO
@@ -35,16 +46,39 @@ ignore = [
   "PTH123",  # use Path.open instead of open
   "S101",    # assert
   "UP015",   # unnecessary open mode params
-  "D105",    # missing docstring for dunder method
-  "D401",    # tone of docstring lol
   "TC001",   # move application imports into TYPE_CHECKING block
+  "TC002",   # move third-party import into TYPE_CHECKING block
   "TC003",   # move type-only stdlib imports into TYPE_CHECKING block
+  "TC006",   # move type-checking import into TYPE_CHECKING block
   "E741",    # ambigous variable name for certain fonts (e.g. l, i, 1 etc)
   "G004",    # log statements with f-strings
   "S301",    # pickle deserialization
   "PLR0911", # too many return statements in function
+  "PLR0913", # too many arguments to function
+  "PLR0915", # too many statements in function
+  "PLR0917", # too many positional arguments
+  "PLR0912", # too many branches
+  "C901",    # too complex
   "FBT001",  # bool argument in function definition
   "FBT002",  # bool argument in function definition with default value
   "FBT003",  # bool argument in function call
   "NPY002",  # use np.random.Generator
+  "ANN001",  # missing type annotation for function arg
+  "ANN002",  # missing type annotation for *args
+  "ANN003",  # missing type annotation for **kwargs
+  "ANN201",  # missing return type annotation for public function
+  "ANN202",  # missing return type annotation for private function
+  "ANN204",  # missing return type annotation for special method
+  "ANN401",  # dynamically typed expressions (typing.Any)
+  "COM812",  # trailing comma missing (conflicts with formatter)
+  "CPY001",  # missing copyright notice
+  "W292",    # no newline at end of file
+  "Q000",    # bad quotes (conflicts with formatter)
+  "ISC003",  # explicit string concatenation
+  "RUF003",  # ambiguous unicode character in comment
+  "RUF001",  # ambiguous unicode character in string
+  "RUF002",  # ambiguous unicode character in docstring
+  "RUF021",  # parenthesize chained operators
+  "SIM108",  # use ternary instead of if-else (readability preference)
+  "PYI021",  # docstring in stub file
 ]

@@ -9,7 +9,7 @@ max_height = 2000
 [plugin]
 prepend_previewers = [
   { url = "*/", run = "eza-preview" },
-  { url = "*.md", run = "glow" },
+  { url = "*.md", run = 'piper -- glow-yazi "$1"' },
   { url = "*.ipynb", run = "rich-preview" },
   { mime = "image/*", run = "zoom" },
   { mime = "application/pdf", run = "pdf-preview" },
