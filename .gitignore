@@ -25,6 +25,11 @@ scripts/themes/local.sh
 /.config/opencode/*backup*
 .config/nvim/after/queries/
 
+# Work-machine-only files (present on ~/dotfiles_WORK, absent here)
+/INSTRUCTIONS_FOR_WORK.md
+/AGENTS.md
+/README.md
+
 # Claude Code — keep settings & custom hooks, ignore runtime/cache/history
 /.claude/backups/
 /.claude/cache/
