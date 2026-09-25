@@ -6,7 +6,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 SCRIPTS_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
 for lib in "$SCRIPTS_DIR"/lib/*.sh; do source "$lib"; done
 
-require_cmd gum rclone
+require_cmd gum rclone gstat
 
 SRC="$HOME/Programming"
 DST="backblaze-main:"
@@ -42,7 +42,7 @@ read -r file_count total_bytes < <(
 	find "$SRC" \
 		\( -path "*/node_modules" -o -path "*/.pixi" -o -type l \) \
 		-prune -o -type f -print0 |
-		xargs -0 stat -f %z |
+		xargs -0 gstat -c %s |
 		awk '{total += $1; count++} END {printf "%d %d\n", count, total}'
 )
 size_gib=$(awk "BEGIN {printf \"%.2f\", $total_bytes/1024/1024/1024}")

@@ -29,6 +29,24 @@ DB="$HOME/.local/share/opencode/opencode.db"
 SCOUT="$HOME/.tmux-scout/status.json"
 CURRENT_PANE="${TMUX_PANE:-}"
 
+# Bash 3.2 has no associative arrays. Maps in this script are represented by
+# parallel indexed arrays; this helper returns the matching index in MAP_INDEX.
+map_find_index() {
+	local needle="$1"
+	shift
+	local value
+	local i=0
+	MAP_INDEX=-1
+	for value in "$@"; do
+		if [[ "$value" == "$needle" ]]; then
+			MAP_INDEX=$i
+			return 0
+		fi
+		i=$((i + 1))
+	done
+	return 0
+}
+
 # --- phase → status tag ------------------------------------------------------
 # Scout's 8 canonical phases (session-contract.js) are collapsed to 5 display
 # tags for the picker:
@@ -68,21 +86,35 @@ sqlite_lookup_batch() {
 }
 
 # --- process table cache -----------------------------------------------------
-# One-shot `ps` parse into two associative arrays used everywhere below:
-#   PROC_CHILDREN[ppid] = "pid1 pid2 ..."     (for descendants walking)
-#   PROC_SESSION[pid]   = "ses_XXX"           (only when the command line
-#                                              contains a session id — this is
-#                                              all we ever need from commands)
+# One-shot `ps` parse into two maps used everywhere below:
+#   ppid -> "pid1 pid2 ..."   (for descendants walking)
+#   pid  -> "ses_XXX"         (only when the command line contains a session
+#                              id — this is all we ever need from commands)
 # Awk pre-filters ses_XXX so the bash loop only has to iterate one line per
 # process with a compact record. That keeps the loop under ~60 ms on macOS.
-declare -A PROC_CHILDREN=() PROC_SESSION=()
+PROC_CHILDREN_KEYS=()
+PROC_CHILDREN_VALUES=()
+PROC_SESSION_PIDS=()
+PROC_SESSION_IDS=()
 _load_proctable() {
 	local pid ppid sid
 	while read -r pid ppid sid; do
 		[[ -z "$pid" ]] && continue
-		PROC_CHILDREN["$ppid"]+=" $pid"
+		map_find_index "$ppid" "${PROC_CHILDREN_KEYS[@]-}"
+		if (( MAP_INDEX < 0 )); then
+			PROC_CHILDREN_KEYS+=("$ppid")
+			PROC_CHILDREN_VALUES+=(" $pid")
+		else
+			PROC_CHILDREN_VALUES[$MAP_INDEX]="${PROC_CHILDREN_VALUES[$MAP_INDEX]} $pid"
+		fi
 		if [[ -n "$sid" ]]; then
-			PROC_SESSION["$pid"]="$sid"
+			map_find_index "$pid" "${PROC_SESSION_PIDS[@]-}"
+			if (( MAP_INDEX < 0 )); then
+				PROC_SESSION_PIDS+=("$pid")
+				PROC_SESSION_IDS+=("$sid")
+			else
+				PROC_SESSION_IDS[$MAP_INDEX]="$sid"
+			fi
 		fi
 	done < <(ps -eo pid=,ppid=,command= | awk '
 		{
@@ -103,7 +135,9 @@ _load_proctable
 descendants() {
 	local root="$1" depth="${2:-5}"
 	(( depth <= 0 )) && return 0
-	local kids="${PROC_CHILDREN[$root]:-}"
+	map_find_index "$root" "${PROC_CHILDREN_KEYS[@]-}"
+	local kids=""
+	(( MAP_INDEX >= 0 )) && kids="${PROC_CHILDREN_VALUES[$MAP_INDEX]}"
 	local k
 	for k in $kids; do
 		printf '%s\n' "$k"
@@ -119,7 +153,9 @@ discover_session_from_ps() {
 	while read -r d; do pids+=("$d"); done < <(descendants "$pane_pid" 5)
 	local p sid
 	for p in "${pids[@]}"; do
-		sid="${PROC_SESSION[$p]:-}"
+		map_find_index "$p" "${PROC_SESSION_PIDS[@]-}"
+		sid=""
+		(( MAP_INDEX >= 0 )) && sid="${PROC_SESSION_IDS[$MAP_INDEX]}"
 		if [[ -n "$sid" ]]; then
 			printf '%s' "$sid"
 			return 0
@@ -129,14 +165,23 @@ discover_session_from_ps() {
 }
 
 # --- preload scout entries: pane_id -> scoutKey and pane_id -> phase -----
-declare -A SCOUT_KEY=() SCOUT_PHASE=()
+SCOUT_PANES=()
+SCOUT_KEYS=()
+SCOUT_PHASES=()
 if [[ -r "$SCOUT" ]]; then
 	while IFS=$'\t' read -r pane key phase; do
 		[[ -z "$pane" ]] && continue
+		map_find_index "$pane" "${SCOUT_PANES[@]-}"
+		if (( MAP_INDEX < 0 )); then
+			SCOUT_PANES+=("$pane")
+			SCOUT_KEYS+=("")
+			SCOUT_PHASES+=("")
+			MAP_INDEX=$((${#SCOUT_PANES[@]} - 1))
+		fi
 		# Prefer entries whose key encodes a real session id if multiple exist.
-		if [[ "$key" == opencode-ses_* ]] || [[ -z "${SCOUT_KEY[$pane]:-}" ]]; then
-			SCOUT_KEY["$pane"]="$key"
-			SCOUT_PHASE["$pane"]="$phase"
+		if [[ "$key" == opencode-ses_* ]] || [[ -z "${SCOUT_KEYS[$MAP_INDEX]}" ]]; then
+			SCOUT_KEYS[$MAP_INDEX]="$key"
+			SCOUT_PHASES[$MAP_INDEX]="$phase"
 		fi
 	done < <(jq -r '
 		.sessions // {}
@@ -158,7 +203,9 @@ while IFS='|' read -r pane pane_pid sess cmd pane_path; do
 	esac
 
 	sid=""
-	scout_key="${SCOUT_KEY[$pane]:-}"
+	map_find_index "$pane" "${SCOUT_PANES[@]-}"
+	scout_key=""
+	(( MAP_INDEX >= 0 )) && scout_key="${SCOUT_KEYS[$MAP_INDEX]}"
 	if [[ "$scout_key" == opencode-ses_* ]]; then
 		sid="${scout_key#opencode-}"
 	fi
@@ -174,23 +221,26 @@ while IFS='|' read -r pane pane_pid sess cmd pane_path; do
 done < <(tmux list-panes -a -F '#{pane_id}|#{pane_pid}|#{session_name}|#{pane_current_command}|#{pane_current_path}' 2>/dev/null || true)
 
 # Pass 2: batched sqlite lookup for all collected session ids.
-declare -A SID_TITLE=() SID_DIR=() SID_MRU=()
+SID_IDS=()
+SID_TITLES=()
+SID_DIRS=()
+SID_MRUS=()
 if (( ${#ROW_SID[@]} > 0 )); then
 	# Build unique, non-empty id list
-	declare -A _seen=()
 	unique_ids=()
 	for s in "${ROW_SID[@]}"; do
 		[[ -z "$s" ]] && continue
-		[[ -n "${_seen[$s]:-}" ]] && continue
-		_seen["$s"]=1
+		map_find_index "$s" "${unique_ids[@]-}"
+		(( MAP_INDEX >= 0 )) && continue
 		unique_ids+=("$s")
 	done
 	if (( ${#unique_ids[@]} > 0 )); then
 		while IFS=$'\t' read -r sid title dir mru; do
 			[[ -z "$sid" ]] && continue
-			SID_TITLE["$sid"]="$title"
-			SID_DIR["$sid"]="$dir"
-			SID_MRU["$sid"]="$mru"
+			SID_IDS+=("$sid")
+			SID_TITLES+=("$title")
+			SID_DIRS+=("$dir")
+			SID_MRUS+=("$mru")
 		done < <(printf '%s\n' "${unique_ids[@]}" | sqlite_lookup_batch)
 	fi
 fi
@@ -205,10 +255,11 @@ for ((i = 0; i < ${#ROW_PANE[@]}; i++)); do
 	title="—"
 	dir=""
 	mru=0
-	if [[ -n "$sid" && -n "${SID_TITLE[$sid]:-}" ]]; then
-		title="${SID_TITLE[$sid]}"
-		dir="${SID_DIR[$sid]}"
-		mru="${SID_MRU[$sid]:-0}"
+	map_find_index "$sid" "${SID_IDS[@]-}"
+	if [[ -n "$sid" ]] && (( MAP_INDEX >= 0 )) && [[ -n "${SID_TITLES[$MAP_INDEX]}" ]]; then
+		title="${SID_TITLES[$MAP_INDEX]}"
+		dir="${SID_DIRS[$MAP_INDEX]}"
+		mru="${SID_MRUS[$MAP_INDEX]:-0}"
 		[[ -z "$title" ]] && title="—"
 		[[ -z "$mru" ]]   && mru=0
 	fi
@@ -217,7 +268,10 @@ for ((i = 0; i < ${#ROW_PANE[@]}; i++)); do
 	dirname="${dir##*/}"
 	[[ -z "$dirname" ]] && dirname="—"
 
-	state=$(phase_to_tag "${SCOUT_PHASE[$pane]:-unknown}")
+	map_find_index "$pane" "${SCOUT_PANES[@]-}"
+	phase="unknown"
+	(( MAP_INDEX >= 0 )) && phase="${SCOUT_PHASES[$MAP_INDEX]:-unknown}"
+	state=$(phase_to_tag "$phase")
 
 	if [[ "$pane" == "$CURRENT_PANE" ]]; then
 		marker="* opencode"

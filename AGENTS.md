@@ -55,12 +55,12 @@ Each `switch_<tool>()` function edits its config with `sed -i ''` (BSD sed, macO
 
 ### Shell live-reload (`_refresh_theme_env`)
 
-`.zshrc:91–104` — precmd hook that runs every prompt:
+`.zshrc:103–119` — precmd hook that runs every prompt:
 
-1. If `stat -f %m ~/.cache/vivid-ls-colors` changed → re-export `LS_COLORS`.
+1. If `stat -c %Y ~/.cache/vivid-ls-colors` changed → re-export `LS_COLORS`.
 2. If `~/.local/state/theme-mode` changed → source `scripts/themes/fzf-${mode}.sh` (which sets `FZF_DEFAULT_OPTS`).
 
-Initial load: `.zshrc:76–86` reads the state file, generates the vivid cache if missing, exports `LS_COLORS`. Line 204 sources the fzf theme.
+Initial load: `.zshrc:88–101` reads the state file, generates the vivid cache if missing, exports `LS_COLORS`. Line 219 sources the fzf theme.
 
 Also the "RR" ASCII banner (`.zshrc:255–289`) picks blue tones per theme; skipped when `$HERDR_ENV` is set (else it would repaint in every herdr pane).
 

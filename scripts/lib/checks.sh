@@ -3,7 +3,7 @@
 
 require_cmd() {
 	for cmd in "$@"; do
-		if ! command -v "$cmd" &>/dev/null; then
+		if ! command -v "$cmd" >/dev/null 2>&1; then
 			log_error "Required command not found: $cmd"
 			log_error "Install via: brew install $cmd"
 			exit 1
@@ -12,7 +12,7 @@ require_cmd() {
 }
 
 check_cmd() {
-	command -v "$1" &>/dev/null
+	command -v "$1" >/dev/null 2>&1
 }
 
 macos_version() {

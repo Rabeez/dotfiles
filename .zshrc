@@ -7,6 +7,19 @@ export XDG_CONFIG_HOME="$HOME/.config"
 # Ensure user-installed thirdparty tools are in path
 export PATH="/usr/local/bin:$PATH"
 
+# .zshrc also runs in non-login shells, where .zprofile may not have exported
+# Homebrew's environment yet.
+if [[ -z ${HOMEBREW_PREFIX:-} ]]; then
+    if [[ -x /opt/homebrew/bin/brew ]]; then
+        export HOMEBREW_PREFIX="$(/opt/homebrew/bin/brew --prefix)"
+    elif [[ -x /usr/local/bin/brew ]]; then
+        export HOMEBREW_PREFIX="$(/usr/local/bin/brew --prefix)"
+    fi
+fi
+if [[ -n ${HOMEBREW_PREFIX:-} ]]; then
+    export PATH="$HOMEBREW_PREFIX/bin:$HOMEBREW_PREFIX/sbin:$PATH"
+fi
+
 # Disable printing of what is updated on brew servers
 export HOMEBREW_NO_ENV_HINTS=1
 export HOMEBREW_NO_UPDATE_REPORT_NEW=1
@@ -77,21 +90,23 @@ _theme_mode="dark"
 [[ -f "$HOME/.local/state/theme-mode" ]] && _theme_mode="$(cat "$HOME/.local/state/theme-mode")"
 
 _vivid_cache="$HOME/.cache/vivid-ls-colors"
-if [[ ! -f "$_vivid_cache" ]]; then
+if [[ ! -f "$_vivid_cache" ]] && (( $+commands[vivid] )); then
     mkdir -p "$(dirname "$_vivid_cache")"
     local _vivid_flavor="catppuccin-mocha"
     [[ "$_theme_mode" == "light" ]] && _vivid_flavor="catppuccin-latte"
     vivid generate "$_vivid_flavor" >"$_vivid_cache"
 fi
-export LS_COLORS="$(cat "$_vivid_cache")"
+if [[ -r "$_vivid_cache" ]]; then
+    export LS_COLORS="$(<"$_vivid_cache")"
+fi
 
 # Auto-reload LS_COLORS and FZF colors when set-theme.sh updates them
-_ls_colors_mtime="$(stat -f %m "$_vivid_cache" 2>/dev/null)"
+_ls_colors_mtime="$(stat -c %Y "$_vivid_cache" 2>/dev/null)"
 _current_theme="$_theme_mode"
 _refresh_theme_env() {
-    local current_mtime="$(stat -f %m "$_vivid_cache" 2>/dev/null)"
+    local current_mtime="$(stat -c %Y "$_vivid_cache" 2>/dev/null)"
     if [[ "$current_mtime" != "$_ls_colors_mtime" ]]; then
-        export LS_COLORS="$(cat "$_vivid_cache")"
+        [[ -r "$_vivid_cache" ]] && export LS_COLORS="$(<"$_vivid_cache")"
         _ls_colors_mtime="$current_mtime"
     fi
     local now_theme="$(cat "$HOME/.local/state/theme-mode" 2>/dev/null)"

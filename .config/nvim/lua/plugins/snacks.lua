@@ -176,8 +176,9 @@ return {
           -- Exit visual mode before opening terminal
           vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Esc>", true, false, true), "x", false)
           local Terminal = require("toggleterm.terminal").Terminal
+          local line_range = vim.fn.shellescape(start_line .. "," .. end_line .. ":" .. file)
           local git_log = Terminal:new({
-            cmd = "git log -L " .. start_line .. "," .. end_line .. ":" .. file .. " | delta --dark --paging=always",
+            cmd = "git log -L " .. line_range .. " | delta --dark --paging=always",
             direction = "float",
             float_opts = { border = "rounded" },
             close_on_exit = false,

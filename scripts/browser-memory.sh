@@ -3,7 +3,8 @@
 set -eu
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-for lib in "$SCRIPT_DIR"/lib/*.sh; do . "$lib"; done
+. "$SCRIPT_DIR/lib/log.sh"
+. "$SCRIPT_DIR/lib/checks.sh"
 
 require_cmd gum top
 
